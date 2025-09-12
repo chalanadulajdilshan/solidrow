@@ -1,6 +1,6 @@
 <?php
 // Path to your project directory (ensure this is the correct path)
-$projectRoot = "/home/festelsd/sites/solidrow.lk"; // Replace with actual path
+$repo_dir = '/home/festelsd/sites/solidrow.lk';
 
 // Secret key (same as you set in GitHub webhook secret)
 $secret = "d928fbbc94e6e4f00955932551879048bf729773d01be8580ee53456665414b6";

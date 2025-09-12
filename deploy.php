@@ -1,6 +1,6 @@
 <?php
-// Path to your project directory
-$projectRoot = "/sites/solidrow.lk";
+// Path to your project directory (make sure this is correct and accessible)
+$projectRoot = "/home/festelsd/sites/solidrow.lk"; // Absolute path to the directory
 
 // Secret key (same as you set in GitHub webhook secret)
 $secret = "d928fbbc94e6e4f00955932551879048bf729773d01be8580ee53456665414b6";
@@ -25,10 +25,16 @@ $data = json_decode($payload, true);
 file_put_contents("webhook.log", date("Y-m-d H:i:s") . " - " . $payload . "\n", FILE_APPEND);
 
 // Run git pull in project folder
-chdir($projectRoot);
-$output = shell_exec("git pull 2>&1");
+if (is_dir($projectRoot . '/.git')) {
+    chdir($projectRoot);
+    $output = shell_exec("git pull 2>&1");
+    
+    // Log output
+    file_put_contents("deploy.log", date("Y-m-d H:i:s") . " - " . $output . "\n", FILE_APPEND);
 
-// Log output
-file_put_contents("deploy.log", date("Y-m-d H:i:s") . " - " . $output . "\n", FILE_APPEND);
-
-echo "Deployment successful: " . $output;
+    echo "Deployment successful: " . $output;
+} else {
+    http_response_code(500);
+    echo "Error: Git repository not found at specified path.";
+}
+?>

@@ -14,6 +14,8 @@ if ($secret && $signature) {
     $expected = "sha256=" . hash_hmac('sha256', $payload, $secret);
     if (!hash_equals($expected, $signature)) {
         http_response_code(403);
+
+        
         die("Invalid signature");
     }
 }

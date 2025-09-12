@@ -22,4 +22,4 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           protocol: ftp
           local-dir: ./   # folder in your repo
-          server-dir: /sites/solidrow.lk/   # change to your server path
+          server-dir: /   # change to your server path

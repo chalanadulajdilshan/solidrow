@@ -1,6 +1,6 @@
 <?php
-// Path to your project directory (make sure this is correct and accessible)
-$projectRoot = "/home/festelsd/sites/solidrow.lk"; // Absolute path to the directory
+// Path to your project directory (ensure this is the correct path)
+$projectRoot = "/home/festelsd/sites/solidrow.lk"; // Replace with actual path
 
 // Secret key (same as you set in GitHub webhook secret)
 $secret = "d928fbbc94e6e4f00955932551879048bf729773d01be8580ee53456665414b6";
@@ -24,11 +24,16 @@ $data = json_decode($payload, true);
 // Optional: log payload for debugging
 file_put_contents("webhook.log", date("Y-m-d H:i:s") . " - " . $payload . "\n", FILE_APPEND);
 
-// Run git pull in project folder
+// Ensure the Git repository exists at the specified path
 if (is_dir($projectRoot . '/.git')) {
     chdir($projectRoot);
-    $output = shell_exec("git pull 2>&1");
     
+    // Set GIT_DISCOVERY_ACROSS_FILESYSTEM to allow Git to look beyond filesystem boundaries
+    putenv("GIT_DISCOVERY_ACROSS_FILESYSTEM=1");
+
+    // Run git pull in project folder
+    $output = shell_exec("git pull 2>&1");
+
     // Log output
     file_put_contents("deploy.log", date("Y-m-d H:i:s") . " - " . $output . "\n", FILE_APPEND);
 

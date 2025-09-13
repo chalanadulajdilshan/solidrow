@@ -9,9 +9,9 @@
 class Database {
 
     private $host = 'localhost';
-    private $name = 'nyscexam_question_db';
-    private $user = 'nyscexam_question_db';
-    private $password = '_UulBsiiDrqd';
+    private $name = 'solidrow';
+    private $user = 'root';
+    private $password = '';
     public $DB_CON = NULL;
 
     public function __construct() {

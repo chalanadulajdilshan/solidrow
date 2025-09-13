@@ -8,16 +8,9 @@
  */
 class User {
 
-    public $id;
-    public $name;
-    public $email;
-    public $phone;
-    public $division;
-    public $position;
-    public $image_name;
+    public $id;  
     public $createdAt;
-    public $type;
-    public $center_id;
+    public $type; 
     public $isActive;
     public $authToken;
     public $lastLogin;
@@ -29,21 +22,15 @@ class User {
 
         if ($id) {
 
-            $query = "SELECT `id`,`name`,`image_name`,`email`,`phone`,`division`,`position`,`createdAt`,`type`,`center_id`,`isActive`,`authToken`,`lastLogin`,`username`,`resetcode` FROM `user` WHERE `id`=" . $id;
+            $query = "SELECT  * FROM `user` WHERE `id`=" . $id;
 
             $db = new Database();
 
             $result = mysqli_fetch_array($db->readQuery($query));
 
-            $this->id = $result['id'];
-            $this->name = $result['name'];
-            $this->email = $result['email'];
-            $this->phone = $result['phone'];
-             $this->division = $result['division'];
-            $this->position = $result['position'];
+            $this->id = $result['id']; 
             $this->createdAt = $result['createdAt'];
-            $this->type = $result['type'];
-            $this->center_id = $result['center_id'];
+            $this->type = $result['type']; 
             $this->isActive = $result['isActive'];
             $this->authToken = $result['authToken'];
             $this->lastLogin = $result['lastLogin'];
@@ -54,12 +41,12 @@ class User {
         }
     }
 
-      public function create($name, $type,$center_id,$division_id,$position, $email, $phone, $username, $password) {
+      public function create( $type, $username, $password) {
         $enPass = md5($password);
 
         date_default_timezone_set('Asia/Colombo');
         $createdAt = date('Y-m-d H:i:s');
-        $query = "INSERT INTO `user` (`name`,`type`,`center_id`,`division`,`position`, `email`,`phone`,`createdAt`,`username`,`password`) VALUES  ('" . $name . "', '" . $type . "','" . $center_id . "','" . $division_id . "','" . $position . "',  '" . $email . "','" . $phone . "', '" . $createdAt . "', '" . $username . "', '" . $enPass . "')";
+        $query = "INSERT INTO `user` (`type`, `createdAt`,`username`,`password`) VALUES  ( '" . $type . "',  '" . $createdAt . "', '" . $username . "', '" . $enPass . "')";
 
         $db = new Database();
 
@@ -72,30 +59,13 @@ class User {
             return FALSE;
         }
     }
-      public function createInstructors($name,$center_id, $email, $phone, $username, $password) {
-        $enPass = md5($password);
+     
 
-        date_default_timezone_set('Asia/Colombo');
-        $createdAt = date('Y-m-d H:i:s');
-        $query = "INSERT INTO `user` (`name`,`type`, `center_id`, `email`,`phone`,`createdAt`,`username`,`password`,`isActive`) VALUES  ('" . $name . "', '7', '" . $center_id . "', '" . $email . "','" . $phone . "', '" . $createdAt . "', '" . $username . "', '" . $enPass . "',1)";
- 
-        $db = new Database();
-
-        $result = $db->readQuery($query);
-        if ($result) {
-
-            return mysqli_insert_id($db->DB_CON);
-        } else {
-
-            return FALSE;
-        }
-    }
-
-    public function login($email, $password) {
+    public function login($user_name, $password) {
 
         $enPass = md5($password);
 
-        $query = "SELECT * FROM `user` WHERE `email`= '" . $email . "' AND `password`= '" . $enPass . "'";
+        $query = "SELECT * FROM `user` WHERE `username`= '" . $user_name . "' AND `password`= '" . $enPass . "'";
        
         $db = new Database();
 
@@ -171,19 +141,7 @@ class User {
         }
         return $array_res;
     }
-    public function getInstructors() {
-
-        $query = "SELECT * FROM `user` WHERE `type` = 7 ";
-
-        $db = new Database();
-        $result = $db->readQuery($query);
-        $array_res = array();
-        while ($row = mysqli_fetch_array($result)) {
-
-            array_push($array_res, $row);
-        }
-        return $array_res;
-    }
+     
 
     public function authenticate() {
 
@@ -238,17 +196,11 @@ class User {
 
 
         unset($_SESSION["id"]);
-
-        unset($_SESSION["name"]);
-
-        unset($_SESSION["email"]);
-
-        unset($_SESSION["phone"]);
+ 
 
         unset($_SESSION["isActive"]);
 
-        unset($_SESSION["type"]);
-        unset($_SESSION["center_id"]);
+        unset($_SESSION["type"]); 
 
         unset($_SESSION["authToken"]);
 
@@ -259,48 +211,7 @@ class User {
         return TRUE;
     }
 
-    public function update() {
-
-        $query = "UPDATE  `user` SET "
-                . "`name` ='" . $this->name . "', "
-                . "`username` ='" . $this->username . "', "
-                . "`type` ='" . $this->type . "', "
-                . "`center_id` ='" . $this->center_id . "', "
-                . "`email` ='" . $this->email . "', "
-                . "`isActive` ='" . $this->isActive . "', "
-                . "`phone` ='" . $this->phone . "'  "
-                . "WHERE `id` = '" . $this->id . "'";
-
-        $db = new Database();
-
-        $result = $db->readQuery($query);
-
-        if ($result) {
-
-            return TRUE;
-        } else {
-
-            return FALSE;
-        }
-    }
-    public function updateInstructorStatus($status, $id) {
-
-        $query = "UPDATE  `user` SET "
-                . "`isActive` ='" . $status . "' "
-                . "WHERE `id` = '" . $id . "'";
-
-        $db = new Database();
-
-        $result = $db->readQuery($query);
-
-        if ($result) {
-
-            return TRUE;
-        } else {
-
-            return FALSE;
-        }
-    }
+      
 
     private function setUserSession($user) {
 
@@ -310,19 +221,12 @@ class User {
             ]);
         }
 
-        $_SESSION["id"] = $user['id'];
-
-        $_SESSION["name"] = $user['name'];
- 
-        $_SESSION["email"] = $user['email'];
-        
-        $_SESSION["phone"] = $user['phone'];
+        $_SESSION["id"] = $user['id']; 
 
         $_SESSION["isActive"] = $user['isActive'];
 
         $_SESSION["type"] = $user['type'];
-        
-        $_SESSION["center_id"] = $user['center_id'];
+         
 
         $_SESSION["authToken"] = $user['authToken'];
 

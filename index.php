@@ -137,7 +137,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
-                    <h2 class="section-title" data-aos="fade-up">Our Digital Presence</h2>
+                    <h2 class="section-title" data-aos="fade-up">Our Companies</h2>
                     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
                         Explore our specialized platforms designed to serve your needs
                     </p>
@@ -153,8 +153,8 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                             <div class="card-overlay"></div>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">Solidrow Foreign Engineering Skills Training Institute</h3>
-                            <a href="../solidrow/Solidrow Engineering/solidrowengineering.php" class="btn btn-view-more" target="_blank">
+                            <h3 class="card-title">Solidrow Foreign Engineering (Pvt) Ltd.</h3>
+                            <a href="solidrow-engineering/solidrowengineering.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
@@ -170,7 +170,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">Solidrow Foreign Employment Agency</h3>
-                            <a href="../solidrow/Solidrow Employment/solidrowemployment.php" class="btn btn-view-more" target="_blank">
+                            <a href="solidrow-foreign-employment/foreign-employment.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
@@ -185,8 +185,8 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                             <div class="card-overlay"></div>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">Solidrow Visa Consultancy Services</h3>
-                            <a href="../solidrow/Solidrow Visa/solidrowvisa.php" class="btn btn-view-more" target="_blank">
+                            <h3 class="card-title">Solidrow Foreign Engineering Skills Training Institute</h3>
+                            <a href="solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
@@ -201,8 +201,8 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                             <div class="card-overlay"></div>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">Solidrow Student Visa Consultancy Services</h3>
-                            <a href="../Solidrow Student Visa/solidrowstudentvisa.php" class="btn btn-view-more" target="_blank">
+                            <h3 class="card-title">Solidrow Visa Consultancy Services</h3>
+                            <a href="visa-consultancy/visa-consultancy.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>

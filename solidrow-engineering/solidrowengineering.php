@@ -22,9 +22,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="#home">
-                <img src="../assets/images/logo.png" alt="Solidrow Engineering Logo" height="70" class="d-inline-block align-text-top me-2">
-                <span>Solidrow Engineering</span>
+            <a class="navbar-brand fw-bold" href="#home">
+                <img src="../assets/images/Solidrow Engineering Logo.png" alt="Solidrow Engineering Logo" height="40" class="me-2">
+                SOLIDROW ENGINEERING
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -176,14 +176,6 @@
             <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-            <p>Scroll Down</p>
         </div>
     </section>
 
@@ -422,7 +414,7 @@
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="about-image-container">
                         <div class="about-image">
-                            <img src="../assets/images/Engineering-about.jpg" alt="Solidrow Festi Training" class="img-fluid rounded-3">
+                            <img src="../assets/images/Engineering-about.jpg" alt="Solidrow Engineering" class="img-fluid rounded-3">
                             <div class="image-decoration"></div>
                         </div>
                     </div>
@@ -552,7 +544,71 @@
     </section>
 
     <!-- Footer -->
-    <?php include __DIR__ . '/../includes/footer.php'; ?>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <img src="../assets/images/Solidrow Engineering Logo.png" alt="FESTI" height="70" class="me-2">
+                            <h5 class="widget-title">SOLIDROW FOREIGN EMPLOYMENT</h5>
+                        </div>
+                        <p>Empowering individuals with essential skills and knowledge required to succeed in foreign employment opportunities.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-widget">
+                        <h5 class="widget-title">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about-us">About Us</a></li>
+                            <li><a href="#courses">Courses</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-widget">
+                        <h5 class="widget-title">Popular Courses</h5>
+                        <ul class="footer-links">
+                            <li><a href="#courses">Professional Welding</a></li>
+                            <li><a href="#courses">Electrical Installation</a></li>
+                            <li><a href="#courses">Plumbing Technology</a></li>
+                            <li><a href="#courses">Carpentry & Joinery</a></li>
+                            <li><a href="#courses">HVAC Systems</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-widget">
+                        <h5 class="widget-title">Contact Info</h5>
+                        <div class="contact-info">
+                            <p><i class="fas fa-map-marker-alt"></i> Mulleriyawa New Town</p>
+                            <p><i class="fas fa-phone"></i> 011 436 4644</p>
+                            <p><i class="fas fa-envelope"></i> info@festi.lk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2023 SOLIDROW FESTI (PVT) LTD. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0">Accredited by TVEC | Registration: P01/1060</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

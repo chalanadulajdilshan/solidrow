@@ -39,12 +39,12 @@ include './auth.php';
                                                 <input type="file" id="image_name" name="image_name" class="form-control" accept="image/*" onchange="previewImage(this)">
                                                 <div id="image_preview" class="mt-2" style="display: none;">
                                                     <img id="company_image" src="#" alt="Company Image Preview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                    <button type="button" class="btn btn-sm btn-danger ms-2" onclick="removeImage()">Remove</button>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label>Image URL</label>
-                                                <input type="text" id="image_url" name="image_url" class="form-control" placeholder="Enter image URL (optional)">
+                                                <label>Site URL</label>
+                                                <input type="text" id="image_url" name="image_url" class="form-control" placeholder="Enter Site URL (optional)">
                                             </div>
                                         </div>
                                         <div class="row">

@@ -141,6 +141,30 @@ class User {
         }
         return $array_res;
     }
+
+    public function get_user_by_type($type = null) {
+        $query = "SELECT id, name, email FROM `user` WHERE isActive = 1";
+        
+        if ($type !== null && is_numeric($type)) {
+            $query .= " AND `type` = '" . $type . "'";
+        }
+        
+        $db = new Database();
+        $result = $db->readQuery($query);
+        $users = array();
+        
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $users[] = array(
+                    'id' => $row['id'],
+                    'name' => $row['name'],
+                    'email' => $row['email']
+                );
+            }
+        }
+        
+        return $users;
+    }
      
 
     public function authenticate() {

@@ -17,13 +17,15 @@ jQuery(document).ready(function ($) {
                 if (result.status === 'success') {
                     swal({
                         title: "Success!",
-                        text: result.message || successMessage,
+                        text: "Course added Successfully!",
                         type: "success",
                         timer: 2000,
-                        showConfirmButton: false
-                    }).then(function () {
-                        location.reload();
-                    });
+                        showConfirmButton: false,
+                      });
+          
+                      window.setTimeout(function () {
+                        window.location.reload();
+                      }, 2000);
                 } else {
                     swal("Error!", result.message || errorMessage, "error");
                 }

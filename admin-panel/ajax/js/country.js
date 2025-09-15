@@ -35,15 +35,15 @@ jQuery(document).ready(function () {
                     if (result.status === 'success') {
                         swal({
                             title: "Success!",
-                            text: "Country added successfully!",
-                            type: 'success',
+                            text: "Country added Successfully!",
+                            type: "success",
                             timer: 2000,
-                            showConfirmButton: false
-                        });
-
-                        window.setTimeout(function () {
+                            showConfirmButton: false,
+                          });
+              
+                          window.setTimeout(function () {
                             window.location.reload();
-                        }, 2000);
+                          }, 2000);
                     } else {
                         swal({
                             title: "Error!",

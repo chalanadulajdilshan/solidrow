@@ -60,18 +60,26 @@ $US = new User($_SESSION['id']);
                         <i class="bx bx-home "></i>
                         <span>Dashboard </span>
                     </a>
+                </li>
+                <li>
                     <a href="Company.php">
                         <i class="bx bx-building "></i>
                         <span>Company </span>
                     </a>
+                </li>
+                <li>
                     <a href="project.php">
                         <i class="bx bx-briefcase "></i>
                         <span>Project </span>
                     </a>
+                </li>
+                <li>
                     <a href="course.php">
                         <i class="bx bx-book "></i>
                         <span>Course </span>
                     </a>
+                </li>
+                <li>
                     <a href="jobs.php">
                         <i class="bx bx-book "></i>
                         <span>Job </span>

@@ -3,6 +3,20 @@
 include '../../../class/include.php';
 header('Content-Type: application/json; charset=UTF8');
 
+// Get users by type
+if (isset($_POST['action']) && $_POST['action'] === 'get_users_by_type' && isset($_POST['type_id'])) {
+    $USER = new User(NULL);
+    $users = $USER->get_user_by_type($_POST['type_id']);
+    
+    $result = [
+        'status' => !empty($users) ? 'success' : 'error',
+        'users' => $users
+    ];
+    
+    echo json_encode($result);
+    exit();
+}
+
 //create course type
 if (isset($_POST['create'])) {
 

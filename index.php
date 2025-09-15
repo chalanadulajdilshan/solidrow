@@ -33,6 +33,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
             </div>
 
             <div class="carousel-inner">
@@ -153,7 +154,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">Solidrow Foreign Engineering Skills Training Institute</h3>
-                            <a href="https://training.solidrow.com" class="btn btn-view-more" target="_blank">
+                            <a href="../solidrow/Solidrow Engineering/solidrowengineering.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
@@ -169,7 +170,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">Solidrow Foreign Employment Agency</h3>
-                            <a href="https://employment.solidrow.com" class="btn btn-view-more" target="_blank">
+                            <a href="../solidrow/Solidrow Employment/solidrowemployment.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
@@ -185,7 +186,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">Solidrow Visa Consultancy Services</h3>
-                            <a href="https://visa.solidrow.com" class="btn btn-view-more" target="_blank">
+                            <a href="../solidrow/Solidrow Visa/solidrowvisa.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>
@@ -201,7 +202,7 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
                         </div>
                         <div class="card-body">
                             <h3 class="card-title">Solidrow Student Visa Consultancy Services</h3>
-                            <a href="https://visa.solidrow.com" class="btn btn-view-more" target="_blank">
+                            <a href="../Solidrow Student Visa/solidrowstudentvisa.php" class="btn btn-view-more" target="_blank">
                                 View More <i class="fas fa-arrow-right ms-2"></i>
                             </a>
                         </div>

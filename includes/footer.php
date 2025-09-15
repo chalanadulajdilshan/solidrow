@@ -14,7 +14,7 @@ $current_year = date('Y');
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-section">
                         <div class="footer-logo">
-                            <img src="assets/images/logo-white.png" alt="Foreign Agency" height="40">
+                            <img src="/solidrow/assets/images/logo-white.png" alt="Solidrow Engineering" height="100" onerror="this.style.display='none'">
                             <span class="footer-brand-text">Solidrow</span>
                         </div>
                         <p class="footer-description">
@@ -46,12 +46,12 @@ $current_year = date('Y');
                     <div class="footer-section">
                         <h4 class="footer-title">Quick Links</h4>
                         <ul class="footer-links">
-                            <li><a href="index.php">Home</a></li>
-                            <li><a href="about.php">About Us</a></li>
-                            <li><a href="services.php">Services</a></li>
-                            <li><a href="jobs.php">Jobs</a></li>
-                            <li><a href="contact.php">Contact</a></li>
-                            <li><a href="blog.php">Blog</a></li>
+                            <li><a href="/solidrow/index.php">Home</a></li>
+                            <li><a href="/solidrow/about.php">About Us</a></li>
+                            <li><a href="/solidrow/services.php">Services</a></li>
+                            <li><a href="/solidrow/jobs.php">Jobs</a></li>
+                            <li><a href="/solidrow/contact.php">Contact</a></li>
+                            <li><a href="/solidrow/blog.php">Blog</a></li>
                         </ul>
                     </div>
                 </div>
@@ -61,12 +61,12 @@ $current_year = date('Y');
                     <div class="footer-section">
                         <h4 class="footer-title">Services</h4>
                         <ul class="footer-links">
-                            <li><a href="job-placement.php">Job Placement</a></li>
-                            <li><a href="visa-processing.php">Visa Processing</a></li>
-                            <li><a href="training.php">Training Programs</a></li>
-                            <li><a href="consultation.php">Consultation</a></li>
-                            <li><a href="documentation.php">Documentation</a></li>
-                            <li><a href="support.php">24/7 Support</a></li>
+                            <li><a href="/solidrow/job-placement.php">Job Placement</a></li>
+                            <li><a href="/solidrow/visa-processing.php">Visa Processing</a></li>
+                            <li><a href="/solidrow/training.php">Training Programs</a></li>
+                            <li><a href="/solidrow/consultation.php">Consultation</a></li>
+                            <li><a href="/solidrow/documentation.php">Documentation</a></li>
+                            <li><a href="/solidrow/support.php">24/7 Support</a></li>
                         </ul>
                     </div>
                 </div>
@@ -120,9 +120,9 @@ $current_year = date('Y');
                 </div>
                 <div class="col-md-6">
                     <ul class="footer-bottom-links">
-                        <li><a href="privacy-policy.php">Privacy Policy</a></li>
-                        <li><a href="terms-conditions.php">Terms & Conditions</a></li>
-                        <li><a href="sitemap.php">Sitemap</a></li>
+                        <li><a href="/solidrow/privacy-policy.php">Privacy Policy</a></li>
+                        <li><a href="/solidrow/terms-conditions.php">Terms & Conditions</a></li>
+                        <li><a href="/solidrow/sitemap.php">Sitemap</a></li>
                     </ul>
                 </div>
             </div>
@@ -137,11 +137,20 @@ $current_year = date('Y');
 
 <style>
     /* Footer Styles */
+    :root {
+        --primary-color: #011a42;
+        --secondary-color: #f57c02;
+        --accent-color: #ff9e2c;
+        --gradient-1: linear-gradient(135deg, #011a42 0%, #003366 100%);
+        --gradient-2: linear-gradient(135deg, #f57c02 0%, #ff9e2c 100%);
+    }
+    
     .footer {
         background: var(--gradient-1);
         color: white;
         position: relative;
         overflow: hidden;
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     }
 
     .footer::before {
@@ -171,6 +180,7 @@ $current_year = date('Y');
         display: flex;
         align-items: center;
         margin-bottom: 1.5rem;
+        gap: 10px;
     }
 
     .footer-brand-text {

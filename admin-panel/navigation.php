@@ -47,13 +47,34 @@ $US = new User($_SESSION['id']);
                         <span>Manage User Type</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="staff.php">
+                        <i class="bx  bx-user"></i>
+                        <span>Manage Staff</span>
+                    </a>
+                </li>
 
                 <li class="menu-title">Navigation</li>
                 <li>
                     <a href="index.php">
                         <i class="bx bx-home "></i>
                         <span>Dashboard </span>
+                    </a>
+                    <a href="Company.php">
+                        <i class="bx bx-building "></i>
+                        <span>Company </span>
+                    </a>
+                    <a href="project.php">
+                        <i class="bx bx-briefcase "></i>
+                        <span>Project </span>
+                    </a>
+                    <a href="course.php">
+                        <i class="bx bx-book "></i>
+                        <span>Course </span>
+                    </a>
+                    <a href="jobs.php">
+                        <i class="bx bx-book "></i>
+                        <span>Job </span>
                     </a>
                 </li>
 

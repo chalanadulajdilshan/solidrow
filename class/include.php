@@ -4,9 +4,15 @@ include_once(dirname(__FILE__) . '/User.php');
 include_once(dirname(__FILE__) . '/UserType.php');     
 include_once(dirname(__FILE__) . '/Upload.php');
 include_once(dirname(__FILE__) . '/Helper.php');
-
- 
-  
+include_once(dirname(__FILE__) . '/Country.php');
+include_once(dirname(__FILE__) . '/Company.php');
+include_once(dirname(__FILE__) . '/JobRole.php');
+include_once(dirname(__FILE__) . '/Staff.php');
+include_once(dirname(__FILE__) . '/Province.php');
+include_once(dirname(__FILE__) . '/District.php');
+include_once(dirname(__FILE__) . '/Project.php');
+include_once(dirname(__FILE__) . '/Course.php');
+include_once(dirname(__FILE__) . '/Job.php');
 function dd($data)
 {
     var_dump($data);

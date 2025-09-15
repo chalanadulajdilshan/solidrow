@@ -1336,3 +1336,177 @@ html {
         font-size: 1.3rem;
     }
 }
+
+/* Footer */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    /* Move logo 10px to the right */
+}
+
+.footer {
+    background: var(--primary-color);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 60px 0 30px;
+}
+
+.footer-widget h5 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.footer-widget p {
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+    padding-left: 5px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.contact-info i {
+    color: var(--secondary-color);
+    width: 18px;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .course-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .course-image {
+        height: 250px;
+    }
+
+    .about-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .floating-card {
+        position: static;
+        margin-top: 20px;
+    }
+
+    .contact-form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-control-prev {
+        left: 15px;
+    }
+
+    .carousel-control-next {
+        right: 15px;
+    }
+
+    .course-content {
+        padding: 30px;
+    }
+
+    .course-navigation {
+        gap: 15px;
+    }
+
+    .course-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .branch-card {
+        padding: 30px 20px;
+    }
+
+    .contact-form {
+        padding: 25px;
+    }
+}

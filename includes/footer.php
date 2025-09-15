@@ -14,8 +14,8 @@ $current_year = date('Y');
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-section">
                         <div class="footer-logo">
-                            <img src="/solidrow/assets/images/logo-white.png" alt="Solidrow Engineering" height="100" onerror="this.style.display='none'">
-                            <span class="footer-brand-text">Solidrow</span>
+
+                            <span class="footer-brand-text">About Us</span>
                         </div>
                         <p class="footer-description">
                             SOLIDROW GROUP (PVT) LTD was registered in the year of 2023 as Limited
@@ -144,7 +144,7 @@ $current_year = date('Y');
         --gradient-1: linear-gradient(135deg, #011a42 0%, #003366 100%);
         --gradient-2: linear-gradient(135deg, #f57c02 0%, #ff9e2c 100%);
     }
-    
+
     .footer {
         background: var(--gradient-1);
         color: white;

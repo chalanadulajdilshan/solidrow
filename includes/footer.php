@@ -18,7 +18,8 @@ $current_year = date('Y');
                             <span class="footer-brand-text">Solidrow</span>
                         </div>
                         <p class="footer-description">
-                            Your trusted partner in international career opportunities. We connect talented professionals with global employment prospects across various industries.
+                            SOLIDROW GROUP (PVT) LTD was registered in the year of 2023 as Limited
+                            Liability Company under the Registrar General of Companies in Sri Lankan.
                         </p>
                         <div class="social-links">
                             <a href="#" class="social-link" aria-label="Facebook">
@@ -80,7 +81,9 @@ $current_year = date('Y');
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <p>123 Business District,<br>Colombo 03, Sri Lanka</p>
+                                    <p>12/88 Kelanimulla,
+                                        <br> Mulleriyawa 10620
+                                    </p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -88,7 +91,7 @@ $current_year = date('Y');
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <p>+94 11 234 5678<br>+94 77 123 4567</p>
+                                    <p>+94 77 930 1318</p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -96,22 +99,9 @@ $current_year = date('Y');
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <p>info@foreignagency.lk<br>careers@foreignagency.lk</p>
+                                    <p>info@solidrow.lk</p>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Newsletter Signup -->
-                        <div class="newsletter-signup">
-                            <h5 class="newsletter-title">Stay Updated</h5>
-                            <form class="newsletter-form" id="newsletterForm">
-                                <div class="input-group">
-                                    <input type="email" class="form-control" placeholder="Enter your email" required>
-                                    <button class="btn btn-newsletter" type="submit">
-                                        <i class="fas fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -125,7 +115,7 @@ $current_year = date('Y');
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <p class="copyright">
-                        &copy; <?php echo $current_year; ?> Foreign Agency. All rights reserved.
+                        &copy; <?php echo $current_year; ?> Solidrow Development by sourcecode.lk
                     </p>
                 </div>
                 <div class="col-md-6">

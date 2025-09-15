@@ -6,7 +6,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
     <div class="container">
         <a class="navbar-brand" href="index.php">
             <img src="assets/images/logo.png" alt="Foreign Agency" height="40">
-            <span class="brand-text">Solidrow</span>
+            <span class="brand-text">Solidrow group pvt ltd</span>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -32,16 +32,7 @@ include './auth.php';
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label>Country</label>
-                                                <select id="country" name="country" class="form-select" required>
-                                                    <option value="">Select Country</option>
-                                                    <?php
-                                                    $COUNTRY = new Country(NULL);
-                                                    $countries = $COUNTRY->all();
-                                                    foreach ($countries as $country) {
-                                                        echo '<option value="' . htmlspecialchars($country['name']) . '">' . htmlspecialchars($country['name']) . '</option>';
-                                                    }
-                                                    ?>
-                                                </select>
+                                                <input type="text" id="country" name="country" class="form-control" placeholder="Enter country" required>
                                             </div>
                                             <div class="col-md-12 mb-3">
                                                 <label>Description</label>

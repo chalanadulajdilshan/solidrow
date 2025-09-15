@@ -1,3 +1,34 @@
+function loadUsersByType(typeId) {
+    if (!typeId) {
+        $('#fullname').html('<option value="">-- Select User type first --</option>');
+        return;
+    }
+    
+    $.ajax({
+        url: 'ajax/php/user.php',
+        type: 'POST',
+        data: {
+            action: 'get_users_by_type',
+            type_id: typeId
+        },
+        dataType: 'json',
+        success: function(response) {
+            var options = '<option value="">-- Select User --</option>';
+            if (response.status === 'success' && response.users.length > 0) {
+                $.each(response.users, function(key, user) {
+                    options += '<option value="' + user.id + '">' + user.name + '</option>';
+                });
+            } else {
+                options = '<option value="">No users found for this type</option>';
+            }
+            $('#fullname').html(options);
+        },
+        error: function() {
+            $('#fullname').html('<option value="">Error loading users</option>');
+        }
+    });
+}
+
 $("document").ready(function () {
     $("#create").click(function (event) {
         event.preventDefault();
@@ -22,22 +53,6 @@ $("document").ready(function () {
             swal({
                 title: "Error!",
                 text: "Please Select User Type..!",
-                type: "error",
-                timer: 2000,
-                showConfirmButton: false,
-            });
-        } else if (!$("#email").val() || $("#email").val().length === 0) {
-            swal({
-                title: "Error!",
-                text: "Please Enter Email..!",
-                type: "error",
-                timer: 2000,
-                showConfirmButton: false,
-            });
-        } else if (!$("#phone").val() || $("#phone").val().length === 0) {
-            swal({
-                title: "Error!",
-                text: "Please Enter Phone Number..!",
                 type: "error",
                 timer: 2000,
                 showConfirmButton: false,
@@ -128,23 +143,6 @@ $("document").ready(function () {
                 timer: 2000,
                 showConfirmButton: false,
             });
-
-        } else if (!$("#email").val() || $("#email").val().length === 0) {
-            swal({
-                title: "Error!",
-                text: "Please Enter email..!",
-                type: "error",
-                timer: 2000,
-                showConfirmButton: false,
-            });
-        } else if (!$("#phone").val() || $("#phone").val().length === 0) {
-            swal({
-                title: "Error!",
-                text: "Please Enter Phone..!",
-                type: "error",
-                timer: 2000,
-                showConfirmButton: false,
-            });
         } else {
             //start preloarder
             $(".someBlock").preloader();
@@ -188,40 +186,6 @@ $("document").ready(function () {
             });
         }
         return false;
-    });
-
-    $("#type").change(function () {
-        var type = $(this).val();
- 
-
-        if (type == "3") {
-            $("#center_name_section").removeClass("hidden");
-        } else {
-            $("#center_name_section").addClass("hidden");
-        }
-        
-           if (type == "8") {
-            $("#province_section").removeClass("hidden");
-        } else {
-            $("#province_section").addClass("hidden");
-        }
-        
-        
-        if (type == 11) {
-            $("#course_name_section").removeClass("hidden");
-        } else {
-            $("#course_name_section").addClass("hidden");
-        }
-        
-        
-        if (type == "5") {
-            $("#division_name_section").removeClass("hidden");
-            $("#position_name_section").removeClass("hidden");
-        } else {
-            $("#division_name_section").addClass("hidden");
-            $("#position_name_section").addClass("hidden");
-        }
-        
     });
 
     //////////////update password /////

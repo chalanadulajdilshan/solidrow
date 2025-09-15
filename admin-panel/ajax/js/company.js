@@ -1,43 +1,9 @@
-jQuery(document).ready(function ($) {
-    // Common AJAX handler
-    function handleAjaxRequest(action, formData, successMessage, errorMessage) {
-        $('.someBlock').preloader();
+jQuery(document).ready(function () {
 
-        $.ajax({
-            url: "ajax/php/company.php",
-            type: 'POST',
-            data: formData,
-            async: true,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: "json",
-            success: function (result) {
-                $('.someBlock').preloader('remove');
-                if (result.status === 'success') {
-                    swal({
-                        title: "Success!",
-                        text: result.message || successMessage,
-                        type: "success",
-                        timer: 2000,
-                        showConfirmButton: false
-                    }).then(function () {
-                        location.reload();
-                    });
-                } else {
-                    swal("Error!", result.message || errorMessage, "error");
-                }
-            },
-            error: function (xhr, status, error) {
-                $('.someBlock').preloader('remove');
-                swal("Error!", "Something went wrong. Please try again later.", "error");
-                console.error("AJAX Error:", status, error);
-            }
-        });
-    }
+    // Create Company
+    $("#create").click(function (event) {
+        event.preventDefault();
 
-    // Form validation
-    function validateForm() {
         if (!$('#name').val() || $('#name').val().length === 0) {
             swal({
                 title: "Error!",
@@ -46,31 +12,108 @@ jQuery(document).ready(function ($) {
                 timer: 2000,
                 showConfirmButton: false
             });
-            return false;
+        } else {
+
+            $('.someBlock').preloader();
+
+            var formData = new FormData($("#form-data")[0]);
+            formData.append('create', true);
+
+            $.ajax({
+                url: "ajax/php/company.php",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "JSON",
+                success: function (result) {
+                    $('.someBlock').preloader('remove');
+
+                    if (result.status === 'success') {
+                        swal({
+                            title: "Success!",
+                            text: "Company added successfully!",
+                            type: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    } else {
+                        swal({
+                            title: "Error!",
+                            text: "Something went wrong.",
+                            type: 'error',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                }
+            });
         }
-        return true;
-    }
-
-    // Create Company
-    $("#create").click(function (event) {
-        event.preventDefault();
-        if (!validateForm()) return false;
-
-        var formData = new FormData($("#form-data")[0]);
-        formData.append('create', true);
-        handleAjaxRequest('create', formData, 'Company created successfully.', 'Failed to create company.');
         return false;
     });
 
     // Update Company
     $("#update").click(function (event) {
         event.preventDefault();
-        if (!validateForm()) return false;
 
-        var formData = new FormData($("#form-data")[0]);
-        formData.append('update', true);
-        formData.append('id', $('#company_id').val());
-        handleAjaxRequest('update', formData, 'Company updated successfully.', 'Failed to update company.');
+        if (!$('#name').val() || $('#name').val().length === 0) {
+            swal({
+                title: "Error!",
+                text: "Please enter company name",
+                type: 'error',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } else {
+
+            $('.someBlock').preloader();
+
+            var formData = new FormData($("#form-data")[0]);
+            formData.append('update', true);
+
+            $.ajax({
+                url: "ajax/php/company.php",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "JSON",
+                success: function (result) {
+                    $('.someBlock').preloader('remove');
+
+                    if (result.status === 'success') {
+                        swal({
+                            title: "Success!",
+                            text: "Company updated successfully!",
+                            type: 'success',
+                            timer: 2500,
+                            showConfirmButton: false
+                        });
+
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+
+                    } else {
+                        swal({
+                            title: "Error!",
+                            text: "Something went wrong.",
+                            type: 'error',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                }
+            });
+        }
         return false;
     });
 
@@ -79,8 +122,6 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $('#form-data')[0].reset();
         $("#create").show();
-        $("#update").hide();
-        removeImage();
     });
 
     // Populate form from modal click
@@ -88,28 +129,21 @@ jQuery(document).ready(function ($) {
         $('#company_id').val($(this).data('id'));
         $('#name').val($(this).data('name'));
         $('#short_desc').val($(this).data('short_desc'));
+        $('#image_name').val($(this).data('image_name'));
         $('#image_url').val($(this).data('image_url'));
 
-        const imageName = $(this).data('image_name');
-        if (imageName) {
-            $('#company_image').attr('src', '../upload/company/' + imageName);
-            $('#image_preview').show();
-        } else {
-            removeImage();
-        }
-
         $("#create").hide();
-        $("#update").show();
         $('#company_master').modal('hide');
     });
 
     // Delete Company
     $(document).on('click', '.delete-company', function (e) {
         e.preventDefault();
-        const companyId = $('#company_id').val();
-        const companyName = $('#name').val();
 
-        if (!companyId) {
+        var companyId = $('#company_id').val();
+        var companyName = $('#name').val();
+
+        if (!companyId || companyId === "") {
             swal({
                 title: "Error!",
                 text: "Please select a company first.",
@@ -128,12 +162,49 @@ jQuery(document).ready(function ($) {
             confirmButtonColor: "#d33",
             cancelButtonColor: "#6c757d",
             confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "Cancel"
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false
         }, function (isConfirm) {
             if (isConfirm) {
-                handleAjaxRequest('delete', { id: companyId, delete: true }, 
-                    'Company deleted successfully.', 'Failed to delete company.');
+                $('.someBlock').preloader();
+
+                $.ajax({
+                    url: 'ajax/php/company.php',
+                    type: 'POST',
+                    data: {
+                        id: companyId,
+                        delete: true
+                    },
+                    dataType: 'JSON',
+                    success: function (response) {
+                        $('.someBlock').preloader('remove');
+
+                        if (response.status === 'success') {
+                            swal({
+                                title: "Deleted!",
+                                text: "Company has been deleted.",
+                                type: "success",
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 2000);
+
+                        } else {
+                            swal({
+                                title: "Error!",
+                                text: "Something went wrong.",
+                                type: "error",
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                        }
+                    }
+                });
             }
         });
     });
+
 });

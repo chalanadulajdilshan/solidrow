@@ -76,7 +76,7 @@ include './auth.php';
                                 <div id="total-revenue-chart"></div>
                             </div>
                             <div>
-                                <h4 class="mb-1 mt-1">+<span data-plugin="counterup"><?= number_format($all_center_application_count_this_year, 0, 2) ?></span></h4>
+                                <h4 class="mb-1 mt-1">+<span data-plugin="counterup">15.000</span></h4>
                                 <p class="text-muted mb-0">Total Applications</p>
                             </div>
                             <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i>
@@ -97,7 +97,7 @@ include './auth.php';
                             </div>
                             <div>
                                 <h4 class="mb-1 mt-1">+<span data-plugin="counterup">
-                                        <?= number_format($all_center_student_count_this_year, 0, 2) ?>
+                                        41
                                     </span></h4>
                                 <p class="text-muted mb-0">Total Students</p>
                             </div>
@@ -117,7 +117,7 @@ include './auth.php';
                                 <div id="customers-chart"> </div>
                             </div>
                             <div>
-                                <h4 class="mb-1 mt-1">+<span data-plugin="counterup"> <?= number_format($all_center_student_count_nvq_this_year, 0, 2) ?> </span></h4>
+                                <h4 class="mb-1 mt-1">+<span data-plugin="counterup"> 10.500 </span></h4>
                                 <p class="text-muted mb-0"> Nvq Student</p>
                             </div>
                             <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i class="mdi mdi-arrow-down-bold me-1"></i>
@@ -138,7 +138,7 @@ include './auth.php';
                                 <div id="growth-chart"></div>
                             </div>
                             <div>
-                                <h4 class="mb-1 mt-1">+ <span data-plugin="counterup"> <?= number_format($all_center_student_count_non_nvq_this_year, 0, 2) ?> </span></h4>
+                                <h4 class="mb-1 mt-1">+ <span data-plugin="counterup"> 10.500 </span></h4>
                                 <p class="text-muted mb-0">Non Nvq Students</p>
                             </div>
                             <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i> <?php
@@ -157,11 +157,7 @@ include './auth.php';
 
                         <div class="table-responsive mb-4">
 
-                            <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
-
-
-
-                            </table>
+                            
 
                         </div>
 

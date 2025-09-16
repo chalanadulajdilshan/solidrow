@@ -90,4 +90,49 @@ class Job
         $result = mysqli_fetch_array($db->readQuery($query));
         return $result['id'] ?? null;
     }
+
+    /**
+     * Get all distinct positions from jobs table
+     * @return array List of distinct positions
+     */
+    public function getPositions()
+    {
+        $query = "SELECT DISTINCT position FROM `jobs` WHERE position IS NOT NULL AND position != '' ORDER BY position ASC";
+        $db = new Database();
+        $result = $db->readQuery($query);
+        
+        $positions = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $positions[] = $row['position'];
+        }
+        
+        return $positions;
+    }
+    
+    /**
+     * Get all jobs with their details
+     * @return array List of jobs with all details
+     */
+    public function getAllJobs()
+    {
+        $query = "SELECT * FROM `jobs` WHERE title IS NOT NULL AND title != '' ORDER BY id DESC";
+        $db = new Database();
+        $result = $db->readQuery($query);
+        
+        $jobs = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $jobs[] = [
+                'id' => $row['id'],
+                'title' => $row['title'],
+                'position' => $row['position'],
+                'description' => $row['description'],
+                'country' => $row['country'],
+                'location' => $row['country'], // Using country as location for now
+                'type' => 'Full-time', // Default to Full-time if not specified
+                'image' => $row['image']
+            ];
+        }
+        
+        return $jobs;
+    }
 }

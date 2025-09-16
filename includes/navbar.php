@@ -19,8 +19,11 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                     <a href="tel:+94112223344" class="nav-link text-white d-flex align-items-center me-3">
                         <i class="bi bi-telephone-fill me-1"></i> +94 77 930 1318
                     </a>
-                    <a href="mailto:info@foreignagency.com" class="nav-link text-white d-flex align-items-center">
+                    <a href="mailto:info@solidrow.lk" class="nav-link text-white d-flex align-items-center me-3">
                         <i class="bi bi-envelope-fill me-1"></i> info@solidrow.lk
+                    </a>
+                    <a href="jobs.php" class="btn btn-outline-light">
+                        <i class="bi bi-briefcase me-1"></i> Careers
                     </a>
                 </div>
             </ul>

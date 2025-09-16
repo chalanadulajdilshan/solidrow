@@ -97,6 +97,18 @@ $US = new User($_SESSION['id']);
                         <span>Job </span>
                     </a>
                 </li>
+                <li>
+                    <a href="job-listings.php">
+                        <i class="bx bx-list-ul "></i>
+                        <span>Job Listings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="career-applications.php">
+                        <i class="bx bx-file"></i>
+                        <span>Career Applications </span>
+                    </a>
+                </li>
 
                 <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
                 <li>
@@ -117,7 +129,7 @@ $US = new User($_SESSION['id']);
                         <li><a href="manage-courses.php">Approved Applications</a></li>
                         <li><a href="manage-courses.php">Rejected Applications</a></li>
                         <li><a href="manage-courses.php">Closed Applications</a></li>
- 
+
                     </ul>
                 </li>
                 <li>

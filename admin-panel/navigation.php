@@ -54,7 +54,7 @@ $US = new User($_SESSION['id']);
                     </a>
                 </li>
 
-                <li class="menu-title">Navigation</li>
+                <li class="menu-title">Main Panel</li>
                 <li>
                     <a href="index.php">
                         <i class="bx bx-home "></i>
@@ -74,20 +74,61 @@ $US = new User($_SESSION['id']);
                     </a>
                 </li>
                 <li>
+                    <a href="country.php">
+                        <i class="bx bx-globe "></i>
+                        <span>Country </span>
+                    </a>
+                </li>
+                <li>
                     <a href="course.php">
-                        <i class="bx bx-book "></i>
+                        <i class="bx bx-book-content "></i>
                         <span>Course </span>
                     </a>
                 </li>
                 <li>
                     <a href="jobs.php">
                         <i class="bx bx-book "></i>
+                        <span>Job Category</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="jobs.php">
+                        <i class="bx bx-briefcase "></i>
                         <span>Job </span>
                     </a>
                 </li>
 
-
-                <li class="menu-title">MIS Management Panel</li>
+                <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
+                <li>
+                    <a href="engineering-application.php">
+                        <i class="bx bx-file "></i>
+                        <span>Application Form</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="   bx bx-phone  "></i>
+                        <span>Call Center</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="manage-course-trade.php">Applications</a></li>
+                        <li><a href="create-courses.php">My Applications</a></li>
+                        <li><a href="manage-courses.php">Pending Applications</a></li>
+                        <li><a href="manage-courses.php">Approved Applications</a></li>
+                        <li><a href="manage-courses.php">Rejected Applications</a></li>
+                        <li><a href="manage-courses.php">Closed Applications</a></li>
+ 
+                    </ul>
+                </li>
+                <li>
+                    <a href="jobs.php">
+                        <i class="bx bx-dollar-circle "></i>
+                        <span>My Commissions </span>
+                    </a>
+                </li>
+                <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
+                <li class="menu-title">Solidrow Foreign Employment Agency</li>
+                <li class="menu-title">Solidrow Visa Consultancy Services</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="   bx bx-book  "></i>

@@ -29,3 +29,13 @@
 <script src="assets/js/jquery.preloader.min.js" type="text/javascript"></script>
 <!-- App js -->
 <script src="assets/js/app.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".phone_number").mask("9999999999");
+            $(".date").mask("99/99/9999");
+
+        });
+    </script>

@@ -98,10 +98,9 @@ include './auth.php';
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12 text-center">
-                                                <button type="button" class="btn btn-primary" id="create">
-                                                    <i class="uil uil-save me-1"></i> Save
-                                                </button>
+                                            <div class="col-12 text-end">
+                                                <button class="btn btn-primary" type="submit" id="create">Create</button>
+                                                <input type="hidden" name="create">
                                             </div>
                                         </div>
                                     </form>

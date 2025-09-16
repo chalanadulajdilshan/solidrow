@@ -34,6 +34,10 @@ include './auth.php';
                                                 <label>Country</label>
                                                 <input type="text" id="country" name="country" class="form-control" placeholder="Enter country" required>
                                             </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Position</label>
+                                                <input type="text" id="position" name="position" class="form-control" placeholder="Enter position" required>
+                                            </div>
                                             <div class="col-md-12 mb-3">
                                                 <label>Description</label>
                                                 <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter job description"></textarea>
@@ -92,6 +96,7 @@ include './auth.php';
                                             <tr>
                                                 <th>#ID</th>
                                                 <th>Title</th>
+                                                <th>Position</th>
                                                 <th>Description</th>
                                                 <th>Country</th>
                                                 <th>Image</th>
@@ -111,6 +116,7 @@ include './auth.php';
                                                 <tr id="div<?php echo $job['id'] ?>">
                                                     <td><?php echo $key ?></td>
                                                     <td><?php echo htmlspecialchars($job['title']) ?></td>
+                                                    <td><?php echo htmlspecialchars($job['position']) ?></td>
                                                     <td><?php echo htmlspecialchars($job['description']) ?></td>
                                                     <td><?php echo htmlspecialchars($job['country']) ?></td>
                                                     <td>
@@ -123,6 +129,7 @@ include './auth.php';
                                                         <div class="badge bg-pill bg-soft-success font-size-14 select-job"
                                                             data-id="<?php echo $job['id'] ?>"
                                                             data-title="<?php echo htmlspecialchars($job['title']) ?>"
+                                                            data-position="<?php echo htmlspecialchars($job['position']) ?>"
                                                             data-description="<?php echo htmlspecialchars($job['description']) ?>"
                                                             data-country="<?php echo htmlspecialchars($job['country']) ?>"
                                                             data-image="<?php echo htmlspecialchars($job['image']) ?>"

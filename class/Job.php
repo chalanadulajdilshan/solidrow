@@ -4,6 +4,7 @@ class Job
 {
     public $id;
     public $title;
+    public $position;
     public $description;
     public $country;
     public $image;
@@ -19,6 +20,7 @@ class Job
             if ($result) {
                 $this->id = $result['id'];
                 $this->title = $result['title'];
+                $this->position = $result['position'];
                 $this->description = $result['description'];
                 $this->country = $result['country'];
                 $this->image = $result['image'];
@@ -30,9 +32,9 @@ class Job
     public function create()
     {
         $query = "INSERT INTO `jobs` (
-            `title`, `description`, `country`, `image`, `respons_person`
+            `title`, `position`, `description`, `country`, `image`, `respons_person`
         ) VALUES (
-            '$this->title', '$this->description', '$this->country', '$this->image', '$this->respons_person'
+            '$this->title', '$this->position', '$this->description', '$this->country', '$this->image', '$this->respons_person'
         )";
 
         $db = new Database();
@@ -49,6 +51,7 @@ class Job
     {
         $query = "UPDATE `jobs` SET 
             `title` = '$this->title',
+            `position` = '$this->position',
             `description` = '$this->description',
             `country` = '$this->country',
             `image` = '$this->image',

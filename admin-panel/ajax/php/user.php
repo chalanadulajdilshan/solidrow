@@ -7,12 +7,12 @@ header('Content-Type: application/json; charset=UTF8');
 if (isset($_POST['action']) && $_POST['action'] === 'get_users_by_type' && isset($_POST['type_id'])) {
     $USER = new User(NULL);
     $users = $USER->get_user_by_type($_POST['type_id']);
-    
+
     $result = [
         'status' => !empty($users) ? 'success' : 'error',
         'users' => $users
     ];
-    
+
     echo json_encode($result);
     exit();
 }
@@ -21,9 +21,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'get_users_by_type' && isset
 if (isset($_POST['create'])) {
 
     $USER = new User(NULL);
-    $USER->create($_POST['name'], $_POST['type'], $_POST['center_id'],$_POST['division'],$_POST['position'], $_POST['email'], $_POST['phone'], $_POST['username'], $_POST['password']);
-
-
+    $USER->create($_POST['type'],$_POST['fullname'], $_POST['username'], $_POST['password']);
+    
     $result = ["status" => 'success'];
     echo json_encode($result);
     exit();

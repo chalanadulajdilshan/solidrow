@@ -1,7 +1,7 @@
 <?php
 include_once(dirname(__FILE__) . '/Database.php');
 include_once(dirname(__FILE__) . '/User.php');
-include_once(dirname(__FILE__) . '/UserType.php');     
+include_once(dirname(__FILE__) . '/UserType.php');
 include_once(dirname(__FILE__) . '/Upload.php');
 include_once(dirname(__FILE__) . '/Helper.php');
 include_once(dirname(__FILE__) . '/Country.php');
@@ -13,7 +13,9 @@ include_once(dirname(__FILE__) . '/District.php');
 include_once(dirname(__FILE__) . '/Project.php');
 include_once(dirname(__FILE__) . '/Course.php');
 include_once(dirname(__FILE__) . '/Job.php');
-include_once(dirname(__FILE__) . '/EngineeringApplication.php'); 
+include_once(dirname(__FILE__) . '/EngineeringApplication.php');
+include_once(dirname(__FILE__) . '/Career.php');
+include_once(dirname(__FILE__) . '/JobListing.php');
 
 
 function dd($data)

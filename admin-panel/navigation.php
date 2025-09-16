@@ -97,6 +97,18 @@ $US = new User($_SESSION['id']);
                         <span>Job </span>
                     </a>
                 </li>
+                <li>
+                    <a href="job-listings.php">
+                        <i class="bx bx-list-ul "></i>
+                        <span>Job Listings </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="career-applications.php">
+                        <i class="bx bx-file"></i>
+                        <span>Career Applications </span>
+                    </a>
+                </li>
 
                 <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
                 <li>
@@ -113,9 +125,6 @@ $US = new User($_SESSION['id']);
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="all-engineering-applications.php">Applications</a></li>
                         <li><a href="staff-engineering-applications.php">My Applications</a></li>
-                        
- 
-                    </ul>
                 </li>
                 <li>
                     <a href="jobs.php">

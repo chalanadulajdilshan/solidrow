@@ -58,10 +58,28 @@ include './auth.php';
 
                                     <h4 class="card-title">Add User</h4>
                                     <form id="form-data">
+
+
+                                        <div class="mb-3 row">
+                                            <label for="fullname" class="col-md-2 col-form-label"> Name</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" name="staff_id" id="staff_id">
+                                                    <option value="">-- Select User type -- </option>
+                                                    <?php
+                                                    $Staff = new Staff(NULL);
+                                                    foreach ($Staff->all() as $staff) {
+                                                    ?>
+                                                        <option value="<?php echo $staff['id'] ?>"><?php echo $staff['name'] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="mb-3 row">
                                             <label for="example-search-input" class="col-md-2 col-form-label">User Type</label>
                                             <div class="col-md-10">
-                                                <select class="form-control" name="type" id="type" onchange="loadUsersByType(this.value)">
+                                                <select class="form-control" name="type" id="type">
                                                     <option value="">-- Select User type -- </option>
                                                     <?php
                                                     $USER_TYPE = new UserType(NULL);
@@ -74,19 +92,10 @@ include './auth.php';
                                                 </select>
                                             </div>
                                         </div>
-
-                                        <div class="mb-3 row">
-                                            <label for="fullname" class="col-md-2 col-form-label">Full Name</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="fullname" id="fullname" required>
-                                                    <option value="">-- Select User type first --</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="mb-3 row">
                                             <label for="example-url-input" class="col-md-2 col-form-label">User Name</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="url" id="username" name="username" placeholder="Enter username">
+                                                <input class="form-control" type="text" id="username" name="username" placeholder="Enter username">
                                             </div>
                                         </div>
 

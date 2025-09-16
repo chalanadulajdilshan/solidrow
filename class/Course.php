@@ -1,5 +1,6 @@
 <?php
-class Course {
+class Course
+{
     public $id;
     public $name;
     public $price;
@@ -11,11 +12,13 @@ class Course {
 
     private $upload_dir = '../../upload/course/';
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         if ($id) $this->load($id);
     }
 
-    private function load($id) {
+    private function load($id)
+    {
         $db = new Database();
         $id = (int)$id;
         $query = "SELECT * FROM `courses` WHERE `id` = $id";
@@ -30,55 +33,45 @@ class Course {
         return false;
     }
 
-    public function create() {
+    public function create()
+    {
         $db = new Database();
 
-        $name = mysqli_real_escape_string($db->DB_CON, $this->name);
-        $price = (float)$this->price;
-        $image_name = mysqli_real_escape_string($db->DB_CON, $this->image_name ?? '');
-        $short_description = mysqli_real_escape_string($db->DB_CON, $this->short_description);
-        $description = mysqli_real_escape_string($db->DB_CON, $this->description);
-        $staff_id = (int)$this->staff_id;
-        $queue = (int)$this->queue;
-
         $query = "INSERT INTO `courses` (`name`, `price`, `image_name`, `short_description`, `description`, `staff_id`, `queue`)
-                  VALUES ('$name', '$price', '$image_name', '$short_description', '$description', '$staff_id', '$queue')";
+                  VALUES ('$this->name', '$this->price', '$this->image_name', '$this->short_description', '$this->description', '$this->staff_id', '$this->queue')";
 
-        if ($db->readQuery($query)) {
-            $this->id = mysqli_insert_id($db->DB_CON);
-            return $this->id;
+        $db = new Database();
+        $result = $db->readQuery($query);
+
+        if ($result) {
+            return mysqli_insert_id($db->DB_CON);
+        } else {
+            return false;
         }
-        return false;
     }
 
-    public function update() {
+    public function update()
+    {
         if (!$this->id) return false;
 
         $db = new Database();
 
-        $name = mysqli_real_escape_string($db->DB_CON, $this->name);
-        $price = (float)$this->price;
-        $image_name = mysqli_real_escape_string($db->DB_CON, $this->image_name ?? '');
-        $short_description = mysqli_real_escape_string($db->DB_CON, $this->short_description);
-        $description = mysqli_real_escape_string($db->DB_CON, $this->description);
-        $staff_id = (int)$this->staff_id;
-        $queue = (int)$this->queue;
-        $id = (int)$this->id;
-
         $query = "UPDATE `courses` SET
-                    `name` = '$name',
-                    `price` = '$price',
-                    `image_name` = '$image_name',
-                    `short_description` = '$short_description',
-                    `description` = '$description',
-                    `staff_id` = '$staff_id',
-                    `queue` = '$queue'
-                  WHERE `id` = $id";
+                    `name` = '$this->name',
+                    `price` = '$this->price',
+                    `image_name` = '$this->image_name',
+                    `short_description` = '$this->short_description',
+                    `description` = '$this->description',
+                    `staff_id` = '$this->staff_id',
+                    `queue` = '$this->queue'
+                  WHERE `id` = $this->id";
 
+        $db = new Database();
         return $db->readQuery($query);
     }
 
-    public function delete() {
+    public function delete()
+    {
         if (!$this->id) return false;
 
         if (!empty($this->image_name)) {
@@ -87,12 +80,12 @@ class Course {
         }
 
         $db = new Database();
-        $id = (int)$this->id;
-        $query = "DELETE FROM `courses` WHERE `id` = $id";
+        $query = "DELETE FROM `courses` WHERE `id` = $this->id";
         return $db->readQuery($query);
     }
 
-    public function all($orderBy = 'id', $order = 'DESC') {
+    public function all($orderBy = 'id', $order = 'DESC')
+    {
         $db = new Database();
         $allowedColumns = ['id', 'name', 'price', 'queue'];
         $orderBy = in_array(strtolower($orderBy), $allowedColumns) ? $orderBy : 'id';

@@ -1,5 +1,6 @@
 <?php
-class Project {
+class Project
+{
     public $id;
     public $title;
     public $image_name;
@@ -8,11 +9,13 @@ class Project {
 
     private $upload_dir = '../../upload/project/';
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         if ($id) $this->load($id);
     }
 
-    private function load($id) {
+    private function load($id)
+    {
         $db = new Database();
         $id = (int)$id;
         $query = "SELECT * FROM `projects` WHERE `id` = $id";
@@ -27,46 +30,40 @@ class Project {
         return false;
     }
 
-    public function create() {
+    public function create()
+    {
         $db = new Database();
 
-        $title = mysqli_real_escape_string($db->DB_CON, $this->title);
-        $image_name = mysqli_real_escape_string($db->DB_CON, $this->image_name ?? '');
-        $short_description = mysqli_real_escape_string($db->DB_CON, $this->short_description);
-        $project_date = mysqli_real_escape_string($db->DB_CON, $this->project_date);
-
         $query = "INSERT INTO `projects` (`title`, `image_name`, `short_description`, `project_date`)
-                  VALUES ('$title', '$image_name', '$short_description', '$project_date')";
+                  VALUES (' $this->title', '$this->image_name', '$this->short_description', '$this->project_date')";
 
-        if ($db->readQuery($query)) {
-            $this->id = mysqli_insert_id($db->DB_CON);
-            return $this->id;
+        $result = $db->readQuery($query);
+
+        if ($result) {
+            return mysqli_insert_id($db->DB_CON);
+        } else {
+            return false;
         }
-        return false;
     }
 
-    public function update() {
+    public function update()
+    {
         if (!$this->id) return false;
 
         $db = new Database();
 
-        $title = mysqli_real_escape_string($db->DB_CON, $this->title);
-        $image_name = mysqli_real_escape_string($db->DB_CON, $this->image_name ?? '');
-        $short_description = mysqli_real_escape_string($db->DB_CON, $this->short_description);
-        $project_date = mysqli_real_escape_string($db->DB_CON, $this->project_date);
-        $id = (int)$this->id;
-
         $query = "UPDATE `projects` SET
-                    `title` = '$title',
-                    `image_name` = '$image_name',
-                    `short_description` = '$short_description',
-                    `project_date` = '$project_date'
-                  WHERE `id` = $id";
+                    `title` = '$this->title',
+                    `image_name` = '$this->image_name',
+                    `short_description` = '$this->short_description',
+                    `project_date` = '$this->project_date'
+                  WHERE `id` = $this->id";
 
         return $db->readQuery($query);
     }
 
-    public function delete() {
+    public function delete()
+    {
         if (!$this->id) return false;
 
         if (!empty($this->image_name)) {
@@ -75,12 +72,12 @@ class Project {
         }
 
         $db = new Database();
-        $id = (int)$this->id;
-        $query = "DELETE FROM `projects` WHERE `id` = $id";
+        $query = "DELETE FROM `projects` WHERE `id` = $this->id";
         return $db->readQuery($query);
     }
 
-    public function all($orderBy = 'id', $order = 'DESC') {
+    public function all($orderBy = 'id', $order = 'DESC')
+    {
         $db = new Database();
         $orderBy = in_array(strtolower($orderBy), ['id', 'title', 'project_date']) ? $orderBy : 'id';
         $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';

@@ -1,6 +1,6 @@
 <?php
 
-include '../../class/include.php';
+include '../../../class/include.php';
 header('Content-Type: application/json; charset=UTF8');
 
 // Create a new staff member
@@ -75,3 +75,18 @@ if (isset($_POST['delete']) && isset($_POST['id'])) {
     }
     exit();
 }
+
+// Get users by type
+if (isset($_POST['action']) && $_POST['action'] === 'get_staff_by_type') {
+    $STAFF = new Staff(NULL);
+    $users = $STAFF->get_staff_by_type();
+
+    $result = [
+        'status' => !empty($users) ? 'success' : 'error',
+        'users' => $users
+    ];
+
+    echo json_encode($result);
+    exit();
+}
+

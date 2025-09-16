@@ -118,4 +118,26 @@ class Staff
         $result = mysqli_fetch_array($db->readQuery($query));
         return $result['id'] ?? null;
     }
+
+    
+    public function get_staff_by_type()
+    {
+        $query = "SELECT id, name FROM `staff` WHERE isActive = 1";
+
+        $db = new Database();
+        $result = $db->readQuery($query);
+        $users = array();
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $users[] = array(
+                    'id' => $row['id'],
+                    'name' => $row['name']
+                );
+            }
+        }
+
+        return $users;
+    }
+
 }

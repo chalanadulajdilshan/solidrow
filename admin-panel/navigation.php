@@ -111,8 +111,8 @@ $US = new User($_SESSION['id']);
                         <span>Call Center</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="manage-course-trade.php">Applications</a></li>
-                        <li><a href="create-courses.php">My Applications</a></li>
+                        <li><a href="all-engineering-applications.php">Applications</a></li>
+                        <li><a href="staff-engineering-applications.php">My Applications</a></li>
                         <li><a href="manage-courses.php">Pending Applications</a></li>
                         <li><a href="manage-courses.php">Approved Applications</a></li>
                         <li><a href="manage-courses.php">Rejected Applications</a></li>

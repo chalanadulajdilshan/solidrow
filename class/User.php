@@ -41,14 +41,17 @@ class User {
         }
     }
 
-      public function create( $type, $username, $password) {
+      public function create( $type, $fullname, $username, $password) {
+
         $enPass = md5($password);
 
         date_default_timezone_set('Asia/Colombo');
         $createdAt = date('Y-m-d H:i:s');
-        $query = "INSERT INTO `user` (`type`, `createdAt`,`username`,`password`) VALUES  ( '" . $type . "',  '" . $createdAt . "', '" . $username . "', '" . $enPass . "')";
+        $query = "INSERT INTO `user` (`type`, `createdAt`,`fullname`,`username`,`password`,`isActive`) VALUES  ( '" . $type . "', '" . $createdAt . "', '" . $fullname . "', '" . $username . "', '" . $enPass . "',1)";
 
         $db = new Database();
+
+         
 
         $result = $db->readQuery($query);
         if ($result) {

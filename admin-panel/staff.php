@@ -10,7 +10,7 @@ include './auth.php';
     <title>Staff Management | Youth Service LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
-    <?php include './assets/main_css.php'; ?>
+    <?php include './assets/main-css.php'; ?>
 </head>
 
 <body class="someBlock">

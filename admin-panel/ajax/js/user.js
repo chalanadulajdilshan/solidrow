@@ -32,11 +32,13 @@ function loadUsersByType(typeId) {
 $("document").ready(function () {
     $("#create").click(function (event) {
         event.preventDefault();
+
+
         //-- ** Start Error Messages
-        if (!$("#name").val() || $("#name").val().length === 0) {
+        if (!$("#fullname").val() || $("#fullname").val().length === 0) {
             swal({
                 title: "Error!",
-                text: "Please Enter name.",
+                text: "Please Select Full Name.",
                 type: "error",
                 timer: 2000,
                 showConfirmButton: false,
@@ -66,13 +68,13 @@ $("document").ready(function () {
                 showConfirmButton: false,
             });
         } else {
+            
             //start preloarder
             $(".someBlock").preloader();
             //grab all form data
 
             var formData = new FormData($("#form-data")[0]); //grab all form data
-
-
+           
             $.ajax({
                 url: "ajax/php/user.php",
                 type: "POST",
@@ -83,8 +85,6 @@ $("document").ready(function () {
                 processData: false,
                 dataType: "json",
                 success: function (result) {
-                    //remove preloarder
-
                     window.setTimeout(function () {
                         $(".someBlock").preloader("remove");
                         if (result.status === "success") {

@@ -43,6 +43,7 @@ jQuery(document).ready(function ($) {
       const requiredFields = [
         { id: "title", message: "Please enter job title" },
         { id: "description", message: "Please enter job description" },
+        { id: "position", message: "Please select job position" },
         { id: "country", message: "Please select country" },
         { id: "respons_person", message: "Please select responsible person" },
       ];
@@ -114,6 +115,7 @@ jQuery(document).ready(function ($) {
   
       $("#job_id").val(jobData.id);
       $("#title").val(jobData.title);
+      $("#position").val(jobData.position);
       $("#description").val(jobData.description);
       $("#country").val(jobData.country);
       $("#respons_person").val(jobData.respons_person);

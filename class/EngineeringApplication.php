@@ -149,15 +149,32 @@ class EngineeringApplication
 
         return $array_res;
     }
-    public function getApplicationsByWithStaffId($staff_id)
+    public function getApplicationsByWithStaffId($staff_id, $call_status = '', $employee_status = '')
     {
-        $query = "SELECT * FROM engineering_applicant WHERE staff_id = $staff_id ORDER BY created_at DESC";
         $db = new Database();
+        $query = "SELECT * FROM engineering_applicant WHERE staff_id = $staff_id ";
+        
+        // Add call status filter if provided
+        if (!empty($call_status)) {
+            $call_status = mysqli_real_escape_string($db->DB_CON, $call_status);
+            $query .= " AND call_status = '$call_status' ";
+        }
+        
+        // Add employee status filter if provided
+        if (!empty($employee_status)) {
+            $employee_status = mysqli_real_escape_string($db->DB_CON, $employee_status);
+            $query .= " AND employee_status = '$employee_status' ";
+        }
+        
+        $query .= " ORDER BY created_at DESC";
+        
         $result = $db->readQuery($query);
 
         $array_res = array();
-        while ($row = mysqli_fetch_array($result)) {
-            array_push($array_res, $row);
+        if ($result) {
+            while ($row = mysqli_fetch_array($result)) {
+                array_push($array_res, $row);
+            }
         }
 
         return $array_res;

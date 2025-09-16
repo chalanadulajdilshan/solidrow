@@ -113,10 +113,7 @@ $US = new User($_SESSION['id']);
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="all-engineering-applications.php">Applications</a></li>
                         <li><a href="staff-engineering-applications.php">My Applications</a></li>
-                        <li><a href="manage-courses.php">Pending Applications</a></li>
-                        <li><a href="manage-courses.php">Approved Applications</a></li>
-                        <li><a href="manage-courses.php">Rejected Applications</a></li>
-                        <li><a href="manage-courses.php">Closed Applications</a></li>
+                        
  
                     </ul>
                 </li>

@@ -1,57 +1,31 @@
 <?php
 
-include './class/include.php';
+include '../../../class/include.php';
 header('Content-Type: application/json; charset=UTF8');
 
 if (isset($_POST['create'])) {
 
-    $APPLICANT = new Applicant1(NULL);
+    $ENGINEERING_APPLICATION = new EngineeringApplication(NULL);
 
-    $APPLICANT->full_name = $_POST['full_name'];
-    $APPLICANT->nic = $_POST['nic'];
-    $APPLICANT->passport_number = $_POST['passport_number'];
-    $APPLICANT->birthday = $_POST['birthday'];
-    $APPLICANT->age = $_POST['age'];
-    $APPLICANT->gender = $_POST['gender'];
-    $APPLICANT->marital_status = $_POST['marital_status'];
-    $APPLICANT->mobile_number = $_POST['mobile_number'];
-    $APPLICANT->whatsapp_number = $_POST['whatsapp_number'];
-    $APPLICANT->province_id = $_POST['province_id'];
-    $APPLICANT->current_job = $_POST['current_job'];
-    $APPLICANT->job_abroad = $_POST['job_abroad'];
-    $APPLICANT->created_at = date('Y-m-d H:i:s');
-
-    $res = $APPLICANT->create();
-
-    if ($res) {
-        echo json_encode(["status" => 'success', "id" => $res]);
-        exit();
-    } else {
-        echo json_encode(["status" => 'error']);
-        exit();
-    }
-}
+    $ENGINEERING_APPLICATION->full_name = $_POST['full_name'];
+    $ENGINEERING_APPLICATION->nic = $_POST['nic'];
+    $ENGINEERING_APPLICATION->staff_id = $_POST['staff_id'];
+    $ENGINEERING_APPLICATION->passport_number = $_POST['passport_number'];
+    $ENGINEERING_APPLICATION->birthday = $_POST['birthday'];
+    $ENGINEERING_APPLICATION->age = $_POST['age'];
+    $ENGINEERING_APPLICATION->gender = $_POST['gender'];
+    $ENGINEERING_APPLICATION->marital_status = $_POST['marital_status'];
+    $ENGINEERING_APPLICATION->mobile_number = $_POST['mobile_number'];
+    $ENGINEERING_APPLICATION->whatsapp_number = $_POST['whatsapp_number'];
+    $ENGINEERING_APPLICATION->province_id = $_POST['province_id'];
+    $ENGINEERING_APPLICATION->current_job = $_POST['current_job'];
+    $ENGINEERING_APPLICATION->job_abroad = $_POST['job_abroad'];
+    $ENGINEERING_APPLICATION->type = 'WEB';
+    $ENGINEERING_APPLICATION->created_at = date('Y-m-d H:i:s');
 
 
-if (isset($_POST['create2'])) {
 
-    $APPLICANT = new Applicant2(NULL);
-
-    $APPLICANT->full_name = $_POST['full_name'];
-    $APPLICANT->nic = $_POST['nic'];
-    $APPLICANT->passport_number = $_POST['passport_number'];
-    $APPLICANT->birthday = $_POST['birthday'];
-    $APPLICANT->age = $_POST['age'];
-    $APPLICANT->gender = $_POST['gender'];
-    $APPLICANT->marital_status = $_POST['marital_status'];
-    $APPLICANT->mobile_number = $_POST['mobile_number'];
-    $APPLICANT->whatsapp_number = $_POST['whatsapp_number'];
-    $APPLICANT->province_id = $_POST['province_id'];
-    $APPLICANT->current_job = $_POST['current_job'];
-    $APPLICANT->job_abroad = $_POST['job_abroad'];
-    $APPLICANT->created_at = date('Y-m-d H:i:s');
-
-    $res = $APPLICANT->create();
+    $res = $ENGINEERING_APPLICATION->create();
 
     if ($res) {
         echo json_encode(["status" => 'success', "id" => $res]);
@@ -59,7 +33,42 @@ if (isset($_POST['create2'])) {
     } else {
         echo json_encode(["status" => 'error']);
         exit();
-    }
+    } 
 }
 
-?>
+if (isset($_POST['update'])) {
+ 
+    $ENGINEERING_APPLICATION = new EngineeringApplication($_POST['id']); // Load staff by ID
+
+    $ENGINEERING_APPLICATION->full_name = $_POST['full_name'];
+    $ENGINEERING_APPLICATION->nic = $_POST['nic'];
+    $ENGINEERING_APPLICATION->staff_id = $_POST['staff_id'];
+    $ENGINEERING_APPLICATION->passport_number = $_POST['passport_number'];
+    $ENGINEERING_APPLICATION->birthday = $_POST['birthday'];
+    $ENGINEERING_APPLICATION->age = $_POST['age'];
+    $ENGINEERING_APPLICATION->gender = $_POST['gender'];
+    $ENGINEERING_APPLICATION->marital_status = $_POST['marital_status'];
+    $ENGINEERING_APPLICATION->mobile_number = $_POST['mobile_number'];
+    $ENGINEERING_APPLICATION->whatsapp_number = $_POST['whatsapp_number'];
+    $ENGINEERING_APPLICATION->province_id = $_POST['province_id'];
+    $ENGINEERING_APPLICATION->current_job = $_POST['current_job'];
+    $ENGINEERING_APPLICATION->job_abroad = $_POST['job_abroad'];
+    $ENGINEERING_APPLICATION->type = 'WEB';
+    $ENGINEERING_APPLICATION->created_at = date('Y-m-d H:i:s');
+
+    $ENGINEERING_APPLICATION->call_date_time = $_POST['call_date_time'];
+    $ENGINEERING_APPLICATION->call_status = $_POST['call_status'];
+    $ENGINEERING_APPLICATION->employee_status = $_POST['employee_status'];
+    $ENGINEERING_APPLICATION->call_notes = $_POST['call_notes'];
+
+   
+
+    $res = $ENGINEERING_APPLICATION->update();
+
+    if ($res) {
+        echo json_encode(["status" => 'success']);
+    } else {
+        echo json_encode(["status" => 'error']);
+    }
+    exit();
+}

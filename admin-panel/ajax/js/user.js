@@ -1,33 +1,3 @@
-function loadUsersByType(typeId) {
-    if (!typeId) {
-        $('#fullname').html('<option value="">-- Select User type first --</option>');
-        return;
-    }
-    
-    $.ajax({
-        url: 'ajax/php/user.php',
-        type: 'POST',
-        data: {
-            action: 'get_users_by_type',
-            type_id: typeId
-        },
-        dataType: 'json',
-        success: function(response) {
-            var options = '<option value="">-- Select User --</option>';
-            if (response.status === 'success' && response.users.length > 0) {
-                $.each(response.users, function(key, user) {
-                    options += '<option value="' + user.id + '">' + user.name + '</option>';
-                });
-            } else {
-                options = '<option value="">No users found for this type</option>';
-            }
-            $('#fullname').html(options);
-        },
-        error: function() {
-            $('#fullname').html('<option value="">Error loading users</option>');
-        }
-    });
-}
 
 $("document").ready(function () {
     $("#create").click(function (event) {
@@ -35,10 +5,10 @@ $("document").ready(function () {
 
 
         //-- ** Start Error Messages
-        if (!$("#fullname").val() || $("#fullname").val().length === 0) {
+        if (!$("#staff_id").val() || $("#staff_id").val().length === 0) {
             swal({
                 title: "Error!",
-                text: "Please Select Full Name.",
+                text: "Please Select Staff Name.",
                 type: "error",
                 timer: 2000,
                 showConfirmButton: false,

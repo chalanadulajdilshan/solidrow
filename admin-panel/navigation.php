@@ -74,7 +74,7 @@ $US = new User($_SESSION['id']);
                     </a>
                 </li>
                 <li>
-                    <a href="country.php">
+                    <a href="countries.php">
                         <i class="bx bx-globe "></i>
                         <span>Country </span>
                     </a>

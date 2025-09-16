@@ -56,6 +56,43 @@ include './auth.php';
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Manage All Applications</h4>
+                                    
+                                    <!-- Filters -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <form id="filterForm" method="get" class="form-inline">
+                                                <div class="row">
+                                                    <div class="col-md-5 mb-2">
+                                                        <select class="form-control" id="call_status" name="call_status">
+                                                            <option value="">All Call Statuses</option>
+                                                            <option value="completed" >Completed</option>
+                                                            <option value="pending" >Pending</option>
+                                                            <option value="in_progress" >In Progress</option>
+                                                            <option value="not_answered" >Not Answered</option>
+                                                            <option value="rescheduled" >Rescheduled</option>
+                                                            <option value="cancelled" >Cancelled</option>
+                                                            <option value="follow_up" >Follow Up Required</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-5 mb-2">
+                                                        <select class="form-control" id="employee_status" name="employee_status">
+                                                            <option value="">All Employee Statuses</option>
+                                                            <option value="ok" >Ok</option>
+                                                            <option value="not_ok" >Not Ok</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2 mb-2">
+                                                        <div class="d-flex">
+                                                            <button type="submit" class="btn btn-primary mr-2">Filter</button>
+                                                            <?php if(isset($_GET['call_status']) || isset($_GET['employee_status'])): ?>
+                                                                <a href="staff-engineering-applications.php" class="btn btn-secondary">Clear</a>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
 
                                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
@@ -75,8 +112,11 @@ include './auth.php';
                                         <tbody>
                                             <?php
                                             $staff_id = $_SESSION['id'];
+                                            $call_status = isset($_GET['call_status']) ? $_GET['call_status'] : '';
+                                            $employee_status = isset($_GET['employee_status']) ? $_GET['employee_status'] : '';
                                             $ENGINEERING_APPLICATION = new EngineeringApplication(NULL);
-                                            foreach ($ENGINEERING_APPLICATION->getApplicationsByWithStaffId($staff_id) as $key => $engineering_application) {
+                                            $applications = $ENGINEERING_APPLICATION->getApplicationsByWithStaffId($staff_id, $call_status, $employee_status);
+                                            foreach ($applications as $key => $engineering_application) {
                                                 $key++;
                                                 $JOB_ROLES = new JobRole($engineering_application['job_abroad']);
                                                 ?>

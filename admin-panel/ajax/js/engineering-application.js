@@ -124,13 +124,13 @@ jQuery(document).ready(function () {
               title: "Success!",
               text: "Application updated successfully!",
               type: "success",
-              timer: 2500,
+              timer: 1500,
               showConfirmButton: false,
             });
 
             window.setTimeout(function () {
-              window.location.reload();
-            }, 2000);
+              window.location.href = "../admin-panel/staff-engineering-applications.php";
+            }, 1000);
           } else {
             swal({
               title: "Error!",

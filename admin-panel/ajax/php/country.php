@@ -1,6 +1,6 @@
 <?php
 
-include '../../class/include.php';
+include __DIR__ . '/../../../class/include.php';
 header('Content-Type: application/json; charset=UTF8');
 
 // Create a new country
@@ -10,6 +10,7 @@ if (isset($_POST['create'])) {
 
     $COUNTRY->name = $_POST['name'];
     $COUNTRY->is_active = isset($_POST['activeStatus']) ? 1 : 0;
+    $COUNTRY->commission_rate = isset($_POST['commission_rate']) ? floatval($_POST['commission_rate']) : 0.00;
 
     $res = $COUNTRY->create();
 
@@ -28,6 +29,7 @@ if (isset($_POST['update'])) {
 
     $COUNTRY->name = $_POST['name'];
     $COUNTRY->is_active = isset($_POST['activeStatus']) ? 1 : 0;
+    $COUNTRY->commission_rate = isset($_POST['commission_rate']) ? floatval($_POST['commission_rate']) : 0.00;
 
     $res = $COUNTRY->update();
 

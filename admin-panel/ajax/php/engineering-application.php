@@ -53,7 +53,7 @@ if (isset($_POST['update'])) {
     $ENGINEERING_APPLICATION->province_id = $_POST['province_id'];
     $ENGINEERING_APPLICATION->current_job = $_POST['current_job'];
     $ENGINEERING_APPLICATION->job_abroad = $_POST['job_abroad'];
-    $ENGINEERING_APPLICATION->type = 'WEB';
+    $ENGINEERING_APPLICATION->type = 'INTERNAL';
     $ENGINEERING_APPLICATION->created_at = date('Y-m-d H:i:s');
 
     $ENGINEERING_APPLICATION->call_date_time = $_POST['call_date_time'];

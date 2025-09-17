@@ -90,7 +90,7 @@ include './auth.php';
                                                     <td>
                                                         <a href="view-engineering-application.php?id=<?php echo $engineering_application['id'] ?>">
 
-                                                            <div class="badge bg-pill bg-soft-success font-size-14"><i class="fas fa-pencil-alt p-1"></i></div>
+                                                            <div class="badge bg-pill bg-soft-success font-size-14"><i class="fas fa-eye p-1"></i></div>
                                                         </a>
                                                        
                                                         <?php

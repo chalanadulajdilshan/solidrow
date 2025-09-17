@@ -36,7 +36,7 @@ jQuery(document).ready(function () {
       }
 
       $.ajax({
-        url: "../ajax/php/skills-training-institute.php", // Change this URL to your actual handler
+        url: "../ajax/php/skills-training-application.php", // Change this URL to your actual handler
         type: "POST",
         data: formData,
         async: false,
@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
       var formData = new FormData($("#form-data")[0]);
 
       $.ajax({
-        url: "ajax/php/skills-training-institute.php",
+        url: "ajax/php/skills-training-application.php",
         type: "POST",
         data: formData,
         async: false,

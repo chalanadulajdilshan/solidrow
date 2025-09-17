@@ -4,12 +4,14 @@ include './auth.php';
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <title>Company Management | Youth Service LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include './assets/main-css.php'; ?>
 </head>
+
 <body class="someBlock">
     <div id="layout-wrapper">
         <?php include './top-header.php'; ?>
@@ -39,12 +41,12 @@ include './auth.php';
                                                 <input type="file" id="image_name" name="image_name" class="form-control" accept="image/*" onchange="previewImage(this)">
                                                 <div id="image_preview" class="mt-2" style="display: none;">
                                                     <img id="company_image" src="#" alt="Company Image Preview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label>Site URL</label>
-                                                <input type="text" id="image_url" name="image_url" class="form-control" placeholder="Enter Site URL (optional)">
+                                                <input type="text" id="page_url" name="page_url" class="form-control" placeholder="Enter Site URL (optional)">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -105,7 +107,7 @@ include './auth.php';
                                                             data-name="<?php echo htmlspecialchars($company['name']) ?>"
                                                             data-short_desc="<?php echo htmlspecialchars($company['short_desc']) ?>"
                                                             data-image_name="<?php echo htmlspecialchars($company['image_name']) ?>"
-                                                            data-image_url="<?php echo htmlspecialchars($company['image_url']) ?>">
+                                                            data-page_url="<?php echo htmlspecialchars($company['page_url']) ?>">
                                                             <i class="fas fa-pencil-alt p-1"></i>
                                                         </div>
                                                     </td>
@@ -148,4 +150,5 @@ include './auth.php';
         }
     </script>
 </body>
+
 </html>

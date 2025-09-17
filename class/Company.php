@@ -6,7 +6,7 @@ class Company
     public $name;
     public $short_desc;
     public $image_name;
-    public $image_url;
+    public $page_url;
 
     public function __construct($id = null)
     {
@@ -20,15 +20,15 @@ class Company
                 $this->name = $result['name'];
                 $this->short_desc = $result['short_desc'];
                 $this->image_name = $result['image_name'];
-                $this->image_url = $result['image_url'];
+                $this->page_url = $result['page_url'];
             }
         }
     }
 
     public function create()
     {
-        $query = "INSERT INTO `company` (`name`, `short_desc`, `image_name`, `image_url`) 
-                  VALUES ('$this->name', '$this->short_desc', '$this->image_name', '$this->image_url')";
+        $query = "INSERT INTO `company` (`name`, `short_desc`, `image_name`, `page_url`) 
+                  VALUES ('$this->name', '$this->short_desc', '$this->image_name', '$this->page_url')";
 
         $db = new Database();
         $result = $db->readQuery($query);
@@ -45,7 +45,7 @@ class Company
                   `name` = '$this->name',
                   `short_desc` = '$this->short_desc',
                   `image_name` = '$this->image_name',
-                  `image_url` = '$this->image_url'
+                  `page_url` = '$this->page_url'
                   WHERE `id` = '$this->id'";
 
         $db = new Database();

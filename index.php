@@ -1,6 +1,12 @@
 <?php
 // Include configuration and any necessary PHP logic here
 $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
+
+include 'class/include.php';
+
+// Create a new Company instance and get all companies
+$company = new Company();
+$companies = $company->all();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,69 +151,53 @@ $page_title = "Foreign Agency - Your Gateway to Global Opportunities";
             </div>
 
             <div class="row g-4">
-                <!-- Website Card 1 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="website-card simple-card">
-                        <div class="card-image">
-                            <img src="assets/images/website-1.jpg" alt="Solidrow Foreign Engineering Skills Training Institute" class="img-fluid">
-                            <div class="card-overlay"></div>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">Solidrow Foreign Engineering (Pvt) Ltd.</h3>
-                            <a href="solidrow-engineering/solidrowengineering.php" class="btn btn-view-more" target="_blank">
-                                View More <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                // Initialize delay counter for animations
+                $delay = 100; // Start with 100ms delay
 
-                <!-- Website Card 2 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="website-card simple-card">
-                        <div class="card-image">
-                            <img src="assets/images/website-2.jpg" alt="Solidrow Foreign Employment Agency" class="img-fluid">
-                            <div class="card-overlay"></div>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">Solidrow Foreign Employment Agency</h3>
-                            <a href="solidrow-foreign-employment/foreign-employment.php" class="btn btn-view-more" target="_blank">
-                                View More <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                // Loop through each company and create a card
+                foreach ($companies as $company) {
+                    // Set default image if not set
+                    $image = !empty($company['image_name']) ? 'upload/company/' . $company['image_name'] : 'assets/images/website-default.jpg';
 
-                <!-- Website Card 3 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="website-card simple-card">
-                        <div class="card-image">
-                            <img src="assets/images/website-3.jpg" alt="Solidrow Visa Consultancy Services" class="img-fluid">
-                            <div class="card-overlay"></div>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">Solidrow Foreign Engineering Skills Training Institute</h3>
-                            <a href="solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php" class="btn btn-view-more" target="_blank">
-                                View More <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    // Set default URL if not set
+                    $url = !empty($company['page_url']) ? $company['page_url'] : '#';
 
-                <!-- Website Card 4 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="website-card simple-card">
-                        <div class="card-image">
-                            <img src="assets/images/website-4.jpg" alt="Solidrow Student Visa Consultancy Services" class="img-fluid">
-                            <div class="card-overlay"></div>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">Solidrow Visa Consultancy Services</h3>
-                            <a href="visa-consultancy/visa-consultancy.php" class="btn btn-view-more" target="_blank">
-                                View More <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    // Output the card HTML
+                    echo '<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="' . $delay . '">';
+                    echo '    <div class="website-card simple-card">';
+                    echo '        <div class="card-image">';
+                    echo '            <img src="' . $image . '" alt="' . htmlspecialchars($company['name']) . '" class="img-fluid">';
+                    echo '            <div class="card-overlay"></div>';
+                    echo '        </div>';
+                    echo '        <div class="card-body">';
+                    echo '            <h3 class="card-title">' . htmlspecialchars($company['name']) . '</h3>';
+                    if (!empty($company['short_desc'])) {
+                        echo '            <p class="card-text">' . htmlspecialchars($company['short_desc']) . '</p>';
+                    }
+                    echo '            <a href="' . htmlspecialchars($url) . '" class="btn btn-view-more"' . (strpos($url, '#') === false ? ' target="_blank"' : '') . '>';
+                    echo '                View More <i class="fas fa-arrow-right ms-2"></i>';
+                    echo '            </a>';
+                    echo '        </div>';
+                    echo '    </div>';
+                    echo '</div>';
+
+                    // Increment delay for next card (staggered animation)
+                    $delay += 200;
+
+                    // Reset delay after 500ms to create a nice pattern
+                    if ($delay > 500) {
+                        $delay = 100;
+                    }
+                }
+
+                // If no companies found, show a message
+                if (empty($companies)) {
+                    echo '<div class="col-12 text-center">';
+                    echo '    <div class="alert alert-info">No companies found. Please check back later.</div>';
+                    echo '</div>';
+                }
+                ?>
             </div>
         </div>
     </section>

@@ -34,24 +34,23 @@ $US = new User($_SESSION['id']);
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
 
-
-                <div class="" <?php if ($US->type != 1) { ?> style="display: none;" <?php } ?>>
+                <?php if ($US->type == 1) { ?>
                     <li class="menu-title">User Management</li>
                     <li>
-                        <a href="create-users.php ">
-                            <i class="bx bx bx-user-plus  "></i>
+                        <a href="create-users.php">
+                            <i class="bx bx-user-plus"></i>
                             <span>Manage Users</span>
                         </a>
                     </li>
                     <li>
                         <a href="manage-user-type.php">
-                            <i class="bx  bx-user"></i>
+                            <i class="bx bx-user"></i>
                             <span>Manage User Type</span>
                         </a>
                     </li>
                     <li>
                         <a href="staff.php">
-                            <i class="bx  bx-user"></i>
+                            <i class="bx bx-user"></i>
                             <span>Manage Staff</span>
                         </a>
                     </li>
@@ -59,80 +58,137 @@ $US = new User($_SESSION['id']);
                     <li class="menu-title">Main Panel</li>
                     <li>
                         <a href="index.php">
-                            <i class="bx bx-home "></i>
-                            <span>Dashboard </span>
+                            <i class="bx bx-home"></i>
+                            <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="Company.php">
-                            <i class="bx bx-building "></i>
-                            <span>Company </span>
+                        <a href="company.php">
+                            <i class="bx bx-building"></i>
+                            <span>Company</span>
                         </a>
                     </li>
                     <li>
                         <a href="project.php">
-                            <i class="bx bx-briefcase "></i>
-                            <span>Project </span>
+                            <i class="bx bx-briefcase"></i>
+                            <span>Project</span>
                         </a>
                     </li>
                     <li>
                         <a href="countries.php">
-                            <i class="bx bx-globe "></i>
-                            <span>Country </span>
+                            <i class="bx bx-globe"></i>
+                            <span>Country</span>
                         </a>
                     </li>
                     <li>
                         <a href="course.php">
-                            <i class="bx bx-book-content "></i>
-                            <span>Course </span>
+                            <i class="bx bx-book-content"></i>
+                            <span>Course</span>
                         </a>
                     </li>
                     <li>
                         <a href="jobs.php">
-                            <i class="bx bx-briefcase "></i>
-                            <span>Job </span>
+                            <i class="bx bx-briefcase"></i>
+                            <span>Job</span>
                         </a>
                     </li>
                     <li>
                         <a href="job-listings.php">
-                            <i class="bx bx-list-ul "></i>
-                            <span>Job Listings </span>
+                            <i class="bx bx-list-ul"></i>
+                            <span>Job Listings</span>
                         </a>
                     </li>
                     <li>
                         <a href="career-applications.php">
                             <i class="bx bx-file"></i>
-                            <span>Career Applications </span>
+                            <span>Career Applications</span>
                         </a>
                     </li>
-                </div>
+                <?php } ?>
+
+                <!-- Solidrow Engineering -->
                 <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
                 <li>
                     <a href="engineering-application.php">
-                        <i class="bx bx-file "></i>
+                        <i class="bx bx-file"></i>
                         <span>Application Form</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="   bx bx-phone  "></i>
+                    <a href="javascript:void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-phone"></i>
                         <span>Call Center</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="all-engineering-applications.php">Applications</a></li>
                         <li><a href="staff-engineering-applications.php">My Applications</a></li>
+                        <li><a href="commissions-engineering.php">Commissions</a></li>
+                    </ul>
                 </li>
+
+                <!-- Solidrow Training -->
+                <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
                 <li>
-                    <a href="jobs.php">
-                        <i class="bx bx-dollar-circle "></i>
-                        <span>My Commissions </span>
+                    <a href="skills-training-application.php">
+                        <i class="bx bx-file"></i>
+                        <span>Application Form</span>
                     </a>
                 </li>
-                <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
+                <li>
+                    <a href="javascript:void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-phone"></i>
+                        <span>Call Center</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="all-skills-training-application.php">Applications</a></li>
+                        <li><a href="staff-skills-training-application.php">My Applications</a></li>
+                        <li><a href="commissions-skills-training.php">Commissions</a></li>
+                    </ul>
+                </li>
+
+                <!-- Solidrow Foreign Employment -->
                 <li class="menu-title">Solidrow Foreign Employment Agency</li>
+                <li>
+                    <a href="foreign-employment-agency-application.php">
+                        <i class="bx bx-file"></i>
+                        <span>Application Form</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-phone"></i>
+                        <span>Call Center</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="all-foreign-employment-agency-applications.php">Applications</a></li>
+                        <li><a href="staff-foreign-employment-agency-applications.php">My Applications</a></li>
+                        <li><a href="commissions-foreign-employment.php">Commissions</a></li>
+                    </ul>
+                </li>
+
+                <!-- Solidrow Visa -->
                 <li class="menu-title">Solidrow Visa Consultancy Services</li>
+                <li>
+                    <a href="visa-consultancy-application.php">
+                        <i class="bx bx-file"></i>
+                        <span>Application Form</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-phone"></i>
+                        <span>Call Center</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="all-visa-consultancy-applications.php">Applications</a></li>
+                        <li><a href="staff-visa-consultancy-applications.php">My Applications</a></li>
+                        <li><a href="commissions-visa-consultancy.php">Commissions</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->
     </div>
+
 </div>

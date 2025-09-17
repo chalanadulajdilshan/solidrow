@@ -1,10 +1,6 @@
 <?php
 include '../class/include.php';
 include './auth.php';
-
-$id = '';
-$id = $_GET['id'];
-$ENGINEERING_APPLICATION = new EngineeringApplication($id);
 ?>
 <!doctype html>
 <html lang="en">
@@ -69,10 +65,8 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="full_name">සම්පූර්ණ නම (Full Name) <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="full_name" name="full_name"
-                                                            placeholder="Enter your full name" value="<?php echo $ENGINEERING_APPLICATION->full_name ?>">
+                                                            placeholder="Enter your full name" required>
                                                     </div>
-                                                    <input type="hidden" name="id" id="id" value="<?php echo $ENGINEERING_APPLICATION->id ?>">
-
                                                     <input type="hidden" name="staff_id" id="staff_id" value="<?php
                                                                                                                 if (!isset($_SESSION['id'])) {
                                                                                                                     die('Session ID not set. Please log in again.');
@@ -87,7 +81,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number)
                                                             <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="nic" name="nic"
-                                                            placeholder="Enter your national id number" value="<?php echo $ENGINEERING_APPLICATION->nic ?>">
+                                                            placeholder="Enter your national id number" required>
                                                     </div>
                                                 </div>
 
@@ -97,7 +91,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="passport_number">පාස්පෝට් අංකය (Passport
                                                             Number) </label>
                                                         <input type="text" class="form-control" id="passport_number"
-                                                            name="passport_number" placeholder="Enter your passport number" value="<?php echo $ENGINEERING_APPLICATION->passport_number ?>"
+                                                            name="passport_number" placeholder="Enter your passport number"
                                                             required>
                                                     </div>
                                                 </div>
@@ -108,7 +102,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="birthday">උපන් දිනය (Birthday) <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="date" class="form-control" id="birthday" name="birthday"
-                                                            value="<?php echo $ENGINEERING_APPLICATION->birthday ?>" required>
+                                                            required>
                                                     </div>
                                                 </div>
 
@@ -118,7 +112,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="age">වයස (Age) <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="number" class="form-control" id="age" name="age"
-                                                            placeholder="Enter your age" value="<?php echo $ENGINEERING_APPLICATION->age ?>" required>
+                                                            placeholder="Enter your age" required>
                                                     </div>
                                                 </div>
 
@@ -129,8 +123,8 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                                 class="text-danger">*</span></label>
                                                         <select class="form-control" id="gender" name="gender" required>
                                                             <option value="">-- Select Gender --</option>
-                                                            <option value="male" <?php echo ($ENGINEERING_APPLICATION->gender == 'male') ? 'selected' : ''; ?>>පුරුෂ (Male)</option>
-                                                            <option value="female" <?php echo ($ENGINEERING_APPLICATION->gender == 'female') ? 'selected' : ''; ?>>ස්ත්‍රී (Female)</option>
+                                                            <option value="male">පුරුෂ (Male)</option>
+                                                            <option value="female">ස්ත්‍රී (Female)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -140,10 +134,11 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                     <div class="mb-3">
                                                         <label class="form-label" for="marital_status">විවාහක අවිවාහක බව
                                                             (Marital Status) <span class="text-danger">*</span></label>
-                                                        <select class="form-control" id="marital_status" name="marital_status" required>
+                                                        <select class="form-control" id="marital_status" name="marital_status"
+                                                            required>
                                                             <option value="">-- Select Marital Status --</option>
-                                                            <option value="single" <?php echo ($ENGINEERING_APPLICATION->marital_status == 'single') ? 'selected' : ''; ?>>අවිවාහක (Single)</option>
-                                                            <option value="married" <?php echo ($ENGINEERING_APPLICATION->marital_status == 'married') ? 'selected' : ''; ?>>විවාහක (Married)</option>
+                                                            <option value="single">අවිවාහක (Single)</option>
+                                                            <option value="married">විවාහක (Married)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -154,7 +149,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="mobile_number">ජංගම දුරකතන අංකය (Mobile
                                                             Number) <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="mobile_number"
-                                                            name="mobile_number" placeholder="Enter your mobile number" value="<?php echo $ENGINEERING_APPLICATION->mobile_number ?>"
+                                                            name="mobile_number" placeholder="Enter your mobile number"
                                                             required>
                                                     </div>
                                                 </div>
@@ -164,7 +159,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                     <div class="mb-3">
                                                         <label class="form-label" for="whatsapp_number">Whatsapp Number</label>
                                                         <input type="text" class="form-control" id="whatsapp_number"
-                                                            name="whatsapp_number" placeholder="Enter your WhatsApp number" value="<?php echo $ENGINEERING_APPLICATION->whatsapp_number ?>">
+                                                            name="whatsapp_number" placeholder="Enter your WhatsApp number">
                                                     </div>
                                                 </div>
 
@@ -173,14 +168,17 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                     <div class="mb-3">
                                                         <label class="form-label" for="province_id">Select your Province <span
                                                                 class="text-danger">*</span></label>
-                                                        <select class="form-control" name="province_id" id="province_id" required>
-
+                                                        <select class="form-control" name="province_id" id="province_id"
+                                                            required>
+                                                            <option value="">-- Select your Province --</option>
                                                             <?php
-                                                            $PROVINCE = new Province($ENGINEERING_APPLICATION->province_id);
-
+                                                            $PROVINCE = new Province();
+                                                            foreach ($PROVINCE->all() as $province) {
                                                             ?>
-                                                            <option value="<?php echo $PROVINCE->id ?>"><?php echo $PROVINCE->name ?></option>
-
+                                                                <option value="<?php echo $province['id'] ?>"><?php echo $province['name'] ?></option>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -191,7 +189,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                         <label class="form-label" for="current_job">ඔබගේ වෘත්තීය (Your current
                                                             job)</label>
                                                         <input type="text" class="form-control" id="current_job"
-                                                            name="current_job" placeholder="Enter your current job" value="<?php echo $ENGINEERING_APPLICATION->current_job ?>">
+                                                            name="current_job" placeholder="Enter your current job">
                                                     </div>
                                                 </div>
 
@@ -205,68 +203,21 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
                                                             <option value="">-- Select a Job Role --</option>
                                                             <?php
                                                             $JobRole = new JobRole(NULL);
-                                                            $allJobRoles = $JobRole->getActive();
-                                                            $selectedJobRoleId = $ENGINEERING_APPLICATION->job_abroad;
-                                                            
-                                                            foreach ($allJobRoles as $job_role) {
-                                                                $selected = ($job_role['id'] == $selectedJobRoleId) ? 'selected' : '';
-                                                                echo "<option value='{$job_role['id']}' $selected>{$job_role['name']}</option>";
+                                                            foreach ($JobRole->getActive() as $job_role) {
+                                                            ?>
+                                                                <option value="<?php echo $job_role['id'] ?>"><?php echo $job_role['name'] ?></option>
+                                                            <?php
                                                             }
                                                             ?>
                                                         </select>
                                                     </div>
                                                 </div>
-
-                                                <!-- Type -->
-                                                <div class="col-md-4">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="call_date_time">Call Date & Time <span class="text-danger">*</span></label>
-                                                        <input type="datetime-local" class="form-control" id="call_date_time" name="call_date_time"
-                                                            placeholder="Enter  call date" value="<?php echo $ENGINEERING_APPLICATION->call_date_time ?>" readonly>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="call_status">Call Status <span class="text-danger">*</span></label>
-                                                        <select class="form-control" id="call_status" name="call_status" required>
-                                                            <option value="" <?php echo empty($ENGINEERING_APPLICATION->call_status) ? 'selected' : ''; ?>>-- Select Call Status --</option>
-                                                            <option value="completed" <?php echo ($ENGINEERING_APPLICATION->call_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
-                                                            <option value="pending" <?php echo ($ENGINEERING_APPLICATION->call_status == 'pending') ? 'selected' : ''; ?>>Pending</option>
-                                                            <option value="in_progress" <?php echo ($ENGINEERING_APPLICATION->call_status == 'in_progress') ? 'selected' : ''; ?>>In Progress</option>
-                                                            <option value="not_answered" <?php echo ($ENGINEERING_APPLICATION->call_status == 'not_answered') ? 'selected' : ''; ?>>Not Answered</option>
-                                                            <option value="rescheduled" <?php echo ($ENGINEERING_APPLICATION->call_status == 'rescheduled') ? 'selected' : ''; ?>>Rescheduled</option>
-                                                            <option value="cancelled" <?php echo ($ENGINEERING_APPLICATION->call_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
-                                                            <option value="follow_up" <?php echo ($ENGINEERING_APPLICATION->call_status == 'follow_up') ? 'selected' : ''; ?>>Follow Up Required</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="employee_status">Employee Status <span class="text-danger">*</span></label>
-                                                        <select class="form-control" id="employee_status" name="employee_status" required>
-                                                            <option value="" <?php echo empty($ENGINEERING_APPLICATION->employee_status) ? 'selected' : ''; ?>>-- Select Employee Status --</option>
-                                                            <option value="ok" <?php echo ($ENGINEERING_APPLICATION->employee_status == 'ok') ? 'selected' : ''; ?>>Ok</option>
-                                                            <option value="not_ok" <?php echo ($ENGINEERING_APPLICATION->employee_status == 'not_ok') ? 'selected' : ''; ?>>Not Ok</option> 
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="call_notes">Call Notes</label>
-                                                        <textarea class="form-control" id="call_notes" name="call_notes" rows="3"><?php echo htmlspecialchars($ENGINEERING_APPLICATION->call_notes); ?></textarea>
-                                                    </div>
-                                                </div>
-
-
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-12 text-end">
-                                                    <button class="btn btn-primary" type="submit" id="update">Update</button>
-                                                    <input type="hidden" name="update">
+                                                    <button class="btn btn-primary" type="submit" id="create">Register</button>
+                                                    <input type="hidden" name="create">
                                                 </div>
                                             </div>
                                         </form>
@@ -286,7 +237,7 @@ $ENGINEERING_APPLICATION = new EngineeringApplication($id);
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
     <?php include './assets/main-js.php'; ?>
-    <script src="ajax/js/engineering-application.js" type="text/javascript"></script>
+    <script src="ajax/js/skills-training-application.js" type="text/javascript"></script>
     <!-- App js -->
     <script src="assets/js/app.js"></script>
 

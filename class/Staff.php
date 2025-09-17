@@ -1,8 +1,11 @@
 <?php
-
 class Staff
 {
     public $id;
+    public $district;
+    public $province;
+    public $company;
+    public $join_date;
     public $name;
     public $position;
     public $contact_no;
@@ -14,130 +17,122 @@ class Staff
     public $id_copy;
     public $epf_no;
     public $salary;
-    public $district;
-    public $province;
-    public $company;
+
+    private $upload_dir = '../../upload/staff/id-copy/';
 
     public function __construct($id = null)
     {
-        if ($id) {
-            $query = "SELECT * FROM `staff` WHERE `id` = " . (int)$id;
-            $db = new Database();
-            $result = mysqli_fetch_array($db->readQuery($query));
+        if ($id) $this->load($id);
+    }
 
-            if ($result) {
-                $this->id = $result['id'];
-                $this->name = $result['name'];
-                $this->position = $result['position'];
-                $this->contact_no = $result['contact_no'];
-                $this->whatsapp_no = $result['whatsapp_no'];
-                $this->nic = $result['nic'];
-                $this->education_qualification = $result['education_qualification'];
-                $this->position_qualification = $result['position_qualification'];
-                $this->service_experience = $result['service_experience'];
-                $this->id_copy = $result['id_copy'];
-                $this->epf_no = $result['epf_no'];
-                $this->salary = $result['salary'];
-                $this->district = $result['district'];
-                $this->province = $result['province'];
-                $this->company = $result['company'];
+    private function load($id)
+    {
+        $db = new Database();
+        $id = (int)$id;
+        $query = "SELECT * FROM `staff` WHERE `id` = $id";
+        $result = mysqli_fetch_assoc($db->readQuery($query));
+
+        if ($result) {
+            foreach ($result as $key => $value) {
+                $this->$key = $value;
             }
+            return true;
         }
+        return false;
     }
 
     public function create()
     {
+        $db = new Database();
+
         $query = "INSERT INTO `staff` (
-            `name`, `position`, `contact_no`, `whatsapp_no`, `nic`, 
-            `education_qualification`, `position_qualification`, `service_experience`, 
-            `id_copy`, `epf_no`, `salary`, `district`, `province`, `company`
+            `name`, `position`, `contact_no`, `whatsapp_no`, `nic`,
+            `education_qualification`, `position_qualification`, `service_experience`,
+            `id_copy`, `epf_no`, `salary`, `district`, `province`, `company`, `join_date`
         ) VALUES (
-            '$this->name', '$this->position', '$this->contact_no', '$this->whatsapp_no', '$this->nic',
-            '$this->education_qualification', '$this->position_qualification', '$this->service_experience',
-            '$this->id_copy', '$this->epf_no', '$this->salary', '$this->district', '$this->province', '$this->company'
+            '" . $this->name . "', 
+            '" . $this->position . "', 
+            '" . $this->contact_no . "', 
+            '" . $this->whatsapp_no . "', 
+            '" . $this->nic . "',
+            '" . $this->education_qualification . "', 
+            '" . $this->position_qualification . "', 
+            '" . $this->service_experience . "',
+            '" . $this->id_copy . "', 
+            '" . $this->epf_no . "', 
+            '" . $this->salary . "', 
+            '" . $this->district . "', 
+            '" . $this->province . "', 
+            '" . $this->company . "', 
+            '" . $this->join_date . "'
         )";
 
-        $db = new Database();
         $result = $db->readQuery($query);
 
         if ($result) {
             return mysqli_insert_id($db->DB_CON);
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function update()
     {
-        $query = "UPDATE `staff` SET 
-            `name` = '$this->name',
-            `position` = '$this->position',
-            `contact_no` = '$this->contact_no',
-            `whatsapp_no` = '$this->whatsapp_no',
-            `nic` = '$this->nic',
-            `education_qualification` = '$this->education_qualification',
-            `position_qualification` = '$this->position_qualification',
-            `service_experience` = '$this->service_experience',
-            `id_copy` = '$this->id_copy',
-            `epf_no` = '$this->epf_no',
-            `salary` = '$this->salary',
-            `district` = '$this->district',
-            `province` = '$this->province',
-            `company` = '$this->company'
-        WHERE `id` = '$this->id'";
+        if (!$this->id) return false;
 
         $db = new Database();
+
+        $query = "UPDATE `staff` SET
+            `name` = '" . $this->name . "',
+            `position` = '" . $this->position . "',
+            `contact_no` = '" . $this->contact_no . "',
+            `whatsapp_no` = '" . $this->whatsapp_no . "',
+            `nic` = '" . $this->nic . "',
+            `education_qualification` = '" . $this->education_qualification . "',
+            `position_qualification` = '" . $this->position_qualification . "',
+            `service_experience` = '" . $this->service_experience . "',
+            `id_copy` = '" . $this->id_copy . "',
+            `epf_no` = '" . $this->epf_no . "',
+            `salary` = '" . $this->salary . "',
+            `district` = '" . $this->district . "',
+            `province` = '" . $this->province . "',
+            `company` = '" . $this->company . "',
+            `join_date` = '" . $this->join_date . "'
+        WHERE `id` = " . (int)$this->id;
+
         return $db->readQuery($query);
     }
 
     public function delete()
     {
-        $query = "DELETE FROM `staff` WHERE `id` = '$this->id'";
-        $db = new Database();
-        return $db->readQuery($query);
-    }
+        if (!$this->id) return false;
 
-    public function all()
-    {
-        $query = "SELECT * FROM `staff` ORDER BY `id` DESC";
-        $db = new Database();
-        $result = $db->readQuery($query);
-
-        $array_res = [];
-        while ($row = mysqli_fetch_array($result)) {
-            array_push($array_res, $row);
-        }
-
-        return $array_res;
-    }
-
-    public function getLastID()
-    {
-        $query = "SELECT * FROM `staff` ORDER BY `id` DESC LIMIT 1";
-        $db = new Database();
-        $result = mysqli_fetch_array($db->readQuery($query));
-        return $result['id'] ?? null;
-    }
-
-    
-    public function get_staff_by_type()
-    {
-        $query = "SELECT id, name FROM `staff` WHERE isActive = 1";
-
-        $db = new Database();
-        $result = $db->readQuery($query);
-        $users = array();
-
-        if ($result) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $users[] = array(
-                    'id' => $row['id'],
-                    'name' => $row['name']
-                );
+        if (!empty($this->id_copy)) {
+            $file_path = $this->upload_dir . $this->id_copy;
+            if (file_exists($file_path) && is_file($file_path)) {
+                unlink($file_path);
             }
         }
 
-        return $users;
+        $db = new Database();
+        $query = "DELETE FROM `staff` WHERE `id` = " . (int)$this->id;
+        return $db->readQuery($query);
     }
 
+    public function all($orderBy = 'id', $order = 'DESC')
+    {
+        $db = new Database();
+        $allowedColumns = ['id', 'name', 'position', 'district', 'company'];
+        $orderBy = in_array(strtolower($orderBy), $allowedColumns) ? $orderBy : 'id';
+        $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';
+
+        $query = "SELECT * FROM `staff` ORDER BY `$orderBy` $order";
+        $result = $db->readQuery($query);
+
+        $staff = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $staff[] = $row;
+        }
+
+        return $staff;
+    }
 }

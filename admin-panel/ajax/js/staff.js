@@ -1,220 +1,208 @@
-jQuery(document).ready(function () {
+jQuery(document).ready(function ($) {
+    // Common AJAX handler
+    function handleAjaxRequest(action, formData, successMessage, errorMessage) {
+        $(".someBlock").preloader();
+
+        $.ajax({
+            url: "ajax/php/staff.php",
+            type: "POST",
+            data: formData,
+            async: true,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function (result) {
+                $(".someBlock").preloader("remove");
+                if (result.status === "success") {
+                    swal({
+                        title: "Success!",
+                        text: result.message || successMessage,
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false,
+                    }).then(function () {
+                        location.reload();
+                    });
+                } else {
+                    swal("Error!", result.message || errorMessage, "error");
+                }
+            },
+            error: function (xhr, status, error) {
+                $(".someBlock").preloader("remove");
+                swal("Error!", "Something went wrong. Please try again later.", "error");
+                console.error("AJAX Error:", status, error);
+            },
+        });
+    }
+
+    // Form validation
+    function validateForm() {
+        const requiredFields = [
+            { id: "name", message: "Please enter staff name" },
+            { id: "position", message: "Please enter position" },
+            { id: "contact_no", message: "Please enter contact number" },
+            { id: "nic", message: "Please enter NIC number" },
+            { id: "epf_no", message: "Please enter EPF number" },
+            { id: "salary", message: "Please enter salary" },
+            { id: "district", message: "Please select district" },
+            { id: "province", message: "Please select province" },
+            { id: "company", message: "Please select company" },
+            { id: "join_date", message: "Please select join date" },
+        ];
+
+        for (const field of requiredFields) {
+            const value = $(`#${field.id}`).val();
+            if (!value || value.length === 0) {
+                return { valid: false, message: field.message };
+            }
+        }
+
+        // Validate NIC format (9 digits + v/x or 12 digits)
+        const nic = $("#nic").val();
+        if (!/^[0-9]{9}[vVxX]?$|^[0-9]{12}$/.test(nic)) {
+            return { valid: false, message: "Please enter a valid NIC number" };
+        }
+
+        // Validate contact number (exactly 10 digits)
+        const contactNo = $("#contact_no").val();
+        if (!/^[0-9]{10}$/.test(contactNo)) {
+            return { valid: false, message: "Please enter a valid 10-digit contact number" };
+        }
+
+        // Validate salary (must be numeric & > 0)
+        const salary = parseFloat($("#salary").val());
+        if (isNaN(salary) || salary <= 0) {
+            return { valid: false, message: "Please enter a valid salary amount" };
+        }
+
+        return { valid: true };
+    }
 
     // Create Staff
     $("#create").click(function (event) {
         event.preventDefault();
-
-        if (!$('#name').val() || $('#name').val().length === 0) {
+        const validation = validateForm();
+        if (!validation.valid) {
             swal({
                 title: "Error!",
-                text: "Please enter staff name",
-                type: 'error',
+                text: validation.message,
+                type: "error",
                 timer: 2000,
-                showConfirmButton: false
+                showConfirmButton: false,
             });
-        } else {
-
-            $('.someBlock').preloader();
-
-            var formData = new FormData($("#form-data")[0]);
-            formData.append('create', true);
-
-            $.ajax({
-                url: "ajax/php/staff.php",
-                type: 'POST',
-                data: formData,
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: "JSON",
-                success: function (result) {
-                    $('.someBlock').preloader('remove');
-
-                    if (result.status === 'success') {
-                        swal({
-                            title: "Success!",
-                            text: "Staff member added successfully!",
-                            type: 'success',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-
-                        window.setTimeout(function () {
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        swal({
-                            title: "Error!",
-                            text: "Something went wrong.",
-                            type: 'error',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }
-                }
-            });
+            return false;
         }
-        return false;
+
+        const formData = new FormData($("#form-data")[0]);
+        formData.append("create", true);
+        handleAjaxRequest("create", formData, "Staff member created successfully.", "Failed to create staff member.");
     });
 
     // Update Staff
     $("#update").click(function (event) {
         event.preventDefault();
-
-        if (!$('#name').val() || $('#name').val().length === 0) {
+        const validation = validateForm();
+        if (!validation.valid) {
             swal({
                 title: "Error!",
-                text: "Please enter staff name",
-                type: 'error',
+                text: validation.message,
+                type: "error",
                 timer: 2000,
-                showConfirmButton: false
+                showConfirmButton: false,
             });
-        } else {
-
-            $('.someBlock').preloader();
-
-            var formData = new FormData($("#form-data")[0]);
-            formData.append('update', true);
-
-            $.ajax({
-                url: "ajax/php/staff.php",
-                type: 'POST',
-                data: formData,
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: "JSON",
-                success: function (result) {
-                    $('.someBlock').preloader('remove');
-
-                    if (result.status === 'success') {
-                        swal({
-                            title: "Success!",
-                            text: "Staff member updated successfully!",
-                            type: 'success',
-                            timer: 2500,
-                            showConfirmButton: false
-                        });
-
-                        window.setTimeout(function () {
-                            window.location.reload();
-                        }, 2000);
-
-                    } else {
-                        swal({
-                            title: "Error!",
-                            text: "Something went wrong.",
-                            type: 'error',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }
-                }
-            });
+            return false;
         }
-        return false;
+
+        const formData = new FormData($("#form-data")[0]);
+        formData.append("update", true);
+        handleAjaxRequest("update", formData, "Staff member updated successfully.", "Failed to update staff member.");
     });
 
     // Reset form
     $("#new").click(function (e) {
         e.preventDefault();
-        $('#form-data')[0].reset();
+        $("#form-data")[0].reset();
         $("#create").show();
+        $("#update").hide();
+        $("#id_copy_preview").hide();
+        if (typeof removeIdCopy === "function") removeIdCopy(); // avoid error if function not defined
     });
 
-    // Populate form from modal click
-    $(document).on('click', '.select-staff', function () {
-        $('#staff_id').val($(this).data('id'));
-        $('#name').val($(this).data('name'));
-        $('#position').val($(this).data('position'));
-        $('#contact_no').val($(this).data('contact_no'));
-        $('#whatsapp_no').val($(this).data('whatsapp_no'));
-        $('#nic').val($(this).data('nic'));
-        $('#education_qualification').val($(this).data('education_qualification'));
-        $('#position_qualification').val($(this).data('position_qualification'));
-        $('#service_experience').val($(this).data('service_experience'));
-        $('#id_copy').val($(this).data('id_copy'));
-        $('#epf_no').val($(this).data('epf_no'));
-        $('#salary').val($(this).data('salary'));
-        $('#district').val($(this).data('district'));
-        $('#province').val($(this).data('province'));
-        $('#company').val($(this).data('company'));
+    // Populate form when selecting staff
+    $(document).on("click", ".select-staff", function () {
+        const staffData = $(this).data();
+
+        $("#staff_id").val(staffData.id);
+        $("#name").val(staffData.name);
+        $("#position").val(staffData.position);
+        $("#contact_no").val(staffData.contact_no);
+        $("#whatsapp_no").val(staffData.whatsapp_no);
+        $("#nic").val(staffData.nic);
+        $("#education_qualification").val(staffData.education_qualification);
+        $("#position_qualification").val(staffData.position_qualification);
+        $("#service_experience").val(staffData.service_experience);
+        $("#epf_no").val(staffData.epf_no);
+        $("#salary").val(staffData.salary);
+        $("#district").val(staffData.district).trigger("change");
+        $("#province").val(staffData.province).trigger("change");
+        $("#company").val(staffData.company).trigger("change");
+
+        if (staffData.join_date) {
+            const joinDate = new Date(staffData.join_date);
+            $("#join_date").val(joinDate.toISOString().split("T")[0]);
+        }
+
+        if (staffData.id_copy) {
+            $("#id_copy_preview").show();
+            $("#id_copy_image").attr("src", "../upload/staff/id-copy/" + staffData.id_copy);
+        } else {
+            $("#id_copy_preview").hide();
+        }
 
         $("#create").hide();
-        $('#staff_master').modal('hide');
+        $("#update").show();
+        $("#staff_master").modal("hide");
     });
 
     // Delete Staff
-    $(document).on('click', '.delete-staff', function (e) {
+    $(document).on("click", ".delete-staff", function (e) {
         e.preventDefault();
+        const staffId = $("#staff_id").val();
+        const staffName = $("#name").val();
 
-        var staffId = $('#staff_id').val();
-        var staffName = $('#name').val();
-
-        if (!staffId || staffId === "") {
+        if (!staffId) {
             swal({
                 title: "Error!",
                 text: "Please select a staff member first.",
                 type: "error",
                 timer: 2000,
-                showConfirmButton: false
+                showConfirmButton: false,
             });
             return;
         }
 
-        swal({
-            title: "Are you sure?",
-            text: "Do you want to delete staff member '" + staffName + "'?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#6c757d",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "Cancel",
-            closeOnConfirm: false
-        }, function (isConfirm) {
-            if (isConfirm) {
-                $('.someBlock').preloader();
-
-                $.ajax({
-                    url: 'ajax/php/staff.php',
-                    type: 'POST',
-                    data: {
-                        id: staffId,
-                        delete: true
-                    },
-                    dataType: 'JSON',
-                    success: function (response) {
-                        $('.someBlock').preloader('remove');
-
-                        if (response.status === 'success') {
-                            swal({
-                                title: "Deleted!",
-                                text: "Staff member has been deleted.",
-                                type: "success",
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 2000);
-
-                        } else {
-                            swal({
-                                title: "Error!",
-                                text: "Something went wrong.",
-                                type: "error",
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                        }
-                    }
-                });
+        swal(
+            {
+                title: "Are you sure?",
+                text: "Do you want to delete staff member '" + staffName + "'?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    handleAjaxRequest(
+                        "delete",
+                        { id: staffId, delete: true },
+                        "Staff member deleted successfully.",
+                        "Failed to delete staff member."
+                    );
+                }
             }
-        });
+        );
     });
-
 });

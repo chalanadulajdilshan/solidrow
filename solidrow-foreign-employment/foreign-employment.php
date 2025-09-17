@@ -237,89 +237,59 @@
             <!-- Course Slider -->
             <div class="course-slider-container">
                 <div class="course-slider" id="courseSlider">
-                    <div class="course-card active" data-aos="fade-up">
+                    <?php
+                    require_once('../class/Course.php');
+                    require_once('../class/Database.php');
+                    
+                    $course = new Course();
+                    $courses = $course->all('queue', 'ASC');
+                    
+                    if (!empty($courses)) {
+                        $delay = 0;
+                        $index = 0;
+                        foreach ($courses as $courseItem) {
+                            $imagePath = !empty($courseItem['image_name']) 
+                                ? '../upload/course/' . $courseItem['image_name'] 
+                                : '../assets/images/courses/default-course.jpg';
+                            $isActive = $index === 0 ? 'active' : '';
+                            $shortDescription = !empty($courseItem['short_description']) 
+                                ? $courseItem['short_description'] 
+                                : substr(strip_tags($courseItem['description']), 0, 150) . '...';
+                    ?>
+                    <div class="course-card <?php echo $isActive; ?>" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
                         <div class="course-image">
-                            <img src="../assets/images/courses/1.jpg" alt="Welding Course" class="img-fluid">
+                            <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($courseItem['name']); ?>" class="img-fluid">
                         </div>
                         <div class="course-content">
-                            <h4 class="course-title">Professional Welding</h4>
-                            <p class="course-description">Master various welding techniques including MIG, TIG, and Arc welding with hands-on training from industry experts.</p>
+                            <h4 class="course-title"><?php echo htmlspecialchars($courseItem['name']); ?></h4>
+                            <p class="course-description"><?php echo htmlspecialchars($shortDescription); ?></p>
                             <div class="course-features">
-                                <span><i class="fas fa-clock"></i> 6 Months</span>
+                                <span><i class="fas fa-money-bill-wave"></i> LKR <?php echo number_format($courseItem['price'], 2); ?></span>
                                 <span><i class="fas fa-certificate"></i> Certified</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="course-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="course-image">
-                            <img src="../assets/images/courses/2.jpg" alt="Electrical Course" class="img-fluid">
-                        </div>
-                        <div class="course-content">
-                            <h4 class="course-title">Electrical Installation</h4>
-                            <p class="course-description">Comprehensive electrical training covering residential, commercial, and industrial electrical systems installation and maintenance.</p>
-                            <div class="course-features">
-                                <span><i class="fas fa-clock"></i> 4 Months</span>
-                                <span><i class="fas fa-certificate"></i> Certified</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="course-image">
-                            <img src="../assets/images/courses/3.jpg" alt="Plumbing Course" class="img-fluid">
-                        </div>
-                        <div class="course-content">
-                            <h4 class="course-title">Plumbing Technology</h4>
-                            <p class="course-description">Learn modern plumbing techniques, pipe fitting, and water system installation with practical workshop experience.</p>
-                            <div class="course-features">
-                                <span><i class="fas fa-clock"></i> 3 Months</span>
-                                <span><i class="fas fa-certificate"></i> Certified</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="course-image">
-                            <img src="../assets/images/courses/4.jpg" alt="Carpentry Course" class="img-fluid">
-                        </div>
-                        <div class="course-content">
-                            <h4 class="course-title">Carpentry & Joinery</h4>
-                            <p class="course-description">Traditional and modern woodworking techniques, furniture making, and construction carpentry skills development.</p>
-                            <div class="course-features">
-                                <span><i class="fas fa-clock"></i> 5 Months</span>
-                                <span><i class="fas fa-certificate"></i> Certified</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="course-image">
-                            <img src="../assets/images/courses/5.jpg" alt="HVAC Course" class="img-fluid">
-                        </div>
-                        <div class="course-content">
-                            <h4 class="course-title">HVAC Systems</h4>
-                            <p class="course-description">Heating, ventilation, and air conditioning systems installation, maintenance, and repair training program.</p>
-                            <div class="course-features">
-                                <span><i class="fas fa-clock"></i> 4 Months</span>
-                                <span><i class="fas fa-certificate"></i> Certified</span>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                            $delay += 100;
+                            $index++;
+                        }
+                    } else {
+                        // Fallback in case no courses are found
+                        echo '<div class="col-12 text-center"><p>No courses available at the moment. Please check back later.</p></div>';
+                    }
+                    ?>
                 </div>
-
-                <!-- Course Navigation -->
+                <?php if (!empty($courses)): ?>
                 <div class="course-navigation">
                     <button class="course-nav-btn" id="prevCourse"><i class="fas fa-chevron-left"></i></button>
                     <div class="course-indicators" id="courseIndicators">
-                        <span class="indicator active" data-index="0"></span>
-                        <span class="indicator" data-index="1"></span>
-                        <span class="indicator" data-index="2"></span>
-                        <span class="indicator" data-index="3"></span>
-                        <span class="indicator" data-index="4"></span>
+                        <?php for ($i = 0; $i < min(count($courses), 5); $i++): ?>
+                            <span class="indicator <?php echo $i === 0 ? 'active' : ''; ?>" data-index="<?php echo $i; ?>"></span>
+                        <?php endfor; ?>
                     </div>
                     <button class="course-nav-btn" id="nextCourse"><i class="fas fa-chevron-right"></i></button>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>

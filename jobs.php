@@ -11,7 +11,7 @@ $jobs = $JOB_LISTING->getActiveJobs(); // Get active job listings
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Openings - Solidrow</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/solidrow/assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
@@ -82,11 +82,11 @@ $jobs = $JOB_LISTING->getActiveJobs(); // Get active job listings
                             <div class="col-md-6 col-lg-4">
                                 <div class="card job-card h-100">
                                     <?php if (!empty($job['image'])): ?>
-                                        <img src="upload/joblisting/<?php echo htmlspecialchars($job['image']); ?>" 
-                                            class="card-img-top" 
+                                        <img src="upload/joblisting/<?php echo htmlspecialchars($job['image']); ?>"
+                                            class="card-img-top"
                                             alt="<?php echo htmlspecialchars($job['name']); ?>"
                                             style="height: 180px; object-fit: cover; cursor: pointer;"
-                                            data-bs-toggle="modal" 
+                                            data-bs-toggle="modal"
                                             data-bs-target="#imageModal"
                                             data-image="upload/joblisting/<?php echo htmlspecialchars($job['image']); ?>"
                                             data-title="<?php echo htmlspecialchars($job['name']); ?>">
@@ -164,10 +164,10 @@ $jobs = $JOB_LISTING->getActiveJobs(); // Get active job listings
                     const button = event.relatedTarget;
                     const imageUrl = button.getAttribute('data-image');
                     const imageTitle = button.getAttribute('data-title');
-                    
+
                     const modalTitle = imageModal.querySelector('.modal-title');
                     const modalImage = imageModal.querySelector('#modalImage');
-                    
+
                     modalTitle.textContent = imageTitle;
                     modalImage.src = imageUrl;
                     modalImage.alt = imageTitle;

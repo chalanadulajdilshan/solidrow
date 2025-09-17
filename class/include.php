@@ -16,6 +16,7 @@ include_once(dirname(__FILE__) . '/Job.php');
 include_once(dirname(__FILE__) . '/EngineeringApplication.php');
 include_once(dirname(__FILE__) . '/Career.php');
 include_once(dirname(__FILE__) . '/JobListing.php');
+include_once(dirname(__FILE__) . '/SkillsTrainingInstitute.php');
 
 
 function dd($data)

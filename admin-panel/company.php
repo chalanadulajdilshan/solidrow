@@ -41,7 +41,6 @@ include './auth.php';
                                                 <input type="file" id="image_name" name="image_name" class="form-control" accept="image/*" onchange="previewImage(this)">
                                                 <div id="image_preview" class="mt-2" style="display: none;">
                                                     <img id="company_image" src="#" alt="Company Image Preview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">

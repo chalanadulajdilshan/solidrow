@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#home">
-                <img src="../assets/images/SOLIDROW FOREIGN EMPLOYMENT.png" alt="FESTI" height="70" class="me-2">
+                <img src="../assets/images/solidrow-foreign-employment.png" alt="FESTI" height="70" class="me-2">
                 SOLIDROW FOREIGN EMPLOYMENT
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -240,35 +240,35 @@
                     <?php
                     require_once('../class/Course.php');
                     require_once('../class/Database.php');
-                    
+
                     $course = new Course();
                     $courses = $course->all('queue', 'ASC');
-                    
+
                     if (!empty($courses)) {
                         $delay = 0;
                         $index = 0;
                         foreach ($courses as $courseItem) {
-                            $imagePath = !empty($courseItem['image_name']) 
-                                ? '../upload/course/' . $courseItem['image_name'] 
+                            $imagePath = !empty($courseItem['image_name'])
+                                ? '../upload/course/' . $courseItem['image_name']
                                 : '../assets/images/courses/default-course.jpg';
                             $isActive = $index === 0 ? 'active' : '';
-                            $shortDescription = !empty($courseItem['short_description']) 
-                                ? $courseItem['short_description'] 
+                            $shortDescription = !empty($courseItem['short_description'])
+                                ? $courseItem['short_description']
                                 : substr(strip_tags($courseItem['description']), 0, 150) . '...';
                     ?>
-                    <div class="course-card <?php echo $isActive; ?>" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-                        <div class="course-image">
-                            <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($courseItem['name']); ?>" class="img-fluid">
-                        </div>
-                        <div class="course-content">
-                            <h4 class="course-title"><?php echo htmlspecialchars($courseItem['name']); ?></h4>
-                            <p class="course-description"><?php echo htmlspecialchars($shortDescription); ?></p>
-                            <div class="course-features">
-                                <span><i class="fas fa-money-bill-wave"></i> LKR <?php echo number_format($courseItem['price'], 2); ?></span>
-                                <span><i class="fas fa-certificate"></i> Certified</span>
+                            <div class="course-card <?php echo $isActive; ?>" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+                                <div class="course-image">
+                                    <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($courseItem['name']); ?>" class="img-fluid">
+                                </div>
+                                <div class="course-content">
+                                    <h4 class="course-title"><?php echo htmlspecialchars($courseItem['name']); ?></h4>
+                                    <p class="course-description"><?php echo htmlspecialchars($shortDescription); ?></p>
+                                    <div class="course-features">
+                                        <span><i class="fas fa-money-bill-wave"></i> LKR <?php echo number_format($courseItem['price'], 2); ?></span>
+                                        <span><i class="fas fa-certificate"></i> Certified</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                     <?php
                             $delay += 100;
                             $index++;
@@ -280,15 +280,15 @@
                     ?>
                 </div>
                 <?php if (!empty($courses)): ?>
-                <div class="course-navigation">
-                    <button class="course-nav-btn" id="prevCourse"><i class="fas fa-chevron-left"></i></button>
-                    <div class="course-indicators" id="courseIndicators">
-                        <?php for ($i = 0; $i < min(count($courses), 5); $i++): ?>
-                            <span class="indicator <?php echo $i === 0 ? 'active' : ''; ?>" data-index="<?php echo $i; ?>"></span>
-                        <?php endfor; ?>
+                    <div class="course-navigation">
+                        <button class="course-nav-btn" id="prevCourse"><i class="fas fa-chevron-left"></i></button>
+                        <div class="course-indicators" id="courseIndicators">
+                            <?php for ($i = 0; $i < min(count($courses), 5); $i++): ?>
+                                <span class="indicator <?php echo $i === 0 ? 'active' : ''; ?>" data-index="<?php echo $i; ?>"></span>
+                            <?php endfor; ?>
+                        </div>
+                        <button class="course-nav-btn" id="nextCourse"><i class="fas fa-chevron-right"></i></button>
                     </div>
-                    <button class="course-nav-btn" id="nextCourse"><i class="fas fa-chevron-right"></i></button>
-                </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -346,7 +346,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <img src="../assets/images/SOLIDROW FOREIGN EMPLOYMENT.png" alt="FESTI" height="70" class="me-2">
+                            <img src="../assets/images/solidrow-foreign-employment.png" alt="FESTI" height="70" class="me-2">
                             <h5 class="widget-title">SOLIDROW FOREIGN EMPLOYMENT</h5>
                         </div>
                         <p>Empowering individuals with essential skills and knowledge required to succeed in foreign employment opportunities.</p>

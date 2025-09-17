@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOLIDROW FOREIGN EMPLOYMENT</title>
+    <title>Solidrow Foreign Engineering Skills Training Institute</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -16,8 +16,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#home">
-                <img src="../assets/images/SOLIDROW FOREIGN EMPLOYMENT.png" alt="FESTI" height="70" class="me-2">
-                SOLIDROW FOREIGN EMPLOYMENT
+                <img src="../assets/images/solidrow_foreign_engineering_skills_training_institute.png" alt="FESTI" height="70" class="me-2">
+                Foreign Engineering Skills Training Institute
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -38,6 +38,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item ms-2 d-flex align-items-center">
+                        <a class="btn btn-primary btn-sm" href="reg-application.php">Apply Now</a>
                     </li>
                 </ul>
             </div>
@@ -376,7 +379,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <img src="../assets/images/SOLIDROW FOREIGN EMPLOYMENT.png" alt="FESTI" height="70" class="me-2">
+                            <img src="../assets/images/solidrow_foreign_engineering_skills_training_institute.png" alt="FESTI" height="70" class="me-2">
                             <h5 class="widget-title">SOLIDROW FOREIGN EMPLOYMENT</h5>
                         </div>
                         <p>Empowering individuals with essential skills and knowledge required to succeed in foreign employment opportunities.</p>

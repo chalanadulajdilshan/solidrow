@@ -61,7 +61,7 @@ class Company
 
     public function all()
     {
-        $query = "SELECT * FROM `company` ORDER BY `id` DESC";
+        $query = "SELECT * FROM `company` ORDER BY `id` ASC";
         $db = new Database();
         $result = $db->readQuery($query);
 

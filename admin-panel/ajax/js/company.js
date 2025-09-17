@@ -130,7 +130,7 @@ jQuery(document).ready(function () {
         $('#name').val($(this).data('name'));
         $('#short_desc').val($(this).data('short_desc'));
         $('#image_name').val($(this).data('image_name'));
-        $('#image_url').val($(this).data('image_url'));
+        $('#page_url').val($(this).data('page_url'));
 
         $("#create").hide();
         $('#company_master').modal('hide');

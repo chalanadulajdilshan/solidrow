@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold d-flex align-items-center" href="solidrowengineering.php">
-                <img src="assets/images/logo.png" alt="Solidrow Engineering Logo" height="70" class="d-inline-block align-text-top me-2">
+                <img src="../assets/images/Solidrow Engineering Logo.png" alt="Solidrow Engineering Logo" height="70" class="d-inline-block align-text-top me-2">
                 <span>Solidrow Engineering</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -41,6 +41,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="contact-us.php">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2 d-flex align-items-center">
+                        <a class="btn btn-primary btn-sm" href="Reg_Application.php">Apply Now</a>
                     </li>
                 </ul>
             </div>

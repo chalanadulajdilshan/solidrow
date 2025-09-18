@@ -107,7 +107,7 @@ $US = new User($_SESSION['id']);
                 <?php } ?>
 
                 <!-- Solidrow Engineering -->
-                <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
+                <!-- <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
                 <li>
                     <a href="engineering-application.php">
                         <i class="bx bx-file"></i>
@@ -124,7 +124,7 @@ $US = new User($_SESSION['id']);
                         <li><a href="staff-engineering-applications.php">My Applications</a></li>
                         <li><a href="commissions-engineering.php">Commissions</a></li>
                     </ul>
-                </li>
+                </li> -->
 
                 <!-- Solidrow Training -->
                 <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
@@ -149,7 +149,7 @@ $US = new User($_SESSION['id']);
                 <!-- Solidrow Foreign Employment -->
                 <li class="menu-title">Solidrow Foreign Employment Agency</li>
                 <li>
-                    <a href="foreign-employment-agency-application.php">
+                    <a href="foreign-employment-application.php">
                         <i class="bx bx-file"></i>
                         <span>Application Form</span>
                     </a>
@@ -160,8 +160,8 @@ $US = new User($_SESSION['id']);
                         <span>Call Center</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="all-foreign-employment-agency-applications.php">Applications</a></li>
-                        <li><a href="staff-foreign-employment-agency-applications.php">My Applications</a></li>
+                        <li><a href="all-foreign-employment-applications.php">Applications</a></li>
+                        <li><a href="staff-foreign-employment-applications.php">My Applications</a></li>
                         <li><a href="commissions-foreign-employment.php">Commissions</a></li>
                     </ul>
                 </li>

@@ -1,6 +1,6 @@
 <?php
 
-class SkillsTrainingApplication
+class SkillTrainingApplication
 {
 
     public $id;

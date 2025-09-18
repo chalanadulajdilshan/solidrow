@@ -114,7 +114,7 @@ include './auth.php';
                                             $staff_id = $_SESSION['id'];
                                             $call_status = isset($_GET['call_status']) ? $_GET['call_status'] : '';
                                             $employee_status = isset($_GET['employee_status']) ? $_GET['employee_status'] : '';
-                                            $SKILLS_TRAINING_APPLICATION = new SkillsTrainingApplication(NULL);
+                                            $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication(NULL);
                                             $applications = $SKILLS_TRAINING_APPLICATION->getApplicationsByWithStaffId($staff_id, $call_status, $employee_status);
                                             foreach ($applications as $key => $skills_training_application) {
                                                 $key++;

@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/Style.css" rel="stylesheet">
+    <link href="assets/css/sfe_style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -38,6 +38,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item ms-2 d-flex align-items-center">
+                        <a class="btn btn-primary btn-sm" href="reg-application.php">Apply Now</a>
                     </li>
                 </ul>
             </div>
@@ -409,7 +412,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="assets/js/Script.js"></script>
+    <script src="assets/js/sfe_js.js"></script>
 </body>
 
 </html>

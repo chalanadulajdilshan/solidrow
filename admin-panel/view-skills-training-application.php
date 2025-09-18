@@ -4,7 +4,7 @@ include './auth.php';
 
 $id = '';
 $id = $_GET['id'];
-$SKILLS_TRAINING_APPLICATION = new SkillsTrainingApplication($id);
+$SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
 ?>
 <!doctype html>
 <html lang="en">

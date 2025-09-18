@@ -130,9 +130,29 @@
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-content">
                         <h2 class="section-title">About <span class="text-accent">SOLIDROW FOREIGN EMPLOYMENT</span></h2>
-                        <p class="lead">SOLIDROW FOREIGN EMPLOYMENT was registered in 2023 as a Limited Liability Company under the Registrar General of Companies in Sri Lanka.</p>
-                        <p>We are an accredited Vocational Training Institute under the Tertiary and Vocational Education Commission of Sri Lanka (P01/1060), empowering individuals with essential skills and knowledge required to succeed in foreign employment opportunities.</p>
+                        <p class="lead">Solidrow Foreign Employment Agency connects skilled, semi-skilled, and professional workers with reputable employers across the globe. We operate with a strong commitment to ethical recruitment, transparency, and compliance with international labor standards, ensuring a smooth process for both job seekers and employers.</p>
 
+                        <div class="services-offered mt-4">
+                            <h5 class="mb-3 fw-bold text-primary">Services Offered:</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Overseas job placement in diverse industries
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Recruitment, documentation, and contract processing
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Pre-departure orientation and training
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Ongoing overseas support
+                                </li>
+                            </ul>
+                        </div>
                         <div class="stats-row row mt-4">
                             <div class="col-4 text-center">
                                 <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
@@ -163,6 +183,41 @@
                             <h5>Accredited Institute</h5>
                             <p>P01/1060</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Vision, Mission, Goal Cards -->
+            <div class="row align-items-center mt-5">
+                <!-- Our Vision -->
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="about-card vision-card">
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon vision-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Our Vision</h4>
+                            <p class="card-text">
+                                Empowering individuals Talents with essential skills and knowledge required to succeed in foreign employment opportunities.
+                        </div>
+                        <div class="card-decoration vision-decoration"></div>
+                    </div>
+                </div>
+
+                <!-- Our Mission -->
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="about-card mission-card">
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon mission-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Our Mission</h4>
+                            <p class="card-text">
+                            Solidrow Foreign Employment Agency's mission is to provide individuals with the necessary skills and opportunities to pursue employment abroad. By leveraging modern training methods and technology, the agency aims to streamline the process of finding suitable overseas employment.</div>
+                        <div class="card-decoration mission-decoration"></div>
                     </div>
                 </div>
             </div>

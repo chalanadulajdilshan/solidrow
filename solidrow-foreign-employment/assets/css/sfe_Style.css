@@ -1038,6 +1038,118 @@ body {
 }
 
 /* Responsive Design */
+/* About Cards */
+.about-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    height: 100%;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.vision-icon {
+    background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+.mission-icon {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.card-icon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: iconShine 3s infinite;
+}
+
+@keyframes iconShine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 1rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.card-decoration {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.vision-decoration {
+    background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+.mission-decoration {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+/* Responsive adjustments */
 @media (max-width: 991px) {
     .hero-title {
         font-size: 2.8rem;

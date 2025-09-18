@@ -27,7 +27,7 @@ include './auth.php';
                                 <div class="card-body">
                                     <h4 class="card-title">Create Staff</h4>
                                     <form id="form-data" enctype="multipart/form-data">
-                                        <input type="hidden" id="staff_id" name="staff_id">
+                                        <input type="hidden" id="id" name="id">
                                         <div class="row">
 
                                             <!-- Country Dropdown -->
@@ -49,11 +49,12 @@ include './auth.php';
                                                 <label>Visa Category</label>
                                                 <select id="visa_category" name="visa_category" class="form-control" required>
                                                     <option value="">Select Visa Category</option>
-                                                    <option value="D4">D4 Korean Language Program</option>
-                                                    <option value="D2.1">D2.1 Associate Degree (2 Years)</option>
-                                                    <option value="D2.2">D2.2 Bachelor Degree (4 Years)</option>
-                                                    <option value="D2.3">D2.3 Master's Degree (2 Years)</option>
-                                                    <option value="D2.4">D2.4 PhD (2 Years)</option>
+                                                    <?php
+                                                    $VISA_TYPE = new VisaType(NULL);
+                                                    foreach ($VISA_TYPE->all() as $visa_type) {
+                                                        echo '<option value="' . htmlspecialchars($visa_type['id']) . '">' . htmlspecialchars($visa_type['name']) . '</option>';
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
 
@@ -100,8 +101,12 @@ include './auth.php';
                                             ?>
                                                 <tr id="div<?php echo $student_country_visa['id'] ?>">
                                                     <td><?php echo $key ?></td>
-                                                    <td><?php echo htmlspecialchars($student_country_visa['country_id']) ?></td>
-                                                    <td><?php echo htmlspecialchars($student_country_visa['visa_category']) ?></td>
+                                                    <td><?php
+                                                    $COUNTRY = new Country($student_country_visa['country_id']);
+                                                    echo $COUNTRY->name ?></td>
+                                                    <td><?php
+                                                    $VISA_TYPE = new VisaType($student_country_visa['visa_category']);
+                                                    echo $VISA_TYPE->name ?></td>
                                                     <td>
                                                         <div class="btn-group" role="group">
                                                             <div class="badge bg-pill bg-soft-success font-size-14 select-staff me-1"

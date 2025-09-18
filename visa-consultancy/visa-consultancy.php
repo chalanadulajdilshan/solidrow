@@ -127,9 +127,33 @@
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-content">
                         <h2 class="section-title">About <span class="text-accent">SOLIDROW FOREIGN EMPLOYMENT</span></h2>
-                        <p class="lead">SOLIDROW FOREIGN EMPLOYMENT was registered in 2023 as a Limited Liability Company under the Registrar General of Companies in Sri Lanka.</p>
-                        <p>We are an accredited Vocational Training Institute under the Tertiary and Vocational Education Commission of Sri Lanka (P01/1060), empowering individuals with essential skills and knowledge required to succeed in foreign employment opportunities.</p>
-
+                        <p>Solidrow Visa Consultancy Services is committed to guiding students toward their international education goals with expert advice and personalized support. We provide end-to-end assistance for students aspiring to study abroad, ensuring a smooth and transparent visa application process.</p>
+                        <p>Our experienced consultants work closely with students to select the right study destinations, institutions, and programs that align with their academic interests and career ambitions. From documentation to interview preparation, we deliver reliable solutions that increase visa success rates and open doors to global opportunities.</p>
+                        <div class="key-services mt-4">
+                            <h5 class="mb-3 fw-bold text-primary">Key Services:</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Career counseling and academic guidance
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    University and course selection support
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Visa documentation and processing
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Pre-departure briefings and travel assistance
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Ongoing support during studies abroad
+                                </li>
+                            </ul>
+                        </div>
                         <div class="stats-row row mt-4">
                             <div class="col-4 text-center">
                                 <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
@@ -163,7 +187,47 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- Vision, Mission, Goal Cards -->
+            <div class="row align-items-center mt-5">
+                <!-- Our Vision -->
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="about-card vision-card">
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon vision-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Our Vision</h4>
+                            <p class="card-text">
+                                To be a trusted global leader in student visa consultancy, empowering students to achieve their educational dreams abroad with integrity, transparency, and excellence.
+                        </div>
+                        <div class="card-decoration vision-decoration"></div>
+                    </div>
+                </div>
+
+                <!-- Our Mission -->
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="about-card mission-card">
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon mission-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Our Mission</h4>
+
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>To provide personalized, reliable, and ethical visa consultancy services tailored to each student's academic goals.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>To guide students through every step of the overseas education process with accuracy and professionalism.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>To build long-term trust by ensuring compliance with international standards and offering transparent solutions.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>To support students in accessing global opportunities that shape successful futures.</li>
+                            </ul>
+                        </div>
+                        <div class="card-decoration mission-decoration"></div>
+                    </div>
+                </div>
+            </div>
     </section>
 
     <!-- Gallery Section -->

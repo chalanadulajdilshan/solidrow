@@ -164,7 +164,7 @@ $companies = $company->all();
                     $url = !empty($company['page_url']) ? $company['page_url'] : '#';
 
                     // Output the card HTML
-                    echo '<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="' . $delay . '">';
+                    echo '<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="' . $delay . '">';
                     echo '    <div class="website-card simple-card">';
                     echo '        <div class="card-image">';
                     echo '            <img src="' . $image . '" alt="' . htmlspecialchars($company['name']) . '" class="img-fluid">';
@@ -220,8 +220,10 @@ $companies = $company->all();
                     <div class="about-content">
                         <div class="about-intro">
                             <h3 class="about-heading">Welcome To All Solidrow Group (Pvt) Ltd.</h3>
-                            <p class="about-description">
-                                <strong>SOLIDROW GROUP (PVT) LTD</strong> was registered in the year of 2023 as Limited Liability Company under the Registrar General of Companies in Sri Lanka. It is also an accredited Vocational Training Institute under the Tertiary and Vocational Education commission of Sri Lanka <strong>(P01/1060)</strong> which is the apex body of Vocational Training.
+                            <p class="about-description" style="text-align: justify;">
+                                <strong>Solidrow Group of Companies</strong> is a diversified corporate group dedicated to delivering excellence across multiple sectors including engineering, technical training, foreign employment, and visa consultancy. With a strong commitment to innovation, professional service, and global standards, Solidrow Group aims to empower individuals and businesses by providing integrated solutions that create opportunities and drive growth.
+
+                                <br>Our mission is to be a trusted partner for clients, employees, and stakeholders by upholding values of integrity, quality, and customer satisfaction. Through our subsidiaries, we provide comprehensive services that span from engineering solutions to international workforce deployment and migration support.
                             </p>
                         </div>
                     </div>
@@ -239,7 +241,7 @@ $companies = $company->all();
             <!-- Vision, Mission, Goal Cards -->
             <div class="row g-4">
                 <!-- Our Vision -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="about-card vision-card">
                         <div class="card-icon-wrapper">
                             <div class="card-icon vision-icon">
@@ -249,7 +251,7 @@ $companies = $company->all();
                         <div class="card-content">
                             <h4 class="card-title">Our Vision</h4>
                             <p class="card-text">
-                                Empowering individuals talents with essential skills and knowledge required to succeed in foreign employment opportunities.
+                                To be a globally recognized group of companies that empowers people and industries through engineering excellence, world-class training, ethical employment opportunities, and reliable consultancy services.”
                             </p>
                         </div>
                         <div class="card-decoration vision-decoration"></div>
@@ -257,7 +259,7 @@ $companies = $company->all();
                 </div>
 
                 <!-- Our Mission -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="about-card mission-card">
                         <div class="card-icon-wrapper">
                             <div class="card-icon mission-icon">
@@ -266,29 +268,15 @@ $companies = $company->all();
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Our Mission</h4>
-                            <p class="card-text">
-                                To bridge the gap between job seekers and foreign employment opportunities by providing comprehensive vocational training programs with practical and industry-relevant skills that not only enhance employability but also foster personal and professional growth while promoting cultural understanding and international collaboration.
-                            </p>
+                            <ul class="mission-list" style="list-style-type: none; padding-left: 0;">
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To deliver innovative and sustainable engineering solutions that meet international standards.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To provide globally aligned technical training that equips individuals with skills for future careers.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To create ethical and transparent pathways for foreign employment that benefit both workers and employers.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To guide students with professional visa consultancy services, helping them achieve their global education goals.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To uphold integrity, professionalism, and customer trust across all our services.</li>
+                            </ul>
                         </div>
                         <div class="card-decoration mission-decoration"></div>
-                    </div>
-                </div>
-
-                <!-- Our Goal -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="about-card goal-card">
-                        <div class="card-icon-wrapper">
-                            <div class="card-icon goal-icon">
-                                <i class="fas fa-flag-checkered"></i>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="card-title">Our Goal</h4>
-                            <p class="card-text">
-                                Sending skilled workers abroad to strengthen Sri Lanka's economy and create better opportunities for our people.
-                            </p>
-                        </div>
-                        <div class="card-decoration goal-decoration"></div>
                     </div>
                 </div>
             </div>

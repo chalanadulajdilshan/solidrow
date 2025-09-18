@@ -82,4 +82,25 @@ class StudentCountryVisa
 
         return $data;
     }
+
+    public function getByCountry($countryId)
+    {
+        $db = new Database();
+        $countryId = (int)$countryId;
+        
+        $query = "SELECT DISTINCT `visa_category` FROM `student_visa_country` 
+                 WHERE `country_id` = $countryId 
+                 ORDER BY `visa_category` ASC";
+        
+        $result = $db->readQuery($query);
+        
+        $categories = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $categories[] = [
+                'visa_category' => $row['visa_category']
+            ];
+        }
+        
+        return $categories;
+    }
 }

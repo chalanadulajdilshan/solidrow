@@ -129,7 +129,7 @@ jQuery(document).ready(function () {
             });
 
             window.setTimeout(function () {
-              window.location.href = "../admin-panel/all-foreign-employment-applications.php";
+              window.location.href = "../admin-panel/all-foreign-employment-application.php";
             }, 1000);
           } else {
             swal({

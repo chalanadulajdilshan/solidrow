@@ -74,7 +74,7 @@ include './auth.php';
 
                                         <tbody>
                                             <?php
-                                            $SKILLS_TRAINING_APPLICATION = new SkillsTrainingApplication(NULL);
+                                            $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication(NULL);
                                             foreach ($SKILLS_TRAINING_APPLICATION->getApplicationsByWithOutStaffId() as $key => $skills_training_application) {
                                                 $key++;
                                                 $JOB_ROLES = new JobRole($skills_training_application['job_abroad']);

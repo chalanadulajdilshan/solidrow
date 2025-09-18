@@ -114,11 +114,11 @@ include './auth.php';
                                             $staff_id = $_SESSION['id'];
                                             $call_status = isset($_GET['call_status']) ? $_GET['call_status'] : '';
                                             $employee_status = isset($_GET['employee_status']) ? $_GET['employee_status'] : '';
-                                            $ENGINEERING_APPLICATION = new EngineeringApplication(NULL);
-                                            $applications = $ENGINEERING_APPLICATION->getApplicationsByWithStaffId($staff_id, $call_status, $employee_status);
-                                            foreach ($applications as $key => $engineering_application) {
+                                            $FOREIGN_EMPLOYMENT_APPLICATION = new ForeignEmploymentApplication(NULL);
+                                            $applications = $FOREIGN_EMPLOYMENT_APPLICATION->getApplicationsByWithStaffId($staff_id, $call_status, $employee_status);
+                                            foreach ($applications as $key => $foreign_employment_application) {
                                                 $key++;
-                                                $JOB_ROLES = new JobRole($engineering_application['job_abroad']);
+                                                $JOB_ROLES = new JobRole($foreign_employment_application['job_abroad']);
                                                 ?>
                                                 <tr id="div<?php echo $engineering_application['id'] ?>">
                                                     <td><?php echo $key ?></td>

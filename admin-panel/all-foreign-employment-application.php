@@ -74,21 +74,21 @@ include './auth.php';
 
                                         <tbody>
                                             <?php
-                                            $ENGINEERING_APPLICATION = new EngineeringApplication(NULL);
-                                            foreach ($ENGINEERING_APPLICATION->getApplicationsByWithOutStaffId() as $key => $engineering_application) {
+                                            $FOREIGN_EMPLOYMENT_APPLICATION = new ForeignEmploymentApplication(NULL);
+                                            foreach ($FOREIGN_EMPLOYMENT_APPLICATION->getApplicationsByWithOutStaffId() as $key => $foreign_employment_application) {
                                                 $key++;
-                                                $JOB_ROLES = new JobRole($engineering_application['job_abroad']);
+                                                $JOB_ROLES = new JobRole($foreign_employment_application['job_abroad']);
                                                 ?>
-                                                <tr id="div<?php echo $engineering_application['id'] ?>">
+                                                <tr id="div<?php echo $foreign_employment_application['id'] ?>">
                                                     <td><?php echo $key ?></td>
-                                                    <td> <?php echo $engineering_application['full_name'] ?></td>
-                                                    <td> <?php echo $engineering_application['passport_number'] ?></td>
-                                                    <td> <?php echo $engineering_application['mobile_number'] ?></td> 
-                                                    <td> <?php echo $engineering_application['current_job'] ?></td>
+                                                    <td> <?php echo $foreign_employment_application['full_name'] ?></td>
+                                                    <td> <?php echo $foreign_employment_application['passport_number'] ?></td>
+                                                    <td> <?php echo $foreign_employment_application['mobile_number'] ?></td> 
+                                                    <td> <?php echo $foreign_employment_application['current_job'] ?></td>
                                                     <td> <?php echo $JOB_ROLES->name?></td>
-                                                    <td> <?php echo $engineering_application['created_at'] ?></td>
+                                                    <td> <?php echo $foreign_employment_application['created_at'] ?></td>
                                                     <td>
-                                                        <a href="view-engineering-application.php?id=<?php echo $engineering_application['id'] ?>">
+                                                        <a href="view-foreign-employment-application.php?id=<?php echo $foreign_employment_application['id'] ?>">
 
                                                             <div class="badge bg-pill bg-soft-success font-size-14"><i class="fas fa-eye p-1"></i></div>
                                                         </a>

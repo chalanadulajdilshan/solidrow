@@ -43,9 +43,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact-us.php">Contact</a>
                     </li>
-                    <li class="nav-item ms-2 d-flex align-items-center">
-                        <a class="btn btn-primary btn-sm" href="reg-application.php">Apply Now</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -408,9 +405,18 @@
                     <div class="about-content">
                         <div class="about-intro">
                             <h3 class="about-heading">Welcome To All Solidrow Engineering</h3>
-                            <p class="about-description">
-                                <strong>SOLIDROW ENGINEERING</strong> was registered in the year of 2023 as Limited Liability Company under the Registrar General of Companies in Sri Lanka. It is also an accredited Vocational Training Institute under the Tertiary and Vocational Education commission of Sri Lanka <strong>(P01/1060)</strong> which is the apex body of Vocational Training.
+                            <p class="about-description" style="text-align: justify;">
+                                <strong>SOLIDROW ENGINEERING</strong> delivers innovative and reliable engineering solutions across civil, mechanical, and electrical sectors. We specialize in designing, developing, and executing projects with a strong emphasis on quality, safety, and sustainability. With a team of skilled professionals and modern technology, we ensure that every project meets international standards while remaining cost-effective and efficient.
                             </p>
+                            <p class="about-description" style="text-align: justify; margin-bottom: 10px;">
+                                <strong>Core Expertise:</strong>
+                            </p>
+                            <ul class="mission-list" style="list-style-type: none; padding-left: 0; margin-top: 10px;">
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>Civil construction and infrastructure development</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>Mechanical and electrical engineering services</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>Project design, consultancy, and management</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>Customized industrial solutions</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -427,7 +433,7 @@
             <!-- Vision, Mission, Goal Cards -->
             <div class="row g-4">
                 <!-- Our Vision -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="about-card vision-card">
                         <div class="card-icon-wrapper">
                             <div class="card-icon vision-icon">
@@ -437,15 +443,14 @@
                         <div class="card-content">
                             <h4 class="card-title">Our Vision</h4>
                             <p class="card-text">
-                                Empowering individuals talents with essential skills and knowledge required to succeed in foreign employment opportunities.
-                            </p>
+                                To be a leading engineering solutions provider, driving innovation, quality, and sustainability in every project we undertake and build long-term partnerships with clients by providing engineering excellence that drives progress and supports economic development.</p>
                         </div>
                         <div class="card-decoration vision-decoration"></div>
                     </div>
                 </div>
 
                 <!-- Our Mission -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="about-card mission-card">
                         <div class="card-icon-wrapper">
                             <div class="card-icon mission-icon">
@@ -454,79 +459,64 @@
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Our Mission</h4>
-                            <p class="card-text">
-                                To bridge the gap between job seekers and foreign employment opportunities by providing comprehensive vocational training programs with practical and industry-relevant skills that not only enhance employability but also foster personal and professional growth while promoting cultural understanding and international collaboration.
-                            </p>
+                            <ul class="mission-list" style="list-style-type: none; padding-left: 0; margin-top: 10px;">
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To deliver high-quality engineering services that meet international standards and exceed client expectations.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To embrace innovation, technology, and sustainable practices in engineering solutions.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To cultivate a skilled workforce committed to safety, precision, and continuous improvement.</li>
+                                <li><i class="fas fa-check-circle text-primary me-2"></i>To contribute to national and global development by providing reliable and cost-effective engineering solutions.</li>
+                            </ul>
                         </div>
                         <div class="card-decoration mission-decoration"></div>
                     </div>
                 </div>
 
-                <!-- Our Goal -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="about-card goal-card">
-                        <div class="card-icon-wrapper">
-                            <div class="card-icon goal-icon">
-                                <i class="fas fa-flag-checkered"></i>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="card-title">Our Goal</h4>
-                            <p class="card-text">
-                                Sending skilled workers abroad to strengthen Sri Lanka's economy and create better opportunities for our people.
-                            </p>
-                        </div>
-                        <div class="card-decoration goal-decoration"></div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Additional Features Row -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="features-container" data-aos="fade-up">
-                        <div class="row g-4">
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-certificate"></i>
+                <!-- Additional Features Row -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="features-container" data-aos="fade-up">
+                            <div class="row g-4">
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                        <h5>Accredited Institute</h5>
+                                        <p>Recognized by TVEC Sri Lanka</p>
                                     </div>
-                                    <h5>Accredited Institute</h5>
-                                    <p>Recognized by TVEC Sri Lanka</p>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-users"></i>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <h5>Expert Instructors</h5>
+                                        <p>Industry experienced trainers</p>
                                     </div>
-                                    <h5>Expert Instructors</h5>
-                                    <p>Industry experienced trainers</p>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-globe"></i>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-globe"></i>
+                                        </div>
+                                        <h5>Global Opportunities</h5>
+                                        <p>Connect with international employers</p>
                                     </div>
-                                    <h5>Global Opportunities</h5>
-                                    <p>Connect with international employers</p>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-handshake"></i>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="feature-item">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-handshake"></i>
+                                        </div>
+                                        <h5>24/7 Support</h5>
+                                        <p>Continuous guidance and assistance</p>
                                     </div>
-                                    <h5>24/7 Support</h5>
-                                    <p>Continuous guidance and assistance</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Contact CTA Section -->

@@ -4,7 +4,7 @@ include './auth.php';
 
 $id = '';
 $id = $_GET['id'];
-$SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
+$VISA_CONSULTANCY_APPLICATION = new VisaConsultancyApplication($id);
 ?>
 <!doctype html>
 <html lang="en">
@@ -69,9 +69,9 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="full_name">සම්පූර්ණ නම (Full Name) <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="full_name" name="full_name"
-                                                            placeholder="Enter your full name" value="<?php echo $SKILLS_TRAINING_APPLICATION->full_name ?>">
+                                                            placeholder="Enter your full name" value="<?php echo $VISA_CONSULTANCY_APPLICATION->full_name ?>">
                                                     </div>
-                                                    <input type="hidden" name="id" id="id" value="<?php echo $SKILLS_TRAINING_APPLICATION->id ?>">
+                                                    <input type="hidden" name="id" id="id" value="<?php echo $VISA_CONSULTANCY_APPLICATION->id ?>">
 
                                                     <input type="hidden" name="staff_id" id="staff_id" value="<?php
                                                                                                                 if (!isset($_SESSION['id'])) {
@@ -87,7 +87,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number)
                                                             <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="nic" name="nic"
-                                                            placeholder="Enter your national id number" value="<?php echo $SKILLS_TRAINING_APPLICATION->nic ?>">
+                                                            placeholder="Enter your national id number" value="<?php echo $VISA_CONSULTANCY_APPLICATION->nic ?>">
                                                     </div>
                                                 </div>
 
@@ -97,7 +97,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="passport_number">පාස්පෝට් අංකය (Passport
                                                             Number) </label>
                                                         <input type="text" class="form-control" id="passport_number"
-                                                            name="passport_number" placeholder="Enter your passport number" value="<?php echo $SKILLS_TRAINING_APPLICATION->passport_number ?>"
+                                                            name="passport_number" placeholder="Enter your passport number" value="<?php echo $VISA_CONSULTANCY_APPLICATION->passport_number ?>"
                                                             required>
                                                     </div>
                                                 </div>
@@ -108,7 +108,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="birthday">උපන් දිනය (Birthday) <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="date" class="form-control" id="birthday" name="birthday"
-                                                            value="<?php echo $SKILLS_TRAINING_APPLICATION->birthday ?>" required>
+                                                            value="<?php echo $VISA_CONSULTANCY_APPLICATION->birthday ?>" required>
                                                     </div>
                                                 </div>
 
@@ -118,7 +118,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="age">වයස (Age) <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="number" class="form-control" id="age" name="age"
-                                                            placeholder="Enter your age" value="<?php echo $SKILLS_TRAINING_APPLICATION->age ?>" required>
+                                                            placeholder="Enter your age" value="<?php echo $VISA_CONSULTANCY_APPLICATION->age ?>" required>
                                                     </div>
                                                 </div>
 
@@ -129,8 +129,8 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                                 class="text-danger">*</span></label>
                                                         <select class="form-control" id="gender" name="gender" required>
                                                             <option value="">-- Select Gender --</option>
-                                                            <option value="male" <?php echo ($SKILLS_TRAINING_APPLICATION->gender == 'male') ? 'selected' : ''; ?>>පුරුෂ (Male)</option>
-                                                            <option value="female" <?php echo ($SKILLS_TRAINING_APPLICATION->gender == 'female') ? 'selected' : ''; ?>>ස්ත්‍රී (Female)</option>
+                                                            <option value="male" <?php echo ($VISA_CONSULTANCY_APPLICATION->gender == 'male') ? 'selected' : ''; ?>>පුරුෂ (Male)</option>
+                                                            <option value="female" <?php echo ($VISA_CONSULTANCY_APPLICATION->gender == 'female') ? 'selected' : ''; ?>>ස්ත්‍රී (Female)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -142,8 +142,8 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                             (Marital Status) <span class="text-danger">*</span></label>
                                                         <select class="form-control" id="marital_status" name="marital_status" required>
                                                             <option value="">-- Select Marital Status --</option>
-                                                            <option value="single" <?php echo ($SKILLS_TRAINING_APPLICATION->marital_status == 'single') ? 'selected' : ''; ?>>අවිවාහක (Single)</option>
-                                                            <option value="married" <?php echo ($SKILLS_TRAINING_APPLICATION->marital_status == 'married') ? 'selected' : ''; ?>>විවාහක (Married)</option>
+                                                            <option value="single" <?php echo ($VISA_CONSULTANCY_APPLICATION->marital_status == 'single') ? 'selected' : ''; ?>>අවිවාහක (Single)</option>
+                                                            <option value="married" <?php echo ($VISA_CONSULTANCY_APPLICATION->marital_status == 'married') ? 'selected' : ''; ?>>විවාහක (Married)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -154,7 +154,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="mobile_number">ජංගම දුරකතන අංකය (Mobile
                                                             Number) <span class="text-danger">*</span></label>
                                                         <input type="text" class="form-control" id="mobile_number"
-                                                            name="mobile_number" placeholder="Enter your mobile number" value="<?php echo $SKILLS_TRAINING_APPLICATION->mobile_number ?>"
+                                                            name="mobile_number" placeholder="Enter your mobile number" value="<?php echo $VISA_CONSULTANCY_APPLICATION->mobile_number ?>"
                                                             required>
                                                     </div>
                                                 </div>
@@ -164,7 +164,47 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                     <div class="mb-3">
                                                         <label class="form-label" for="whatsapp_number">Whatsapp Number</label>
                                                         <input type="text" class="form-control" id="whatsapp_number"
-                                                            name="whatsapp_number" placeholder="Enter your WhatsApp number" value="<?php echo $SKILLS_TRAINING_APPLICATION->whatsapp_number ?>">
+                                                            name="whatsapp_number" placeholder="Enter your WhatsApp number" value="<?php echo $VISA_CONSULTANCY_APPLICATION->whatsapp_number ?>">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Country Dropdown -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label>Country</label>
+                                                    <select class="form-control" name="country_id" id="country_id" required>
+                                                        <option value="">-- Select Country --</option>
+                                                        <?php
+                                                        $COUNTRY = new Country();
+                                                        $allCountries = $COUNTRY->all();
+                                                        $selectedCountryId = $VISA_CONSULTANCY_APPLICATION->country_id;
+
+                                                        foreach ($allCountries as $country) {
+                                                            $selected = ($country['id'] == $selectedCountryId) ? 'selected' : '';
+                                                            echo "<option value='{$country['id']}' $selected>{$country['name']}</option>";
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <!-- Visa Category Dropdown -->
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="visa_category">Visa Category <span class="text-danger">*</span></label>
+                                                        <select class="form-control" name="visa_category" id="visa_category" required <?php echo empty($VISA_CONSULTANCY_APPLICATION->country_id) ? 'disabled' : ''; ?>>
+                                                            <option value="">-- Select Visa Category --</option>
+                                                            <?php
+                                                            if (!empty($VISA_CONSULTANCY_APPLICATION->country_id)) {
+                                                                $visaCategory = new StudentCountryVisa();
+                                                                $categories = $visaCategory->getByCountry($VISA_CONSULTANCY_APPLICATION->country_id);
+
+                                                                foreach ($categories as $category) {
+                                                                    $visaType = new VisaType($category['visa_category']);
+                                                                    $selected = ($category['visa_category'] == $VISA_CONSULTANCY_APPLICATION->visa_category) ? 'selected' : '';
+                                                                    $visaTypeName = !empty($visaType->name) ? $visaType->name : 'Unknown Visa Type';
+                                                                    echo "<option value='{$category['visa_category']}' $selected>{$visaTypeName}</option>";
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -176,7 +216,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <select class="form-control" name="province_id" id="province_id" required>
 
                                                             <?php
-                                                            $PROVINCE = new Province($SKILLS_TRAINING_APPLICATION->province_id);
+                                                            $PROVINCE = new Province($VISA_CONSULTANCY_APPLICATION->province_id);
 
                                                             ?>
                                                             <option value="<?php echo $PROVINCE->id ?>"><?php echo $PROVINCE->name ?></option>
@@ -191,7 +231,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                         <label class="form-label" for="current_job">ඔබගේ වෘත්තීය (Your current
                                                             job)</label>
                                                         <input type="text" class="form-control" id="current_job"
-                                                            name="current_job" placeholder="Enter your current job" value="<?php echo $SKILLS_TRAINING_APPLICATION->current_job ?>">
+                                                            name="current_job" placeholder="Enter your current job" value="<?php echo $VISA_CONSULTANCY_APPLICATION->current_job ?>">
                                                     </div>
                                                 </div>
 
@@ -206,8 +246,8 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                             <?php
                                                             $JobRole = new JobRole(NULL);
                                                             $allJobRoles = $JobRole->getActive();
-                                                            $selectedJobRoleId = $SKILLS_TRAINING_APPLICATION->job_abroad;
-                                                            
+                                                            $selectedJobRoleId = $VISA_CONSULTANCY_APPLICATION->job_abroad;
+
                                                             foreach ($allJobRoles as $job_role) {
                                                                 $selected = ($job_role['id'] == $selectedJobRoleId) ? 'selected' : '';
                                                                 echo "<option value='{$job_role['id']}' $selected>{$job_role['name']}</option>";
@@ -222,22 +262,23 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                     <div class="mb-3">
                                                         <label class="form-label" for="call_date_time">Call Date & Time <span class="text-danger">*</span></label>
                                                         <input type="datetime-local" class="form-control" id="call_date_time" name="call_date_time"
-                                                            placeholder="Enter  call date" value="<?php echo $SKILLS_TRAINING_APPLICATION->call_date_time ?>" readonly>
+                                                            placeholder="Enter  call date" value="<?php echo $VISA_CONSULTANCY_APPLICATION->call_date_time ?>" readonly>
                                                     </div>
                                                 </div>
+
 
                                                 <div class="col-md-4">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="call_status">Call Status <span class="text-danger">*</span></label>
                                                         <select class="form-control" id="call_status" name="call_status" required>
-                                                            <option value="" <?php echo empty($SKILLS_TRAINING_APPLICATION->call_status) ? 'selected' : ''; ?>>-- Select Call Status --</option>
-                                                            <option value="completed" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
-                                                            <option value="pending" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'pending') ? 'selected' : ''; ?>>Pending</option>
-                                                            <option value="in_progress" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'in_progress') ? 'selected' : ''; ?>>In Progress</option>
-                                                            <option value="not_answered" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'not_answered') ? 'selected' : ''; ?>>Not Answered</option>
-                                                            <option value="rescheduled" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'rescheduled') ? 'selected' : ''; ?>>Rescheduled</option>
-                                                            <option value="cancelled" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
-                                                            <option value="follow_up" <?php echo ($SKILLS_TRAINING_APPLICATION->call_status == 'follow_up') ? 'selected' : ''; ?>>Follow Up Required</option>
+                                                            <option value="" <?php echo empty($VISA_CONSULTANCY_APPLICATION->call_status) ? 'selected' : ''; ?>>-- Select Call Status --</option>
+                                                            <option value="completed" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                                                            <option value="pending" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'pending') ? 'selected' : ''; ?>>Pending</option>
+                                                            <option value="in_progress" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'in_progress') ? 'selected' : ''; ?>>In Progress</option>
+                                                            <option value="not_answered" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'not_answered') ? 'selected' : ''; ?>>Not Answered</option>
+                                                            <option value="rescheduled" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'rescheduled') ? 'selected' : ''; ?>>Rescheduled</option>
+                                                            <option value="cancelled" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
+                                                            <option value="follow_up" <?php echo ($VISA_CONSULTANCY_APPLICATION->call_status == 'follow_up') ? 'selected' : ''; ?>>Follow Up Required</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -246,9 +287,9 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                     <div class="mb-3">
                                                         <label class="form-label" for="employee_status">Employee Status <span class="text-danger">*</span></label>
                                                         <select class="form-control" id="employee_status" name="employee_status" required>
-                                                            <option value="" <?php echo empty($SKILLS_TRAINING_APPLICATION->employee_status) ? 'selected' : ''; ?>>-- Select Employee Status --</option>
-                                                            <option value="ok" <?php echo ($SKILLS_TRAINING_APPLICATION->employee_status == 'ok') ? 'selected' : ''; ?>>Ok</option>
-                                                            <option value="not_ok" <?php echo ($SKILLS_TRAINING_APPLICATION->employee_status == 'not_ok') ? 'selected' : ''; ?>>Not Ok</option> 
+                                                            <option value="" <?php echo empty($VISA_CONSULTANCY_APPLICATION->employee_status) ? 'selected' : ''; ?>>-- Select Employee Status --</option>
+                                                            <option value="ok" <?php echo ($VISA_CONSULTANCY_APPLICATION->employee_status == 'ok') ? 'selected' : ''; ?>>Ok</option>
+                                                            <option value="not_ok" <?php echo ($VISA_CONSULTANCY_APPLICATION->employee_status == 'not_ok') ? 'selected' : ''; ?>>Not Ok</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -256,7 +297,7 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="call_notes">Call Notes</label>
-                                                        <textarea class="form-control" id="call_notes" name="call_notes" rows="3"><?php echo htmlspecialchars($SKILLS_TRAINING_APPLICATION->call_notes); ?></textarea>
+                                                        <textarea class="form-control" id="call_notes" name="call_notes" rows="3"><?php echo htmlspecialchars($VISA_CONSULTANCY_APPLICATION->call_notes); ?></textarea>
                                                     </div>
                                                 </div>
 
@@ -286,10 +327,9 @@ $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($id);
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
     <?php include './assets/main-js.php'; ?>
-    <script src="ajax/js/engineering-application.js" type="text/javascript"></script>
+    <script src="ajax/js/visa-consultancy-application.js" type="text/javascript"></script>
     <!-- App js -->
     <script src="assets/js/app.js"></script>
-
 </body>
 
 </html>

@@ -5,7 +5,7 @@ header('Content-Type: application/json; charset=UTF8');
 
 if (isset($_POST['create'])) {
 
-    $SKILLS_TRAINING_APPLICATION = new SkillsTrainingApplication(NULL);
+    $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication(NULL);
 
     $SKILLS_TRAINING_APPLICATION->full_name = $_POST['full_name'];
     $SKILLS_TRAINING_APPLICATION->nic = $_POST['nic'];
@@ -38,7 +38,7 @@ if (isset($_POST['create'])) {
 
 if (isset($_POST['update'])) {
  
-    $SKILLS_TRAINING_APPLICATION = new SkillsTrainingApplication($_POST['id']); // Load staff by ID
+    $SKILLS_TRAINING_APPLICATION = new SkillTrainingApplication($_POST['id']); // Load staff by ID
 
     $SKILLS_TRAINING_APPLICATION->full_name = $_POST['full_name'];
     $SKILLS_TRAINING_APPLICATION->nic = $_POST['nic'];

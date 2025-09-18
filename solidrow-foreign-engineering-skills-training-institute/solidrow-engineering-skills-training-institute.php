@@ -130,8 +130,32 @@
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-content">
                         <h2 class="section-title">About <span class="text-accent">SOLIDROW FOREIGN EMPLOYMENT</span></h2>
-                        <p class="lead">SOLIDROW FOREIGN EMPLOYMENT was registered in 2023 as a Limited Liability Company under the Registrar General of Companies in Sri Lanka.</p>
-                        <p>We are an accredited Vocational Training Institute under the Tertiary and Vocational Education Commission of Sri Lanka (P01/1060), empowering individuals with essential skills and knowledge required to succeed in foreign employment opportunities.</p>
+                        <p class="lead" style="text-align: justify;"><strong>Solidrow Foreign Engineering Skills Training Institute</strong> is dedicated to preparing individuals for global career opportunities
+                            in engineering and technical fields. The institute provides structured training programs that focus on both theoretical knowledge and practical skills,
+                            ensuring trainees meet international industry standards.</p>
+
+                        <div class="training-focus mt-4">
+                            <h5 class="mb-3 fw-bold text-primary">Training Focus:</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Skilled and semi-skilled engineering disciplines
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Practical workshops with modern facilities
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Certification aligned with foreign employment requirements
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Direct linkage to overseas job opportunities through Solidrow's network
+                                </li>
+                            </ul>
+                            <p style="text-align: justify;">Our objective is to produce a competent, globally employable workforce by bridging the gap between local talent and international labor market demands.</p>
+                        </div>
 
                         <div class="stats-row row mt-4">
                             <div class="col-4 text-center">
@@ -163,6 +187,43 @@
                             <h5>Accredited Institute</h5>
                             <p>P01/1060</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision, Mission, Goal Cards -->
+            <div class="row align-items-center mt-5">
+                <!-- Our Vision -->
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="about-card vision-card">
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon vision-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Our Vision</h4>
+                            <p class="card-text">
+                                Empowering individuals Talents with essential skills and knowledge required to succeed in foreign employment opportunities.
+                        </div>
+                        <div class="card-decoration vision-decoration"></div>
+                    </div>
+                </div>
+
+                <!-- Our Mission -->
+                <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="about-card mission-card">
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon mission-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">Our Mission</h4>
+                            <p class="card-text">
+                                To bridge the gap between job seekers and foreign employment opportunities by providing comprehensive vocational training programs with practical and industry-relevant that not only enhance employability but also foster personal and professional growth while promoting cultural understanding and international collaboration.</p>
+                        </div>
+                        <div class="card-decoration mission-decoration"></div>
                     </div>
                 </div>
             </div>

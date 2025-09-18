@@ -186,8 +186,8 @@ $US = new User($_SESSION['id']);
                         <span>Call Center</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="all-visa-consultancy-applications.php">Applications</a></li>
-                        <li><a href="staff-visa-consultancy-applications.php">My Applications</a></li>
+                        <li><a href="all-visa-consultancy-application.php">Applications</a></li>
+                        <li><a href="staff-visa-consultancy-application.php">My Applications</a></li>
                         <li><a href="commissions-visa-consultancy.php">Commissions</a></li>
                     </ul>
                 </li>

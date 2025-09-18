@@ -81,6 +81,12 @@ $US = new User($_SESSION['id']);
                         </a>
                     </li>
                     <li>
+                        <a href="student-country-visa.php">
+                            <i class="bx bx-globe"></i>
+                            <span>Student Country Visa</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="course.php">
                             <i class="bx bx-book-content"></i>
                             <span>Course</span>
@@ -160,8 +166,8 @@ $US = new User($_SESSION['id']);
                         <span>Call Center</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="all-foreign-employment-applications.php">Applications</a></li>
-                        <li><a href="staff-foreign-employment-applications.php">My Applications</a></li>
+                        <li><a href="all-foreign-employment-application.php">Applications</a></li>
+                        <li><a href="staff-foreign-employment-application.php">My Applications</a></li>
                         <li><a href="commissions-foreign-employment.php">Commissions</a></li>
                     </ul>
                 </li>

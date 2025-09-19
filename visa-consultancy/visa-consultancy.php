@@ -39,6 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Us</a>
                     </li>
+                    <li class="nav-item ms-2 d-flex align-items-center">
+                        <a class="btn btn-primary btn-sm" href="reg-application.php">Apply Now</a>
+                    </li>
                 </ul>
             </div>
         </div>

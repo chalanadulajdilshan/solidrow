@@ -171,7 +171,7 @@ $companies = $company->all();
                     echo '            <div class="card-overlay"></div>';
                     echo '        </div>';
                     echo '        <div class="card-body">';
-                    echo '            <h3 class="card-title">' . htmlspecialchars($company['name']) . '</h3>';
+                    echo '            <h3 class="card-title">' . strtoupper(htmlspecialchars($company['name'])) . '</h3>';
                     if (!empty($company['short_desc'])) {
                         echo '            <p class="card-text">' . htmlspecialchars($company['short_desc']) . '</p>';
                     }

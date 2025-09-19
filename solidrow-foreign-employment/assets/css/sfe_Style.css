@@ -1,8 +1,8 @@
 /* Custom CSS Variables */
 :root {
     --primary-color: #011a42;
-    --secondary-color: #f57c02;
-    --accent-color: #f57c02;
+    --secondary-color: #394e96;
+    --accent-color: #394e96;
     --text-dark: #2c3e50;
     --text-light: #6c757d;
     --bg-light: #f8f9fa;
@@ -11,7 +11,7 @@
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.15);
     --gradient-primary: linear-gradient(135deg, var(--primary-color), #0d47a1);
-    --gradient-secondary: linear-gradient(135deg, var(--secondary-color), #ff9800);
+    --gradient-secondary: linear-gradient(135deg, #394e96, #5b6fb5);
 }
 
 /* Global Styles */
@@ -37,7 +37,7 @@ body {
 }
 
 .btn-primary {
-    background: var(--gradient-secondary);
+    background: linear-gradient(135deg, #394e96, #5b6fb5);
     border: none;
     border-radius: 50px;
     padding: 12px 30px;
@@ -67,7 +67,7 @@ body {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
-    background: var(--gradient-secondary);
+    background: linear-gradient(135deg, #394e96, #5b6fb5);
     border: none;
 }
 
@@ -858,7 +858,7 @@ body {
 .branch-icon {
     width: 80px;
     height: 80px;
-    background: var(--gradient-secondary);
+    background: linear-gradient(135deg, #394e96, #5b6fb5);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1343,7 +1343,7 @@ body {
     left: 0;
     width: 0%;
     height: 3px;
-    background: var(--gradient-secondary);
+    background: linear-gradient(135deg, #394e96, #5b6fb5);
     z-index: 9999;
     transition: width 0.1s ease;
 }

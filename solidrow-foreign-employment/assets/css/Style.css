@@ -1,11 +1,11 @@
 /* Custom CSS Variables */
 :root {
     --primary-color: #011a42;
-    --secondary-color: #f57c02;
+    --secondary-color: #4dabf7;
     --dark-color: #0d1b2a;
     --light-color: #f8f9fa;
     --gradient-primary: linear-gradient(135deg, #011a42 0%, #0d47a1 100%);
-    --gradient-secondary: linear-gradient(135deg, #f57c02 0%, #ff9800 100%);
+    --gradient-secondary: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
     --shadow-light: 0 5px 15px rgba(1, 26, 66, 0.1);
     --shadow-heavy: 0 15px 35px rgba(1, 26, 66, 0.2);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -177,7 +177,7 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(1, 26, 66, 0.9) 0%, rgba(1, 26, 66, 0.6) 50%, rgba(245, 124, 2, 0.3) 100%);
+    background: linear-gradient(45deg, rgba(1, 26, 66, 0.9) 0%, rgba(1, 26, 66, 0.6) 50%, rgba(77, 171, 247, 0.3) 100%);
 }
 
 .hero-title {
@@ -247,7 +247,7 @@ html {
     background: var(--secondary-color);
     border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 12px 35px rgba(245, 124, 2, 0.4);
+    box-shadow: 0 12px 35px rgba(77, 171, 247, 0.4);
 }
 
 .carousel-control-prev-icon,
@@ -289,7 +289,7 @@ html {
 .carousel-indicators button.active {
     background: linear-gradient(90deg, var(--secondary-color), #ffb74d);
     transform: scale(1.2);
-    box-shadow: 0 4px 15px rgba(245, 124, 2, 0.5);
+    box-shadow: 0 4px 15px rgba(77, 171, 247, 0.5);
 }
 
 .carousel-indicators button:hover::before {
@@ -336,7 +336,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
     animation: wheelMove 2s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(245, 124, 2, 0.5);
+    box-shadow: 0 0 10px rgba(77, 171, 247, 0.5);
 }
 
 @keyframes mouseFloat {
@@ -764,7 +764,7 @@ html {
 .projects-next:hover {
     background: var(--secondary-color);
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(245, 124, 2, 0.4);
+    box-shadow: 0 6px 20px rgba(77, 171, 247, 0.4);
 }
 
 .projects-prev:active,
@@ -918,7 +918,7 @@ html {
 .loading-spinner {
     width: 60px;
     height: 60px;
-    border: 4px solid rgba(245, 124, 2, 0.3);
+    border: 4px solid rgba(77, 171, 247, 0.3);
     border-left: 4px solid var(--secondary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -1044,7 +1044,7 @@ html {
     right: -200px;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(245, 124, 2, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(77, 171, 247, 0.05) 0%, transparent 70%);
     border-radius: 50%;
     z-index: 1;
 }
@@ -1161,7 +1161,7 @@ html {
 }
 
 .goal-icon {
-    background: linear-gradient(135deg, #ff9800 0%, #f57c02 100%);
+    background: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
 }
 
 .card-icon::before {
@@ -1223,7 +1223,7 @@ html {
 }
 
 .goal-decoration {
-    background: linear-gradient(135deg, #ff9800 0%, #f57c02 100%);
+    background: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
 }
 
 /* Features Section */
@@ -1242,7 +1242,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(245, 124, 2, 0.03) 0%, rgba(1, 26, 66, 0.03) 100%);
+    background: linear-gradient(45deg, rgba(77, 171, 247, 0.1) 0%, rgba(1, 26, 66, 0.03) 100%);
     z-index: 1;
 }
 

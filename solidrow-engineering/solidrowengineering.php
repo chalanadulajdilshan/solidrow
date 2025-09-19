@@ -519,23 +519,6 @@
             </div>
     </section>
 
-    <!-- Contact CTA Section -->
-    <section class="py-5 bg-primary text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8" data-aos="fade-right">
-                    <h3 class="mb-3">Ready to Start Your Engineering Project?</h3>
-                    <p class="mb-0">Let's discuss how we can bring your vision to life with our expertise and innovation.</p>
-                </div>
-                <div class="col-lg-4 text-lg-end" data-aos="fade-left">
-                    <a href="contact-us.php" class="btn btn-light btn-lg">
-                        <i class="bi bi-telephone me-2"></i>Contact Us
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">

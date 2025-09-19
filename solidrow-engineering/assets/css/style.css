@@ -1,11 +1,11 @@
 /* Custom CSS Variables */
 :root {
     --primary-color: #011a42;
-    --secondary-color: #f57c02;
+    --secondary-color: #fa2121;
     --dark-color: #0d1b2a;
     --light-color: #f8f9fa;
     --gradient-primary: linear-gradient(135deg, #011a42 0%, #0d47a1 100%);
-    --gradient-secondary: linear-gradient(135deg, #f57c02 0%, #ff9800 100%);
+    --gradient-secondary: linear-gradient(135deg, #fa2121 0%, #ff9800 100%);
     --shadow-light: 0 5px 15px rgba(1, 26, 66, 0.1);
     --shadow-heavy: 0 15px 35px rgba(1, 26, 66, 0.2);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

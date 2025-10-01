@@ -18,8 +18,8 @@ $current_year = date('Y');
                             <span class="footer-brand-text">About Us</span>
                         </div>
                         <p class="footer-description">
-                            SOLIDROW GROUP (PVT) LTD was registered in the year of 2023 as Limited
-                            Liability Company under the Registrar General of Companies in Sri Lankan.
+                            Solidrow Group of Companies is a diversified corporate group dedicated to delivering excellence across 
+                            multiple sectors including engineering, technical training, foreign employment, and visa consultancy.
                         </p>
                         <div class="social-links">
                             <a href="#" class="social-link" aria-label="Facebook">
@@ -81,8 +81,10 @@ $current_year = date('Y');
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="contact-details">
-                                    <p>12/88 Kelanimulla,
-                                        <br> Mulleriyawa 10620
+                                    <p>12/87 Kelanimulla,
+                                        <br> Mulleriyawa New Town,
+                                        <br> 10620,
+                                        <br> Sri Lanka
                                     </p>
                                 </div>
                             </div>

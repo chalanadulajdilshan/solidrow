@@ -87,15 +87,7 @@
 
                         <!-- Google Map Embed -->
                         <div class="map-embed">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58703046694!2d79.77749994999999!3d6.9270786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2slk!4v1699123456789!5m2!1sen!2slk"
-                                width="100%"
-                                height="400"
-                                style="border:0;"
-                                allowfullscreen=""
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d126737.93552932118!2d79.8415821!3d6.943012!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25722c6c58f2b%3A0x51cf6c18dc180e82!2sSOLIDROW%20Foreign%20Employment%20Agency!5e0!3m2!1sen!2slk!4v1758617697634!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
 
                         <!-- Contact Info Cards -->

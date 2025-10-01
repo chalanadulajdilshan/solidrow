@@ -552,13 +552,12 @@
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="footer-widget">
-                        <h5 class="widget-title">Popular Courses</h5>
+                        <h5 class="widget-title">Projects</h5>
                         <ul class="footer-links">
-                            <li><a href="#courses">Professional Welding</a></li>
-                            <li><a href="#courses">Electrical Installation</a></li>
-                            <li><a href="#courses">Plumbing Technology</a></li>
-                            <li><a href="#courses">Carpentry & Joinery</a></li>
-                            <li><a href="#courses">HVAC Systems</a></li>
+                            <li><a href="#courses">Building & Infrastructure Projects</a></li>
+                            <li><a href="#courses">Civil Engineering Projects</a></li>
+                            <li><a href="#courses">Specialized Projects</a></li>
+                            <li><a href="#courses">Long-term Development Projects</a></li>
                         </ul>
                     </div>
                 </div>
@@ -566,9 +565,15 @@
                     <div class="footer-widget">
                         <h5 class="widget-title">Contact Info</h5>
                         <div class="contact-info">
-                            <p><i class="fas fa-map-marker-alt"></i> Mulleriyawa New Town</p>
-                            <p><i class="fas fa-phone"></i> 011 436 4644</p>
-                            <p><i class="fas fa-envelope"></i> info@festi.lk</p>
+                            <p><i class="fas fa-map-marker-alt"></i>
+                                12/87 Kelanimulla,
+                                <br> Mulleriyawa New Town,
+                                <br> 10620,
+                                <br> Sri Lanka
+                            </p>
+                            <p><i class="fas fa-phone"></i> 011 436 4644 <br>
+                                0776111115</p>
+                            <p><i class="fas fa-envelope"></i> engineering@solidrow.lk</p>
                         </div>
                     </div>
                 </div>

@@ -217,7 +217,8 @@
                         <div class="card-content">
                             <h4 class="card-title">Our Mission</h4>
                             <p class="card-text">
-                            Solidrow Foreign Employment Agency's mission is to provide individuals with the necessary skills and opportunities to pursue employment abroad. By leveraging modern training methods and technology, the agency aims to streamline the process of finding suitable overseas employment.</div>
+                                Solidrow Foreign Employment Agency's mission is to provide individuals with the necessary skills and opportunities to pursue employment abroad. By leveraging modern training methods and technology, the agency aims to streamline the process of finding suitable overseas employment.
+                        </div>
                         <div class="card-decoration mission-decoration"></div>
                     </div>
                 </div>
@@ -445,7 +446,12 @@
                     <div class="footer-widget">
                         <h5 class="widget-title">Contact Info</h5>
                         <div class="contact-info">
-                            <p><i class="fas fa-map-marker-alt"></i> Mulleriyawa New Town</p>
+                            <p><i class="fas fa-map-marker-alt"></i>
+                                12/87 Kelanimulla,
+                                <br> Mulleriyawa New Town,
+                                <br> 10620,
+                                <br> Sri Lanka
+                            </p>
                             <p><i class="fas fa-phone"></i> 011 436 4644</p>
                             <p><i class="fas fa-envelope"></i> info@festi.lk</p>
                         </div>

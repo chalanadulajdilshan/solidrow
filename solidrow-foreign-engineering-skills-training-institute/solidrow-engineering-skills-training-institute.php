@@ -480,7 +480,12 @@
                     <div class="footer-widget">
                         <h5 class="widget-title">Contact Info</h5>
                         <div class="contact-info">
-                            <p><i class="fas fa-map-marker-alt"></i> Mulleriyawa New Town</p>
+                        <p><i class="fas fa-map-marker-alt"></i>
+                            12/87 Kelanimulla,
+                            <br> Mulleriyawa New Town,
+                            <br> 10620,
+                            <br> Sri Lanka
+                            </p>
                             <p><i class="fas fa-phone"></i> 011 436 4644</p>
                             <p><i class="fas fa-envelope"></i> info@festi.lk</p>
                         </div>

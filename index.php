@@ -14,7 +14,7 @@ $companies = $company->all();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_title; ?></title>
+    <title>Welcome to Solidrow Group of companies</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@ $companies = $company->all();
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-8">
                                 <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                                    <h1 class="hero-title">Your Gateway to <span class="text-accent">Global Opportunities</span></h1>
+                                    <h1 class="hero-title">Empowering Your Future, <span class="text-accent"> Globally</span></h1>
                                     <p class="hero-subtitle">Connecting talented professionals with international career opportunities across the globe</p>
                                     <div class="hero-buttons">
                                         <a href="#services" class="btn btn-primary btn-lg me-3">Explore Services</a>
@@ -73,7 +73,7 @@ $companies = $company->all();
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-8">
                                 <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                                    <h1 class="hero-title">Expert <span class="text-accent">Consultation</span> Services</h1>
+                                    <h1 class="hero-title">Professional <span class="text-accent"> Guidance, Global  Impact</h1>
                                     <p class="hero-subtitle">Professional guidance for visa processing, documentation, and career planning</p>
                                     <div class="hero-buttons">
                                         <a href="#consultation" class="btn btn-primary btn-lg me-3">Book Consultation</a>
@@ -94,7 +94,8 @@ $companies = $company->all();
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-8">
                                 <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                                    <h1 class="hero-title">Trusted <span class="text-accent">Partnership</span></h1>
+                                    <h1 class="hero-title">Your Pathway to <span class="text-accent">Success Abroad
+                                        </span></h1>
                                     <p class="hero-subtitle">Over a decade of experience in international recruitment and placement services</p>
                                     <div class="hero-buttons">
                                         <a href="#success-stories" class="btn btn-primary btn-lg me-3">Success Stories</a>
@@ -115,7 +116,9 @@ $companies = $company->all();
                         <div class="row align-items-center min-vh-100">
                             <div class="col-lg-8">
                                 <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                                    <h1 class="hero-title">Trusted <span class="text-accent">Partnership</span></h1>
+                                    <h1 class="hero-title">Reliable Solutions,
+                                        <span class="text-accent"> Trusted Support</span>
+                                    </h1>
                                     <p class="hero-subtitle">Over a decade of experience in international recruitment and placement services</p>
                                     <div class="hero-buttons">
                                         <a href="#success-stories" class="btn btn-primary btn-lg me-3">Success Stories</a>

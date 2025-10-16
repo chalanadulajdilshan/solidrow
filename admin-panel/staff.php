@@ -112,8 +112,8 @@ include './auth.php';
                                                 <textarea id="education_qualification" name="education_qualification" class="form-control" rows="3" placeholder="Enter education qualification"></textarea>
                                             </div>
                                             <div class="col-12 mb-3">
-                                                <label>Position Qualification</label>
-                                                <textarea id="position_qualification" name="position_qualification" class="form-control" rows="3" placeholder="Enter position qualification"></textarea>
+                                                <label>Professional Qualification</label>
+                                                <textarea id="position_qualification" name="position_qualification" class="form-control" rows="3" placeholder="Enter Professional qualification"></textarea>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label>Service Experience</label>

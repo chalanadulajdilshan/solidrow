@@ -61,18 +61,10 @@ class Project
 
         return $db->readQuery($query);
     }
-
     public function delete()
     {
-        if (!$this->id) return false;
-
-        if (!empty($this->image_name)) {
-            $file_path = $this->upload_dir . $this->image_name;
-            if (file_exists($file_path)) unlink($file_path);
-        }
-
+        $query = "DELETE FROM `projects` WHERE `id` = '$this->id'";
         $db = new Database();
-        $query = "DELETE FROM `projects` WHERE `id` = $this->id";
         return $db->readQuery($query);
     }
 

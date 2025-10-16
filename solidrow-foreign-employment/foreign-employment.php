@@ -35,9 +35,6 @@
                         <a class="nav-link" href="#gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#courses">Courses</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Us</a>
                     </li>
                     <li class="nav-item ms-2 d-flex align-items-center">
@@ -158,34 +155,25 @@
                             <div class="col-4 text-center">
                                 <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
                                     <h3 class="stat-number text-accent" data-count="500">0</h3>
-                                    <p class="stat-label">Students Trained</p>
+                                    <p class="stat-label">Applied Candidates</p>
                                 </div>
                             </div>
                             <div class="col-4 text-center">
                                 <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                                    <h3 class="stat-number text-accent" data-count="15">0</h3>
-                                    <p class="stat-label">Courses Available</p>
+                                    <h3 class="stat-number text-accent" data-count="112">0</h3>
+                                    <p class="stat-label">Processed</p>
                                 </div>
                             </div>
                             <div class="col-4 text-center">
                                 <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                                    <h3 class="stat-number text-accent" data-count="3">0</h3>
-                                    <p class="stat-label">Island-wide Branches</p>
+                                    <h3 class="stat-number text-accent" data-count="800">0</h3>
+                                    <p class="stat-label">Abroad</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="about-image">
-                        <img src="../assets/images/foreign-employment-about-us.jpg" alt="About SOLIDROW FOREIGN EMPLOYMENT" class="img-fluid rounded-3 shadow-lg">
-                        <div class="floating-card">
-                            <i class="fas fa-award text-accent"></i>
-                            <h5>Accredited Institute</h5>
-                            <p>P01/1060</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <!-- Vision, Mission, Goal Cards -->
             <div class="row align-items-center mt-5">
@@ -282,74 +270,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section id="courses" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">Our <span class="text-accent">Courses</span></h2>
-                <p class="section-subtitle">Choose from our wide range of internationally recognized training programs</p>
-            </div>
-
-            <!-- Course Slider -->
-            <div class="course-slider-container">
-                <div class="course-slider" id="courseSlider">
-                    <?php
-                    require_once('../class/Course.php');
-                    require_once('../class/Database.php');
-
-                    $course = new Course();
-                    $courses = $course->all('queue', 'ASC');
-
-                    if (!empty($courses)) {
-                        $delay = 0;
-                        $index = 0;
-                        foreach ($courses as $courseItem) {
-                            $imagePath = !empty($courseItem['image_name'])
-                                ? '../upload/course/' . $courseItem['image_name']
-                                : '../assets/images/courses/default-course.jpg';
-                            $isActive = $index === 0 ? 'active' : '';
-                            $shortDescription = !empty($courseItem['short_description'])
-                                ? $courseItem['short_description']
-                                : substr(strip_tags($courseItem['description']), 0, 150) . '...';
-                    ?>
-                            <div class="course-card <?php echo $isActive; ?>" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-                                <div class="course-image">
-                                    <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($courseItem['name']); ?>" class="img-fluid">
-                                </div>
-                                <div class="course-content">
-                                    <h4 class="course-title"><?php echo htmlspecialchars($courseItem['name']); ?></h4>
-                                    <p class="course-description"><?php echo htmlspecialchars($shortDescription); ?></p>
-                                    <div class="course-features">
-                                        <span><i class="fas fa-money-bill-wave"></i> LKR <?php echo number_format($courseItem['price'], 2); ?></span>
-                                        <span><i class="fas fa-certificate"></i> Certified</span>
-                                    </div>
-                                </div>
-                            </div>
-                    <?php
-                            $delay += 100;
-                            $index++;
-                        }
-                    } else {
-                        // Fallback in case no courses are found
-                        echo '<div class="col-12 text-center"><p>No courses available at the moment. Please check back later.</p></div>';
-                    }
-                    ?>
-                </div>
-                <?php if (!empty($courses)): ?>
-                    <div class="course-navigation">
-                        <button class="course-nav-btn" id="prevCourse"><i class="fas fa-chevron-left"></i></button>
-                        <div class="course-indicators" id="courseIndicators">
-                            <?php for ($i = 0; $i < min(count($courses), 5); $i++): ?>
-                                <span class="indicator <?php echo $i === 0 ? 'active' : ''; ?>" data-index="<?php echo $i; ?>"></span>
-                            <?php endfor; ?>
-                        </div>
-                        <button class="course-nav-btn" id="nextCourse"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -452,8 +372,11 @@
                                 <br> 10620,
                                 <br> Sri Lanka
                             </p>
-                            <p><i class="fas fa-phone"></i> 011 436 4644</p>
-                            <p><i class="fas fa-envelope"></i> info@festi.lk</p>
+                            <p><i class="fas fa-phone"></i> 0112267588
+                                <br> 0743838644
+                                <br> 0743937644
+                            </p>
+                            <p><i class="fas fa-envelope"></i> sfeagency@solidrow.lk</p>
                         </div>
                     </div>
                 </div>

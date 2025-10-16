@@ -9,6 +9,8 @@ class Course
     public $description;
     public $staff_id;
     public $queue;
+    public $duration;
+    public $is_certified;
 
     private $upload_dir = '../../upload/course/';
 
@@ -37,8 +39,8 @@ class Course
     {
         $db = new Database();
 
-        $query = "INSERT INTO `courses` (`name`, `price`, `image_name`, `short_description`, `description`, `staff_id`, `queue`)
-                  VALUES ('$this->name', '$this->price', '$this->image_name', '$this->short_description', '$this->description', '$this->staff_id', '$this->queue')";
+        $query = "INSERT INTO `courses` (`name`, `price`, `image_name`, `short_description`, `description`, `staff_id`, `queue`, `duration`, `is_certified`)
+                  VALUES ('$this->name', '$this->price', '$this->image_name', '$this->short_description', '$this->description', '$this->staff_id', '$this->queue', '$this->duration', '$this->is_certified')";
 
         $db = new Database();
         $result = $db->readQuery($query);
@@ -63,7 +65,9 @@ class Course
                     `short_description` = '$this->short_description',
                     `description` = '$this->description',
                     `staff_id` = '$this->staff_id',
-                    `queue` = '$this->queue'
+                    `queue` = '$this->queue',
+                    `duration` = '$this->duration',
+                    `is_certified` = '$this->is_certified'
                   WHERE `id` = $this->id";
 
         $db = new Database();

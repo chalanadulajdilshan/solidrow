@@ -98,7 +98,8 @@
                                 </div>
                                 <div class="info-content">
                                     <h5>Address</h5>
-                                    <p>123 Engineering Plaza<br>Colombo 03, Sri Lanka</p>
+                                    <p> 12/87 Kelanimulla,Mulleriyawa New Town, <br>10620,
+                                        Sri Lanka </p>
                                 </div>
                             </div>
 
@@ -108,7 +109,7 @@
                                 </div>
                                 <div class="info-content">
                                     <h5>Phone</h5>
-                                    <p>+94 11 234 5678<br>+94 77 123 4567</p>
+                                    <p>011 436 464</p>
                                 </div>
                             </div>
 
@@ -118,7 +119,7 @@
                                 </div>
                                 <div class="info-content">
                                     <h5>Email</h5>
-                                    <p>info@solidrow.com<br>projects@solidrow.com</p>
+                                    <p>info@festi.lk</p>
                                 </div>
                             </div>
 

@@ -11,14 +11,14 @@ $current_year = date('Y');
         <div class="container">
             <div class="row g-4">
                 <!-- Company Info -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="footer-section">
                         <div class="footer-logo">
 
                             <span class="footer-brand-text">About Us</span>
                         </div>
                         <p class="footer-description">
-                            Solidrow Group of Companies is a diversified corporate group dedicated to delivering excellence across 
+                            Solidrow Group of Companies is a diversified corporate group dedicated to delivering excellence across
                             multiple sectors including engineering, technical training, foreign employment, and visa consultancy.
                         </p>
                         <div class="social-links">
@@ -42,31 +42,27 @@ $current_year = date('Y');
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="footer-section">
                         <h4 class="footer-title">Quick Links</h4>
                         <ul class="footer-links">
-                            <li><a href="/solidrow/index.php">Home</a></li>
-                            <li><a href="/solidrow/about.php">About Us</a></li>
-                            <li><a href="/solidrow/services.php">Services</a></li>
-                            <li><a href="/solidrow/jobs.php">Jobs</a></li>
-                            <li><a href="/solidrow/contact.php">Contact</a></li>
-                            <li><a href="/solidrow/blog.php">Blog</a></li>
+                            <li><a href="/solidrow/solidrow-engineering/solidrowengineering.php">SOLIDROW ENGINEERING</a></li>
+                            <li><a href="/solidrow/solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php">SOLIDROW FOREIGN ENGINEERING SKILLS TRAINING INSTITUTE</a></li>
+                            <li><a href="/solidrow/solidrow-foreign-employment/foreign-employment.php">SOLIDROW FOREIGN EMPLOYMENT AGENCY</a></li>
+                            <li><a href="/solidrow/visa-consultancy/visa-consultancy.php">SOLIDROW VISA CONSULTANCY SERVICES</a></li>
+
                         </ul>
                     </div>
                 </div>
-
                 <!-- Services -->
                 <div class="col-lg-2 col-md-6">
                     <div class="footer-section">
                         <h4 class="footer-title">Services</h4>
                         <ul class="footer-links">
-                            <li><a href="/solidrow/job-placement.php">Job Placement</a></li>
-                            <li><a href="/solidrow/visa-processing.php">Visa Processing</a></li>
-                            <li><a href="/solidrow/training.php">Training Programs</a></li>
-                            <li><a href="/solidrow/consultation.php">Consultation</a></li>
-                            <li><a href="/solidrow/documentation.php">Documentation</a></li>
-                            <li><a href="/solidrow/support.php">24/7 Support</a></li>
+                            <li>Civil construction and infrastructure development</li>
+                            <li>Mechanical and electrical engineering services</li>
+                            <li>Project design, consultancy, and management</li>
+                            <li>Customized industrial solutions</li>
                         </ul>
                     </div>
                 </div>

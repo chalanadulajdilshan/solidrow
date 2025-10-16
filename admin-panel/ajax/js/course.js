@@ -46,7 +46,9 @@ jQuery(document).ready(function ($) {
             { id: 'short_description', message: 'Please enter short description' },
             { id: 'description', message: 'Please enter course description' },
             { id: 'staff_id', message: 'Please select a staff member' },
-            { id: 'queue', message: 'Please enter queue order' }
+            { id: 'queue', message: 'Please enter queue order' },
+            { id: 'duration', message: 'Please enter duration' },
+            { id: 'is_certified', message: 'Please select is certified' }
         ];
 
         for (const field of requiredFields) {
@@ -120,7 +122,9 @@ jQuery(document).ready(function ($) {
         $('#short_description').val(courseData.short_description);
         $('#description').val(courseData.description);
         $('#staff_id').val(courseData.staff_id);
-        $('#queue').val(courseData.queue);
+        $('#queue').val(courseData.queue);  
+        $('#duration').val(courseData.duration);
+        $('#is_certified').val(courseData.is_certified);
 
         if (courseData.image_name) {
             $('#image_preview').show();

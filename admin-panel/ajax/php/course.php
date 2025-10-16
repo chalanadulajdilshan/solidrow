@@ -56,6 +56,8 @@ if (isset($_POST['create'])) {
     $COURSE->description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
     $COURSE->staff_id = filter_input(INPUT_POST, 'staff_id', FILTER_SANITIZE_NUMBER_INT);
     $COURSE->queue = filter_input(INPUT_POST, 'queue', FILTER_SANITIZE_NUMBER_INT);
+    $COURSE->duration = filter_input(INPUT_POST, 'duration', FILTER_SANITIZE_NUMBER_INT);
+    $COURSE->is_certified = filter_input(INPUT_POST, 'is_certified', FILTER_SANITIZE_NUMBER_INT);
 
     if ($COURSE->create()) {
         echo json_encode(['status' => 'success', 'message' => 'Course created successfully.']);
@@ -97,6 +99,8 @@ if (isset($_POST['update'])) {
     $COURSE->description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
     $COURSE->staff_id = filter_input(INPUT_POST, 'staff_id', FILTER_SANITIZE_NUMBER_INT);
     $COURSE->queue = filter_input(INPUT_POST, 'queue', FILTER_SANITIZE_NUMBER_INT);
+    $COURSE->duration = filter_input(INPUT_POST, 'duration', FILTER_SANITIZE_NUMBER_INT);
+    $COURSE->is_certified = filter_input(INPUT_POST, 'is_certified', FILTER_SANITIZE_NUMBER_INT);
 
     if ($COURSE->update()) {
         echo json_encode(['status' => 'success', 'message' => 'Course updated successfully.']);

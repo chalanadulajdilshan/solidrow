@@ -179,69 +179,7 @@
         </div>
     </section>
 
-    <!-- Company Websites Section -->
-    <section id="websites" class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center mb-5">
-                    <h2 class="section-title" data-aos="fade-up">Our Network</h2>
-                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
-                        Explore our affiliated websites and services
-                    </p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="website-card">
-                        <div class="website-icon">
-                            <i class="bi bi-building"></i>
-                        </div>
-                        <h5>Solidrow Main</h5>
-                        <p>Our main corporate website</p>
-                        <a href="https://solidrow.com" class="btn btn-outline-primary btn-sm">
-                            Visit Site <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="website-card">
-                        <div class="website-icon">
-                            <i class="bi bi-mortarboard"></i>
-                        </div>
-                        <h5>FESTI Training</h5>
-                        <p>Vocational training programs</p>
-                        <a href="https://festi.lk" class="btn btn-outline-primary btn-sm">
-                            Visit Site <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="website-card">
-                        <div class="website-icon">
-                            <i class="bi bi-tools"></i>
-                        </div>
-                        <h5>Engineering Hub</h5>
-                        <p>Technical resources & tools</p>
-                        <a href="https://hub.solidrow.com" class="btn btn-outline-primary btn-sm">
-                            Visit Site <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="website-card">
-                        <div class="website-icon">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <h5>Careers Portal</h5>
-                        <p>Join our engineering team</p>
-                        <a href="https://careers.solidrow.com" class="btn btn-outline-primary btn-sm">
-                            Visit Site <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Projects Section -->
     <section id="projects" class="py-5">
@@ -481,8 +419,8 @@
                                         <div class="feature-icon">
                                             <i class="fas fa-certificate"></i>
                                         </div>
-                                        <h5>Accredited Institute</h5>
-                                        <p>Recognized by TVEC Sri Lanka</p>
+                                        <h5>C4 Construction Company</h5>
+                                        <p>Recognized by CIDA</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
@@ -490,8 +428,8 @@
                                         <div class="feature-icon">
                                             <i class="fas fa-users"></i>
                                         </div>
-                                        <h5>Expert Instructors</h5>
-                                        <p>Industry experienced trainers</p>
+                                        <h5>Customer Support</h5>
+                                        <p>Well Experience Staff</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
@@ -499,8 +437,8 @@
                                         <div class="feature-icon">
                                             <i class="fas fa-globe"></i>
                                         </div>
-                                        <h5>Global Opportunities</h5>
-                                        <p>Connect with international employers</p>
+                                        <h5>24/7 Support</h5>
+                                        <p>Continuous guidance and assistance</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
@@ -508,8 +446,8 @@
                                         <div class="feature-icon">
                                             <i class="fas fa-handshake"></i>
                                         </div>
-                                        <h5>24/7 Support</h5>
-                                        <p>Continuous guidance and assistance</p>
+                                        <h5>Global Opportunities</h5>
+                                        <p>Connect with international employers</p>
                                     </div>
                                 </div>
                             </div>
@@ -584,7 +522,7 @@
                         <p class="mb-0">&copy; 2023 SOLIDROW FESTI (PVT) LTD. All rights reserved.</p>
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <p class="mb-0">Accredited by TVEC | Registration: P01/1060</p>
+                        <p class="mb-0"><i class="fas fa-certificate text-primary me-2"></i>Accredited by TVEC | Registration:PV 00202224</p>
                     </div>
                 </div>
             </div>

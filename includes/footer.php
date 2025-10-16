@@ -287,7 +287,25 @@ $current_year = date('Y');
         height: 6px;
         background: var(--accent-color);
         border-radius: 50%;
-        transition: all 0.3s ease;
+
+    }
+
+    .footer-links a:hover {
+        color: white;
+        padding-left: 20px;
+    }
+
+    .footer-links a:hover::before {
+        opacity: 1;
+    }
+
+    .contact-info {
+        margin-bottom: 2rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
         margin-bottom: 1.5rem;
     }
 

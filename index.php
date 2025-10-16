@@ -222,7 +222,7 @@ $companies = $company->all();
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-content">
                         <div class="about-intro">
-                            <h3 class="about-heading">Welcome To All Solidrow Group (Pvt) Ltd.</h3>
+                            <h3 class="about-heading">Welcome To All Solidrow Group</h3>
                             <p class="about-description" style="text-align: justify;">
                                 <strong>Solidrow Group of Companies</strong> is a diversified corporate group dedicated to delivering excellence across multiple sectors including engineering, technical training, foreign employment, and visa consultancy. With a strong commitment to innovation, professional service, and global standards, Solidrow Group aims to empower individuals and businesses by providing integrated solutions that create opportunities and drive growth.
 

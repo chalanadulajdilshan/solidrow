@@ -58,10 +58,10 @@ $current_year = date('Y');
                     <div class="footer-section">
                         <h4 class="footer-title">OUR COMPANIES</h4>
                         <ul class="footer-links">
-                            <li><a href="/solidrow/solidrow-engineering/solidrowengineering.php">SOLIDROW ENGINEERING</a></li>
-                            <li><a href="/solidrow/solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php">SOLIDROW FOREIGN ENGINEERING SKILLS TRAINING INSTITUTE</a></li>
-                            <li><a href="/solidrow/solidrow-foreign-employment/foreign-employment.php">SOLIDROW FOREIGN EMPLOYMENT AGENCY</a></li>
-                            <li><a href="/solidrow/visa-consultancy/visa-consultancy.php">SOLIDROW VISA CONSULTANCY SERVICES</a></li>
+                            <li><a href="/solidrow-engineering/solidrowengineering.php">SOLIDROW ENGINEERING</a></li>
+                            <li><a href="/solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php">SOLIDROW FOREIGN ENGINEERING SKILLS TRAINING INSTITUTE</a></li>
+                            <li><a href="/solidrow-foreign-employment/foreign-employment.php">SOLIDROW FOREIGN EMPLOYMENT AGENCY</a></li>
+                            <li><a href="/visa-consultancy/visa-consultancy.php">SOLIDROW VISA CONSULTANCY SERVICES</a></li>
                         </ul>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ $current_year = date('Y');
         <div class="container">
             <div class="row g-4">
                 <!-- Company Info -->
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <div class="footer-section">
                         <div class="footer-logo">
 
@@ -42,33 +42,32 @@ $current_year = date('Y');
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-section">
+                <div class="col-lg-2 col-md-4">
+                    <div class="fo    oter-section">
                         <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="#hero-slider">Home</a></li>
+                            <li><a href="#our-websites">Our Websites</a></li>
+                            <li><a href="#about-us">About Us</a></li>
+                            <li><a href="jobs.php">Jobs</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Services -->
+                <div class="col-lg-4 col-md-4">
+                    <div class="footer-section">
+                        <h4 class="footer-title">OUR COMPANIES</h4>
                         <ul class="footer-links">
                             <li><a href="/solidrow/solidrow-engineering/solidrowengineering.php">SOLIDROW ENGINEERING</a></li>
                             <li><a href="/solidrow/solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php">SOLIDROW FOREIGN ENGINEERING SKILLS TRAINING INSTITUTE</a></li>
                             <li><a href="/solidrow/solidrow-foreign-employment/foreign-employment.php">SOLIDROW FOREIGN EMPLOYMENT AGENCY</a></li>
                             <li><a href="/solidrow/visa-consultancy/visa-consultancy.php">SOLIDROW VISA CONSULTANCY SERVICES</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-                <!-- Services -->
-                <div class="col-lg-2 col-md-6">
-                    <div class="footer-section">
-                        <h4 class="footer-title">Services</h4>
-                        <ul class="footer-links">
-                            <li>Civil construction and infrastructure development</li>
-                            <li>Mechanical and electrical engineering services</li>
-                            <li>Project design, consultancy, and management</li>
-                            <li>Customized industrial solutions</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Contact Info -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-2 col-md-4">
                     <div class="footer-section">
                         <h4 class="footer-title">Get in Touch</h4>
                         <div class="contact-info">
@@ -288,8 +287,7 @@ $current_year = date('Y');
         height: 6px;
         background: var(--accent-color);
         border-radius: 50%;
-        opacity: 0;
-        transition: all 0.3s ease;
+
     }
 
     .footer-links a:hover {

@@ -11,14 +11,14 @@ $current_year = date('Y');
         <div class="container">
             <div class="row g-4">
                 <!-- Company Info -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <div class="footer-section">
                         <div class="footer-logo">
 
                             <span class="footer-brand-text">About Us</span>
                         </div>
                         <p class="footer-description">
-                            Solidrow Group of Companies is a diversified corporate group dedicated to delivering excellence across 
+                            Solidrow Group of Companies is a diversified corporate group dedicated to delivering excellence across
                             multiple sectors including engineering, technical training, foreign employment, and visa consultancy.
                         </p>
                         <div class="social-links">
@@ -42,37 +42,32 @@ $current_year = date('Y');
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-lg-2 col-md-6">
-                    <div class="footer-section">
+                <div class="col-lg-2 col-md-4">
+                    <div class="fo    oter-section">
                         <h4 class="footer-title">Quick Links</h4>
                         <ul class="footer-links">
-                            <li><a href="/solidrow/index.php">Home</a></li>
-                            <li><a href="/solidrow/about.php">About Us</a></li>
-                            <li><a href="/solidrow/services.php">Services</a></li>
-                            <li><a href="/solidrow/jobs.php">Jobs</a></li>
-                            <li><a href="/solidrow/contact.php">Contact</a></li>
-                            <li><a href="/solidrow/blog.php">Blog</a></li>
+                            <li><a href="#hero-slider">Home</a></li>
+                            <li><a href="#our-websites">Our Websites</a></li>
+                            <li><a href="#about-us">About Us</a></li>
+                            <li><a href="jobs.php">Jobs</a></li>
                         </ul>
                     </div>
                 </div>
-
                 <!-- Services -->
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <div class="footer-section">
-                        <h4 class="footer-title">Services</h4>
+                        <h4 class="footer-title">OUR COMPANIES</h4>
                         <ul class="footer-links">
-                            <li><a href="/solidrow/job-placement.php">Job Placement</a></li>
-                            <li><a href="/solidrow/visa-processing.php">Visa Processing</a></li>
-                            <li><a href="/solidrow/training.php">Training Programs</a></li>
-                            <li><a href="/solidrow/consultation.php">Consultation</a></li>
-                            <li><a href="/solidrow/documentation.php">Documentation</a></li>
-                            <li><a href="/solidrow/support.php">24/7 Support</a></li>
+                            <li><a href="/solidrow-engineering/solidrowengineering.php">SOLIDROW ENGINEERING</a></li>
+                            <li><a href="/solidrow-foreign-engineering-skills-training-institute/solidrow-engineering-skills-training-institute.php">SOLIDROW FOREIGN ENGINEERING SKILLS TRAINING INSTITUTE</a></li>
+                            <li><a href="/solidrow-foreign-employment/foreign-employment.php">SOLIDROW FOREIGN EMPLOYMENT AGENCY</a></li>
+                            <li><a href="/visa-consultancy/visa-consultancy.php">SOLIDROW VISA CONSULTANCY SERVICES</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Contact Info -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-2 col-md-4">
                     <div class="footer-section">
                         <h4 class="footer-title">Get in Touch</h4>
                         <div class="contact-info">
@@ -292,26 +287,7 @@ $current_year = date('Y');
         height: 6px;
         background: var(--accent-color);
         border-radius: 50%;
-        opacity: 0;
         transition: all 0.3s ease;
-    }
-
-    .footer-links a:hover {
-        color: white;
-        padding-left: 20px;
-    }
-
-    .footer-links a:hover::before {
-        opacity: 1;
-    }
-
-    .contact-info {
-        margin-bottom: 2rem;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: flex-start;
         margin-bottom: 1.5rem;
     }
 

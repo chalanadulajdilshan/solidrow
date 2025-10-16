@@ -44,6 +44,17 @@ include './auth.php';
                                                 <input type="number" id="queue" name="queue" class="form-control" placeholder="Enter display order (queue)">
                                             </div>
                                             <div class="col-md-6 mb-3">
+                                                <label>Duration</label>
+                                                <input type="number" id="duration" name="duration" class="form-control" placeholder="Enter duration">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Is Certified</label>
+                                                <select id="is_certified" name="is_certified" class="form-control">
+                                                    <option value="0">No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
                                                 <label>Staff</label>
                                                 <select id="staff_id" name="staff_id" class="form-control">
                                                     <option value="">Select Staff</option>
@@ -136,6 +147,8 @@ include './auth.php';
                                                             data-description="<?php echo htmlspecialchars($course['description']) ?>"
                                                             data-staff_id="<?php echo htmlspecialchars($course['staff_id']) ?>"
                                                             data-queue="<?php echo htmlspecialchars($course['queue']) ?>"
+                                                            data-duration="<?php echo htmlspecialchars($course['duration']) ?>"
+                                                            data-is_certified="<?php echo htmlspecialchars($course['is_certified']) ?>"
                                                             data-image_name="<?php echo htmlspecialchars($course['image_name']) ?>">
                                                             <i class="fas fa-pencil-alt p-1"></i>
                                                         </div>

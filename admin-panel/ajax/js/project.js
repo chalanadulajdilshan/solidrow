@@ -149,44 +149,43 @@ jQuery(document).ready(function ($) {
     $("#project_master").modal("hide");
   });
 
-  // Delete Project
   $(document).on("click", ".delete-project", function (e) {
-    e.preventDefault();
-    const projectId = $("#project_id").val();
-    const projectTitle = $("#title").val();
-
-    if (!projectId) {
-      swal({
-        title: "Error!",
-        text: "Please select a project first.",
-        type: "error",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-      return;
-    }
-
-    swal(
-      {
-        title: "Are you sure?",
-        text: "Do you want to delete project '" + projectTitle + "'?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#6c757d",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "Cancel",
-      },
-      function (isConfirm) {
-        if (isConfirm) {
-          handleAjaxRequest(
-            "delete",
-            { id: projectId, delete: true },
-            "Project deleted successfully.",
-            "Failed to delete project."
-          );
-        }
+      e.preventDefault();
+      const projectId = $("#project_id").val();
+      const projectTitle = $("#title").val();
+  
+      if (!projectId) {
+        swal({
+          title: "Error!",
+          text: "Please select a project first.",
+          type: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        return;
       }
-    );
-  });
+  
+      swal(
+        {
+          title: "Are you sure?",
+          text: "Do you want to delete project '" + projectTitle + "'?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#6c757d",
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "Cancel",
+        },
+        function (isConfirm) {
+          if (isConfirm) {
+            handleAjaxRequest(
+              "delete",
+              { id: projectId, delete: true },
+              "Project deleted successfully!",
+              "Failed to delete project."
+            );
+          }
+        }
+      );
+    });
 });

@@ -104,7 +104,7 @@
                         <div class="container h-100 d-flex align-items-center">
                             <div class="row w-100">
                                 <div class="col-lg-6" data-aos="fade-right">
-                                    <h1 class="hero-title">Your Gateway to <span class="text-accent">International Success</span></h1>
+                                    <h1 class="hero-title">Quality Training, Global Careers <span class="text-accent"> Global Careers</span></h1>
                                     <p class="hero-subtitle">Strengthening Sri Lanka's economy by sending skilled workers abroad with world-class training</p>
                                     <a href="#courses" class="btn btn-primary btn-lg me-3">Start Your Journey</a>
                                     <a href="#contact" class="btn btn-outline-light btn-lg">Get Started</a>

@@ -98,10 +98,8 @@ if (isset($_POST['update'])) {
 // Delete project
 if (isset($_POST['delete']) && isset($_POST['id'])) {
     $PROJECT = new Project($_POST['id']);
-    if ($PROJECT->id && $PROJECT->delete()) {
-        echo json_encode(['status' => 'success', 'message' => 'Project deleted successfully.']);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to delete project.']);
-    }
+    $res = $PROJECT->delete();
+
+    echo json_encode(["status" => $res ? 'success' : 'error']);
     exit();
 }

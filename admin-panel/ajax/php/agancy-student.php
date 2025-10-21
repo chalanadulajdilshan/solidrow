@@ -30,7 +30,9 @@ if (isset($_POST['section'])) {
             'district' => $_POST['district'],
             'dsdivision_id' => $_POST['dsdivision_id'],
             'gn_division' => $_POST['gn_division'],
-            'school_attendant' => $_POST['school_attendant']
+            'school_attendant' => $_POST['school_attendant'],
+            'country' => $_POST['country'],
+            'registration_date' => $_POST['registration_date']
         ];
 
         if (!empty($_POST['id'])) {

@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
             formData.append('create', true);
 
             $.ajax({
-                url: "ajax/php/jobs.php",
+                url: "ajax/php/jobs-categories.php",
                 type: 'POST',
                 data: formData,
                 async: false,

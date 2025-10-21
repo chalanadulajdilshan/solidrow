@@ -91,11 +91,19 @@ $US = new User($_SESSION['id']);
                             <i class="bx bx-book-content"></i>
                             <span>Course</span>
                         </a>
-                    </li>
-                    <li>
+                    </li> 
+                   
+                     <li>
                         <a href="jobs.php">
                             <i class="bx bx-briefcase"></i>
-                            <span>Job</span>
+                            <span>Jobs</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="jobs-categories.php">
+                            <i class="bx bx-briefcase "></i>
+                            <span>Job Roles</span>
                         </a>
                     </li>
                     <li>

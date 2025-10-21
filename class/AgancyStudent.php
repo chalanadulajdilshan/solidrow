@@ -88,6 +88,8 @@ class AgancyStudent
     public $createdAt;
     public $name_with_initials;
     public $is_completed;
+    public $country;
+    public $registration_date;  
 
     public function __construct($id)
     {
@@ -173,6 +175,8 @@ class AgancyStudent
             $this->note = $result['note'];
             $this->name_with_initials = $result['name_with_initials'];
             $this->is_completed = $result['is_completed'];
+            $this->country = $result['country'];
+            $this->registration_date = $result['registration_date'];
 
 
 
@@ -188,7 +192,7 @@ class AgancyStudent
             . "`province`,`district`,`dsdivision_id`,`gn_division`,`school_attendant`,"
             . "`other_related_qualification`,"
             . "`related_qualification_1`,`related_qualification_2`,`related_qualification_3`,`emergency_person_name`,`relationship`,`emergency_person_address`,`emergency_whatsapp`,`demand_name_field`,`occupation`,`agency_test_date`,`selection_test_result`,`job_confirm_letter_date`,`job_confirm_letter_sign_date`,`job_confirm_sign_attach`,`work_permit_document`,`pcc_submit_date`,`pcc_color_copy`,`work_permit_apply_date`,`work_permit_issue_date`,`work_permit_copy`,`travel_insurance_copy`,`travel_insurance_submit_date`,`travel_insurance2_copy`,`travel_insurance2_submit_date`,`visa_file_send_date`,`embassy_appointment_date`,`job_contract_copy`,`job_contract_copy_file`,`english_copy_attach_date`,`job_offer_letter_english`,`job_offer_letter_romania`,`guarantee_letter_english`,`guarantee_letter_romania`,`accommodation_confirmation`,`visa_status`,`visa_approved_date`,`beauro_training_date`,`beauro_training_file`,`final_approval_date`,`final_bureau_date`,`air_ticket_date`,`air_ticket_copy`,`working_experience`,`cv_copy`,`local_pcc`,`online_pcc`,`local_pcc_date`,`online_pcc_date`,"
-            . "`note`, `name_with_initials`, `is_completed`) VALUES  ('"
+            . "`note`, `name_with_initials`, `is_completed`, `country`, `registration_date`) VALUES  ('"
             . $this->student_id . "','"
             . $this->full_name . "','"
             . $this->address . "','"
@@ -260,7 +264,9 @@ class AgancyStudent
             . $this->online_pcc_date . "','"
             . $this->note . "','"
             . $this->name_with_initials . "','"
-            . $this->is_completed . "')";
+            . $this->is_completed . "','"
+            . $this->country . "','"
+            . $this->registration_date . "')";
 
 
  

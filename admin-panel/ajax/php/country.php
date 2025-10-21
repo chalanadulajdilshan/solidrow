@@ -10,7 +10,8 @@ if (isset($_POST['create'])) {
 
     $COUNTRY->name = $_POST['name'];
     $COUNTRY->is_active = isset($_POST['activeStatus']) ? 1 : 0;
-    $COUNTRY->commission_rate = isset($_POST['commission_rate']) ? floatval($_POST['commission_rate']) : 0.00;
+    $COUNTRY->commission_rate_staff = isset($_POST['commission_rate']) ? floatval($_POST['commission_rate']) : 0.00;
+    $COUNTRY->commission_rate_agent = isset($_POST['commission_rate_agent']) ? floatval($_POST['commission_rate_agent']) : 0.00;
 
     $res = $COUNTRY->create();
 
@@ -29,7 +30,8 @@ if (isset($_POST['update'])) {
 
     $COUNTRY->name = $_POST['name'];
     $COUNTRY->is_active = isset($_POST['activeStatus']) ? 1 : 0;
-    $COUNTRY->commission_rate = isset($_POST['commission_rate']) ? floatval($_POST['commission_rate']) : 0.00;
+    $COUNTRY->commission_rate_staff    = isset($_POST['commission_rate']) ? floatval($_POST['commission_rate']) : 0.00;
+    $COUNTRY->commission_rate_agent    = isset($_POST['commission_rate_agent']) ? floatval($_POST['commission_rate_agent']) : 0.00;
 
     $res = $COUNTRY->update();
 

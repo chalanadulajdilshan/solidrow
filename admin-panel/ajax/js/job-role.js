@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
     $("#create").click(function (event) {
         event.preventDefault();
 
-        if (!$('#name').val() || $('#name').val().length === 0) {
+        if (!$('#title').val() || $('#title').val().length === 0) {
             swal({
                 title: "Error!",
                 text: "Please enter job role name",

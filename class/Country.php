@@ -5,7 +5,8 @@ class Country
     public $id;
     public $name;
     public $is_active;
-    public $commission_rate;
+    public $commission_rate_staff;
+    public $commission_rate_agent;
 
     public function __construct($id = null)
     {
@@ -18,15 +19,16 @@ class Country
                 $this->id = $result['id'];
                 $this->name = $result['name'];
                 $this->is_active = $result['is_active'];
-                $this->commission_rate = $result['commission_rate'];
+                $this->commission_rate_staff = $result['commission_rate_staff'];
+                $this->commission_rate_agent = $result['commission_rate_agent'];
             }
         }
     }
 
     public function create()
     {
-        $query = "INSERT INTO `country` (`name`, `is_active`, `commission_rate`) 
-                  VALUES ('$this->name', '$this->is_active', '$this->commission_rate')";
+        $query = "INSERT INTO `country` (`name`, `is_active`, `commission_rate_staff`, `commission_rate_agent`) 
+                  VALUES ('$this->name', '$this->is_active', '$this->commission_rate_staff', '$this->commission_rate_agent')";
 
         $db = new Database();
         $result = $db->readQuery($query);
@@ -43,7 +45,8 @@ class Country
         $query = "UPDATE `country` SET 
                   `name` = '$this->name',
                   `is_active` = '$this->is_active',
-                  `commission_rate` = '$this->commission_rate'
+                  `commission_rate_staff` = '$this->commission_rate_staff',
+                  `commission_rate_agent` = '$this->commission_rate_agent'
                   WHERE `id` = '$this->id'";
 
         $db = new Database();

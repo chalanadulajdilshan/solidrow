@@ -36,7 +36,7 @@ class Job
         ) VALUES (
             '$this->title', '$this->position', '$this->description', '$this->country', '$this->image', '$this->respons_person'
         )";
-
+ 
         $db = new Database();
         $result = $db->readQuery($query);
 

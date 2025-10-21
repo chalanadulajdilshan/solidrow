@@ -179,12 +179,30 @@ $DEFULTDATA = new DefaultData();
                                                 </select>
                                             </div>
                                             
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <label for="school_attendant" class="col-form-label"> Higest Professional Qualification </label>
                                                 <input class="form-control" type="text" id="school_attendant"
                                                     name="school_attendant"
                                                     placeholder="Enter Professional Qualification">
-                                            </div>   
+                                            </div>  
+                                            <div class="col-md-4">
+                                                <label for="registration_date" class="col-form-label">Registration Date</label>
+                                                <input class="form-control" type="date" id="registration_date" name="registration_date">
+                                            </div>
+
+                                            <!-- selection countrys -->
+                                            <div class="col-md-4">
+                                                <label for="country" class="col-form-label">Country</label>
+                                                <select class="form-control" id="country" name="country">
+                                                    <option value="">-- Select Country --</option>
+                                                   <?php
+                                                   $COUNTRY = new Country(NULL);
+                                                   foreach ($COUNTRY->all() as $key => $country) {
+                                                       echo "<option value=\"{$country['id']}\">{$country['name']}</option>";
+                                                   }
+                                                   ?>
+                                                </select>
+                                            </div>
                                         </div>
                                         
                                         

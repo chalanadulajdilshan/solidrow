@@ -25,7 +25,7 @@ class JobRole
     {
         $query = "INSERT INTO `job_role` (`name`, `is_active`) 
                   VALUES ('$this->name', '$this->is_active')";
-
+ 
         $db = new Database();
         $result = $db->readQuery($query);
 

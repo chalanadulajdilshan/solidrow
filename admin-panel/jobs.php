@@ -1,6 +1,11 @@
 <?php
 include '../class/include.php';
 include './auth.php';
+
+$id = $_GET['id'] ?? NULL;
+
+$country = new Country($id);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,15 +31,28 @@ include './auth.php';
                                     <form id="form-data" enctype="multipart/form-data">
                                         <input type="hidden" id="job_id" name="job_id">
                                         <div class="row">
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-4 mb-3">
                                                 <label>Title</label>
                                                 <input type="text" id="title" name="title" class="form-control" placeholder="Enter job title" required>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Country</label>
-                                                <input type="text" id="country" name="country" class="form-control" placeholder="Enter country" required>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
+                                   
+                                        <div class="col-md-4 mb-3">
+                                            <label>Country</label>
+                                            <select id="country" name="country" class="form-control" required>
+                                                <option value="">Select Country</option>
+                                                <?php
+                                                $COUNTRY = new Country(NULL);
+                                                foreach ($COUNTRY->all() as $key => $country) {
+                                                    if ($country['id'] == $id) {
+                                                        echo "<option value=\"{$country['id']}\" selected>{$country['name']}</option>";
+                                                    } else {
+                                                        echo "<option value=\"{$country['id']}\">{$country['name']}</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                            <div class="col-md-4 mb-3">
                                                 <label>Position</label>
                                                 <input type="text" id="position" name="position" class="form-control" placeholder="Enter position" required>
                                             </div>

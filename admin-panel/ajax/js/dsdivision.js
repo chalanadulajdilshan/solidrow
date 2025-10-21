@@ -2,21 +2,23 @@
 
 $(document).ready(function () {
 
-    $('#province').change(function () {
+
+   
+    $('#district').change(function () {
 
         $('.someBlock').preloader();
         //grab all form data  
 
-        var province = $(this).val();
+        var disID = $(this).val();
 
-        $('#district').empty();
+        $('#dsdivision_id').empty();
 
         $.ajax({
-            url: "ajax/php/district.php",
+            url: "ajax/php/dsdivision.php",
             type: "POST",
             data: {
-                province: province,
-                action: 'GET_DISTRICT_BY_PROVINCE'
+                district: disID,
+                action: 'GET_DIVISIONAL_BY_DISTRICT'
             },
             dataType: "JSON",
             success: function (jsonStr) {
@@ -24,17 +26,22 @@ $(document).ready(function () {
                 //remove preloarder
                 $('.someBlock').preloader('remove');
 
-                var html = '<option value="" > -  Select District - </option>';
+                var html = '<option value="" > - Select your Ds Division - </option>';
                 $.each(jsonStr, function (i, data) {
                     html += '<option value="' + data.id + '">';
                     html += data.name;
                     html += '</option>';
                 });
 
-                $('#district').empty();
-                $('#district').append(html);
+                $('#dsdivision_id').empty();
+                $('#dsdivision_id').append(html);
             }
         });
     });
+
+
+
+
+
 });
 

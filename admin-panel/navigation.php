@@ -160,6 +160,13 @@ $US = new User($_SESSION['id']);
                         <span>Application Form</span>
                     </a>
                 </li>
+                 <li>
+                    <a href="create-agancy-student.php">
+                        <i class="bx bx-user"></i>
+                        <span>Registration </span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="javascript:void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-phone"></i>

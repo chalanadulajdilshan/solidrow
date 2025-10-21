@@ -11,12 +11,12 @@ include './auth.php';
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Sl Youth Sri Lanka </title>
+    <title>Dashboard | Solidrow Groups Pvt Ltd </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Solidrow Groups Pvt Ltd" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/Solidrow Logo.png">
 
     <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />

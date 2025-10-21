@@ -7,10 +7,10 @@ include '../class/include.php';
 
 <head>
     <meta charset="utf-8" />
-    <title>Login | Ministry of Youth</title>
+    <title>Login | Solidrow Groups Pvt Ltd</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="NYSC" name="author" />
+    <meta content="Solidrow Groups Pvt Ltd" name="author" />
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->

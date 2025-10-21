@@ -1,17 +1,16 @@
 <?php
 
-include '../../class/include.php';
-header('Content-Type: application/json; charset=UTF8');
+include '../../../class/include.php';
 
-if (isset($_POST['display'])) {
+ 
 
-    $DISTRICT = new District();
-    $res = $DISTRICT->all();
+if ($_POST['action'] == 'GET_DISTRICT_BY_PROVINCE') {
 
-    if ($res) {
-        echo json_encode(["status" => 'success', "data" => $res]);
-    } else {
-        echo json_encode(["status" => 'error', "data" => []]);
-    }
+    $DISTRICT = new District(NULL);
+  
+    $result = $DISTRICT->GetDistrictByProvince($_POST["province"]);
+    echo json_encode($result);
+     
     exit();
 }
+

@@ -1,22 +1,21 @@
-
+ 
 
 $(document).ready(function () {
-
-    $('#province').change(function () {
+    $('#dsdivision_id').change(function () {
 
         $('.someBlock').preloader();
         //grab all form data  
 
-        var province = $(this).val();
+        var division_id = $(this).val();
 
-        $('#district').empty();
-
+        $('#gn_division').empty();
+        
         $.ajax({
-            url: "ajax/php/district.php",
+            url: "ajax/php/gramaniladari.php",
             type: "POST",
             data: {
-                province: province,
-                action: 'GET_DISTRICT_BY_PROVINCE'
+                division_id: division_id,
+                action: 'GET_GRAMANILADARI_BY_DSDIVISION'
             },
             dataType: "JSON",
             success: function (jsonStr) {
@@ -24,15 +23,15 @@ $(document).ready(function () {
                 //remove preloarder
                 $('.someBlock').preloader('remove');
 
-                var html = '<option value="" > -  Select District - </option>';
+                var html = '<option value="" > -  Select your Gn Division - </option>';
                 $.each(jsonStr, function (i, data) {
                     html += '<option value="' + data.id + '">';
                     html += data.name;
                     html += '</option>';
                 });
 
-                $('#district').empty();
-                $('#district').append(html);
+                $('#gn_division').empty();
+                $('#gn_division').append(html);
             }
         });
     });

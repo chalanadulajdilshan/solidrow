@@ -76,20 +76,25 @@ $DEFULTDATA = new DefaultData();
                                         <hr>
                                         <div class="row mt-2">
                                             <div class="col-md-4">
-                                                <label for="student_id" class="col-form-label">  Client No</label>
+                                                <label for="student_id" class="col-form-label">  Candidate Reg. No <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="student_id"
-                                                        name="student_id" placeholder="Enter client No">
+                                                        name="student_id" placeholder="Enter Candidate Reg. No">
                                                 </div>
                                             </div>
+                                             <div class="col-md-4">
+                                                <label for="registration_date" class="col-form-label">Registration Date <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="date" id="registration_date" name="registration_date">
+                                            </div>
+
                                             <div class="col-md-4">
-                                                <label for="full_name" class="col-form-label">Name as Mentioned in the Passport</label>
+                                                <label for="full_name" class="col-form-label">Name as Mentioned in the Passport <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="full_name" name="full_name"
                                                         placeholder="Enter Name as Mentioned in the Passport ">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 hidden">
                                                 <label for="name_with_initials" class="col-form-label"> Name with Initial</label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="name_with_initials"
@@ -98,25 +103,25 @@ $DEFULTDATA = new DefaultData();
                                             </div>
                                             
                                             <div class="col-md-4">
-                                                <label for="address" class="col-form-label">Address</label>
+                                                <label for="address" class="col-form-label">Address <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="address" name="address"
-                                                    placeholder="Enter Address">
+                                                    placeholder="Enter Address" required>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="nic" class="col-form-label">NIC Number</label>
+                                                <label for="nic" class="col-form-label">NIC Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="nic" name="nic"
-                                                    placeholder="Enter NIC Number">
+                                                    placeholder="Enter NIC Number" required>
                                             </div>
                                             
                                             <div class="col-md-4">
-                                                <label for="passport_number" class="col-form-label">Passport Number</label>
+                                                <label for="passport_number" class="col-form-label">Passport Number </label>
                                                 <input class="form-control" type="text" id="passport_number"
                                                     name="passport_number" placeholder="Enter Passport Number">
                                             </div>
                                             
                                             <div class="col-md-4">
-                                                <label for="birth_date" class="col-form-label">Birth Date</label>
+                                                <label for="birth_date" class="col-form-label">Birth Date  </label>
                                                 <input class="form-control" type="text" id="birth_date" name="birth_date"
                                                     readonly>
                                             </div>
@@ -131,18 +136,18 @@ $DEFULTDATA = new DefaultData();
                                                     placeholder="Enter Email Address">
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="phone_number" class="col-form-label">Phone Number</label>
+                                                <label for="phone_number" class="col-form-label">Phone Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone_number"
-                                                    name="phone_number" placeholder="Enter Phone Number">
+                                                    name="phone_number" placeholder="Enter Phone Number" required>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="whatsapp_number" class="col-form-label">Whatsapp Number</label>
+                                                <label for="whatsapp_number" class="col-form-label">Whatsapp Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="whatsapp_number"
-                                                    name="whatsapp_number" placeholder="Enter Whatsapp Number">
+                                                    name="whatsapp_number" placeholder="Enter Whatsapp Number" required>
                                             </div>
                                             
                                             <div class="col-md-4">
-                                                <label for="province" class="col-form-label">Province of Residence</label>
+                                                <label for="province" class="col-form-label">Province of Residence <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="province" name="province">
                                                     <option value="">-- Select Province --</option>
                                                     <?php
@@ -155,7 +160,7 @@ $DEFULTDATA = new DefaultData();
                                             </div>
                                             
                                             <div class="col-md-4">
-                                                <label for="district" class="col-form-label">District</label>
+                                                <label for="district" class="col-form-label">District <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="district" name="district">
                                                     <option value="">-- Select District --</option>
                                                     <!-- Populate dynamically -->
@@ -185,14 +190,11 @@ $DEFULTDATA = new DefaultData();
                                                     name="school_attendant"
                                                     placeholder="Enter Professional Qualification">
                                             </div>  
-                                            <div class="col-md-4">
-                                                <label for="registration_date" class="col-form-label">Registration Date</label>
-                                                <input class="form-control" type="date" id="registration_date" name="registration_date">
-                                            </div>
+                                           
 
                                             <!-- selection countrys -->
                                             <div class="col-md-4">
-                                                <label for="country" class="col-form-label">Country</label>
+                                                <label for="country" class="col-form-label">Country <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="country" name="country">
                                                     <option value="">-- Select Country --</option>
                                                    <?php
@@ -203,6 +205,19 @@ $DEFULTDATA = new DefaultData();
                                                    ?>
                                                 </select>
                                             </div>
+<div class="col-md-4">
+                                                <label for="country" class="col-form-label">Staff   Coordinator <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="country" name="country">
+                                                    <option value="">-- Select Staff Coordinator --</option>
+                                                   <?php
+                                                   $STAFFCOORDINATOR = new staff(NULL);
+                                                   foreach ($STAFFCOORDINATOR->all() as $key => $country) {
+                                                       echo "<option value=\"{$country['id']}\">{$country['name']}</option>";
+                                                   }
+                                                   ?>
+                                                </select>
+                                            </div>
+                                            
                                         </div>
                                         
                                         

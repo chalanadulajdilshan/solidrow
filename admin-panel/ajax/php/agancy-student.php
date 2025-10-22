@@ -10,10 +10,10 @@ if (isset($_POST['section'])) {
     $STUDENT = !empty($_POST['id']) ? new AgancyStudent($_POST['id']) : new AgancyStudent(NULL);
 
     $fields = [];
-
+ 
 
     // SECTION 1: PERSONAL INFO
-    if ($SECTION === "section1") {
+    if ($SECTION == "section1") {
         $fields = [
             'student_id' => strtoupper($_POST['student_id']),
             'full_name' => strtoupper($_POST['full_name']),
@@ -32,7 +32,11 @@ if (isset($_POST['section'])) {
             'gn_division' => $_POST['gn_division'],
             'school_attendant' => $_POST['school_attendant'],
             'country' => $_POST['country'],
-            'registration_date' => $_POST['registration_date']
+            'registration_date' => $_POST['registration_date'],
+            'passport_retention' => $_POST['passport_retention'],
+            'passport_collected_date' => $_POST['passport_collected_date'], 
+            'agent_id' => $_POST['agent_id'], 
+            'staff_id' => $_POST['staff_id']
         ];
 
         if (!empty($_POST['id'])) {
@@ -49,7 +53,7 @@ if (isset($_POST['section'])) {
     }
 
     // SECTION 2: ATTACHMENTS
-    if ($SECTION === "section2") {
+    if ($SECTION == "section2") {
         $upload_dir = "../../../upload/agancy/files/";
         $upload_fields = [
             'nic_doc', 'passport_doc', 'professional_certificate_1',
@@ -106,7 +110,7 @@ if (isset($_POST['section'])) {
     }
 
         // SECTION 3: Other Qualifications
-        if ($SECTION === "section3") {
+        if ($SECTION == "section3") {
             $upload_dir = "../../../upload/agancy/files/";
             $fields = [
                 'other_related_qualification' => $_POST['other_related_qualification'] ?? ''
@@ -132,8 +136,8 @@ if (isset($_POST['section'])) {
             exit();
         }
 
-        // SECTION 4: Emergency Contact
-        if ($SECTION === "section4") {
+        // SECTION 4: Emergency Contac
+        if ($SECTION == "section4") {
             $fields = [
                 'emergency_person_name' => $_POST['emergency_person_name'],
                 'relationship' => $_POST['relationship'],
@@ -147,7 +151,7 @@ if (isset($_POST['section'])) {
         }
 
         // SECTION 5: Job Confirmation
-        if ($SECTION === "section5") {
+        if ($SECTION == "section5") {
             $upload_dir = "../../../upload/agancy/files/";
             $fields = [
                 'demand_name_field' => $_POST['demand_name_field'],
@@ -172,7 +176,7 @@ if (isset($_POST['section'])) {
         }
 
         // SECTION 6: Visa Documents
-        if ($SECTION === "section6") {
+        if ($SECTION == "section6") {
             $upload_dir = "../../../upload/agancy/files/";
             $fields = [
                 'online_pcc_date' => $_POST['online_pcc_date'],
@@ -209,7 +213,7 @@ if (isset($_POST['section'])) {
         }
 
         // SECTION 7: Visa Final Info
-        if ($SECTION === "section7") {
+        if ($SECTION == "section7") {
             $upload_dir = "../../../upload/agancy/files/";
             $fields = [
                 'visa_status' => $_POST['visa_status'],
@@ -240,7 +244,7 @@ if (isset($_POST['section'])) {
         }
 
         // SECTION 8: Final Submission & Remarks
-        if ($SECTION === "section8") {
+        if ($SECTION == "section8") {
             $fields = [
                 'is_completed' => $_POST['is_completed'] ?? '',
                 'note' => $_POST['note'] ?? ''

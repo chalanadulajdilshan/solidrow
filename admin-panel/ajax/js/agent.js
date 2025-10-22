@@ -15,15 +15,17 @@ jQuery(document).ready(function ($) {
             success: function (result) {
                 $(".someBlock").preloader("remove");
                 if (result.status === "success") {
-                    swal({
-                        title: "Success!",
-                        text: result.message || successMessage,
-                        type: "success",
-                        timer: 2000,
-                        showConfirmButton: false,
-                    }).then(function () {
-                        location.reload();
-                    });
+                      swal({
+            title: "Success!",
+            text: successMessage,
+            type: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+
+          window.setTimeout(function () {
+            window.location.reload();
+          }, 2000);
                 } else {
                     swal("Error!", result.message || errorMessage, "error");
                 }

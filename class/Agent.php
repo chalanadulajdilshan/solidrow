@@ -32,14 +32,14 @@ class Agent
     {
         $db = new Database();
 
-        $query = "INSERT INTO `agent` (
-            `name`, `contact_no`, `whatsapp_no`, `nic`
-        ) VALUES (
-            '" . $this->name . "', 
-            '" . $this->contact_no . "', 
-            '" . $this->whatsapp_no . "', 
-            '" . $this->nic . "',
-        )";
+       $query = "INSERT INTO `agent` (
+    `name`, `contact_no`, `whatsapp_no`, `nic`
+) VALUES (
+    '" . $this->name . "',
+    '" . $this->contact_no . "',
+    '" . $this->whatsapp_no . "',
+    '" . $this->nic . "'
+)";
 
         $result = $db->readQuery($query);
 
@@ -51,21 +51,22 @@ class Agent
 
  
 
-    public function update()
-    {
-        if (!$this->id) return false;
+  public function update()
+{
+    if (!$this->id) return false;
 
-        $db = new Database();
+    $db = new Database();
 
-        $query = "UPDATE `agent` SET
-            `name` = '" . $this->name . "',
-            `contact_no` = '" . $this->contact_no . "',
-            `whatsapp_no` = '" . $this->whatsapp_no . "',
-            `nic` = '" . $this->nic . "',
+    $query = "UPDATE `agent` SET
+        `name` = '" . $this->name . "',
+        `contact_no` = '" . $this->contact_no . "',
+        `whatsapp_no` = '" . $this->whatsapp_no . "',
+        `nic` = '" . $this->nic . "'
         WHERE `id` = " . (int)$this->id;
 
-        return $db->readQuery($query);
-    }
+    return $db->readQuery($query);
+}
+
 
     public function delete()
     { 

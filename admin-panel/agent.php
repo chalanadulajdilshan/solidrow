@@ -24,7 +24,7 @@ include './auth.php';
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Create Agent</h4>
-                                    <form id="form-data" enctype="multipart/form-data">
+                                    <form id="form-data" enctype="multipart/form-data" autocomplete="off">
                                         <input type="hidden" id="agent_id" name="agent_id">
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
@@ -44,6 +44,7 @@ include './auth.php';
                                                 <label>NIC</label>
                                                 <input type="text" id="nic" name="nic" class="form-control" placeholder="Enter NIC number" required>
                                             </div>
+
 
                                         </div>
                                         <div class="row">
@@ -77,7 +78,9 @@ include './auth.php';
                                             <tr>
                                                 <th>#ID</th>
                                                 <th>Name</th>
-                                                <th>Job Role</th>
+                                                <th>Contact No</th>
+                                                <th>WhatsApp No</th>
+                                                <th>NIC</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -90,7 +93,9 @@ include './auth.php';
                                                 <tr id="div<?php echo $agent['id'] ?>">
                                                     <td><?php echo $key ?></td>
                                                     <td><?php echo htmlspecialchars($agent['name']) ?></td>
-                                                    <td><?php echo htmlspecialchars($agent['job_role']) ?></td>
+                                                    <td><?php echo htmlspecialchars($agent['contact_no']) ?></td>
+                                                    <td><?php echo htmlspecialchars($agent['whatsapp_no']) ?></td>
+                                                    <td><?php echo htmlspecialchars($agent['nic']) ?></td>
                                                     <td>
                                                         <div class="badge bg-pill bg-soft-success font-size-14 select-staff"
                                                             data-id="<?php echo htmlspecialchars($agent['id']) ?>"

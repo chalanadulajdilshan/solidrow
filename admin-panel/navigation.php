@@ -54,6 +54,12 @@ $US = new User($_SESSION['id']);
                             <span>Manage Staff</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="agent.php">
+                            <i class="bx bx-user"></i>
+                            <span>Manage Agent</span>
+                        </a>
+                    </li>
 
                     <li class="menu-title">Main Panel</li>
                     <li>

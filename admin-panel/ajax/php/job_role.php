@@ -22,9 +22,7 @@ if (isset($_POST['create'])) {
 
 // Update job role
 if (isset($_POST['update'])) {
-
-    $JOB = new JobRole($_POST['jobrole_id']); // Load job role by ID
-
+    $JOB = new JobRole($_POST['job_id']); // Load job role by ID
     $JOB->name = $_POST['title'];
     $JOB->is_active = isset($_POST['activeStatus']) ? 1 : 0;
 

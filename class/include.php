@@ -22,6 +22,7 @@ include_once(dirname(__FILE__) . '/VisaConsultancyApplication.php');
 include_once(dirname(__FILE__) . '/VisaType.php');
 include_once(dirname(__FILE__) . '/DefaultData.php');
 include_once(dirname(__FILE__) . '/AgancyStudent.php');
+include_once(dirname(__FILE__) . '/Agent.php');
 
 function dd($data)
 {

@@ -57,38 +57,34 @@ include './auth.php';
                                                 <label>EPF No</label>
                                                 <input type="text" id="epf_no" name="epf_no" class="form-control" placeholder="Enter EPF number" required>
                                             </div>
+
                                             <div class="col-md-6 mb-3">
                                                 <label>Salary</label>
                                                 <input type="number" id="salary" name="salary" class="form-control" placeholder="Enter salary amount" required>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>District</label>
-                                                <select id="district" name="district" class="form-select" required>
-                                                    <option value="">Select District</option>
-                                                    <?php
-                                                    $DISTRICT = new District(NULL);
-                                                    foreach ($DISTRICT->all() as $district) {
-                                                    ?>
-                                                        <option value="<?php echo htmlspecialchars($district['id']); ?>">
-                                                            <?php echo htmlspecialchars($district['name']); ?>
-                                                        </option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label>Province</label>
-                                                <select id="province" name="province" class="form-select" required>
-                                                    <option value="">Select Province</option>
+
+                                             
+                                            <div class="col-md-6">
+                                                <label for="province" class="col-form-label">Province of Residence <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="province" name="province">
+                                                    <option value="">-- Select Province --</option>
                                                     <?php
                                                     $PROVINCE = new Province(NULL);
-                                                    foreach ($PROVINCE->all() as $province) {
+                                                    foreach ($PROVINCE->all() as $key => $province) {
+                                                        echo "<option value=\"{$province['id']}\">{$province['name']}</option>";
+                                                    }
                                                     ?>
-                                                        <option value="<?php echo htmlspecialchars($province['id']); ?>">
-                                                            <?php echo htmlspecialchars($province['name']); ?>
-                                                        </option>
-                                                    <?php } ?>
                                                 </select>
                                             </div>
+
+                                            <div class="col-md-6">
+                                                <label for="district" class="col-form-label">District <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="district" name="district">
+                                                    <option value="">-- Select District --</option>
+                                                    <!-- Populate dynamically -->
+                                                </select>
+                                            </div>
+                                           
                                             <div class="col-md-6 mb-3">
                                                 <label>Company</label>
                                                 <select id="company" name="company" class="form-select" required>
@@ -201,6 +197,7 @@ include './auth.php';
     <div class="rightbar-overlay"></div>
     <?php include 'assets/main-js.php'; ?>
     <script src="ajax/js/staff.js"></script>
+     <script src="ajax/js/district.js" type="text/javascript"></script>
     <script>
         function previewIdCopy(input) {
             const preview = document.getElementById('id_copy_preview');

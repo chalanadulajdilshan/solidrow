@@ -3,10 +3,11 @@
 include '../class/include.php';
 include './auth.php';
 $DEFULTDATA = new DefaultData();
-
-$AGENCY = new Agent(NULL);
-
-
+ 
+$AGENCY_STUDENT  = new AgancyStudent(NULL);
+$res = $AGENCY_STUDENT->getLastID();
+$student_id = $res + 1;
+$student_id = 'REG/01/'.$_SESSION['id'].$student_id;
 ?>
 <html lang="en">
 
@@ -90,7 +91,7 @@ $AGENCY = new Agent(NULL);
                                                 <label for="student_id" class="col-form-label"> Candidate Reg. No <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="student_id"
-                                                        name="student_id" placeholder="Enter Candidate Reg. No">
+                                                        name="student_id" placeholder="Enter Candidate Reg. No" value="<?php echo $student_id; ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">

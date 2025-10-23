@@ -670,11 +670,7 @@ class AgancyStudent
 
 
 
-            $result = mysqli_fetch_array($db->readQuery($query));
-
-
-
-            $this->username = $result['username'];
+            $result = mysqli_fetch_array($db->readQuery($query)); 
 
             $this->email = $result['email'];
 
@@ -684,6 +680,17 @@ class AgancyStudent
             return $result;
         }
     }
+
+// Get last inserted ID
+    public function getLastID()
+    {
+        $query = "SELECT `id` FROM `agencystudent` ORDER BY `id` DESC LIMIT 1";
+        $db = new Database();
+        
+        $result = mysqli_fetch_array($db->readQuery($query));
+        return $result ? $result['id'] : null;
+    }
+
 
 
     //-----------------------------------------------------------------------

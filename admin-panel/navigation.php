@@ -145,15 +145,7 @@ $US = new User($_SESSION['id']);
                         <li><a href="commissions-engineering.php">Commissions</a></li>
                     </ul>
                 </li> -->
-<?php
-$USER_TYPE = new user($_SESSION['id']);
-if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
-    $show_foreign_employment = true;
-}else{
-    $show_foreign_employment = false;
-}
-?>
-<?php if ($show_foreign_employment): ?>
+
                 <!-- Solidrow Training -->
                 <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
                 <li>
@@ -176,7 +168,15 @@ if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
 
 
 <!-- Later in the file, wrap the Foreign Employment section with the check -->
-
+<?php
+$USER_TYPE = new user($_SESSION['id']);
+if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
+    $show_foreign_employment = true;
+}else{
+    $show_foreign_employment = false;
+}
+?>
+<?php if ($show_foreign_employment): ?>
     <!-- Solidrow Foreign Employment -->
     <li class="menu-title">Solidrow Foreign Employment Agency</li>
     <li>

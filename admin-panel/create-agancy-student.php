@@ -253,7 +253,7 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                                     $user = new User($_SESSION['id']);
                                                     foreach ($AGENT->all() as $key => $agent) {
                                                         if ($agent['id'] == $user->agent_user_id) {
-                                                            echo "<option value=\"{$agent['id']}\">{$agent['name']}</option>";
+                                                            echo "<option selected value=\"{$agent['id']}\">{$agent['name']}</option>";
                                                         }else{
                                                             echo "<option value=\"{$agent['id']}\">{$agent['name']}</option>";
                                                         }

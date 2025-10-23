@@ -357,7 +357,7 @@ function saveSection(section, fieldIds, isFinal = false) {
           "passport_number", "birth_date", "gender", "email", "phone_number",
           "whatsapp_number", "province", "district", "dsdivision_id", "gn_division",
           "country", "registration_date", "passport_retention", "passport_collected_date",
-          "agent_id", "staff_id", "school_attendant","other_agent_check","other_agent_name","other_agent_mobile"
+          "agent_id", "staff_id", "school_attendant","other_agent_check","other_agent_name","other_agent_mobile","registration_no"
       ]);
   });
 

@@ -7,7 +7,7 @@ $DEFULTDATA = new DefaultData();
 $AGENCY_STUDENT  = new AgancyStudent(NULL);
 $res = $AGENCY_STUDENT->getLastID();
 $student_id = $res + 1;
-$student_id = 'REG/01/'.$_SESSION['id'].$student_id;
+$student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'/'.$student_id;
 ?>
 <html lang="en">
 
@@ -87,13 +87,23 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                         <p class="text-danger">01. Personal Details</p>
                                         <hr>
                                         <div class="row mt-2">
+
+                                         <div class="col-md-4">
+                                                <label for="registration_no" class="col-form-label"> Registration No <span class="text-danger">*</span></label>
+                                                <div class="col-md-12">
+                                                    <input class="form-control" type="text" id="registration_no"
+                                                        name="registration_no" placeholder="Enter Registration No" value="<?php echo $student_id; ?>" readonly>
+                                                </div>
+                                            </div>
+
                                             <div class="col-md-4">
                                                 <label for="student_id" class="col-form-label"> Candidate Reg. No <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="student_id"
-                                                        name="student_id" placeholder="Enter Candidate Reg. No" value="<?php echo $student_id; ?>" readonly>
+                                                        name="student_id" placeholder="Enter Candidate Reg. No"  >
                                                 </div>
                                             </div>
+
                                             <div class="col-md-4">
                                                 <label for="registration_date" class="col-form-label">Registration Date <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="date" id="registration_date" name="registration_date">
@@ -232,7 +242,7 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="country" class="col-form-label">Staff Coordinator <span class="text-danger">*</span></label>
+                                                <label for="country" class="col-form-label">Staff Coordinator  </label>
                                                 <select class="form-control" id="staff_id" name="staff_id">
                                                     <option value="">-- Select Staff Coordinator --</option>
                                                     <?php

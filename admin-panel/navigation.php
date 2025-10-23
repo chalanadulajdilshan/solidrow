@@ -147,7 +147,7 @@ $US = new User($_SESSION['id']);
                 </li> -->
 
                 <!-- Solidrow Training -->
-                <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
+                <!-- <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
                 <li>
                     <a href="skills-training-application.php">
                         <i class="bx bx-file"></i>
@@ -164,7 +164,7 @@ $US = new User($_SESSION['id']);
                         <li><a href="staff-skills-training-application.php">My Applications</a></li>
                         <li><a href="commissions-skills-training.php">Commissions</a></li>
                     </ul>
-                </li>
+                </li> -->
 
 
 <!-- Later in the file, wrap the Foreign Employment section with the check -->
@@ -212,7 +212,7 @@ if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
 <?php endif; ?>
 
                 <!-- Solidrow Visa -->
-                <li class="menu-title">Solidrow Visa Consultancy Services</li>
+                <!-- <li class="menu-title">Solidrow Visa Consultancy Services</li>
                 <li>
                     <a href="visa-consultancy-application.php">
                         <i class="bx bx-file"></i>
@@ -229,7 +229,7 @@ if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
                         <li><a href="staff-visa-consultancy-application.php">My Applications</a></li>
                         <li><a href="commissions-visa-consultancy.php">Commissions</a></li>
                     </ul>
-                </li>
+                </li> -->
 
             </ul>
         </div>

@@ -39,7 +39,8 @@ if (isset($_POST['section'])) {
             'staff_id' => $_POST['staff_id'],
             'other_agent_check' => $_POST['other_agent_check'],
             'other_agent_name' => $_POST['other_agent_name'],
-            'other_agent_mobile' => $_POST['other_agent_mobile']
+            'other_agent_mobile' => $_POST['other_agent_mobile'],
+            'registration_no' => $_POST['registration_no']
         ];
 
         if (!empty($_POST['id'])) {

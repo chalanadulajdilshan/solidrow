@@ -3,6 +3,10 @@
 include '../class/include.php';
 include './auth.php';
 $DEFULTDATA = new DefaultData();
+
+$AGENCY = new Agent(NULL);
+
+
 ?>
 <html lang="en">
 
@@ -35,12 +39,12 @@ $DEFULTDATA = new DefaultData();
     <link href="assets/css/preloader.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
-<style>
-   .passport_fields {
-    display: none; 
-    clear: both;
-}
-</style>
+    <style>
+        .passport_fields {
+            display: none;
+            clear: both;
+        }
+    </style>
 </head>
 
 <body class="someBlock">
@@ -123,23 +127,23 @@ $DEFULTDATA = new DefaultData();
 
 
                                             <div class="col-md-4">
-        <label for="passport_retention" class="col-form-label">Passport Retention</label>
-        <select class="form-control" id="passport_retention" name="passport_retention" onchange="togglePassportFields()">
-            <option value="">-- Select Passport Retention --</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-    </div>
+                                                <label for="passport_retention" class="col-form-label">Passport Retention</label>
+                                                <select class="form-control" id="passport_retention" name="passport_retention" onchange="togglePassportFields()">
+                                                    <option value="">-- Select Passport Retention --</option>
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                </select>
+                                            </div>
 
-    <div class="col-md-4 passport_fields" style="display: none;">
-        <label for="passport_collected_date" class="col-form-label">Passport Collected Date</label>
-        <input class="form-control" type="date" id="passport_collected_date" name="passport_collected_date" placeholder="Enter Passport Collected Date">
-    </div>
+                                            <div class="col-md-4 passport_fields" style="display: none;">
+                                                <label for="passport_collected_date" class="col-form-label">Passport Collected Date</label>
+                                                <input class="form-control" type="date" id="passport_collected_date" name="passport_collected_date" placeholder="Enter Passport Collected Date">
+                                            </div>
 
-    <div class="col-md-4 passport_fields" style="display: none;">
-        <label for="passport_number" class="col-form-label">Passport Number</label>
-        <input class="form-control" type="text" id="passport_number" name="passport_number" placeholder="Enter Passport Number">
-    </div>
+                                            <div class="col-md-4 passport_fields" style="display: none;">
+                                                <label for="passport_number" class="col-form-label">Passport Number</label>
+                                                <input class="form-control" type="text" id="passport_number" name="passport_number" placeholder="Enter Passport Number">
+                                            </div>
 
                                             <div class="col-md-4">
                                                 <label for="birth_date" class="col-form-label">Birth Date </label>
@@ -251,11 +255,28 @@ $DEFULTDATA = new DefaultData();
                                                     ?>
                                                 </select>
                                             </div>
+                                       
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input" type="checkbox" id="other_agent_check" name="other_agent_check" onchange="toggleOtherAgentFields()">
+                                                <label class="form-check-label" for="other_agent_check">
+                                                    Other Agent
+                                                </label>
+                                            </div>
                                         </div>
 
+                                        <div class="col-md-4 other-agent-fields" style="display: none;">
+                                            <label for="other_agent_name" class="col-form-label">Agent Name</label>
+                                            <input type="text" class="form-control" id="other_agent_name" name="other_agent_name" placeholder="Enter Agent Name">
+                                        </div>
 
-
-
+                                        <div class="col-md-4 other-agent-fields" style="display: none;">
+                                            <label for="other_agent_mobile" class="col-form-label">Agent Mobile</label>
+                                            <input type="text" class="form-control" id="other_agent_mobile" name="other_agent_mobile" placeholder="Enter Agent Mobile">
+                                        </div>
+                                        </div>
                                         <div class="col-md-8" style="margin-top: 40px">
                                             <button class="btn btn-primary" type="button" id="save_section_1">Save Section 1</button>
                                         </div>
@@ -847,29 +868,28 @@ $DEFULTDATA = new DefaultData();
     <!-- JavaScript to show/hide related qualification fields -->
 
     <script>
+        // Function to toggle passport fields based on retention selection
+        function togglePassportFields() {
+            const retention = document.getElementById('passport_retention').value;
+            const passportFields = document.getElementsByClassName('passport_fields');
 
-       // Function to toggle passport fields based on retention selection
-function togglePassportFields() {
-    const retention = document.getElementById('passport_retention').value;
-    const passportFields = document.getElementsByClassName('passport_fields');
-    
-    // Convert HTMLCollection to array and update each element
-    Array.from(passportFields).forEach(field => {
-        if (retention === 'yes') {
-            field.style.display = 'block';
-        } else {
-            field.style.display = 'none';
-            // Clear the fields when hiding
-            document.getElementById('passport_collected_date').value = '';
-            document.getElementById('passport_number').value = '';
+            // Convert HTMLCollection to array and update each element
+            Array.from(passportFields).forEach(field => {
+                if (retention === 'yes') {
+                    field.style.display = 'block';
+                } else {
+                    field.style.display = 'none';
+                    // Clear the fields when hiding
+                    document.getElementById('passport_collected_date').value = '';
+                    document.getElementById('passport_number').value = '';
+                }
+            });
         }
-    });
-}
 
-// Initialize passport fields visibility when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    togglePassportFields();
-});
+        // Initialize passport fields visibility when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            togglePassportFields();
+        });
 
         document.getElementById('avb_qualification').addEventListener('change', function() {
             var relatedFields = document.querySelectorAll('.related-qualification-fields');
@@ -887,6 +907,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+
+        function toggleOtherAgentFields() {
+            const otherAgentCheck = document.getElementById('other_agent_check');
+            const otherAgentFields = document.getElementsByClassName('other-agent-fields');
+            const agentSelect = document.getElementById('agent_id');
+
+            if (otherAgentCheck.checked) {
+                // Show other agent fields and disable the agent select
+                for (let field of otherAgentFields) {
+                    field.style.display = 'block';
+                }
+                agentSelect.disabled = true;
+                agentSelect.value = ''; // Clear the selection
+            } else {
+                // Hide other agent fields and enable the agent select
+                for (let field of otherAgentFields) {
+                    field.style.display = 'none';
+                    // Clear the input fields when hiding
+                    const inputs = field.getElementsByTagName('input');
+                    for (let input of inputs) {
+                        input.value = '';
+                    }
+                }
+                agentSelect.disabled = false;
+            }
+        }
     </script>
 
 
@@ -898,6 +944,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     </script>
+
+
     <script>
         $(function(e) {
             "use strict";

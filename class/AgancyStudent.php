@@ -94,6 +94,9 @@ class AgancyStudent
     public $passport_collected_date;
     public $agent_id;
     public $staff_id;
+    public $other_agent_check;
+    public $other_agent_name;
+    public $other_agent_mobile;
 
     public function __construct($id)
     {
@@ -185,6 +188,9 @@ class AgancyStudent
             $this->passport_collected_date = $result['passport_collected_date'];
             $this->agent_id = $result['agent_id'];
             $this->staff_id = $result['staff_id'];
+            $this->other_agent_check = $result['other_agent_check'];
+            $this->other_agent_name = $result['other_agent_name'];
+            $this->other_agent_mobile = $result['other_agent_mobile'];
 
 
 
@@ -200,7 +206,7 @@ class AgancyStudent
             . "`province`,`district`,`dsdivision_id`,`gn_division`,`school_attendant`,"
             . "`other_related_qualification`,"
             . "`related_qualification_1`,`related_qualification_2`,`related_qualification_3`,`emergency_person_name`,`relationship`,`emergency_person_address`,`emergency_whatsapp`,`demand_name_field`,`occupation`,`agency_test_date`,`selection_test_result`,`job_confirm_letter_date`,`job_confirm_letter_sign_date`,`job_confirm_sign_attach`,`work_permit_document`,`pcc_submit_date`,`pcc_color_copy`,`work_permit_apply_date`,`work_permit_issue_date`,`work_permit_copy`,`travel_insurance_copy`,`travel_insurance_submit_date`,`travel_insurance2_copy`,`travel_insurance2_submit_date`,`visa_file_send_date`,`embassy_appointment_date`,`job_contract_copy`,`job_contract_copy_file`,`english_copy_attach_date`,`job_offer_letter_english`,`job_offer_letter_romania`,`guarantee_letter_english`,`guarantee_letter_romania`,`accommodation_confirmation`,`visa_status`,`visa_approved_date`,`beauro_training_date`,`beauro_training_file`,`final_approval_date`,`final_bureau_date`,`air_ticket_date`,`air_ticket_copy`,`working_experience`,`cv_copy`,`local_pcc`,`online_pcc`,`local_pcc_date`,`online_pcc_date`,"
-            . "`note`, `name_with_initials`, `is_completed`, `country`, `registration_date`, `passport_retention`, `passport_collected_date`, `agent_id`, `staff_id`) VALUES  ('"
+            . "`note`, `name_with_initials`, `is_completed`, `country`, `registration_date`, `passport_retention`, `passport_collected_date`, `agent_id`, `staff_id`, `other_agent_check`, `other_agent_name`, `other_agent_mobile`) VALUES  ('"
             . $this->student_id . "','"
             . $this->full_name . "','"
             . $this->address . "','"
@@ -278,7 +284,11 @@ class AgancyStudent
             . $this->passport_retention . "','"
             . $this->passport_collected_date . "','"
             . $this->agent_id . "','"
-            . $this->staff_id . "')";
+            . $this->staff_id . "','"
+            . $this->other_agent_check . "','"
+            . $this->other_agent_name . "','"
+            . $this->other_agent_mobile . "')";
+            
             
 
 
@@ -586,7 +596,10 @@ class AgancyStudent
             . "`online_pcc_date` ='" . $this->online_pcc_date . "', "
             . "`note` ='" . $this->note . "', "
             . "`name_with_initials` ='" . $this->name_with_initials . "', "
-            . "`is_completed` ='" . $this->is_completed . "' "
+            . "`is_completed` ='" . $this->is_completed . "', "
+            . "`other_agent_check` ='" . $this->other_agent_check . "', "
+            . "`other_agent_name` ='" . $this->other_agent_name . "', "
+            . "`other_agent_mobile` ='" . $this->other_agent_mobile . "' "
             . "WHERE `id` = '" . $this->id . "'";
 
 
@@ -694,6 +707,9 @@ class AgancyStudent
 
         return $result ? true : false;
     }
+
+
+    
 
 
 }

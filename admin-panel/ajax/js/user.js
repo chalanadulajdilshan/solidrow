@@ -5,15 +5,7 @@ $("document").ready(function () {
 
 
         //-- ** Start Error Messages
-        if (!$("#staff_id").val() || $("#staff_id").val().length === 0) {
-            swal({
-                title: "Error!",
-                text: "Please Select Staff Name.",
-                type: "error",
-                timer: 2000,
-                showConfirmButton: false,
-            });
-        } else if (!$("#username").val() || $("#username").val().length === 0) {
+          if (!$("#username").val() || $("#username").val().length === 0) {
             swal({
                 title: "Error!",
                 text: "Please Enter Username..!",

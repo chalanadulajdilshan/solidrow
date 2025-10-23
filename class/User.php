@@ -15,6 +15,8 @@ class User
     public $isActive;
     public $authToken;
     public $lastLogin;
+    public $staff_user_id;
+    public $agent_user_id;
     public $username;
     public $resetCode;
     private $password;
@@ -36,6 +38,8 @@ class User
             $this->isActive = $result['isActive'];
             $this->authToken = $result['authToken'];
             $this->lastLogin = $result['lastLogin'];
+            $this->staff_user_id = $result['staff_user_id'];
+            $this->agent_user_id = $result['agent_user_id'];
             $this->username = $result['username'];
             $this->resetCode = $result['resetcode'];
 
@@ -43,14 +47,14 @@ class User
         }
     }
 
-    public function create($type, $staff_user_id, $fullname, $username, $password)
+    public function create($type, $staff_user_id, $agent_user_id, $username, $password)
     {
 
         $enPass = md5($password);
 
         date_default_timezone_set('Asia/Colombo');
         $createdAt = date('Y-m-d H:i:s');
-        $query = "INSERT INTO `user` (`type`, `createdAt`, `staff_user_id`, `name`, `username`, `password`, `isActive`) VALUES ('" . $type . "', '" . $createdAt . "', '" . $staff_user_id . "', '" . $fullname . "', '" . $username . "', '" . $enPass . "', 1)";
+        $query = "INSERT INTO `user` (`type`, `createdAt`, `staff_user_id`, `agent_user_id`, `username`, `password`, `isActive`) VALUES ('" . $type . "', '" . $createdAt . "', '" . $staff_user_id . "', '" . $agent_user_id . "', '" . $username . "', '" . $enPass . "', 1)";
 
         $db = new Database();
 
@@ -137,17 +141,35 @@ class User
 
     public function all()
     {
-
         $query = "SELECT * FROM `user` ";
 
         $db = new Database();
         $result = $db->readQuery($query);
         $array_res = array();
         while ($row = mysqli_fetch_array($result)) {
-
             array_push($array_res, $row);
         }
         return $array_res;
+    }
+
+    public function update()
+    {
+        $query = "UPDATE `user` SET 
+                 `username` = '" . $this->username . "',
+                 `type` = '" . $this->type . "',
+                 `staff_user_id` = " . ($this->staff_user_id ? "'" . $this->staff_user_id . "'" : "NULL") . ",
+                 `agent_user_id` = " . ($this->agent_user_id ? "'" . $this->agent_user_id . "'" : "NULL") . ",
+                 `isActive` = '" . $this->isActive . "'
+                 WHERE `id` = " . $this->id;
+
+        $db = new Database();
+        $result = $db->readQuery($query);
+
+        if ($result) {
+            return $this->__construct($this->id);
+        } else {
+            return FALSE;
+        }
     }
 
 

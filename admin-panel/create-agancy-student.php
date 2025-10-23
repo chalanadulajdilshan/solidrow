@@ -14,7 +14,7 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
 <head>
 
     <meta charset="utf-8" />
-    <title>Create Student </title>
+    <title>Create Agency Student  </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="#" name="description" />
     <meta content="NYSC" name="author" />
@@ -70,7 +70,7 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Create Student</li>
+                                    <li class="breadcrumb-item active">Create Agency Student</li>
                                 </ol>
                             </div>
 
@@ -211,7 +211,7 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="school_attendant" class="col-form-label"> Higest Professional Qualification </label>
+                                                <label for="school_attendant" class="col-form-label">Highest Professional Qualification</label>
                                                 <input class="form-control" type="text" id="school_attendant"
                                                     name="school_attendant"
                                                     placeholder="Enter Professional Qualification">
@@ -250,8 +250,13 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                                     <option value="">-- Select Agent --</option>
                                                     <?php
                                                     $AGENT = new Agent(NULL);
+                                                    $user = new User($_SESSION['id']);
                                                     foreach ($AGENT->all() as $key => $agent) {
-                                                        echo "<option value=\"{$agent['id']}\">{$agent['name']}</option>";
+                                                        if ($agent['id'] == $user->agent_user_id) {
+                                                            echo "<option value=\"{$agent['id']}\">{$agent['name']}</option>";
+                                                        }else{
+                                                            echo "<option value=\"{$agent['id']}\">{$agent['name']}</option>";
+                                                        }
                                                     }
                                                     ?>
                                                 </select>
@@ -263,18 +268,18 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                             <div class="form-check mt-4">
                                                 <input class="form-check-input" type="checkbox" id="other_agent_check" name="other_agent_check" onchange="toggleOtherAgentFields()">
                                                 <label class="form-check-label" for="other_agent_check">
-                                                    Other Agent
+                                                   Other Coordinator
                                                 </label>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 other-agent-fields" style="display: none;">
-                                            <label for="other_agent_name" class="col-form-label">Agent Name</label>
-                                            <input type="text" class="form-control" id="other_agent_name" name="other_agent_name" placeholder="Enter Agent Name">
+                                            <label for="other_agent_name" class="col-form-label">Other Coordinator Name</label>
+                                            <input type="text" class="form-control" id="other_agent_name" name="other_agent_name" placeholder="Enter Other Coordinator Name">
                                         </div>
 
                                         <div class="col-md-4 other-agent-fields" style="display: none;">
-                                            <label for="other_agent_mobile" class="col-form-label">Agent Mobile</label>
+                                            <label for="other_agent_mobile" class="col-form-label">Other Coordinator Mobile</label>
                                             <input type="text" class="form-control" id="other_agent_mobile" name="other_agent_mobile" placeholder="Enter Agent Mobile">
                                         </div>
                                         </div>

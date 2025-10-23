@@ -145,7 +145,15 @@ $US = new User($_SESSION['id']);
                         <li><a href="commissions-engineering.php">Commissions</a></li>
                     </ul>
                 </li> -->
-
+<?php
+$USER_TYPE = new user($_SESSION['id']);
+if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
+    $show_foreign_employment = true;
+}else{
+    $show_foreign_employment = false;
+}
+?>
+<?php if ($show_foreign_employment): ?>
                 <!-- Solidrow Training -->
                 <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
                 <li>
@@ -166,32 +174,42 @@ $US = new User($_SESSION['id']);
                     </ul>
                 </li>
 
-                <!-- Solidrow Foreign Employment -->
-                <li class="menu-title">Solidrow Foreign Employment Agency</li>
-                <li>
-                    <a href="foreign-employment-application.php">
-                        <i class="bx bx-file"></i>
-                        <span>Application Form</span>
-                    </a>
-                </li>
-                 <li>
-                    <a href="create-agancy-student.php">
-                        <i class="bx bx-user"></i>
-                        <span>Registration </span>
-                    </a>
-                </li>
 
-                <li>
-                    <a href="javascript:void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-phone"></i>
-                        <span>Call Center</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="all-foreign-employment-application.php">Applications</a></li>
-                        <li><a href="staff-foreign-employment-application.php">My Applications</a></li>
-                        <li><a href="commissions-foreign-employment.php">Commissions</a></li>
-                    </ul>
-                </li>
+<!-- Later in the file, wrap the Foreign Employment section with the check -->
+
+    <!-- Solidrow Foreign Employment -->
+    <li class="menu-title">Solidrow Foreign Employment Agency</li>
+    <li>
+        <a href="foreign-employment-application.php">
+            <i class="bx bx-file"></i>
+            <span>Application Form</span>
+        </a>
+    </li>
+    <li>
+        <a href="create-agancy-student.php">
+            <i class="bx bx-user-plus"></i>
+            <span>Registration</span>
+        </a>
+    </li>
+    <li>
+        <a href="manage-agancy-student.php">
+            <i class="bx bx-list-ul"></i>
+            <span>Manage Registration</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="javascript:void(0);" class="has-arrow waves-effect">
+            <i class="bx bx-phone"></i>
+            <span>Call Center</span>
+        </a>
+        <ul class="sub-menu" aria-expanded="false">
+            <li><a href="all-foreign-employment-application.php">Applications</a></li>
+            <li><a href="staff-foreign-employment-application.php">My Applications</a></li>
+            <li><a href="commissions-foreign-employment.php">Commissions</a></li>
+        </ul>
+    </li>
+<?php endif; ?>
 
                 <!-- Solidrow Visa -->
                 <li class="menu-title">Solidrow Visa Consultancy Services</li>

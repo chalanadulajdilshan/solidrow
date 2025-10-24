@@ -127,7 +127,7 @@ $US = new User($_SESSION['id']);
                 <?php } ?>
 
                 <!-- Solidrow Engineering -->
-                <!-- <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
+                <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
                 <li>
                     <a href="engineering-application.php">
                         <i class="bx bx-file"></i>
@@ -144,11 +144,11 @@ $US = new User($_SESSION['id']);
                         <li><a href="staff-engineering-applications.php">My Applications</a></li>
                         <li><a href="commissions-engineering.php">Commissions</a></li>
                     </ul>
-                </li> -->
+                </li>  
 
-                <!-- Solidrow Training -->
-                <!-- <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
-                <li>
+              
+                <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
+                 <li>
                     <a href="skills-training-application.php">
                         <i class="bx bx-file"></i>
                         <span>Application Form</span>
@@ -164,7 +164,7 @@ $US = new User($_SESSION['id']);
                         <li><a href="staff-skills-training-application.php">My Applications</a></li>
                         <li><a href="commissions-skills-training.php">Commissions</a></li>
                     </ul>
-                </li> -->
+                </li>
 
 
 <!-- Later in the file, wrap the Foreign Employment section with the check -->

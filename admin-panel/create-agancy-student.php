@@ -45,6 +45,37 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
             display: none;
             clear: both;
         }
+        /* Validation styles */
+        .is-valid {
+            border-color: #28a745 !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") !important;
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+            padding-right: 2.25rem;
+        }
+        .is-invalid {
+            border-color: #dc3545 !important;
+            padding-right: 2.25rem;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        }
+        .form-control:focus.is-valid,
+        .form-control:focus.is-invalid {
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+        .form-control.is-invalid:focus {
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 80%;
+            color: #dc3545;
+        }
     </style>
 </head>
 
@@ -133,7 +164,12 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-4">
                                                 <label for="nic" class="col-form-label">NIC Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="nic" name="nic"
-                                                    placeholder="Enter NIC Number" required>
+                                                    placeholder="Enter NIC Number" required 
+                                                    oninput="validateNIC(this)" 
+                                                    onblur="checkNICExists(this.value)">
+                                                <div class="invalid-feedback" id="nic-feedback">
+                                                    Please enter a valid NIC number (10 or 12 digits)
+                                                </div>
                                             </div>
 
 
@@ -174,12 +210,28 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-4">
                                                 <label for="phone_number" class="col-form-label">Phone Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone_number"
-                                                    name="phone_number" placeholder="Enter Phone Number" required>
+                                                    name="phone_number" placeholder="Enter Phone Number (10 digits)" required 
+                                                    oninput="validatePhoneNumber(this)" 
+                                                    onblur="checkMobileNumberExists(this.value, 'phone_number', function(exists) {
+                                                        if (exists) {
+                                                            showError('phone_number', 'This phone number is already registered');
+                                                        }
+                                                    });"
+                                                    maxlength="10"
+                                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid 10-digit phone number
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="whatsapp_number" class="col-form-label">Whatsapp Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="whatsapp_number"
-                                                    name="whatsapp_number" placeholder="Enter Whatsapp Number" required>
+                                                    name="whatsapp_number" placeholder="Enter WhatsApp Number (10 digits)" required 
+                                                    oninput="validatePhoneNumber(this)" maxlength="10"
+                                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid 10-digit WhatsApp number
+                                                </div>
                                             </div>
 
                                             <div class="col-md-4">
@@ -290,9 +342,103 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
 
                                         <div class="col-md-4 other-agent-fields" style="display: none;">
                                             <label for="other_agent_mobile" class="col-form-label">Other Coordinator Mobile</label>
-                                            <input type="text" class="form-control" id="other_agent_mobile" name="other_agent_mobile" placeholder="Enter Agent Mobile">
+                                            <input type="text" class="form-control" id="other_agent_mobile" name="other_agent_mobile" 
+                                                   placeholder="Enter Coordinator Mobile (10 digits)" 
+                                                   oninput="validatePhoneNumber(this)" 
+                                                   maxlength="10"
+                                                   onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <div class="invalid-feedback">
+                                                Please enter a valid 10-digit mobile number
+                                            </div>
                                         </div>
-                                        </div>
+                                        <script>
+                                            $('form').on('submit', function(e) {
+                                                e.preventDefault();
+                                                const form = this;
+                                                const phoneNumber = $('#phone_number').val();
+                                                const whatsappNumber = $('#whatsapp_number').val();
+                                                const otherAgentMobile = $('#other_agent_mobile').val();
+                                                
+                                                // Reset previous error states
+                                                $('.is-invalid').removeClass('is-invalid');
+                                                $('.duplicate-error').remove();
+                                                
+                                                // Validate phone number format
+                                                if (!validatePhoneNumber(phoneNumber)) {
+                                                    alert('Please enter a valid 10-digit phone number');
+                                                    $('#phone_number').focus();
+                                                    return false;
+                                                }
+                                                
+                                                // Validate WhatsApp number format
+                                                if (!validatePhoneNumber(whatsappNumber)) {
+                                                    alert('Please enter a valid 10-digit WhatsApp number');
+                                                    $('#whatsapp_number').focus();
+                                                    return false;
+                                                }
+                                                
+                                                // Check if other agent mobile is provided and valid
+                                                if ($('#other_agent_check').is(':checked') && otherAgentMobile) {
+                                                    if (!validatePhoneNumber(otherAgentMobile)) {
+                                                        alert('Please enter a valid 10-digit mobile number for other coordinator');
+                                                        $('#other_agent_mobile').focus();
+                                                        return false;
+                                                    }
+                                                }
+                                                
+                                                // Function to show error message
+                                                function showError(field, message) {
+                                                    const $field = $('#' + field);
+                                                    $field.addClass('is-invalid');
+                                                    $field.after('<div class="invalid-feedback duplicate-error">' + message + '</div>');
+                                                    $field.focus();
+                                                }
+                                                
+                                                // Check for duplicate numbers
+                                                let checksCompleted = 0;
+                                                let hasDuplicates = false;
+                                                
+                                                function checkNext() {
+                                                    checksCompleted++;
+                                                    if (checksCompleted === 3 || (checksCompleted === 2 && !$('#other_agent_check').is(':checked'))) {
+                                                        if (!hasDuplicates) {
+                                                            form.submit();
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                // Check phone number
+                                                checkMobileNumberExists(phoneNumber, 'phone_number', function(exists) {
+                                                    if (exists) {
+                                                        showError('phone_number', 'This phone number is already registered');
+                                                        hasDuplicates = true;
+                                                    }
+                                                    checkNext();
+                                                });
+                                                
+                                                // Check WhatsApp number
+                                                checkMobileNumberExists(whatsappNumber, 'whatsapp_number', function(exists) {
+                                                    if (exists) {
+                                                        showError('whatsapp_number', 'This WhatsApp number is already registered');
+                                                        hasDuplicates = true;
+                                                    }
+                                                    checkNext();
+                                                });
+                                                
+                                                // Check other agent mobile if provided
+                                                if ($('#other_agent_check').is(':checked') && otherAgentMobile) {
+                                                    checkMobileNumberExists(otherAgentMobile, 'other_agent_mobile', function(exists) {
+                                                        if (exists) {
+                                                            showError('other_agent_mobile', 'This coordinator mobile number is already registered');
+                                                            hasDuplicates = true;
+                                                        }
+                                                        checkNext();
+                                                    });
+                                                } else {
+                                                    checksCompleted++; // Skip this check if not applicable
+                                                }
+                                            });
+                                        </script>
                                         <div class="col-md-8" style="margin-top: 40px">
                                             <button class="btn btn-primary" type="button" id="save_section_1">Save Section 1</button>
                                         </div>
@@ -884,6 +1030,134 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
     <!-- JavaScript to show/hide related qualification fields -->
 
     <script>
+        // Function to validate NIC number format
+        function validateNIC(input) {
+            const nic = input.value.trim();
+            const isValid = /^([0-9]{9}[xXvV]|[0-9]{12})$/.test(nic);
+            
+            if (nic === '') {
+                input.classList.remove('is-valid', 'is-invalid');
+                return false;
+            }
+            
+            input.classList.toggle('is-valid', isValid);
+            input.classList.toggle('is-invalid', !isValid);
+            
+            return isValid;
+        }
+        
+        // Function to check if NIC already exists in the database
+        function checkNICExists(nic, callback) {
+            // First validate the NIC format without DOM manipulation
+            const nicRegex = /^([0-9]{9}[xXvV]|[0-9]{12})$/;
+            const isValidFormat = nicRegex.test(nic.trim());
+            
+            if (!isValidFormat) {
+                if (typeof callback === 'function') callback(false);
+                return false;
+            }
+            
+            return $.ajax({
+                url: 'ajax/php/check-nic.php',
+                type: 'POST',
+                data: { 
+                    nic: nic,
+                    current_id: '<?php echo isset($_GET['id']) ? $_GET['id'] : 0; ?>'
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.exists) {
+                        const input = document.getElementById('nic');
+                        input.classList.add('is-invalid');
+                        const feedback = document.getElementById('nic-feedback');
+                        feedback.textContent = 'This NIC number is already registered';
+                        feedback.style.display = 'block';
+                    }
+                    if (typeof callback === 'function') callback(response.exists);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error checking NIC:', status, error);
+                    if (typeof callback === 'function') callback(false);
+                }
+            });
+        }
+        
+        // Function to check if a mobile number already exists in the database
+        function checkMobileNumberExists(number, field, callback) {
+            if (!number || number.length !== 10) {
+                callback(false);
+                return;
+            }
+            
+            $.ajax({
+                url: 'ajax/php/check-mobile.php',
+                type: 'POST',
+                data: { 
+                    number: number,
+                    field: field,
+                    current_id: '<?php echo isset($_GET['id']) ? $_GET['id'] : 0; ?>' // For edit mode
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        console.error('Error checking mobile number:', response.error);
+                        callback(false);
+                    } else {
+                        callback(response.exists);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    callback(false);
+                }
+            });
+        }
+
+        // Function to validate and format phone numbers
+        function validatePhoneNumber(input) {
+            // Get the input element if a value was passed directly
+            let inputElement = input;
+            let value = input;
+            
+            if (input.value !== undefined) {
+                // Handle direct element reference
+                inputElement = input;
+                value = input.value;
+            } else if (typeof input === 'string') {
+                // Handle string value (from inline oninput)
+                inputElement = document.activeElement; // Get the currently focused input
+                value = input;
+            }
+            
+            // Remove any non-digit characters
+            const digitsOnly = value.replace(/\D/g, '');
+            
+            // Limit to 10 digits
+            const limitedDigits = digitsOnly.slice(0, 10);
+            
+            // Update the input field with only digits
+            inputElement.value = limitedDigits;
+            
+            // Check if we have exactly 10 digits
+            const isValid = /^\d{10}$/.test(limitedDigits);
+            
+            // Update visual feedback
+            if (limitedDigits.length > 0) {
+                inputElement.classList.toggle('is-invalid', !isValid);
+                inputElement.classList.toggle('is-valid', isValid);
+                
+                // Show/hide error message
+                const errorElement = inputElement.nextElementSibling;
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.style.display = !isValid ? 'block' : 'none';
+                }
+            } else {
+                inputElement.classList.remove('is-valid', 'is-invalid');
+            }
+            
+            return isValid;
+        }
+
         // Function to toggle passport fields based on retention selection
         function togglePassportFields() {
             const retention = document.getElementById('passport_retention').value;
@@ -1089,51 +1363,144 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
             $('.section').hide();
             $('#section-1').show();
 
-            // When Section 1 is saved
-            $('#save_section_1').on('click', function() {
-                // You can add validation here
-                $('#section-2').show();
-                $('html, body').animate({
-                    scrollTop: $("#section-2").offset().top
-                }, 500);
-            });
+            // Function to validate section 1 fields
+            function validateSection1() {
+                let isValid = true;
+                const nic = $('#nic').val().trim();
+                const phoneNumber = $('#phone_number').val().trim();
+                const whatsappNumber = $('#whatsapp_number').val().trim();
+                const registrationDate = $('#registration_date').val();
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                // Reset previous error states
+                $('.is-invalid').removeClass('is-invalid');
+                $('.duplicate-error').remove();
+                $('.form-control').removeClass('is-valid');
+                
+                // Function to show error message
+                function showError(field, message) {
+                    const $field = $('#' + field);
+                    $field.addClass('is-invalid');
+                    $field.after('<div class="invalid-feedback duplicate-error" style="display: block;">' + message + '</div>');
+                    $field.focus();
+                    isValid = false;
+                }
+                
+                // Function to mark field as valid
+                function markValid(field) {
+                    $('#' + field).addClass('is-valid');
+                }
+                
+                // Validate NIC
+                if (!nic) {
+                    showError('nic', 'NIC number is required');
+                } else if (!/^([0-9]{9}[xXvV]|[0-9]{12})$/.test(nic)) {
+                    showError('nic', 'Please enter a valid NIC number (10 or 12 digits)');
+                }
+                
+                // Validate Registration Date
+                if (!registrationDate) {
+                    showError('registration_date', 'Registration date is required');
+                } else {
+                    const selectedDate = new Date(registrationDate);
+                    selectedDate.setHours(0, 0, 0, 0);
+                    
+                    if (selectedDate > today) {
+                        showError('registration_date', 'Registration date cannot be in the future');
+                    } else {
+                        markValid('registration_date');
+                    }
+                }
+                
+                // Validate Phone Number
+                if (!phoneNumber) {
+                    showError('phone_number', 'Phone number is required');
+                } else if (!/^[1-9]\d{9}$/.test(phoneNumber)) {
+                    showError('phone_number', 'Please enter a valid 10-digit phone number (should not start with 0)');
+                } else if (phoneNumber === whatsappNumber) {
+                    showError('phone_number', 'Phone number and WhatsApp number cannot be the same');
+                } else {
+                    markValid('phone_number');
+                }
+                
+                // Validate WhatsApp Number
+                if (!whatsappNumber) {
+                    showError('whatsapp_number', 'WhatsApp number is required');
+                } else if (!/^[1-9]\d{9}$/.test(whatsappNumber)) {
+                    showError('whatsapp_number', 'Please enter a valid 10-digit WhatsApp number (should not start with 0)');
+                } else if (phoneNumber === whatsappNumber) {
+                    showError('whatsapp_number', 'Phone number and WhatsApp number cannot be the same');
+                } else {
+                    markValid('whatsapp_number');
+                }
+                
+                // Check for duplicate NIC
+                if (isValid) {
+                    return new Promise((resolve) => {
+                        checkNICExists(nic, function(exists) {
+                            if (exists) {
+                                showError('nic', 'This NIC number is already registered');
+                                resolve(false);
+                            } else {
+                                // Check for duplicate phone numbers
+                                checkMobileNumberExists(phoneNumber, 'phone_number', function(phoneExists) {
+                                    if (phoneExists) {
+                                        showError('phone_number', 'This phone number is already registered');
+                                        resolve(false);
+                                    } else {
+                                        checkMobileNumberExists(whatsappNumber, 'whatsapp_number', function(whatsappExists) {
+                                            if (whatsappExists) {
+                                                showError('whatsapp_number', 'This WhatsApp number is already registered');
+                                                resolve(false);
+                                            } else {
+                                                resolve(true);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    });
+                }
+                
+                return Promise.resolve(isValid);
+            }
+            
+            // Section navigation handlers (saving is handled in agancy-student.js)
+            function goToSection(currentSection, nextSection) {
+                $(`#${currentSection}`).fadeOut(300, function() {
+                    $(`#${nextSection}`).fadeIn(300, function() {
+                        $('html, body').animate({
+                            scrollTop: $(`#${nextSection}`).offset().top - 20
+                        }, 500);
+                    });
+                });
+            }
 
             // Section 2
             $('#save_section_2').on('click', function() {
-                $('#section-3').show();
-                $('html, body').animate({
-                    scrollTop: $("#section-3").offset().top
-                }, 500);
+                goToSection('section-2', 'section-3');
             });
 
             // Section 3
             $('#save_section_3').on('click', function() {
-                $('#section-4').show();
-                $('html, body').animate({
-                    scrollTop: $("#section-4").offset().top
-                }, 500);
+                goToSection('section-3', 'section-4');
             });
 
-            // Continue this pattern...
+            // Section 4
             $('#save_section_4').on('click', function() {
-                $('#section-5').show();
-                $('html, body').animate({
-                    scrollTop: $("#section-5").offset().top
-                }, 500);
+                goToSection('section-4', 'section-5');
             });
 
+            // Section 5
             $('#save_section_5').on('click', function() {
-                $('#section-6').show();
-                $('html, body').animate({
-                    scrollTop: $("#section-6").offset().top
-                }, 500);
+                goToSection('section-5', 'section-6');
             });
 
+            // Section 6
             $('#save_section_6').on('click', function() {
-                $('#section-7').show();
-                $('html, body').animate({
-                    scrollTop: $("#section-7").offset().top
-                }, 500);
+                goToSection('section-6', 'section-7');
             });
 
             $('#save_section_7').on('click', function() {

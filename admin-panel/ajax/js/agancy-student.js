@@ -351,15 +351,288 @@ function saveSection(section, fieldIds, isFinal = false) {
 
 
   // Section 1 - Personal
-  $("#save_section_1").click(function () {
-      saveSection("section1", [
-          "student_id", "full_name", "name_with_initials", "address", "nic",
-          "passport_number", "birth_date", "gender", "email", "phone_number",
-          "whatsapp_number", "province", "district", "dsdivision_id", "gn_division",
-          "country", "registration_date", "passport_retention", "passport_collected_date",
-          "agent_id", "staff_id", "school_attendant","other_agent_check","other_agent_name","other_agent_mobile","registration_no"
-      ]);
+  $("#save_section_1").click(async function (e) {
+      e.preventDefault();
+      
+      // Show loading state
+      const $saveBtn = $(this);
+      const originalText = $saveBtn.html();
+      $saveBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
+      
+      try {
+          // Run the validation
+          const isValid = await validateSection1();
+          
+          if (isValid) {
+              // Get all form data
+              const form = $('#form-data');
+              const formData = new FormData(form[0]);
+              
+              // Add section info and action
+              formData.append('section', 'section1');
+              formData.append('action', 'SAVE_SECTION');
+              
+              // Add student_db_id if exists
+              const studentDbId = $("#student_db_id").val();
+              if (studentDbId) {
+                  formData.append('id', studentDbId);
+              }
+              
+              // Add CSRF token if it exists
+              const token = $('meta[name="csrf-token"]').attr('content');
+              if (token) {
+                  formData.append('_token', token);
+              }
+              
+              // Log form data for debugging
+              const formDataObj = {};
+              formData.forEach((value, key) => {
+                  formDataObj[key] = value;
+              });
+              console.log('Submitting form data:', formDataObj);
+              
+              // Send data via AJAX
+              $.ajax({
+                  url: form.attr('action') || "ajax/php/agancy-student.php",
+                  type: "POST",
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  dataType: "json",
+                  success: function(response) {
+                      if (response.status === "success") {
+                          if (response.id) {
+                              // Update the student_db_id if we got a new one
+                              $("#student_db_id").val(response.id);
+                              
+                              // Show success message
+                              swal({
+                                  title: "Success!",
+                                  text: "Section 1 saved successfully!",
+                                  type: "success",
+                                  timer: 1000,
+                                  showConfirmButton: false
+                              }).then(() => {
+                                  // Close section 1
+                                  $('#section-1').collapse('hide');
+                                  // Show section 2
+                                  $('#section-2').collapse('show');
+                                  // Enable section 2 save button
+                                  $('#save_section_2').prop('disabled', false);
+                                  
+                                  // Enable section 2 tab if it was disabled and show it
+                                  $('.nav-link[href="#section2"]')
+                                      .removeClass('disabled')
+                                      .tab('show');
+                                  
+                                  // Scroll to section 2 after a short delay to ensure it's visible
+                                  setTimeout(() => {
+                                      $('html, body').animate({
+                                          scrollTop: $('#section-2').offset().top - 20
+                                      }, 500);
+                                  }, 100);
+                              });
+                          }
+                      } else {
+                          swal({
+                              title: "Error!",
+                              text: response.message || "Failed to save section 1. Please try again.",
+                              type: "error",
+                              timer: 3000,
+                              showConfirmButton: true
+                          });
+                      }
+                  },
+                  error: function(xhr, status, error) {
+                      console.error("AJAX Error details:", {
+                          status: xhr.status,
+                          statusText: xhr.statusText,
+                          responseText: xhr.responseText,
+                          error: error
+                      });
+                      
+                      let errorMessage = "An error occurred while saving. Please try again.";
+                      
+                      // Try to get more specific error from response
+                      try {
+                          const response = JSON.parse(xhr.responseText);
+                          if (response && response.message) {
+                              errorMessage = response.message;
+                          }
+                      } catch (e) {
+                          console.error("Error parsing error response:", e);
+                      }
+                      
+                      swal({
+                          title: "Error!",
+                          text: errorMessage,
+                          type: "error",
+                          timer: 5000,
+                          showConfirmButton: true
+                      });
+                  },
+                  complete: function() {
+                      // Always re-enable the button
+                      $saveBtn.prop('disabled', false).html(originalText);
+                  }
+              });
+          } else {
+              $saveBtn.prop('disabled', false).html(originalText);
+          }
+      } catch (error) {
+          console.error("Error in save_section_1:", {
+              error: error,
+              errorMessage: error.message,
+              stack: error.stack
+          });
+          
+          swal({
+              title: "Error!",
+              text: error.message || "An unexpected error occurred. Please try again.",
+              type: "error",
+              timer: 5000,
+              showConfirmButton: true
+          });
+          
+          $saveBtn.prop('disabled', false).html(originalText);
+      }
   });
+  
+  // Make validateSection1 function available globally
+  window.validateSection1 = async function() {
+      let isValid = true;
+      const nic = $('#nic').val().trim();
+      const phoneNumber = $('#phone_number').val().trim();
+      const whatsappNumber = $('#whatsapp_number').val().trim();
+      const registrationDate = $('#registration_date').val();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Reset previous error states
+      $('.is-invalid').each(function() {
+          if (this && this.classList) {
+              this.classList.remove('is-invalid');
+          }
+      });
+      $('.duplicate-error').remove();
+      $('.form-control').each(function() {
+          if (this && this.classList) {
+              this.classList.remove('is-valid');
+          }
+      });
+      
+      // Function to show error message
+      function showError(field, message) {
+          const $field = $('#' + field);
+          if ($field.length) {
+              const element = $field[0];
+              if (element && element.classList) {
+                  element.classList.add('is-invalid');
+              }
+              $field.after('<div class="invalid-feedback duplicate-error" style="display: block;">' + message + '</div>');
+              try {
+                  $field.focus();
+              } catch (e) {
+                  console.error('Could not focus on field:', field, e);
+              }
+          } else {
+              console.error('Could not find element with ID:', field);
+          }
+          isValid = false;
+      }
+      
+      // Function to mark field as valid
+      function markValid(field) {
+          const $field = $('#' + field);
+          if ($field.length) {
+              const element = $field[0];
+              if (element && element.classList) {
+                  element.classList.add('is-valid');
+              }
+          } else {
+              console.warn('Could not find element to mark as valid:', field);
+          }
+      }
+      
+      // Validate NIC
+      if (!nic) {
+          showError('nic', 'NIC number is required');
+      } else if (!/^([0-9]{9}[xXvV]|[0-9]{12})$/.test(nic)) {
+          showError('nic', 'Please enter a valid NIC number (10 or 12 digits)');
+      }
+      
+      // Validate Registration Date
+      if (!registrationDate) {
+          showError('registration_date', 'Registration date is required');
+      } else {
+          const selectedDate = new Date(registrationDate);
+          selectedDate.setHours(0, 0, 0, 0);
+          
+          if (selectedDate > today) {
+              showError('registration_date', 'Registration date cannot be in the future');
+          } else {
+              markValid('registration_date');
+          }
+      }
+      
+      // Validate Phone Number (Sri Lankan format: 0XXXXXXXXX, 10 digits starting with 0)
+      if (!phoneNumber) {
+          showError('phone_number', 'Phone number is required');
+      } else if (!/^0[1-9]\d{8}$/.test(phoneNumber)) {
+          showError('phone_number', 'Please enter a valid 10-digit Sri Lankan phone number starting with 0');
+      }   else {
+          markValid('phone_number');
+      }
+      
+      // Validate WhatsApp Number (Sri Lankan format: 0XXXXXXXXX, 10 digits starting with 0)
+      if (!whatsappNumber) {
+          showError('whatsapp_number', 'WhatsApp number is required');
+      } else if (!/^0[1-9]\d{8}$/.test(whatsappNumber)) {
+          showError('whatsapp_number', 'Please enter a valid 10-digit Sri Lankan WhatsApp number starting with 0');
+      }  else {
+          markValid('whatsapp_number');
+      }
+      
+      // If all validations pass, check for duplicates
+      if (isValid) {
+          return new Promise((resolve) => {
+              // First, clear any previous NIC error
+              const nicField = document.getElementById('nic');
+              if (nicField) {
+                  nicField.classList.remove('is-invalid');
+                  const existingError = document.querySelector('#nic + .invalid-feedback.duplicate-error');
+                  if (existingError) {
+                      existingError.remove();
+                  }
+              }
+              
+              checkNICExists(nic, function(exists) {
+                  if (exists) {
+                      showError('nic', 'This NIC number is already registered');
+                      resolve(false);
+                  } else {
+                      checkMobileNumberExists(phoneNumber, 'phone_number', function(phoneExists) {
+                          if (phoneExists) {
+                              showError('phone_number', 'This phone number is already registered');
+                              resolve(false);
+                          } else {
+                              checkMobileNumberExists(whatsappNumber, 'whatsapp_number', function(whatsappExists) {
+                                  if (whatsappExists) {
+                                      showError('whatsapp_number', 'This WhatsApp number is already registered');
+                                      resolve(false);
+                                  } else {
+                                      resolve(true);
+                                  }
+                              });
+                          }
+                      });
+                  }
+              });
+          });
+      }
+      
+      return Promise.resolve(isValid);
+  };
 
   // Section 2 - Attachments
   $("#save_section_2").click(function () {

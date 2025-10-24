@@ -37,9 +37,9 @@ if (isset($_POST['section'])) {
             'passport_collected_date' => $_POST['passport_collected_date'], 
             'agent_id' => $_POST['agent_id'], 
             'staff_id' => $_POST['staff_id'],
-            'other_agent_check' => $_POST['other_agent_check'],
-            'other_agent_name' => $_POST['other_agent_name'],
-            'other_agent_mobile' => $_POST['other_agent_mobile'],
+            'other_agent_check' => $_POST['other_agent_check'] ?? null,
+            'other_agent_name' => $_POST['other_agent_name'] ?? null,
+            'other_agent_mobile' => $_POST['other_agent_mobile'] ?? null,
             'registration_no' => $_POST['registration_no']
         ];
 

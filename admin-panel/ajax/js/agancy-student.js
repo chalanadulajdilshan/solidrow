@@ -389,7 +389,7 @@ function saveSection(section, fieldIds, isFinal = false) {
               formData.forEach((value, key) => {
                   formDataObj[key] = value;
               });
-              console.log('Submitting form data:', formDataObj);
+             
               
               // Send data via AJAX
               $.ajax({
@@ -405,33 +405,19 @@ function saveSection(section, fieldIds, isFinal = false) {
                               // Update the student_db_id if we got a new one
                               $("#student_db_id").val(response.id);
                               
-                              // Show success message
+                              // Show success message and reload the page
                               swal({
-                                  title: "Success!",
-                                  text: "Section 1 saved successfully!",
-                                  type: "success",
-                                  timer: 1000,
-                                  showConfirmButton: false
-                              }).then(() => {
-                                  // Close section 1
-                                  $('#section-1').collapse('hide');
-                                  // Show section 2
-                                  $('#section-2').collapse('show');
-                                  // Enable section 2 save button
-                                  $('#save_section_2').prop('disabled', false);
-                                  
-                                  // Enable section 2 tab if it was disabled and show it
-                                  $('.nav-link[href="#section2"]')
-                                      .removeClass('disabled')
-                                      .tab('show');
-                                  
-                                  // Scroll to section 2 after a short delay to ensure it's visible
-                                  setTimeout(() => {
-                                      $('html, body').animate({
-                                          scrollTop: $('#section-2').offset().top - 20
-                                      }, 500);
-                                  }, 100);
-                              });
+    title: "Success!",
+    text: "Section 1 saved successfully! The page will reload...",
+    type: "success",
+    timer: 1500,
+    showConfirmButton: false
+});
+
+setTimeout(() => {
+    window.location.reload();
+}, 1600);
+
                           }
                       } else {
                           swal({

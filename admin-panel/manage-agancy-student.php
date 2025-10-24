@@ -89,7 +89,8 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                 <table id="student-datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                         <tr>
-                            <th>Candidate Reg No</th>
+                            <th>Id</th>
+                            <th> Reg No</th>
                             <th>Registration Date</th>
                             <th>Mobile Number</th>
                             <th>Passport Number</th>
@@ -99,12 +100,19 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                     <tbody>
                         <?php
                         $STUDENT = new AgancyStudent(NULL);
-                        $students = $STUDENT->all();
+                        $USERSS = new User($_SESSION['id']); 
+                        if($USERSS->type == 2){
+                            $students = $STUDENT->getByAgent($_SESSION['id']);
+                        }else if($USERSS->type == 1){
+                            $students = $STUDENT->getByStaff($_SESSION['id']);
+                        }
                         if ($students) {
-                            foreach ($students as $student) {
+                            foreach ($students as $key=>$student) {
+                                $key++;
                         ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($student['student_id']); ?></td>
+                                <td><?php echo htmlspecialchars($key); ?></td>
+                                <td><?php echo htmlspecialchars($student['registration_no']); ?></td>
                                 <td><?php echo !empty($student['registration_date']) ? date('Y-m-d', strtotime($student['registration_date'])) : 'N/A'; ?></td>
                                 <td><?php echo htmlspecialchars($student['mobile'] ?? 'N/A'); ?></td>
                                 <td><?php echo htmlspecialchars($student['passport_no'] ?? 'N/A'); ?></td>

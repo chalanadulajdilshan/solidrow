@@ -333,6 +333,56 @@ class AgancyStudent
         return $array_res;
     }
 
+      public function getByAgent($agent_id)
+    {
+
+
+
+        $query = "SELECT * FROM `agencystudent` WHERE `agent_id` = '$agent_id' ORDER BY `student_id` ASC";
+
+        $db = new Database();
+
+        $result = $db->readQuery($query);
+
+        $array_res = array();
+
+
+
+        while ($row = mysqli_fetch_array($result)) {
+
+            array_push($array_res, $row);
+        }
+
+
+
+        return $array_res;
+    }
+
+       public function getByStaff($staff_id)
+    {
+
+
+
+        $query = "SELECT * FROM `agencystudent` WHERE `staff_id` = '$staff_id' ORDER BY `student_id` ASC";
+
+        $db = new Database();
+
+        $result = $db->readQuery($query);
+
+        $array_res = array();
+
+
+
+        while ($row = mysqli_fetch_array($result)) {
+
+            array_push($array_res, $row);
+        }
+
+
+
+        return $array_res;
+    }
+
     public function getStudentByid($id)
     {
         $query = 'SELECT * FROM `agencystudent` WHERE is_certificate="' . $id . '"   ORDER BY queue ASC';

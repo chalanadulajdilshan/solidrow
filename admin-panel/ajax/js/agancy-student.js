@@ -350,6 +350,19 @@ function saveSection(section, fieldIds, isFinal = false) {
 
 
 
+function unlockSection(sectionNumber) {
+    const sectionSelector = `#section-${sectionNumber}`;
+    const $targetSection = $(sectionSelector);
+
+    if ($targetSection.length) {
+        $targetSection.slideDown(300, function () {
+            const offsetTop = $targetSection.offset()?.top || 0;
+            $('html, body').animate({ scrollTop: offsetTop - 20 }, 500);
+        });
+    }
+}
+
+
   // Section 1 - Personal
   $("#save_section_1").click(async function (e) {
       e.preventDefault();
@@ -405,19 +418,18 @@ function saveSection(section, fieldIds, isFinal = false) {
                               // Update the student_db_id if we got a new one
                               $("#student_db_id").val(response.id);
                               
-                              // Show success message and reload the page
+                              // Show success message and unlock next section
                               swal({
-    title: "Success!",
-    text: "Section 1 saved successfully! The page will reload...",
-    type: "success",
-    timer: 1500,
-    showConfirmButton: false
-});
+                                  title: "Success!",
+                                  text: "Section 1 saved successfully!",
+                                  type: "success",
+                                  timer: 1500,
+                                  showConfirmButton: false
+                              });
 
-setTimeout(() => {
-    window.location.reload();
-}, 1600);
-
+                              setTimeout(() => {
+                                  unlockSection(2);
+                              }, 1600);
                           }
                       } else {
                           swal({

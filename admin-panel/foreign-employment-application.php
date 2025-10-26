@@ -237,7 +237,8 @@ include './auth.php';
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
     <?php include './assets/main-js.php'; ?>
-    <script src="ajax/js/engineering-application.js" type="text/javascript"></script>
+    <script src="ajax/js/foreign-employment-application.js" type="text/javascript"></script>
+
     <!-- App js -->
     <script src="assets/js/app.js"></script>
 

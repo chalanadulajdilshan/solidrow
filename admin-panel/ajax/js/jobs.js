@@ -84,6 +84,7 @@ jQuery(document).ready(function ($) {
     $("#new").click(function (e) {
       e.preventDefault();
       $("#form-data")[0].reset();
+      $("#active").prop("checked", true);
       $("#create").show();
       $("#update").hide();
       $("#image_preview").hide();
@@ -99,6 +100,7 @@ jQuery(document).ready(function ($) {
       $("#description").val(jobData.description);
       $("#country").val(jobData.country);
       $("#respons_person").val(jobData.respons_person);
+      $("#active").prop("checked", jobData.active == 1);
   
       if (jobData.image) {
         $("#image_preview").show();

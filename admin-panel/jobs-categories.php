@@ -32,8 +32,13 @@ include './auth.php';
                                                 <label>Title</label>
                                                 <input type="text" id="title" name="title" class="form-control" placeholder="Enter job title" required>
                                             </div>
-                                   
-                                         
+                                            <div class="col-md-4 mb-3">
+                                                <div class="form-check mt-4">
+                                                    <input class="form-check-input" type="checkbox" id="activeStatus" name="activeStatus">
+                                                    <label class="form-check-label" for="activeStatus">Active</label>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="row">
                                             <div class="col-12 text-end">
@@ -46,7 +51,7 @@ include './auth.php';
                                                 <button type="button" class="btn btn-secondary" id="new">
                                                     <i class="uil uil-plus me-1"></i> New
                                                 </button>
-                                                <button type="button" class="btn btn-danger delete-job">
+                                                <button type="button" class="btn btn-danger delete-job" style="display: none;">
                                                     <i class="uil uil-trash me-1"></i> Delete
                                                 </button>
                                             </div>
@@ -67,7 +72,8 @@ include './auth.php';
                                         <thead>
                                             <tr>
                                                 <th>#ID</th>
-                                                <th>Title</th> 
+                                                <th>Title</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -81,11 +87,13 @@ include './auth.php';
                                                 <tr id="div<?php echo $job['id'] ?>">
                                                     <td><?php echo $key ?></td>
                                                     <td><?php echo htmlspecialchars($job['name']) ?></td>
-                                                     
+                                                    <td><?php echo $job['is_active'] ? 'Active' : 'Inactive'; ?></td>
+
                                                     <td>
                                                         <div class="badge bg-pill bg-soft-success font-size-14 select-job"
                                                             data-id="<?php echo $job['id'] ?>"
-                                                            data-title="<?php echo htmlspecialchars($job['name']) ?>" >
+                                                            data-title="<?php echo htmlspecialchars($job['name']) ?>"
+                                                            data-active="<?php echo (int)$job['is_active']; ?>">
                                                             <i class="fas fa-pencil-alt p-1"></i>
                                                         </div>
                                                     </td>

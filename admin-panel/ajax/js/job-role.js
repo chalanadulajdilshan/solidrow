@@ -61,7 +61,7 @@ jQuery(document).ready(function () {
     $("#update").click(function (event) {
         event.preventDefault();
 
-        if (!$('#name').val() || $('#name').val().length === 0) {
+        if (!$('#title').val() || $('#title').val().length === 0) {
             swal({
                 title: "Error!",
                 text: "Please enter job role name",
@@ -119,31 +119,32 @@ jQuery(document).ready(function () {
         e.preventDefault();
         $('#form-data')[0].reset();
         $("#create").show();
+        $("#update").hide();
+        $(".delete-job").hide();
+        $('#activeStatus').prop('checked', false);
     });
 
-    // Populate form from modal click
-    $(document).on('click', '.select-jobrole', function () {
-        $('#jobrole_id').val($(this).data('id'));
-        $('#name').val($(this).data('name'));
-
-        if ($(this).data('active') == 1) {
-            $('#activeStatus').prop('checked', true);
-        } else {
-            $('#activeStatus').prop('checked', false);
-        }
+    // Populate form from table click
+    $(document).on('click', '.select-job', function () {
+        $('#job_id').val($(this).data('id'));
+        $('#title').val($(this).data('title'));
+        const isActive = Number($(this).data('active')) === 1;
+        $('#activeStatus').prop('checked', isActive);
 
         $("#create").hide();
-        $('#jobrole_master').modal('hide');
+        $("#update").show();
+        $("#new").show();
+        $(".delete-job").show();
     });
 
     // Delete Job Role
-    $(document).on('click', '.delete-jobrole', function (e) {
+    $(document).on('click', '.delete-job', function (e) {
         e.preventDefault();
 
-        var jobroleId = $('#jobrole_id').val();
-        var jobroleName = $('#name').val();
+        var jobId = $('#job_id').val();
+        var jobName = $('#title').val();
 
-        if (!jobroleId || jobroleId === "") {
+        if (!jobId || jobId === "") {
             swal({
                 title: "Error!",
                 text: "Please select a job role first.",
@@ -156,7 +157,7 @@ jQuery(document).ready(function () {
 
         swal({
             title: "Are you sure?",
-            text: "Do you want to delete job role '" + jobroleName + "'?",
+            text: "Do you want to delete job role '" + jobName + "'?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
@@ -172,7 +173,7 @@ jQuery(document).ready(function () {
                     url: 'ajax/php/job_role.php',
                     type: 'POST',
                     data: {
-                        id: jobroleId,
+                        id: jobId,
                         delete: true
                     },
                     dataType: 'JSON',

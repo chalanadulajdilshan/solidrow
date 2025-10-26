@@ -100,12 +100,17 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                     <tbody>
                         <?php
                         $STUDENT = new AgancyStudent(NULL);
-                        $USERSS = new User($_SESSION['id']); 
-                        if($USERSS->type == 2){
-                            $students = $STUDENT->getByAgent($_SESSION['id']);
-                        }else if($USERSS->type == 1){
-                            $students = $STUDENT->getByStaff($_SESSION['id']);
+                        $students = [];
+                        $loggedInUser = new User($_SESSION['id']);
+
+                        if ($loggedInUser->type == 3 && !empty($loggedInUser->agent_user_id)) {
+                            $students = $STUDENT->getByAgent($loggedInUser->agent_user_id);
+                        } elseif ($loggedInUser->type == 2 && !empty($loggedInUser->staff_user_id)) {
+                            $students = $STUDENT->getByStaff($loggedInUser->staff_user_id);
+                        } else {
+                            $students = $STUDENT->all();
                         }
+
                         if ($students) {
                             foreach ($students as $key=>$student) {
                                 $key++;
@@ -114,15 +119,13 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
                                 <td><?php echo htmlspecialchars($key); ?></td>
                                 <td><?php echo htmlspecialchars($student['registration_no']); ?></td>
                                 <td><?php echo !empty($student['registration_date']) ? date('Y-m-d', strtotime($student['registration_date'])) : 'N/A'; ?></td>
-                                <td><?php echo htmlspecialchars($student['mobile'] ?? 'N/A'); ?></td>
-                                <td><?php echo htmlspecialchars($student['passport_no'] ?? 'N/A'); ?></td>
+                                <td><?php echo htmlspecialchars($student['phone_number'] ?? 'N/A'); ?></td>
+                                <td><?php echo htmlspecialchars($student['passport_number'] ?? 'N/A'); ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary view-student" 
-                                            data-id="<?php echo $student['id']; ?>"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#viewStudentModal">
-                                        <i class="fas fa-eye"></i> View
-                                    </button>
+                                    <a class="btn btn-sm btn-primary"
+                                       href="create-agancy-student.php?id=<?php echo (int) $student['id']; ?>">
+                                        <i class="fas fa-edit"></i> Manage
+                                    </a>
                                 </td>
                             </tr>
                         <?php

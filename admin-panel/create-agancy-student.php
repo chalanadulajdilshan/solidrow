@@ -5,6 +5,12 @@ include './auth.php';
 $DEFULTDATA = new DefaultData();
  
 $AGENCY_STUDENT  = new AgancyStudent(NULL);
+$studentToEdit = null;
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $studentToEdit = new AgancyStudent((int) $_GET['id']);
+}
+
 $res = $AGENCY_STUDENT->getLastID();
 $student_id = $res + 1;
 $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'/'.$student_id;
@@ -123,7 +129,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="registration_no" class="col-form-label"> Registration No <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="registration_no"
-                                                        name="registration_no" placeholder="Enter Registration No" value="<?php echo $student_id; ?>" readonly>
+                                                        name="registration_no" placeholder="Enter Registration No" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->registration_no : $student_id); ?>" readonly>
                                                 </div>
                                             </div>
 
@@ -131,40 +137,40 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="student_id" class="col-form-label"> Candidate Reg. No <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="student_id"
-                                                        name="student_id" placeholder="Enter Candidate Reg. No"  >
+                                                        name="student_id" placeholder="Enter Candidate Reg. No" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->student_id : ''); ?>" <?php echo $studentToEdit ? 'readonly' : ''; ?> >
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="registration_date" class="col-form-label">Registration Date <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="date" id="registration_date" name="registration_date">
+                                                <input class="form-control" type="date" id="registration_date" name="registration_date" value="<?php echo $studentToEdit && $studentToEdit->registration_date ? date('Y-m-d', strtotime($studentToEdit->registration_date)) : ''; ?>">
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="full_name" class="col-form-label">Name as Mentioned in the Passport <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="full_name" name="full_name"
-                                                        placeholder="Enter Name as Mentioned in the Passport ">
+                                                        placeholder="Enter Name as Mentioned in the Passport " value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->full_name : ''); ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 hidden">
                                                 <label for="name_with_initials" class="col-form-label"> Name with Initial</label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="name_with_initials"
-                                                        name="name_with_initials" placeholder="Enter Name with Initials">
+                                                        name="name_with_initials" placeholder="Enter Name with Initials" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->name_with_initials : ''); ?>">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="address" class="col-form-label">Address <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="address" name="address"
-                                                    placeholder="Enter Address" required>
+                                                    placeholder="Enter Address" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->address : ''); ?>" required>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="nic" class="col-form-label">NIC Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="nic" name="nic"
-                                                    placeholder="Enter NIC Number" required 
+                                                    placeholder="Enter NIC Number" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->nic : ''); ?>" required 
                                                     oninput="validateNIC(this)" 
                                                     onblur="checkNICExists(this.value)">
                                                 <div class="invalid-feedback" id="nic-feedback">
@@ -177,40 +183,40 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="passport_retention" class="col-form-label">Passport Retention</label>
                                                 <select class="form-control" id="passport_retention" name="passport_retention" onchange="togglePassportFields()">
                                                     <option value="">-- Select Passport Retention --</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="yes" <?php echo $studentToEdit && $studentToEdit->passport_retention == 'yes' ? 'selected' : ''; ?>>Yes</option>
+                                                    <option value="no" <?php echo $studentToEdit && $studentToEdit->passport_retention == 'no' ? 'selected' : ''; ?>>No</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-4 passport_fields" style="display: none;">
                                                 <label for="passport_collected_date" class="col-form-label">Passport Collected Date</label>
-                                                <input class="form-control" type="date" id="passport_collected_date" name="passport_collected_date" placeholder="Enter Passport Collected Date">
+                                                <input class="form-control" type="date" id="passport_collected_date" name="passport_collected_date" placeholder="Enter Passport Collected Date" value="<?php echo $studentToEdit && $studentToEdit->passport_collected_date ? date('Y-m-d', strtotime($studentToEdit->passport_collected_date)) : ''; ?>">
                                             </div>
 
                                             <div class="col-md-4 passport_fields" style="display: none;">
                                                 <label for="passport_number" class="col-form-label">Passport Number</label>
-                                                <input class="form-control" type="text" id="passport_number" name="passport_number" placeholder="Enter Passport Number">
+                                                <input class="form-control" type="text" id="passport_number" name="passport_number" placeholder="Enter Passport Number" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->passport_number : ''); ?>">
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="birth_date" class="col-form-label">Birth Date </label>
                                                 <input class="form-control" type="text" id="birth_date" name="birth_date"
-                                                    readonly>
+                                                    value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->birth_date : ''); ?>" readonly>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="gender" class="col-form-label">Gender</label>
-                                                <input class="form-control" type="text" id="gender" name="gender" readonly>
+                                                <input class="form-control" type="text" id="gender" name="gender" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->gender : ''); ?>" readonly>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="email" class="col-form-label">Email Address</label>
                                                 <input class="form-control" type="text" id="email" name="email"
-                                                    placeholder="Enter Email Address">
+                                                    placeholder="Enter Email Address" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->email : ''); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="phone_number" class="col-form-label">Phone Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone_number"
-                                                    name="phone_number" placeholder="Enter Phone Number (10 digits)" required 
+                                                    name="phone_number" placeholder="Enter Phone Number (10 digits)" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->phone_number : ''); ?>" required 
                                                     oninput="validatePhoneNumber(this)" 
                                                     onblur="checkMobileNumberExists(this.value, 'phone_number', function(exists) {
                                                         if (exists) {
@@ -226,7 +232,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-4">
                                                 <label for="whatsapp_number" class="col-form-label">Whatsapp Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="whatsapp_number"
-                                                    name="whatsapp_number" placeholder="Enter WhatsApp Number (10 digits)" required 
+                                                    name="whatsapp_number" placeholder="Enter WhatsApp Number (10 digits)" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->whatsapp_number : ''); ?>" required 
                                                     oninput="validatePhoneNumber(this)" maxlength="10"
                                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                                 <div class="invalid-feedback">
@@ -241,7 +247,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     <?php
                                                     $PROVINCE = new Province(NULL);
                                                     foreach ($PROVINCE->all() as $key => $province) {
-                                                        echo "<option value=\"{$province['id']}\">{$province['name']}</option>";
+                                                        $selected = $studentToEdit && $studentToEdit->province == $province['id'] ? 'selected' : '';
+                                                        echo "<option value=\"{$province['id']}\" $selected>{$province['name']}</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -251,7 +258,15 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="district" class="col-form-label">District <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="district" name="district">
                                                     <option value="">-- Select District --</option>
-                                                    <!-- Populate dynamically -->
+                                                    <?php
+                                                    if ($studentToEdit && $studentToEdit->province) {
+                                                        $DISTRICT = new District(NULL);
+                                                        foreach ($DISTRICT->GetDistrictByProvince($studentToEdit->province) as $district) {
+                                                            $selected = $studentToEdit->district == $district['id'] ? 'selected' : '';
+                                                            echo "<option value=\"{$district['id']}\" $selected>{$district['name']}</option>";
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
 
@@ -260,7 +275,15 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     Secretariat</label>
                                                 <select class="form-control" id="dsdivision_id" name="dsdivision_id">
                                                     <option value="">-- Select Divisional Secretariat --</option>
-                                                    <!-- Populate dynamically -->
+                                                    <?php
+                                                    if ($studentToEdit && $studentToEdit->district) {
+                                                        $DSDIVISION = new Dsdivision(NULL);
+                                                        foreach ($DSDIVISION->GetDistrictByDsdivision($studentToEdit->district) as $division) {
+                                                            $selected = $studentToEdit->dsdivision_id == $division['id'] ? 'selected' : '';
+                                                            echo "<option value=\"{$division['id']}\" $selected>{$division['name']}</option>";
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
@@ -268,7 +291,15 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     Division</label>
                                                 <select class="form-control" id="gn_division" name="gn_division">
                                                     <option value="">-- Select Grama Niladhari Division --</option>
-                                                    <!-- Populate dynamically -->
+                                                    <?php
+                                                    if ($studentToEdit && $studentToEdit->dsdivision_id) {
+                                                        $GNDIV = new Gndivision(NULL);
+                                                        foreach ($GNDIV->GetGnByDsdivision($studentToEdit->dsdivision_id) as $gn) {
+                                                            $selected = $studentToEdit->gn_division == $gn['id'] ? 'selected' : '';
+                                                            echo "<option value=\"{$gn['id']}\" $selected>{$gn['name']}</option>";
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
 
@@ -276,7 +307,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="school_attendant" class="col-form-label">Highest Professional Qualification</label>
                                                 <input class="form-control" type="text" id="school_attendant"
                                                     name="school_attendant"
-                                                    placeholder="Enter Professional Qualification">
+                                                    placeholder="Enter Professional Qualification" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->school_attendant : ''); ?>">
                                             </div>
 
 
@@ -288,7 +319,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     <?php
                                                     $COUNTRY = new Country(NULL);
                                                     foreach ($COUNTRY->all() as $key => $country) {
-                                                        echo "<option value=\"{$country['id']}\">{$country['name']}</option>";
+                                                        $selected = $studentToEdit && $studentToEdit->country == $country['id'] ? 'selected' : '';
+                                                        echo "<option value=\"{$country['id']}\" $selected>{$country['name']}</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -300,7 +332,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     <?php
                                                     $STAFFCOORDINATOR = new staff(NULL);
                                                     foreach ($STAFFCOORDINATOR->all() as $key => $country) {
-                                                        echo "<option value=\"{$country['id']}\">{$country['name']}</option>";
+                                                        $selected = $studentToEdit && $studentToEdit->staff_id == $country['id'] ? 'selected' : '';
+                                                        echo "<option value=\"{$country['id']}\" $selected>{$country['name']}</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -314,11 +347,13 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     $AGENT = new Agent(NULL);
                                                     $user = new User($_SESSION['id']);
                                                     foreach ($AGENT->all() as $key => $agent) {
-                                                        if ($agent['id'] == $user->agent_user_id) {
-                                                            echo "<option selected value=\"{$agent['id']}\">{$agent['name']}</option>";
-                                                        }else{
-                                                            echo "<option value=\"{$agent['id']}\">{$agent['name']}</option>";
+                                                        $selected = '';
+                                                        if ($studentToEdit) {
+                                                            $selected = $studentToEdit->agent_id == $agent['id'] ? 'selected' : '';
+                                                        } elseif ($agent['id'] == $user->agent_user_id) {
+                                                            $selected = 'selected';
                                                         }
+                                                        echo "<option value=\"{$agent['id']}\" $selected>{$agent['name']}</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -328,7 +363,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
 
                                         <div class="col-md-4">
                                             <div class="form-check mt-4">
-                                                <input class="form-check-input" type="checkbox" id="other_agent_check" name="other_agent_check" onchange="toggleOtherAgentFields()">
+                                                <input class="form-check-input" type="checkbox" id="other_agent_check" name="other_agent_check" onchange="toggleOtherAgentFields()" <?php echo $studentToEdit && $studentToEdit->other_agent_check ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="other_agent_check">
                                                    Other Coordinator
                                                 </label>
@@ -337,7 +372,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
 
                                         <div class="col-md-4 other-agent-fields" style="display: none;">
                                             <label for="other_agent_name" class="col-form-label">Other Coordinator Name</label>
-                                            <input type="text" class="form-control" id="other_agent_name" name="other_agent_name" placeholder="Enter Other Coordinator Name">
+                                            <input type="text" class="form-control" id="other_agent_name" name="other_agent_name" placeholder="Enter Other Coordinator Name" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->other_agent_name : ''); ?>">
                                         </div>
 
                                         <div class="col-md-4 other-agent-fields" style="display: none;">
@@ -346,6 +381,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                    placeholder="Enter Coordinator Mobile (10 digits)" 
                                                    oninput="validatePhoneNumber(this)" 
                                                    maxlength="10"
+                                                   value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->other_agent_mobile : ''); ?>"
                                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                             <div class="invalid-feedback">
                                                 Please enter a valid 10-digit mobile number
@@ -461,47 +497,47 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="passport_image" class="col-form-label">Passport Size Photo <span
                                                         class="text-danger">(826px x 1062px)</span></label>
                                                 <input class="form-control" type="file" id="passport_image" name="passport_image">
-                                                <input type="hidden" name="passport_image_hidden" id="passport_image_hidden">
+                                                <input type="hidden" name="passport_image_hidden" id="passport_image_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->passport_image : ''); ?>">
                                             </div>
 
 
                                             <div class="col-md-6">
                                                 <label for="nic_doc" class="col-form-label">NIC Color Copy (Attach)</label>
                                                 <input class="form-control" type="file" id="nic_doc" name="nic_doc">
-                                                <input type="hidden" name="nic_doc_hidden" id="nic_doc_hidden">
+                                                <input type="hidden" name="nic_doc_hidden" id="nic_doc_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->nic_doc : ''); ?>">
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label for="passport_doc" class="col-form-label">Passport Color Copy (Attach)</label>
                                                 <input class="form-control" type="file" id="passport_doc" name="passport_doc">
-                                                <input type="hidden" name="passport_doc_hidden" id="passport_doc_hidden">
+                                                <input type="hidden" name="passport_doc_hidden" id="passport_doc_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->passport_doc : ''); ?>">
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label for="professional_certificate_1" class="col-form-label">Professional Certificate (Attach) </label>
                                                 <input class="form-control" type="file" id="professional_certificate_1"
                                                     name="professional_certificate_1">
-                                                <input type="hidden" name="professional_certificate_1_hidden" id="professional_certificate_1_hidden">
+                                                <input type="hidden" name="professional_certificate_1_hidden" id="professional_certificate_1_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->professional_certificate_1 : ''); ?>">
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label for="working_experience" class="col-form-label">Attach Working Experience</label>
                                                 <input class="form-control" type="file" id="working_experience"
                                                     name="working_experience">
-                                                <input type="hidden" name="working_experience_hidden" id="working_experience_hidden">
+                                                <input type="hidden" name="working_experience_hidden" id="working_experience_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->working_experience : ''); ?>">
                                             </div>
 
 
                                             <div class="col-md-6">
                                                 <label for="cv_copy" class="col-form-label">CV Copy (Attach)</label>
                                                 <input class="form-control" type="file" id="cv_copy" name="cv_copy">
-                                                <input type="hidden" name="cv_copy_hidden" id="cv_copy_hidden">
+                                                <input type="hidden" name="cv_copy_hidden" id="cv_copy_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->cv_copy : ''); ?>">
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label for="local_pcc" class="col-form-label">Local PCC (Attach)</label>
                                                 <input class="form-control" type="file" id="local_pcc" name="local_pcc">
-                                                <input type="hidden" name="local_pcc_hidden" id="local_pcc_hidden">
+                                                <input type="hidden" name="local_pcc_hidden" id="local_pcc_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->local_pcc : ''); ?>">
                                             </div>
 
 
@@ -511,20 +547,20 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-6">
                                                 <label for="pcc_color_copy" class="col-form-label">2nd PCC Color Copy (Attach)</label>
                                                 <input class="form-control" type="file" id="pcc_color_copy" name="pcc_color_copy">
-                                                <input type="hidden" name="pcc_color_copy_hidden" id="pcc_color_copy_hidden">
+                                                <input type="hidden" name="pcc_color_copy_hidden" id="pcc_color_copy_hidden" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->pcc_color_copy : ''); ?>">
                                             </div>
 
 
                                             <div class="col-md-6">
                                                 <label for="local_pcc_date" class="col-form-label">Local PCC Attach Date</label>
-                                                <input class="form-control datepicker" type="text" id="local_pcc_date" name="local_pcc_date" placeholder="Select Date">
+                                                <input class="form-control datepicker" type="text" id="local_pcc_date" name="local_pcc_date" placeholder="Select Date" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->local_pcc_date : ''); ?>">
                                             </div>
 
 
 
                                             <div class="col-md-6">
                                                 <label for="pcc_submit_date" class="col-form-label">2nd PCC Submit Date</label>
-                                                <input class="form-control datepicker" type="text" id="pcc_submit_date" name="pcc_submit_date" placeholder="Enter 2nd PCC Submit Date">
+                                                <input class="form-control datepicker" type="text" id="pcc_submit_date" name="pcc_submit_date" placeholder="Enter 2nd PCC Submit Date" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->pcc_submit_date : ''); ?>">
                                             </div>
                                         </div>
 
@@ -549,8 +585,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="avb_qualification" class="col-form-label">Available Qualification</label>
                                                 <select class="form-control" id="avb_qualification" name="avb_qualification">
                                                     <option value="">-- Select option --</option>
-                                                    <option value="yes"> Yes </option>
-                                                    <option value="no"> No </option>
+                                                    <option value="yes" <?php echo $studentToEdit && $studentToEdit->other_related_qualification ? 'selected' : ''; ?>> Yes </option>
+                                                    <option value="no" <?php echo $studentToEdit && !$studentToEdit->other_related_qualification ? 'selected' : ''; ?>> No </option>
                                                 </select>
                                             </div>
 
@@ -974,7 +1010,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                     </div>
                 </div>
 
-                <input type="hidden" name="id" id="student_db_id" value="">
+                <input type="hidden" name="id" id="student_db_id" value="<?php echo $studentToEdit ? (int)$studentToEdit->id : ''; ?>">
 
                 </form>
 

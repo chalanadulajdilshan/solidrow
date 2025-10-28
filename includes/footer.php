@@ -117,9 +117,8 @@ $current_year = date('Y');
                 </div>
                 <div class="col-md-6">
                     <ul class="footer-bottom-links">
-                        <li><a href="/solidrow/privacy-policy.php">Privacy Policy</a></li>
-                        <li><a href="/solidrow/terms-conditions.php">Terms & Conditions</a></li>
-                        <li><a href="/solidrow/sitemap.php">Sitemap</a></li>
+                        <li><a href="./includes/privacy-policy.php">Privacy Policy-APP</a></li>
+
                     </ul>
                 </div>
             </div>

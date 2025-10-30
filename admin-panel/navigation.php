@@ -170,7 +170,7 @@ $US = new User($_SESSION['id']);
 <!-- Later in the file, wrap the Foreign Employment section with the check -->
 <?php
 $USER_TYPE = new user($_SESSION['id']);
-if($USER_TYPE->type == 3 || $USER_TYPE->type == 1){
+if($USER_TYPE->type == 3 || $USER_TYPE->type == 1 || $USER_TYPE->type == 2){
     $show_foreign_employment = true;
 }else{
     $show_foreign_employment = false;

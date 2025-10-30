@@ -484,7 +484,9 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                 </div>
                             </div>
 
-                            <div id="section-2" class="section" style="display: none;">
+                            <div id="section-2" class="section"  >
+<!-- <div id="section-2" class="section" style="display: none;"> -->
+
                                 <div class="card">
                                     <div class="card-body">
 
@@ -574,7 +576,9 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                             </div>
 
 
-                            <div id="section-3" class="section" style="display: none;">
+                            <div id="section-3" class="section"  >
+<!-- <div id="section-3" class="section" style="display: none;"> -->
+
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -622,7 +626,9 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                             </div>
 
 
-                            <div id="section-4" class="section" style="display: none;">
+                            <div id="section-4" class="section" >
+<!-- <div id="section-4" class="section" style="display: none;"> -->
+
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -672,7 +678,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                             </div>
 
 
-                            <div id="section-5" class="section" style="display: none;">
+                            <div id="section-5" class="section" >
+<!-- <div id="section-5" class="section" style="display: none;"> -->
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row mt-2">
@@ -732,7 +739,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                             </div>
 
 
-                            <div id="section-6" class="section" style="display: none;">
+                            <div id="section-6" class="section" >
+<!-- <div id="section-6" class="section" style="display: none;"> -->
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row mt-2">
@@ -899,7 +907,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                             </div>
 
 
-                            <div id="section-7" class="section" style="display: none;">
+                            <div id="section-7" class="section" >
+<!-- <div id="section-7" class="section" style="display: none;"> -->
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -973,7 +982,8 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                             </div>
 
 
-                            <div id="section-8" class="section" style="display: none;">
+                            <div id="section-8" class="section" >
+<!-- <div id="section-8" class="section" style="display: none;"> -->
                                 <div class="card  ">
                                     <div class="card-body">
                                         <div class="row">

@@ -33,8 +33,13 @@ $US = new User($_SESSION['id']);
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-
                 <?php if ($US->type == 1) { ?>
+                    <li>
+                        <a href="remarks.php">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Manage Remarks</span>
+                        </a>
+                    </li>
                     <li class="menu-title">User Management</li>
                     <li>
                         <a href="create-users.php">

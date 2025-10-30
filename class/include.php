@@ -25,6 +25,7 @@ include_once(dirname(__FILE__) . '/AgancyStudent.php');
 include_once(dirname(__FILE__) . '/Agent.php');
 include_once(dirname(__FILE__) . '/Dsdivision.php');
 include_once(dirname(__FILE__) . '/Gndivision.php');
+include_once(dirname(__FILE__) . '/Remark.php');
 
 function dd($data)
 {

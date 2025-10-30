@@ -28,6 +28,11 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
     <link href="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/libs/@chenfengyuan/datepicker/datepicker.min.css">
 
+    <!-- DataTables CSS -->
+    <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -163,94 +168,6 @@ $student_id = 'REG/01/'.$_SESSION['id'].$student_id;
         </div>
     </div>
 </div>
-
-<!-- Add this script section at the bottom of the file, before the closing body tag -->
-<script>
-$(document).ready(function() {
-    // Initialize DataTable
-    $('#student-datatable').DataTable({
-        responsive: true,
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'excel', 'pdf', 'print', 'colvis'
-        ],
-        order: [[0, 'desc']],
-        pageLength: 10
-    });
-
-    // Handle view student button click
-    $(document).on('click', '.view-student', function() {
-        const studentId = $(this).data('id');
-        const modal = $('#viewStudentModal');
-        
-        // Show loading state
-        $('#studentDetails').html(`
-            <div class="text-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        `);
-        
-        // Load student details via AJAX
-        $.ajax({
-            url: 'ajax/php/agancy-student.php',
-            type: 'POST',
-            data: { 
-                get_student: true, 
-                id: studentId 
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    const student = response.student;
-                    let html = `
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p><strong>Candidate Reg No:</strong> ${student.student_id || 'N/A'}</p>
-                                <p><strong>Registration Date:</strong> ${student.registration_date ? new Date(student.registration_date).toLocaleDateString() : 'N/A'}</p>
-                                <p><strong>Full Name:</strong> ${student.full_name || 'N/A'}</p>
-                                <p><strong>Name with Initials:</strong> ${student.name_with_initials || 'N/A'}</p>
-                                <p><strong>Date of Birth:</strong> ${student.dob || 'N/A'}</p>
-                                <p><strong>Gender:</strong> ${student.gender || 'N/A'}</p>
-                                <p><strong>NIC/Passport No:</strong> ${student.nic_passport_no || 'N/A'}</p>
-                                <p><strong>Passport Expiry Date:</strong> ${student.passport_expiry_date || 'N/A'}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p><strong>Address:</strong> ${student.address || 'N/A'}</p>
-                                <p><strong>Mobile Number:</strong> ${student.mobile || 'N/A'}</p>
-                                <p><strong>WhatsApp Number:</strong> ${student.whatsapp || 'N/A'}</p>
-                                <p><strong>Email:</strong> ${student.email || 'N/A'}</p>
-                                <p><strong>Education Qualification:</strong> ${student.education_qualification || 'N/A'}</p>
-                                <p><strong>Work Experience:</strong> ${student.work_experience || 'N/A'}</p>
-                                <p><strong>Status:</strong> 
-                                    <span class="badge ${student.is_active == 1 ? 'bg-success' : 'bg-danger'}">
-                                        ${student.is_active == 1 ? 'Active' : 'Inactive'}
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    `;
-                    $('#studentDetails').html(html);
-                } else {
-                    $('#studentDetails').html(`
-                        <div class="alert alert-danger" role="alert">
-                            Error loading student details. Please try again.
-                        </div>
-                    `);
-                }
-            },
-            error: function() {
-                $('#studentDetails').html(`
-                    <div class="alert alert-danger" role="alert">
-                        Error loading student details. Please try again.
-                    </div>
-                `);
-            }
-        });
-    });
-});
-</script>
                     </div>
                 </div>
 
@@ -280,6 +197,17 @@ $(document).ready(function() {
     <script src="assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
 
+    <!-- DataTables core -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- DataTables buttons -->
+    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
     <!-- plugins -->
     <script src="assets/libs/select2/js/select2.min.js"></script>
     <script src="assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
@@ -308,6 +236,91 @@ $(document).ready(function() {
     <script src="assets/js/app.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <!-- JavaScript to show/hide related qualification fields -->
+
+    <!-- DataTable Initialization -->
+    <script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        $('#student-datatable').DataTable({
+            responsive: true,
+            dom: 'frtip',
+            order: [[0, 'desc']],
+            pageLength: 10
+        });
+
+        // Handle view student button click
+        $(document).on('click', '.view-student', function() {
+            const studentId = $(this).data('id');
+            const modal = $('#viewStudentModal');
+            
+            // Show loading state
+            $('#studentDetails').html(`
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            `);
+            
+            // Load student details via AJAX
+            $.ajax({
+                url: 'ajax/php/agancy-student.php',
+                type: 'POST',
+                data: { 
+                    get_student: true, 
+                    id: studentId 
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        const student = response.student;
+                        let html = `
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Candidate Reg No:</strong> ${student.student_id || 'N/A'}</p>
+                                    <p><strong>Registration Date:</strong> ${student.registration_date ? new Date(student.registration_date).toLocaleDateString() : 'N/A'}</p>
+                                    <p><strong>Full Name:</strong> ${student.full_name || 'N/A'}</p>
+                                    <p><strong>Name with Initials:</strong> ${student.name_with_initials || 'N/A'}</p>
+                                    <p><strong>Date of Birth:</strong> ${student.dob || 'N/A'}</p>
+                                    <p><strong>Gender:</strong> ${student.gender || 'N/A'}</p>
+                                    <p><strong>NIC/Passport No:</strong> ${student.nic_passport_no || 'N/A'}</p>
+                                    <p><strong>Passport Expiry Date:</strong> ${student.passport_expiry_date || 'N/A'}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Address:</strong> ${student.address || 'N/A'}</p>
+                                    <p><strong>Mobile Number:</strong> ${student.mobile || 'N/A'}</p>
+                                    <p><strong>WhatsApp Number:</strong> ${student.whatsapp || 'N/A'}</p>
+                                    <p><strong>Email:</strong> ${student.email || 'N/A'}</p>
+                                    <p><strong>Education Qualification:</strong> ${student.education_qualification || 'N/A'}</p>
+                                    <p><strong>Work Experience:</strong> ${student.work_experience || 'N/A'}</p>
+                                    <p><strong>Status:</strong> 
+                                        <span class="badge ${student.is_active == 1 ? 'bg-success' : 'bg-danger'}">
+                                            ${student.is_active == 1 ? 'Active' : 'Inactive'}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        `;
+                        $('#studentDetails').html(html);
+                    } else {
+                        $('#studentDetails').html(`
+                            <div class="alert alert-danger" role="alert">
+                                Error loading student details. Please try again.
+                            </div>
+                        `);
+                    }
+                },
+                error: function() {
+                    $('#studentDetails').html(`
+                        <div class="alert alert-danger" role="alert">
+                            Error loading student details. Please try again.
+                        </div>
+                    `);
+                }
+            });
+        });
+    });
+    </script>
 
   
 

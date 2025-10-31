@@ -1406,7 +1406,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
     <script>
         $(document).ready(function() {
             // Show only section 1 initially
-            $('.section').hide();
+            // $('.section').hide();
             $('#section-1').show();
 
             // Function to validate section 1 fields

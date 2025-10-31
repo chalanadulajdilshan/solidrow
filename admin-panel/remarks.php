@@ -2,7 +2,7 @@
 include '../class/include.php';
 include './auth.php';
 
-// Initialize variables to avoid undefined index notices
+// Initialize variables
 $remarks = [];
 $count = 1;
 
@@ -17,37 +17,59 @@ $remarks = $REMARK->all();
     <meta charset="utf-8" />
     <title>Remark Management | Solidrow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <?php include './assets/main-css.php'; ?>
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Force visibility fix if theme overrides select display */
+        
+    </style>
 </head>
 
 <body class="someBlock">
     <div id="layout-wrapper">
         <?php include './top-header.php'; ?>
         <?php include './navigation.php'; ?>
+
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
+
                     <!-- Create Remark -->
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Add New Remark</h4>
+                                    <h4 class="card-title mb-4">Add New Remark</h4>
                                     <form id="form-data">
                                         <input type="hidden" id="remark_id" name="remark_id">
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <label>Remark</label>
-                                                <textarea id="remark" name="remark" class="form-control" placeholder="Enter remark" rows="3" required></textarea>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" id="create" class="btn btn-primary">Save Remark</button>
-                                                <button type="button" id="update" class="btn btn-success" style="display: none;">Update Remark</button>
-                                                <button type="button" id="new" class="btn btn-secondary">New</button>
+
+
+
+
+                                        <div class="mb-3 row">
+                                            <label class="col-md-3 col-form-label">Remark</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="remark" name="remark" required>
                                             </div>
                                         </div>
-                                    </form>
+
+                                        <div class="mb-3 row">
+                                            <label class="col-md-3 col-form-label">Status</label>
+                                            <div class="col-md-9">
+                                                <select class="form-control" name="status" id=" ">
+                                                    <option value="1">Success</option>
+                                                    <option value="0">Unsuccess</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" id="create" class="btn btn-primary">Save Remark</button>
+                                            <button type="button" id="update" class="btn btn-success" style="display: none;">Update Remark</button>
+                                            <button type="button" id="new" class="btn btn-secondary">New</button>
+                                        </div>
+                                    </form> 
                                 </div>
                             </div>
                         </div>
@@ -58,37 +80,49 @@ $remarks = $REMARK->all();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Remark List</h4>
+                                    <h4 class="card-title mb-4">Remark List</h4>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                            <thead>
+                                        <table class="table table-bordered table-striped align-middle">
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Remark</th>
+                                                    <th>Status</th>
                                                     <th>Created At</th>
                                                     <th>Updated At</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
-                                                if (!empty($remarks)) {
-                                                    foreach ($remarks as $remark) {
-                                                        echo "<tr>";
-                                                        echo "<td>" . $count++ . "</td>";
-                                                        echo "<td>" . htmlspecialchars($remark['remark']) . "</td>";
-                                                        echo "<td>" . htmlspecialchars($remark['created_at']) . "</td>";
-                                                        echo "<td>" . htmlspecialchars($remark['updated_at']) . "</td>";
-                                                        echo "<td>";
-                                                        echo "<button class='btn btn-sm btn-warning edit-remark' data-id='" . htmlspecialchars($remark['id']) . "' data-remark='" . htmlspecialchars($remark['remark']) . "'><i class='mdi mdi-pencil'></i></button> ";
-                                                        echo "<button class='btn btn-sm btn-danger delete-remark' data-id='" . htmlspecialchars($remark['id']) . "'><i class='mdi mdi-delete'></i></button>";
-                                                        echo "</td>";
-                                                        echo "</tr>";
-                                                    }
-                                                } else {
-                                                    echo '<tr><td colspan="5" class="text-center">No remarks found</td></tr>';
-                                                }
-                                                ?>
+                                                <?php if (!empty($remarks)): ?>
+                                                    <?php foreach ($remarks as $remark): ?>
+                                                        <tr>
+                                                            <td><?= $count++; ?></td>
+                                                            <td><?= htmlspecialchars($remark['remark']); ?></td>
+                                                            <td>
+                                                                <?= $remark['status'] == 1 ? '<span class="badge bg-success">Success</span>' : '<span class="badge bg-danger">Unsuccess</span>'; ?>
+                                                            </td>
+                                                            <td><?= htmlspecialchars($remark['created_at']); ?></td>
+                                                            <td><?= htmlspecialchars($remark['updated_at']); ?></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-warning edit-remark"
+                                                                    data-id="<?= htmlspecialchars($remark['id']); ?>"
+                                                                    data-remark="<?= htmlspecialchars($remark['remark']); ?>"
+                                                                    data-status="<?= htmlspecialchars($remark['status']); ?>">
+                                                                    <i class="mdi mdi-pencil"></i>
+                                                                </button>
+                                                                <button class="btn btn-sm btn-danger delete-remark"
+                                                                    data-id="<?= htmlspecialchars($remark['id']); ?>">
+                                                                    <i class="mdi mdi-delete"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <tr>
+                                                        <td colspan="6" class="text-center text-muted">No remarks found</td>
+                                                    </tr>
+                                                <?php endif; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -96,31 +130,36 @@ $remarks = $REMARK->all();
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+                </div> <!-- container-fluid -->
+            </div> <!-- page-content -->
+        </div> <!-- main-content -->
+    </div> <!-- layout-wrapper -->
 
     <?php include './assets/main-js.php'; ?>
     <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            // Handle form submission for create
+            // CREATE remark
             $('#form-data').on('submit', function(e) {
                 e.preventDefault();
-                
-                var remark = $('#remark').val().trim();
+
+                const remark = $('#remark').val().trim();
+                const status = $('#status').val();
+
                 if (!remark) {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Validation Error',
                         text: 'Please enter a remark'
                     });
-                    $('#remark').focus();
                     return;
                 }
-                
-                var formData = new FormData(this);
+
+               
+
+                const formData = new FormData(this);
                 formData.append('create', true);
 
                 $.ajax({
@@ -138,9 +177,7 @@ $remarks = $REMARK->all();
                                 text: 'Remark saved successfully',
                                 timer: 2000,
                                 showConfirmButton: false
-                            }).then(() => {
-                                location.reload();
-                            });
+                            }).then(() => location.reload());
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -153,43 +190,45 @@ $remarks = $REMARK->all();
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Error saving remark'
+                            text: 'Request failed while saving remark'
                         });
                     }
                 });
             });
 
-            // Handle edit button click
+            // EDIT remark
             $(document).on('click', '.edit-remark', function() {
-                var id = $(this).data('id');
-                var remark = $(this).data('remark');
+                const id = $(this).data('id');
+                const remark = $(this).data('remark');
+                const status = $(this).data('status');
 
                 $('#remark_id').val(id);
                 $('#remark').val(remark);
+                $('#status').val(status);
 
                 $('#create').hide();
                 $('#update').show();
 
-                // Scroll to form
                 $('html, body').animate({
                     scrollTop: $("#form-data").offset().top - 100
-                }, 500);
+                }, 400);
             });
 
-            // Handle update button click
+            // UPDATE remark
             $('#update').on('click', function() {
-                var remark = $('#remark').val().trim();
+                const remark = $('#remark').val().trim();
+                const status = $('#status').val();
+
                 if (!remark) {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Validation Error',
-                        text: 'Please enter a remark'
+                        text: 'Please fill all required fields'
                     });
-                    $('#remark').focus();
                     return;
                 }
-                
-                var formData = new FormData($('#form-data')[0]);
+
+                const formData = new FormData($('#form-data')[0]);
                 formData.append('update', true);
 
                 $.ajax({
@@ -203,13 +242,11 @@ $remarks = $REMARK->all();
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Success',
+                                title: 'Updated!',
                                 text: 'Remark updated successfully',
                                 timer: 2000,
                                 showConfirmButton: false
-                            }).then(() => {
-                                location.reload();
-                            });
+                            }).then(() => location.reload());
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -222,19 +259,19 @@ $remarks = $REMARK->all();
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Error updating remark'
+                            text: 'Request failed while updating remark'
                         });
                     }
                 });
             });
 
-            // Handle delete button click
+            // DELETE remark
             $(document).on('click', '.delete-remark', function() {
-                var id = $(this).data('id');
+                const id = $(this).data('id');
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: 'You won\'t be able to revert this!',
+                    text: 'You will not be able to undo this!',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
@@ -255,12 +292,10 @@ $remarks = $REMARK->all();
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Deleted!',
-                                        text: 'Remark has been deleted.',
+                                        text: 'Remark deleted successfully',
                                         timer: 2000,
                                         showConfirmButton: false
-                                    }).then(() => {
-                                        location.reload();
-                                    });
+                                    }).then(() => location.reload());
                                 } else {
                                     Swal.fire({
                                         icon: 'error',
@@ -273,7 +308,7 @@ $remarks = $REMARK->all();
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error',
-                                    text: 'Error deleting remark'
+                                    text: 'Request failed while deleting remark'
                                 });
                             }
                         });
@@ -281,7 +316,7 @@ $remarks = $REMARK->all();
                 });
             });
 
-            // Handle new button click
+            // NEW button reset
             $('#new').click(function() {
                 $('#form-data')[0].reset();
                 $('#remark_id').val('');

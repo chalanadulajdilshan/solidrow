@@ -9,6 +9,7 @@ if (isset($_POST['create'])) {
     $REMARK = new Remark(NULL); // New remark object
 
     $REMARK->remark = $_POST['remark'];
+    $REMARK->status = $_POST['status'];
 
     $res = $REMARK->create();
 
@@ -26,6 +27,7 @@ if (isset($_POST['update'])) {
     $REMARK = new Remark($_POST['remark_id']); // Load remark by ID
 
     $REMARK->remark = $_POST['remark'];
+    $REMARK->status = $_POST['status'];
 
     $res = $REMARK->update();
 

@@ -4,6 +4,7 @@ class Remark
 {
     public $id;
     public $remark;
+    public $status;
     public $created_at;
     public $updated_at;
 
@@ -17,6 +18,7 @@ class Remark
             if ($result) {
                 $this->id = $result['id'];
                 $this->remark = $result['remark'];
+                $this->status = $result['status'];
                 $this->created_at = $result['created_at'];
                 $this->updated_at = $result['updated_at'];
             }
@@ -25,7 +27,7 @@ class Remark
 
     public function create()
     {
-        $query = "INSERT INTO `remarks` (`remark`) VALUES ('$this->remark')";
+        $query = "INSERT INTO `remarks` (`remark`, `status`) VALUES ('$this->remark', '$this->status')";
 
         $db = new Database();
         $result = $db->readQuery($query);
@@ -39,7 +41,7 @@ class Remark
 
     public function update()
     {
-        $query = "UPDATE `remarks` SET `remark` = '$this->remark' WHERE `id` = '$this->id'";
+        $query = "UPDATE `remarks` SET `remark` = '$this->remark', `status` = '$this->status' WHERE `id` = '$this->id'";
 
         $db = new Database();
         return $db->readQuery($query);

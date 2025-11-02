@@ -102,8 +102,14 @@ $remarks = $REMARK->all();
                                                             <td><?= $count++; ?></td>
                                                             <td><?= htmlspecialchars($remark['remark']); ?></td>
                                                             <td>
-                                                                <?= $remark['status'] == 1 ? '<span class="badge bg-success">Success</span>' : '<span class="badge bg-danger">Unsuccess</span>'; ?>
-                                                            </td>
+                                                                <?php if ($remark['status'] == 1): ?>
+                                                                    <span class="badge bg-success">Success</span>
+                                                                <?php elseif ($remark['status'] == 0): ?>
+                                                                    <span class="badge bg-danger">Unsuccess</span>
+                                                                <?php elseif ($remark['status'] == 2): ?>
+                                                                    <span class="badge bg-warning">Pending</span>
+                                                                <?php endif; ?>
+                                                             </td>
                                                             <td><?= htmlspecialchars($remark['created_at']); ?></td>
                                                             <td><?= htmlspecialchars($remark['updated_at']); ?></td>
                                                             <td>

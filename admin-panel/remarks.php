@@ -60,7 +60,9 @@ $remarks = $REMARK->all();
                                             <div class="col-md-9">
                                                 <select class="form-control" name="status" id=" ">
                                                     <option value="1">Success</option>
+                                                      <option value="2">Pending</option>
                                                     <option value="0">Unsuccess</option>
+                                                  
                                                 </select>
                                             </div>
                                         </div>

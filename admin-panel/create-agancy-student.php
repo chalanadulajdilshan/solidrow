@@ -14,6 +14,22 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 $res = $AGENCY_STUDENT->getLastID();
 $student_id = $res + 1;
 $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'/'.$student_id;
+
+// Prefill from application if application_id is provided (OOP mapping)
+$application = null;
+$prefillStudent = null;
+// Prefer POST 'application' if present, else fallback to GET 'application_id'
+$incomingId = null;
+if (isset($_POST['application']) && is_numeric($_POST['application'])) {
+    $incomingId = (int) $_POST['application'];
+} elseif (isset($_GET['application_id']) && is_numeric($_GET['application_id'])) {
+    $incomingId = (int) $_GET['application_id'];
+}
+if ($incomingId) {
+    $application = new Application($incomingId);
+    $prefillStudent = new AgancyStudent(NULL);
+    $prefillStudent->populateFromApplication($application);
+}
 ?>
 <html lang="en">
 
@@ -150,7 +166,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                 <label for="full_name" class="col-form-label">Name as Mentioned in the Passport <span class="text-danger">*</span></label>
                                                 <div class="col-md-12">
                                                     <input class="form-control" type="text" id="full_name" name="full_name"
-                                                        placeholder="Enter Name as Mentioned in the Passport " value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->full_name : ''); ?>">
+                                                        placeholder="Enter Name as Mentioned in the Passport " value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->full_name : ($prefillStudent ? $prefillStudent->full_name : '')); ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 hidden">
@@ -170,7 +186,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-4">
                                                 <label for="nic" class="col-form-label">NIC Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="nic" name="nic"
-                                                    placeholder="Enter NIC Number" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->nic : ''); ?>" required 
+                                                    placeholder="Enter NIC Number" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->nic : ($prefillStudent ? $prefillStudent->nic : '')); ?>" required 
                                                     oninput="validateNIC(this)" 
                                                     onblur="checkNICExists(this.value)">
                                                 <div class="invalid-feedback" id="nic-feedback">
@@ -216,7 +232,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-4">
                                                 <label for="phone_number" class="col-form-label">Phone Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone_number"
-                                                    name="phone_number" placeholder="Enter Phone Number (10 digits)" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->phone_number : ''); ?>" required 
+                                                    name="phone_number" placeholder="Enter Phone Number (10 digits)" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->phone_number : ($prefillStudent ? $prefillStudent->phone_number : '')); ?>" required 
                                                     oninput="validatePhoneNumber(this)" 
                                                     onblur="checkMobileNumberExists(this.value, 'phone_number', function(exists) {
                                                         if (exists) {
@@ -232,7 +248,7 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                             <div class="col-md-4">
                                                 <label for="whatsapp_number" class="col-form-label">Whatsapp Number <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="whatsapp_number"
-                                                    name="whatsapp_number" placeholder="Enter WhatsApp Number (10 digits)" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->whatsapp_number : ''); ?>" required 
+                                                    name="whatsapp_number" placeholder="Enter WhatsApp Number (10 digits)" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->whatsapp_number : ($prefillStudent ? $prefillStudent->whatsapp_number : '')); ?>" required 
                                                     oninput="validatePhoneNumber(this)" maxlength="10"
                                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                                 <div class="invalid-feedback">
@@ -319,7 +335,12 @@ $student_id = 'SDW/'.DATE('Y').'/'.DATE('m').'/'.DATE('d').'/'.$_SESSION['id'].'
                                                     <?php
                                                     $COUNTRY = new Country(NULL);
                                                     foreach ($COUNTRY->all() as $key => $country) {
-                                                        $selected = $studentToEdit && $studentToEdit->country == $country['id'] ? 'selected' : '';
+                                                        $selected = '';
+                                                        if ($studentToEdit && $studentToEdit->country == $country['id']) {
+                                                            $selected = 'selected';
+                                                        } elseif (!$studentToEdit && $prefillStudent && $prefillStudent->country == $country['id']) {
+                                                            $selected = 'selected';
+                                                        }
                                                         echo "<option value=\"{$country['id']}\" $selected>{$country['name']}</option>";
                                                     }
                                                     ?>

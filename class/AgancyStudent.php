@@ -675,6 +675,30 @@ class AgancyStudent
     }
 
 
+    /**
+     * Populate this student object from an Application object
+     * Only maps commonly shared fields needed for prefill.
+     *
+     * @param Application $application
+     * @return $this
+     */
+    public function populateFromApplication($application)
+    {
+        if (!$application) {
+            return $this;
+        }
+
+        // Basic mappings from Application to Agency Student
+        $this->full_name = isset($application->fullname) ? $application->fullname : $this->full_name;
+        $this->nic = isset($application->NIC) ? $application->NIC : $this->nic;
+        $this->passport_number = isset($application->passportnumber) ? $application->passportnumber : $this->passport_number;
+        $this->phone_number = isset($application->mobile_number) ? $application->mobile_number : $this->phone_number;
+        $this->whatsapp_number = isset($application->whatsapp_number) ? $application->whatsapp_number : $this->whatsapp_number;
+        $this->country = isset($application->country) ? $application->country : $this->country;
+
+        return $this;
+    }
+
     private function setUserSession($students)
     {
 

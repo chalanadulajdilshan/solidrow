@@ -34,12 +34,7 @@ $US = new User($_SESSION['id']);
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <?php if ($US->type == 1) { ?>
-                    <li>
-                        <a href="remarks.php">
-                            <i class="bx bx-user-plus"></i>
-                            <span>Manage Remarks</span>
-                        </a>
-                    </li>
+                    
                     <li class="menu-title">User Management</li>
                     <li>
                         <a href="create-users.php">
@@ -129,12 +124,18 @@ $US = new User($_SESSION['id']);
                             <span>Career Applications</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="remarks.php">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Manage Remarks</span>
+                        </a>
+                    </li>
                 <?php } ?>
 
                 <!-- Solidrow Engineering -->
                 <li class="menu-title">Solidrow Engineering (Pvt) Ltd</li>
                 <li>
-                    <a href="engineering-application.php">
+                    <a href="application.php">
                         <i class="bx bx-file"></i>
                         <span>Application Form</span>
                     </a>

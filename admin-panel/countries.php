@@ -3,19 +3,14 @@ include '../class/include.php';
 include './auth.php';
 
 // Initialize variables to avoid undefined index notices
-$countries = [];
+
 $count = 1;
 
 // Get all countries with default commission rate if not set
-$COUNTRY = new Country(NULL);
-$countries = $COUNTRY->all();
+
 
 // Ensure each country has a commission_rate
-foreach ($countries as &$country) {
-    if (!isset($country['commission_rate'])) {
-        $country['commission_rate'] = '0.00'; // Default commission rate
-    }
-}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -99,6 +94,9 @@ foreach ($countries as &$country) {
                                             </thead>
                                             <tbody>
                                                 <?php
+                                                $COUNTRY = new Country(NULL);
+                                                $countries = $COUNTRY->all();
+
                                                 if (!empty($countries)) {
                                                     foreach ($countries as $country) {
                                                         $status = $country['is_active'] ? 'Active' : 'Inactive';
@@ -140,7 +138,7 @@ foreach ($countries as &$country) {
             // Handle form submission
             $('#form-data').on('submit', function(e) {
                 e.preventDefault();
-                
+
                 if ($('#update').is(':visible')) {
                     // Trigger update
                     $('#update').trigger('click');
@@ -153,7 +151,7 @@ foreach ($countries as &$country) {
             // Handle edit button click
             $(document).on('click', '.edit-country', function(e) {
                 e.preventDefault();
-                
+
                 var id = $(this).data('id');
                 var name = $(this).data('name');
                 var rate = $(this).data('rate');

@@ -69,7 +69,7 @@ foreach ($countries as &$country) {
                                             </div>
                                             <div class="col-12">
                                                 <button type="submit" id="create" class="btn btn-primary">Save Country</button>
-                                                <button type="button" id="update" class="btn btn-success" style="display: none;">Update Country</button>
+                                                <button type="submit" id="update" class="btn btn-success" style="display: none;">Update Country</button>
                                                 <button type="button" id="new" class="btn btn-secondary">New</button>
                                             </div>
                                         </div>
@@ -113,6 +113,7 @@ foreach ($countries as &$country) {
                                                         echo "<button class='btn btn-sm btn-warning edit-country' data-id='" . htmlspecialchars($country['id']) . "' data-name='" . htmlspecialchars($country['name']) . "' data-rate='" . htmlspecialchars($country['commission_rate_staff'] ?? '0.00') . "' data-rate_agent='" . htmlspecialchars($country['commission_rate_agent'] ?? '0.00') . "' data-status='" . $country['is_active'] . "'><i class='mdi mdi-pencil'></i></button> ";
                                                         echo "<button class='btn btn-sm btn-danger delete-country' data-id='" . htmlspecialchars($country['id']) . "'><i class='mdi mdi-delete'></i></button>";
                                                         echo "<a href='jobs.php?id=" . htmlspecialchars($country['id']) . "'><button class='btn btn-sm btn-primary new' style='  margin-left: 5px;' data-id='" . htmlspecialchars($country['id']) . "'><i class='mdi mdi-plus'></i></button></a>";
+                                                        echo "<a href='country-jobs.php?id=" . htmlspecialchars($country['id']) . "'><button class='btn btn-sm btn-success new' style='  margin-left: 5px;' data-id='" . htmlspecialchars($country['id']) . "'><i class='mdi mdi-cog'></i></button></a>";
                                                         echo "</td>";
                                                         echo "</tr>";
                                                     }
@@ -136,8 +137,23 @@ foreach ($countries as &$country) {
     <script src="ajax/js/country.js"></script>
     <script>
         $(document).ready(function() {
+            // Handle form submission
+            $('#form-data').on('submit', function(e) {
+                e.preventDefault();
+                
+                if ($('#update').is(':visible')) {
+                    // Trigger update
+                    $('#update').trigger('click');
+                } else {
+                    // Trigger create
+                    $('#create').trigger('click');
+                }
+            });
+
             // Handle edit button click
-            $(document).on('click', '.edit-country', function() {
+            $(document).on('click', '.edit-country', function(e) {
+                e.preventDefault();
+                
                 var id = $(this).data('id');
                 var name = $(this).data('name');
                 var rate = $(this).data('rate');
@@ -146,8 +162,8 @@ foreach ($countries as &$country) {
 
                 $('#country_id').val(id);
                 $('#name').val(name);
-                $('#commission_rate').val(rate);
-                $('#commission_rate_agent').val(rate_agent);
+                $('#commission_rate').val(parseFloat(rate).toFixed(2));
+                $('#commission_rate_agent').val(parseFloat(rate_agent).toFixed(2));
                 $('#activeStatus').prop('checked', status == 1);
 
                 $('#create').hide();
@@ -160,7 +176,8 @@ foreach ($countries as &$country) {
             });
 
             // Handle delete button click
-            $(document).on('click', '.delete-country', function() {
+            $(document).on('click', '.delete-country', function(e) {
+                e.preventDefault();
                 var id = $(this).data('id');
 
                 if (confirm('Are you sure you want to delete this country?')) {
@@ -176,11 +193,23 @@ foreach ($countries as &$country) {
                             if (response.status === 'success') {
                                 location.reload();
                             } else {
-                                alert('Error deleting country');
+                                swal({
+                                    title: "Error!",
+                                    text: "Failed to delete country. Please try again.",
+                                    type: 'error',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
                             }
                         },
                         error: function() {
-                            alert('Error deleting country');
+                            swal({
+                                title: "Error!",
+                                text: "An error occurred while deleting the country.",
+                                type: 'error',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
                         }
                     });
                 }
@@ -192,6 +221,10 @@ foreach ($countries as &$country) {
                 $('#country_id').val('');
                 $('#create').show();
                 $('#update').hide();
+                // Scroll to form
+                $('html, body').animate({
+                    scrollTop: $("#form-data").offset().top - 100
+                }, 500);
             });
         });
     </script>

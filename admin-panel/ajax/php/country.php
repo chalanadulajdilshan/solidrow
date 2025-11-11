@@ -16,6 +16,12 @@ if (isset($_POST['create'])) {
     $res = $COUNTRY->create();
 
     if ($res) {
+        // Create a default job for this country
+        $defaultJob = new CountryJob();
+        $defaultJob->country_id = $res; // Use the new country ID
+        $defaultJob->name = 'General Worker';
+        $defaultJob->create();
+        
         echo json_encode(["status" => 'success']);
     } else {
         echo json_encode(["status" => 'error']);

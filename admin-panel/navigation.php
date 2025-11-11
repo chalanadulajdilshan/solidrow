@@ -33,7 +33,7 @@ $US = new User($_SESSION['id']);
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <?php if ($US->type == 1) { ?>
+                <?php if ($US->type == 1 || $US->type == 4) { ?>
                     
                     <li class="menu-title">User Management</li>
                     <li>

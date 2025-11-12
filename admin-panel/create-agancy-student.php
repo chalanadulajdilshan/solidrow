@@ -572,7 +572,7 @@ if ($incomingId) {
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label for="history_student_id" class="col-form-label">Candidate Reg. No (for history)</label>
+                                                <label for="history_student_id" class="col-form-label">Candidate Reg. No (for Assessment history)</label>
                                                 <input class="form-control" list="existing-students" id="history_student_id" placeholder="Type or select Candidate Reg. No">
                                                 <datalist id="existing-students">
                                                     <?php

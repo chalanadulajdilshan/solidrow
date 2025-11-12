@@ -97,7 +97,13 @@ $US = new User($_SESSION['id']);
                             <i class="bx bx-book-content"></i>
                             <span>Course</span>
                         </a>
-                    </li> 
+                    </li>
+                    <li>
+                        <a href="group.php">
+                            <i class="bx bx-group"></i>
+                            <span>Groups</span>
+                        </a>
+                    </li>
                    
                      <li>
                         <a href="jobs.php">

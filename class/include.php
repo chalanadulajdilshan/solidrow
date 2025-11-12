@@ -29,6 +29,7 @@ include_once(dirname(__FILE__) . '/Gndivision.php');
 include_once(dirname(__FILE__) . '/Remark.php');
 include_once(dirname(__FILE__) . '/CountryJob.php'); 
 include_once(dirname(__FILE__) . '/Application.php'); 
+include_once(dirname(__FILE__) . '/Group.php'); 
 
 function dd($data)
 {

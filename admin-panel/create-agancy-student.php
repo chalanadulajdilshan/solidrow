@@ -572,8 +572,13 @@ if ($incomingId) {
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label for="history_student_id" class="col-form-label">Candidate Reg. No (for Assesments  history)</label>
-                                                <input class="form-control" list="existing-students" id="history_student_id" placeholder="Type or select Candidate Reg. No">
+                                                <label for="history_student_id" class="col-form-label">Candidate Reg. No (for Assessment history)</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" list="existing-students" id="history_student_id" placeholder="Type or select Candidate Reg. No">
+                                                    <button class="btn btn-outline-secondary" type="button" id="refresh_students">
+                                                        <i class="uil uil-sync"></i>
+                                                    </button>
+                                                </div>
                                                 <datalist id="existing-students">
                                                     <?php
                                                     $EXIST_STUDENT = new AgancyStudent(NULL);
@@ -589,7 +594,7 @@ if ($incomingId) {
                                                     if ($existingStudents) {
                                                         foreach ($existingStudents as $es) {
                                                             if (!empty($es['student_id'])) {
-                                                                echo '<option value="' . htmlspecialchars($es['student_id']) . '">';
+                                                                echo '<option value="' . htmlspecialchars($es['student_id']) . '" data-type="' . htmlspecialchars($es['assessment_type'] ?? '') . '">';
                                                             }
                                                         }
                                                     }
@@ -1520,6 +1525,83 @@ function handleCountryChange() {
 document.addEventListener('DOMContentLoaded', function () {
     var sel = document.getElementById('country');
     var historySel = document.getElementById('history_student_id');
+    var studentDatalist = document.getElementById('existing-students');
+    
+    // Function to load assessment history for a student
+    function loadAssessmentHistory(studentId) {
+        const container = document.getElementById('all-assessment-history');
+        if (!studentId) {
+            if (container) container.innerHTML = '';
+            handleCountryChange();
+            return;
+        }
+        
+        if (container) container.innerHTML = '<p>Loading history...</p>';
+        
+        $.ajax({
+            url: 'ajax/php/agancy-student.php',
+            type: 'POST',
+            data: { 
+                action: 'GET_ALL_ASSESSMENT_HISTORY', 
+                student_id: studentId 
+            },
+            dataType: 'json',
+            success: function(resp) {
+                if (resp && resp.status === 'success' && Array.isArray(resp.data)) {
+                    if (resp.data.length === 0) {
+                        if (container) container.innerHTML = '<p>No previous assessment history found.</p>';
+                        return;
+                    }
+                    let html = '<div class="table-responsive"><table class="table table-bordered table-striped">';
+                    html += '<thead><tr><th>Type</th><th>Date</th><th>Result</th><th>Status</th></tr></thead><tbody>';
+                    
+                    resp.data.forEach(function(a) {
+                        const res = (a.assessment_result || '').toLowerCase();
+                        const cls = res === 'pass' ? 'success' : 'danger';
+                        const txt = res === 'pass' ? 'Passed' : (res ? 'Failed' : '');
+                        
+                        // Format the assessment type for display
+                        let displayType = (a.assessment_type || 'N/A').toLowerCase()
+                            .split('_')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ');
+                            
+                        // Handle specific cases
+                        if (displayType === 'Pretest') displayType = 'Pre Test';
+                        else if (displayType === 'Interview') displayType = 'Interview';
+                        
+                        // Format the result for display
+                        const displayResult = (a.assessment_result || 'N/A').charAt(0).toUpperCase() + 
+                                          (a.assessment_result || '').slice(1).toLowerCase();
+                        
+                        html += '<tr>'+
+                            '<td>'+displayType+'</td>'+
+                            '<td>'+(a.assessment_date || 'N/A')+'</td>'+
+                            '<td>'+displayResult+'</td>'+
+                            '<td><span class="badge bg-'+cls+'">'+txt+'</span></td>'+
+                        '</tr>';
+                    });
+                    
+                    html += '</tbody></table></div>';
+                    if (container) container.innerHTML = html;
+                } else {
+                    if (container) container.innerHTML = '<p>No previous assessment history found.</p>';
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading assessment history:', error);
+                if (container) container.innerHTML = '<p>Error loading assessment history. Please try again.</p>';
+            }
+        });
+    }
+    
+    // Handle student selection
+    if (historySel) {
+        historySel.addEventListener('input', function() {
+            const studentId = this.value.trim();
+            loadAssessmentHistory(studentId);
+        });
+    }
     if (sel) {
         // If inline onchange exists, this is extra-safe; otherwise it wires it.
         sel.addEventListener('change', handleCountryChange);

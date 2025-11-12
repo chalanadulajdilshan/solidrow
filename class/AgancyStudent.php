@@ -98,6 +98,7 @@ class AgancyStudent
     public $other_agent_name;
     public $other_agent_mobile;
     public $registration_no;
+    public $assessment_type;
 
     public function __construct($id)
     {

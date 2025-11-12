@@ -3,6 +3,84 @@
 include '../../../class/include.php';
 header('Content-Type: application/json; charset=UTF8');
 
+// Handle assessment history fetching
+if (isset($_POST['action'])) {
+    // Handle fetching all assessment history for a student
+    if ($_POST['action'] === 'GET_ALL_ASSESSMENT_HISTORY') {
+        try {
+            $student_id = $_POST['student_id'] ?? null;
+
+            if (empty($student_id)) {
+                echo json_encode(["status" => "error", "message" => "Student ID is required"]);
+                exit();
+            }
+
+            $assessment = new StudentAssessment();
+            $all = $assessment->getAllByStudent($student_id);
+
+            echo json_encode([
+                "status" => "success",
+                "data" => $all
+            ]);
+        } catch (Exception $e) {
+            error_log("Assessment all history fetch error: " . $e->getMessage());
+            echo json_encode([
+                "status" => "error",
+                "message" => "An error occurred while fetching all assessment history",
+                "error" => $e->getMessage()
+            ]);
+        }
+        exit();
+    } 
+    // Handle fetching specific assessment type history
+    else if ($_POST['action'] === 'GET_ASSESSMENT_HISTORY') {
+        try {
+            $student_id = $_POST['student_id'] ?? null;
+            $assessment_type = $_POST['assessment_type'] ?? null;
+
+            // Validate required fields
+            if (empty($student_id)) {
+                echo json_encode(["status" => "error", "message" => "Student ID is required"]);
+                exit();
+            }
+
+            if (empty($assessment_type) || !in_array($assessment_type, ['interview', 'pretest'])) {
+                echo json_encode(["status" => "error", "message" => "Valid assessment type is required"]);
+                exit();
+            }
+
+            $assessment = new StudentAssessment();
+            $history = $assessment->getByStudentAndType($student_id, $assessment_type);
+            
+            if ($history) {
+                // If we have a single result, return it as an array with one item
+                $historyData = is_array($history) ? $history : [$history];
+                echo json_encode([
+                    "status" => "success", 
+                    "data" => $historyData
+                ]);
+            } else {
+                // No history found
+                echo json_encode([
+                    "status" => "success", 
+                    "data" => [],
+                    "message" => "No $assessment_type history found for this student"
+                ]);
+            }
+        } catch (Exception $e) {
+            error_log("Assessment history fetch error: " . $e->getMessage());
+            echo json_encode([
+                "status" => "error", 
+                "message" => "An error occurred while fetching assessment history",
+                "error" => $e->getMessage()
+            ]);
+        }
+        exit();
+    }
+}
+
+// Handle assessment (interview/pretest) saving
+
 // Handle assessment (interview/pretest) saving
 if (isset($_POST['action']) && $_POST['action'] === 'SAVE_ASSESSMENT') {
     try {

@@ -1,4 +1,52 @@
 jQuery(document).ready(function () {
+    // Load assessment history when assessment type changes
+    $(document).on('change', 'select[name^="assessment_type"]', function() {
+        const assessmentType = $(this).val();
+        const studentId = $('input[name="id"]').val() || $('input[name="student_id"]').val();
+        
+        if (!studentId) return;
+        
+        // Show loading state
+        const historyContainer = $(this).closest('.assessment-section').find('.assessment-history');
+        historyContainer.html('<p>Loading history...</p>');
+        
+        // Fetch assessment history
+        $.ajax({
+            url: 'ajax/php/agancy-student.php',
+            type: 'POST',
+            data: {
+                action: 'GET_ASSESSMENT_HISTORY',
+                student_id: studentId,
+                assessment_type: assessmentType
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success' && response.data.length > 0) {
+                    let historyHtml = '<div class="table-responsive"><table class="table table-bordered table-striped">';
+                    historyHtml += '<thead><tr><th>Date</th><th>Result</th><th>Status</th></tr></thead><tbody>';
+                    
+                    response.data.forEach(function(assessment) {
+                        const statusClass = assessment.assessment_result === 'pass' ? 'success' : 'danger';
+                        const statusText = assessment.assessment_result === 'pass' ? 'Passed' : 'Failed';
+                        
+                        historyHtml += `<tr>
+                            <td>${assessment.assessment_date || 'N/A'}</td>
+                            <td>${assessment.assessment_result || 'N/A'}</td>
+                            <td><span class="badge bg-${statusClass}">${statusText}</span></td>
+                        </tr>`;
+                    });
+                    
+                    historyHtml += '</tbody></table></div>';
+                    historyContainer.html(historyHtml);
+                } else {
+                    historyContainer.html('<p>No previous assessment history found.</p>');
+                }
+            },
+            error: function() {
+                historyContainer.html('<p>Error loading assessment history.</p>');
+            }
+        });
+    });
     
   $("#create").click(function (event) {
     event.preventDefault();
@@ -426,6 +474,7 @@ function unlockSection(sectionNumber) {
                                   timer: 1500,
                                   showConfirmButton: false
                               });
+
 
                               setTimeout(() => {
                                   unlockSection(2);
@@ -876,6 +925,16 @@ function unlockSection(sectionNumber) {
         },
     });
 }
+
+
+
+
+
+
+
+
+
+
 
 //----------------------------------------------------------------------------
 

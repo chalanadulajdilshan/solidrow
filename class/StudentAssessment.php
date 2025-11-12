@@ -86,6 +86,7 @@ class StudentAssessment {
         return $result ? true : false;
     }
 
+
     public function getByStudentAndType($student_id, $type) {
         // If student_id is empty, don't try to find by student_id
         if (empty($student_id)) {
@@ -110,6 +111,27 @@ class StudentAssessment {
         }
 
         return false;
+    }
+
+    public function getAllByStudent($student_id) {
+        if (empty($student_id)) {
+            return [];
+        }
+
+        $db = new Database();
+        $con = $db->DB_CON;
+        $student_id_esc = mysqli_real_escape_string($con, $student_id);
+
+        $query = "SELECT * FROM `student_assessment`\n                 WHERE `student_id` = '" . $student_id_esc . "'\n                 ORDER BY `id` DESC";
+
+        $result = $db->readQuery($query);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+        }
+        return $rows;
     }
 
     /**

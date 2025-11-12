@@ -394,6 +394,9 @@ if ($incomingId) {
                                             </div>
                                         </div>
 
+
+                                        
+
                                         <div class="col-md-4 other-agent-fields" style="display: none;">
                                             <label for="other_agent_name" class="col-form-label">Other Coordinator Name</label>
                                             <input type="text" class="form-control" id="other_agent_name" name="other_agent_name" placeholder="Enter Other Coordinator Name" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->other_agent_name : ''); ?>">
@@ -508,13 +511,7 @@ if ($incomingId) {
                                 </div>
                             </div>
 
-                            <div id="section-2" class="section">
-                                <div class="card">
-                                    <div class="card-body">
-                                        
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <!-- Interview Details Section (For Romania) -->
                             <div id="romania-section" class="section" style="display: none;">
@@ -570,7 +567,42 @@ if ($incomingId) {
                                 </div>
                             </div>
 
-
+<div id="section-2" class="section">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="history_student_id" class="col-form-label">Candidate Reg. No (for history)</label>
+                                                <input class="form-control" list="existing-students" id="history_student_id" placeholder="Type or select Candidate Reg. No">
+                                                <datalist id="existing-students">
+                                                    <?php
+                                                    $EXIST_STUDENT = new AgancyStudent(NULL);
+                                                    $existingStudents = [];
+                                                    $loggedInUser = new User($_SESSION['id']);
+                                                    if ($loggedInUser->type == 3 && !empty($loggedInUser->agent_user_id)) {
+                                                        $existingStudents = $EXIST_STUDENT->getByAgent($loggedInUser->agent_user_id);
+                                                    } elseif ($loggedInUser->type == 2 && !empty($loggedInUser->staff_user_id)) {
+                                                        $existingStudents = $EXIST_STUDENT->getByStaff($loggedInUser->staff_user_id);
+                                                    } else {
+                                                        $existingStudents = $EXIST_STUDENT->all();
+                                                    }
+                                                    if ($existingStudents) {
+                                                        foreach ($existingStudents as $es) {
+                                                            if (!empty($es['student_id'])) {
+                                                                echo '<option value="' . htmlspecialchars($es['student_id']) . '">';
+                                                            }
+                                                        }
+                                                    }
+                                                    ?>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-md-12" style="margin-top: 15px">
+                                                <div id="all-assessment-history" class="assessment-history"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                                         <p class="text-danger">02. Personal Details (Attachment) </p>
                                         <hr>
@@ -1161,36 +1193,64 @@ if ($incomingId) {
         // Function to handle country selection change
         function handleCountryChange() {
             const countrySelect = document.getElementById('country');
+            if (!countrySelect || !countrySelect.value) {
+                return;
+            }
+            
             const selectedOption = countrySelect.options[countrySelect.selectedIndex];
             const countryName = selectedOption.textContent.trim().toLowerCase();
             
             // Hide both sections first
-            document.getElementById('romania-section').style.display = 'none';
-            document.getElementById('pretest-section').style.display = 'none';
+            const romaniaSection = document.getElementById('romania-section');
+            const pretestSection = document.getElementById('pretest-section');
+            
+            if (romaniaSection) romaniaSection.style.display = 'none';
+            if (pretestSection) pretestSection.style.display = 'none';
             
             // Show the appropriate section based on country
             if (countryName === 'romania') {
-                document.getElementById('romania-section').style.display = 'block';
-                // Set current date as default for interview date
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById('interview_date').min = today;
-                document.getElementById('interview_date').value = today;
+                const section = document.getElementById('romania-section');
+                if (section) {
+                    section.style.display = 'block';
+                    // Set current date as default for interview date
+                    const today = new Date().toISOString().split('T')[0];
+                    const interviewDate = document.getElementById('interview_date');
+                    if (interviewDate) {
+                        interviewDate.min = today;
+                        if (!interviewDate.value) {
+                            interviewDate.value = today;
+                        }
+                    }
+                }
             } else if (countrySelect.value !== '') {
-                document.getElementById('pretest-section').style.display = 'block';
-                // Set current date as default for pretest date
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById('pretest_date').min = today;
-                document.getElementById('pretest_date').value = today;
+                const section = document.getElementById('pretest-section');
+                if (section) {
+                    section.style.display = 'block';
+                    // Set current date as default for pretest date
+                    const today = new Date().toISOString().split('T')[0];
+                    const pretestDate = document.getElementById('pretest_date');
+                    if (pretestDate) {
+                        pretestDate.min = today;
+                        if (!pretestDate.value) {
+                            pretestDate.value = today;
+                        }
+                    }
+                }
             }
-            
         }
         
-        // Call the function on page load to set initial state
+        
+
+        // Initialize the form on page load
         document.addEventListener('DOMContentLoaded', function() {
-            handleCountryChange();
-            
             // Add event listener to the country select
-            document.getElementById('country').addEventListener('change', handleCountryChange);
+            const countrySelect = document.getElementById('country');
+            if (countrySelect) {
+                countrySelect.addEventListener('change', handleCountryChange);
+                
+                // Trigger initial state
+                handleCountryChange();
+            }
         });
 
         // Function to validate NIC number format
@@ -1424,10 +1484,33 @@ function handleCountryChange() {
     if (romaniaSection) romaniaSection.style.display = 'none';
     if (pretestSection) pretestSection.style.display = 'none';
 
+    const today = new Date().toISOString().split('T')[0];
+    const studentIdInput = document.getElementById('student_id');
+    const historyIdInput = document.getElementById('history_student_id');
+    const overrideId = historyIdInput && historyIdInput.value ? historyIdInput.value.trim() : '';
+    const studentId = overrideId || (studentIdInput ? studentIdInput.value : '');
+
+
+    // Romania -> interview section
     if (selectedValue === "1" || selectedName === 'romania') {
-        if (romaniaSection) romaniaSection.style.display = 'block';
+        if (romaniaSection) {
+            romaniaSection.style.display = 'block';
+            const interviewDate = document.getElementById('interview_date');
+            if (interviewDate) {
+                interviewDate.min = today;
+                if (!interviewDate.value) interviewDate.value = today;
+            }
+        }
     } else if (selectedValue !== "") {
-        if (pretestSection) pretestSection.style.display = 'block';
+        // Others -> pretest section
+        if (pretestSection) {
+            pretestSection.style.display = 'block';
+            const pretestDate = document.getElementById('pretest_date');
+            if (pretestDate) {
+                pretestDate.min = today;
+                if (!pretestDate.value) pretestDate.value = today;
+            }
+        }
     }
 }
 </script>
@@ -1436,6 +1519,7 @@ function handleCountryChange() {
 // Ensure initial state on load and wire the change listener
 document.addEventListener('DOMContentLoaded', function () {
     var sel = document.getElementById('country');
+    var historySel = document.getElementById('history_student_id');
     if (sel) {
         // If inline onchange exists, this is extra-safe; otherwise it wires it.
         sel.addEventListener('change', handleCountryChange);
@@ -1443,6 +1527,71 @@ document.addEventListener('DOMContentLoaded', function () {
         handleCountryChange();
     } else {
         try { console.warn('[handleCountryChange] #country not found at DOMContentLoaded'); } catch (e) {}
+    }
+    if (historySel) {
+        historySel.addEventListener('change', function(){
+            // Fetch all assessments for the selected student and render
+            const studentId = this.value && this.value.trim();
+            const container = document.getElementById('all-assessment-history');
+            if (!studentId) {
+                if (container) container.innerHTML = '';
+                handleCountryChange();
+                return;
+            }
+            if (container) container.innerHTML = '<p>Loading history...</p>';
+            if (!window.jQuery) return;
+            $.ajax({
+                url: 'ajax/php/agancy-student.php',
+                type: 'POST',
+                data: { action: 'GET_ALL_ASSESSMENT_HISTORY', student_id: studentId },
+                dataType: 'json',
+                success: function(resp){
+                    if (resp && resp.status === 'success' && Array.isArray(resp.data)) {
+                        if (resp.data.length === 0) {
+                            if (container) container.innerHTML = '<p>No previous assessment history found.</p>';
+                            return;
+                        }
+                        let html = '<div class="table-responsive"><table class="table table-bordered table-striped">';
+                        html += '<thead><tr><th>Type</th><th>Date</th><th>Result</th><th>Status</th></tr></thead><tbody>';
+                        resp.data.forEach(function(a){
+                            const res = (a.assessment_result || '').toLowerCase();
+                            const cls = res === 'pass' ? 'success' : 'danger';
+                            const txt = res === 'pass' ? 'Passed' : (res ? 'Failed' : '');
+                            
+                            // Format the assessment type for display
+                            let displayType = (a.assessment_type || 'N/A').toLowerCase()
+                                .split('_')
+                                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                .join(' ');
+                                
+                            // Handle specific cases
+                            if (displayType === 'Pretest') displayType = 'Pre Test';
+                            else if (displayType === 'Interview') displayType = 'Interview';
+                            
+                            // Format the result for display
+                            const displayResult = (a.assessment_result || 'N/A').charAt(0).toUpperCase() + 
+                                              (a.assessment_result || '').slice(1).toLowerCase();
+                            
+                            html += '<tr>'+
+                                '<td>'+displayType+'</td>'+
+                                '<td>'+(a.assessment_date || 'N/A')+'</td>'+
+                                '<td>'+displayResult+'</td>'+
+                                '<td><span class="badge bg-'+cls+'">'+txt+'</span></td>'+
+                            '</tr>';
+                        });
+                        html += '</tbody></table></div>';
+                        if (container) container.innerHTML = html;
+                    } else {
+                        if (container) container.innerHTML = '<p>No previous assessment history found.</p>';
+                    }
+                },
+                error: function(){
+                    if (container) container.innerHTML = '<p>Error loading assessment history.</p>';
+                }
+            });
+            // Also refresh the country-specific section history
+            handleCountryChange();
+        });
     }
 });
 </script>

@@ -146,6 +146,13 @@ jQuery(document).ready(function ($) {
         $("#district").val(staffData.district).trigger("change");
         $("#province").val(staffData.province).trigger("change");
         $("#company").val(staffData.company).trigger("change");
+        
+        // Set the group selection
+        if (staffData.group_id) {
+            $("#group_id").val(staffData.group_id);
+        } else {
+            $("#group_id").val("");
+        }
 
         if (staffData.join_date) {
             const joinDate = new Date(staffData.join_date);

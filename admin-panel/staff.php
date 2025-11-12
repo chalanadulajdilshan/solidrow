@@ -100,6 +100,19 @@ include './auth.php';
                                                 </select>
                                             </div>
                                             <div class="col-md-6 mb-3">
+                                                <label>Group</label>
+                                                <select id="group_id" name="group_id" class="form-select">
+                                                    <option value="">Select Group</option>
+                                                    <?php
+                                                    $GROUP = new Group(NULL);
+                                                    $groups = $GROUP->all();
+                                                    foreach ($groups as $group) {
+                                                        echo "<option value='" . $group['id'] . "'>" . htmlspecialchars($group['group_name']) . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
                                                 <label>Join Date</label>
                                                 <input type="date" id="join_date" name="join_date" class="form-control" required>
                                             </div>

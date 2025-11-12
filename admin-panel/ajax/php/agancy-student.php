@@ -3,6 +3,56 @@
 include '../../../class/include.php';
 header('Content-Type: application/json; charset=UTF8');
 
+// Handle assessment (interview/pretest) saving
+if (isset($_POST['action']) && $_POST['action'] === 'SAVE_ASSESSMENT') {
+    try {
+        $agancy_student_id = $_POST['agancy_student_id'] ?? null;
+        $assessment_type = $_POST['assessment_type'] ?? null;
+        $assessment_date = $_POST['assessment_date'] ?? null;
+        $assessment_result = $_POST['assessment_result'] ?? null;
+
+        // Validate required fields
+        if (empty($agancy_student_id)) {
+            echo json_encode(["status" => "error", "message" => "Student ID is required"]);
+            exit();
+        }
+
+        if (empty($assessment_type) || !in_array($assessment_type, ['interview', 'pretest'])) {
+            echo json_encode(["status" => "error", "message" => "Valid assessment type is required"]);
+            exit();
+        }
+
+        if (empty($assessment_date)) {
+            echo json_encode(["status" => "error", "message" => "Assessment date is required"]);
+            exit();
+        }
+
+        if (empty($assessment_result) || !in_array($assessment_result, ['pass', 'fail'])) {
+            echo json_encode(["status" => "error", "message" => "Valid assessment result is required"]);
+            exit();
+        }
+
+        // Create StudentAssessment instance and save
+        $assessment = new StudentAssessment();
+        $result = $assessment->saveOrUpdate($agancy_student_id, $assessment_type, $assessment_date, $assessment_result);
+
+        if ($result) {
+            echo json_encode([
+                "status" => "success", 
+                "message" => ucfirst($assessment_type) . " details saved successfully",
+                "assessment_id" => $result
+            ]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Failed to save " . $assessment_type . " details"]);
+        }
+        
+    } catch (Exception $e) {
+        error_log("Assessment save error: " . $e->getMessage());
+        echo json_encode(["status" => "error", "message" => "An error occurred while saving assessment details"]);
+    }
+    exit();
+}
+
 //------------------------------------------------------------------
  
 if (isset($_POST['section'])) {

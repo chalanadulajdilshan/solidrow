@@ -136,7 +136,10 @@ $country = new Country($id);
                                                     <td><?php echo htmlspecialchars($job['title']) ?></td>
                                                     <td><?php echo htmlspecialchars($job['position']) ?></td>
                                                     <td><?php echo htmlspecialchars($job['description']) ?></td>
-                                                    <td><?php echo htmlspecialchars($job['country']) ?></td>
+                                                    <td><?php 
+                                                        $country = new Country($job['country']);
+                                                        echo htmlspecialchars($country->name ?? 'N/A'); 
+                                                    ?></td>
                                                     <td>
                                                         <?php if (!empty($job['image'])) { ?>
                                                             <img src="../upload/job/<?php echo htmlspecialchars($job['image']) ?>" alt="Job Image" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">

@@ -429,6 +429,10 @@ function unlockSection(sectionNumber) {
 
                               setTimeout(() => {
                                   unlockSection(2);
+                                  // Trigger country change to show interview/pretest sections if country is selected
+                                  if (typeof handleCountryChange === 'function') {
+                                      handleCountryChange();
+                                  }
                               }, 1600);
                           }
                       } else {
@@ -691,9 +695,123 @@ function unlockSection(sectionNumber) {
     validateAndSubmitFinalSection();
 });
 
+  // Interview Details Save (Romania)
+  $("#save_interview_details").click(function (e) {
+      e.preventDefault();
+      saveAssessmentDetails('interview');
+  });
 
+  // Pre-test Details Save (Other countries)
+  $("#save_pretest_details").click(function (e) {
+      e.preventDefault();
+      saveAssessmentDetails('pretest');
+  });
 
+  // Function to save assessment details (interview or pretest)
+  function saveAssessmentDetails(type) {
+      const studentDbId = $("#student_db_id").val();
+      
+      if (!studentDbId) {
+          swal({
+              title: "Error!",
+              text: "Please save Section 1 (Personal Details) first to get a student ID.",
+              type: "error",
+              timer: 3000,
+              showConfirmButton: true
+          });
+          return;
+      }
 
+      let dateField, resultField;
+      if (type === 'interview') {
+          dateField = 'interview_date';
+          resultField = 'interview_result';
+      } else {
+          dateField = 'pretest_date';
+          resultField = 'pretest_result';
+      }
+
+      const assessmentDate = $("#" + dateField).val();
+      const assessmentResult = $("#" + resultField).val();
+
+      if (!assessmentDate) {
+          swal({
+              title: "Error!",
+              text: "Please select the " + type + " date.",
+              type: "error",
+              timer: 2000,
+              showConfirmButton: false
+          });
+          $("#" + dateField).focus();
+          return;
+      }
+
+      if (!assessmentResult) {
+          swal({
+              title: "Error!",
+              text: "Please select the " + type + " result.",
+              type: "error",
+              timer: 2000,
+              showConfirmButton: false
+          });
+          $("#" + resultField).focus();
+          return;
+      }
+
+      // Show loading state
+      const $saveBtn = $("#save_" + type + "_details");
+      const originalText = $saveBtn.html();
+      $saveBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
+
+      // Prepare form data
+      let formData = new FormData();
+      formData.append('action', 'SAVE_ASSESSMENT');
+      formData.append('agancy_student_id', studentDbId);
+      formData.append('assessment_type', type);
+      formData.append('assessment_date', assessmentDate);
+      formData.append('assessment_result', assessmentResult);
+
+      $.ajax({
+          url: "ajax/php/agancy-student.php",
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          dataType: "json",
+          success: function(response) {
+              if (response.status === "success") {
+                  swal({
+                      title: "Success!",
+                      text: type.charAt(0).toUpperCase() + type.slice(1) + " details saved successfully!",
+                      type: "success",
+                      timer: 2000,
+                      showConfirmButton: false
+                  });
+              } else {
+                  swal({
+                      title: "Error!",
+                      text: response.message || "Failed to save " + type + " details. Please try again.",
+                      type: "error",
+                      timer: 3000,
+                      showConfirmButton: true
+                  });
+              }
+          },
+          error: function(xhr, status, error) {
+              console.error("AJAX Error:", error);
+              swal({
+                  title: "Error!",
+                  text: "An error occurred while saving. Please try again.",
+                  type: "error",
+                  timer: 3000,
+                  showConfirmButton: true
+              });
+          },
+          complete: function() {
+              $saveBtn.prop('disabled', false).html(originalText);
+          }
+      });
+  }
 
       function validateAndSubmitFinalSection() {
     if (!$("#student_id").val() || $("#student_id").val().length === 0) {
@@ -758,12 +876,6 @@ function unlockSection(sectionNumber) {
         },
     });
 }
-
-
-
-
-
-
 
 //----------------------------------------------------------------------------
 

@@ -326,28 +326,8 @@ if ($incomingId) {
                                                     placeholder="Enter Professional Qualification" value="<?php echo htmlspecialchars($studentToEdit ? $studentToEdit->school_attendant : ''); ?>">
                                             </div>
 
-
-                                            <!-- selection countrys -->
                                             <div class="col-md-4">
-                                                <label for="country" class="col-form-label">Country <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="country" name="country">
-                                                    <option value="">-- Select Country --</option>
-                                                    <?php
-                                                    $COUNTRY = new Country(NULL);
-                                                    foreach ($COUNTRY->all() as $key => $country) {
-                                                        $selected = '';
-                                                        if ($studentToEdit && $studentToEdit->country == $country['id']) {
-                                                            $selected = 'selected';
-                                                        } elseif (!$studentToEdit && $prefillStudent && $prefillStudent->country == $country['id']) {
-                                                            $selected = 'selected';
-                                                        }
-                                                        echo "<option value=\"{$country['id']}\" $selected>{$country['name']}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="country" class="col-form-label">Staff Coordinator  </label>
+                                                <label for="staff_id" class="col-form-label">Staff Coordinator  </label>
                                                 <select class="form-control" id="staff_id" name="staff_id">
                                                     <option value="">-- Select Staff Coordinator --</option>
                                                     <?php
@@ -379,7 +359,30 @@ if ($incomingId) {
                                                     ?>
                                                 </select>
                                             </div>
-                                       
+
+                                            <div class="col-md-4">
+                                                <label for="country" class="col-form-label">Country <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <select class="form-control" id="country" name="country" onchange="handleCountryChange()">
+                                                        <option value="">-- Select Country --</option>
+                                                        <?php
+                                                        $COUNTRY = new Country(NULL);
+                                                        $countries = $COUNTRY->all();
+                                                        foreach ($countries as $key => $country) {
+                                                            $selected = '';
+                                                            if ($studentToEdit && $studentToEdit->country == $country['id']) {
+                                                                $selected = 'selected';
+                                                                echo "<option value='" . $country['id'] . "' selected='selected' data-name='" . strtolower($country['name']) . "'>" . $country['name'] . "</option>";
+                                                            } elseif (!$studentToEdit && $prefillStudent && $prefillStudent->country == $country['id']) {
+                                                                echo "<option value='" . $country['id'] . "' selected='selected' data-name='" . strtolower($country['name']) . "'>" . $country['name'] . "</option>";
+                                                            } else {
+                                                                echo "<option value='" . $country['id'] . "' data-name='" . strtolower($country['name']) . "'>" . $country['name'] . "</option>";
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
 
 
                                         <div class="col-md-4">
@@ -505,11 +508,69 @@ if ($incomingId) {
                                 </div>
                             </div>
 
-                            <div id="section-2" class="section"  >
-<!-- <div id="section-2" class="section" style="display: none;"> -->
-
+                            <div id="section-2" class="section">
                                 <div class="card">
                                     <div class="card-body">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interview Details Section (For Romania) -->
+                            <div id="romania-section" class="section" style="display: none;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <p class="text-danger">1.1 Interview Details (Romania)</p>
+                                            <hr>
+                                            <div class="col-md-4">
+                                                <label for="interview_date" class="col-form-label">Interview Date <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="interview_date" name="interview_date" value="<?php echo $studentToEdit && isset($studentToEdit->interview_date) && $studentToEdit->interview_date ? date('Y-m-d', strtotime($studentToEdit->interview_date)) : ''; ?>">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="interview_result" class="col-form-label">Interview Result <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="interview_result" name="interview_result">
+                                                    <option value="">-- Select Result --</option>
+                                                    <option value="pass" <?php echo $studentToEdit && isset($studentToEdit->interview_result) && $studentToEdit->interview_result == 'pass' ? 'selected' : ''; ?>>Pass</option>
+                                                    <option value="fail" <?php echo $studentToEdit && isset($studentToEdit->interview_result) && $studentToEdit->interview_result == 'fail' ? 'selected' : ''; ?>>Fail</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12" style="margin-top: 20px">
+                                                <button class="btn btn-primary" type="button" id="save_interview_details">Save Interview Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pre-test Details Section (For other countries) -->
+                            <div id="pretest-section" class="section" style="display: none;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <p class="text-danger">1.1 Pre-test Details</p>
+                                            <hr>
+                                            <div class="col-md-4">
+                                                <label for="pretest_date" class="col-form-label">Pre-test Date <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="pretest_date" name="pretest_date" value="<?php echo $studentToEdit && isset($studentToEdit->pretest_date) && $studentToEdit->pretest_date ? date('Y-m-d', strtotime($studentToEdit->pretest_date)) : ''; ?>">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="pretest_result" class="col-form-label">Pre-test Result <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="pretest_result" name="pretest_result">
+                                                    <option value="">-- Select Result --</option>
+                                                    <option value="pass" <?php echo $studentToEdit && isset($studentToEdit->pretest_result) && $studentToEdit->pretest_result == 'pass' ? 'selected' : ''; ?>>Pass</option>
+                                                    <option value="fail" <?php echo $studentToEdit && isset($studentToEdit->pretest_result) && $studentToEdit->pretest_result == 'fail' ? 'selected' : ''; ?>>Fail</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12" style="margin-top: 20px">
+                                                <button class="btn btn-primary" type="button" id="save_pretest_details">Save Pre-test Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
 
                                         <p class="text-danger">02. Personal Details (Attachment) </p>
                                         <hr>
@@ -1087,7 +1148,7 @@ if ($incomingId) {
     <script src="plugin/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 
 
-    <script src="ajax/js/agancy-student.js" type="text/javascript"></script>
+    <script src="ajax/js/agancy-student.js?v=<?php echo time(); ?>" type="text/javascript"></script>
     <script src="ajax/js/district.js" type="text/javascript"></script>
     <script src="ajax/js/dsdivision.js" type="text/javascript"></script>
     <script src="ajax/js/gramaniladari.js" type="text/javascript"></script>
@@ -1097,6 +1158,41 @@ if ($incomingId) {
     <!-- JavaScript to show/hide related qualification fields -->
 
     <script>
+        // Function to handle country selection change
+        function handleCountryChange() {
+            const countrySelect = document.getElementById('country');
+            const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+            const countryName = selectedOption.textContent.trim().toLowerCase();
+            
+            // Hide both sections first
+            document.getElementById('romania-section').style.display = 'none';
+            document.getElementById('pretest-section').style.display = 'none';
+            
+            // Show the appropriate section based on country
+            if (countryName === 'romania') {
+                document.getElementById('romania-section').style.display = 'block';
+                // Set current date as default for interview date
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('interview_date').min = today;
+                document.getElementById('interview_date').value = today;
+            } else if (countrySelect.value !== '') {
+                document.getElementById('pretest-section').style.display = 'block';
+                // Set current date as default for pretest date
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('pretest_date').min = today;
+                document.getElementById('pretest_date').value = today;
+            }
+            
+        }
+        
+        // Call the function on page load to set initial state
+        document.addEventListener('DOMContentLoaded', function() {
+            handleCountryChange();
+            
+            // Add event listener to the country select
+            document.getElementById('country').addEventListener('change', handleCountryChange);
+        });
+
         // Function to validate NIC number format
         function validateNIC(input) {
             const nic = input.value.trim();
@@ -1294,19 +1390,70 @@ if ($incomingId) {
 
 
     <script>
-        $(function() {
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                setDate: new Date() // This sets the default date to today's date
+        if (window.jQuery && $.fn.datepicker) {
+            $(function() {
+                $(".datepicker").datepicker({
+                    dateFormat: "yy-mm-dd",
+                    setDate: new Date()
+                });
             });
-        });
+        } else {
+            try { console.warn('jQuery UI datepicker not available; skipping .datepicker init'); } catch (e) {}
+        }
     </script>
+
+<script>
+function handleCountryChange() {
+    const countrySelect = document.getElementById("country");
+    if (!countrySelect) return;
+
+    const selectedValue = countrySelect.value;
+    const selectedName = countrySelect.options[countrySelect.selectedIndex]
+        ? countrySelect.options[countrySelect.selectedIndex].text.trim().toLowerCase()
+        : '';
+
+    const romaniaSection = document.getElementById("romania-section");
+    const pretestSection = document.getElementById("pretest-section");
+
+    // Debug logs
+    try {
+        console.log('[handleCountryChange] value=', selectedValue, ' name=', selectedName);
+        console.log('[handleCountryChange] romaniaSection?', !!romaniaSection, ' pretestSection?', !!pretestSection);
+    } catch (e) {}
+
+    if (romaniaSection) romaniaSection.style.display = 'none';
+    if (pretestSection) pretestSection.style.display = 'none';
+
+    if (selectedValue === "1" || selectedName === 'romania') {
+        if (romaniaSection) romaniaSection.style.display = 'block';
+    } else if (selectedValue !== "") {
+        if (pretestSection) pretestSection.style.display = 'block';
+    }
+}
+</script>
+
+<script>
+// Ensure initial state on load and wire the change listener
+document.addEventListener('DOMContentLoaded', function () {
+    var sel = document.getElementById('country');
+    if (sel) {
+        // If inline onchange exists, this is extra-safe; otherwise it wires it.
+        sel.addEventListener('change', handleCountryChange);
+        // Initialize once
+        handleCountryChange();
+    } else {
+        try { console.warn('[handleCountryChange] #country not found at DOMContentLoaded'); } catch (e) {}
+    }
+});
+</script>
+
 
 
     <script>
-        $(function(e) {
-            "use strict";
-            $(".date-inputmask").inputmask("dd/mm/yyyy"),
+        if (window.jQuery && $.fn.inputmask) {
+            $(function(e) {
+                "use strict";
+                $(".date-inputmask").inputmask("dd/mm/yyyy"),
                 $(".phone-inputmask").inputmask("9999999999"),
                 $(".email-inputmask").inputmask({
                     mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[*{2,6}][*{1,2}].*{1,}[.*{2,6}][.*{1,2}]",
@@ -1322,10 +1469,13 @@ if ($incomingId) {
                         }
                     }
                 })
-        });
+            });
+        } else {
+            try { console.warn('Inputmask not available; skipping inputmask initializations'); } catch (e) {}
+        }
     </script>
     <script>
-        $(document).ready(function() {
+        if (window.jQuery) $(document).ready(function() {
 
             $("#nic").focusout(function() {
                 //Clear Existing Details
@@ -1576,9 +1726,129 @@ if ($incomingId) {
                     scrollTop: $("#section-8").offset().top
                 }, 500);
             });
+
+            // Save Interview Details
+            $('#save_interview_details').on('click', function() {
+                const interviewDate = $('#interview_date').val();
+                const interviewResult = $('#interview_result').val();
+                const studentId = <?php echo $studentToEdit ? $studentToEdit->id : 'null'; ?>;
+
+                // Validate fields
+                if (!studentId) {
+                    swal("Error", "Please save the student information first before adding interview details", "error");
+                    return;
+                }
+
+                if (!interviewDate) {
+                    swal("Error", "Please select interview date", "error");
+                    return;
+                }
+
+                if (!interviewResult) {
+                    swal("Error", "Please select interview result", "error");
+                    return;
+                }
+
+                // Show loading
+                swal({
+                    title: "Saving...",
+                    text: "Please wait while we save the interview details",
+                    icon: "info",
+                    buttons: false,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+
+                // Send AJAX request
+                $.ajax({
+                    url: 'ajax/php/save-assessment.php',
+                    type: 'POST',
+                    data: {
+                        student_id: studentId,
+                        assessment_type: 'interview',
+                        assessment_date: interviewDate,
+                        assessment_result: interviewResult
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            swal("Success", response.message, "success");
+                            // Clear form fields for next entry
+                            $('#interview_date').val('');
+                            $('#interview_result').val('');
+                        } else {
+                            swal("Error", response.message, "error");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        swal("Error", "Failed to save interview details. Please try again.", "error");
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            // Save Pre-test Details
+            $('#save_pretest_details').on('click', function() {
+                const pretestDate = $('#pretest_date').val();
+                const pretestResult = $('#pretest_result').val();
+                const studentId = <?php echo $studentToEdit ? $studentToEdit->id : 'null'; ?>;
+
+                // Validate fields
+                if (!studentId) {
+                    swal("Error", "Please save the student information first before adding pretest details", "error");
+                    return;
+                }
+
+                if (!pretestDate) {
+                    swal("Error", "Please select pretest date", "error");
+                    return;
+                }
+
+                if (!pretestResult) {
+                    swal("Error", "Please select pretest result", "error");
+                    return;
+                }
+
+                // Show loading
+                swal({
+                    title: "Saving...",
+                    text: "Please wait while we save the pretest details",
+                    icon: "info",
+                    buttons: false,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+
+                // Send AJAX request
+                $.ajax({
+                    url: 'ajax/php/save-assessment.php',
+                    type: 'POST',
+                    data: {
+                        student_id: studentId,
+                        assessment_type: 'pretest',
+                        assessment_date: pretestDate,
+                        assessment_result: pretestResult
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            swal("Success", response.message, "success");
+                            // Clear form fields for next entry
+                            $('#pretest_date').val('');
+                            $('#pretest_result').val('');
+                        } else {
+                            swal("Error", response.message, "error");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        swal("Error", "Failed to save pretest details. Please try again.", "error");
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
         });
     </script>
-
 
 </body>
 

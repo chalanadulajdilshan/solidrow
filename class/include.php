@@ -30,6 +30,7 @@ include_once(dirname(__FILE__) . '/Remark.php');
 include_once(dirname(__FILE__) . '/CountryJob.php'); 
 include_once(dirname(__FILE__) . '/Application.php'); 
 include_once(dirname(__FILE__) . '/Group.php'); 
+include_once(dirname(__FILE__) . '/Notification.php');
 
 function dd($data)
 {

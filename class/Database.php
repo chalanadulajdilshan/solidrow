@@ -1,60 +1,55 @@
 <?php
+class Database
+{
+    private $host;
+    private $name;
+    private $user;
+    private $password;
+    public $DB_CON;
+    public function __construct()
+    {
+        // Detect environment
+        if ($this->isLocalServer()) {
+            // Local DB settings
+            $this->host = 'localhost';
+            $this->name = 'solidrow_festi';
+            $this->user = 'root';
+            $this->password = '';
+        } else {
+            // Online DB settings
+            $this->host = 'localhost';
+            $this->name = 'festelsd_solidraw_group';
+            $this->user = 'festelsd_solidrawuser';
+            $this->password = 'xp[)~fY@SI1F';
+            $this->DB_CON ='';
+        }
 
-/**
- * Description of User
- *
- * @author Suharshana DsW
- * @web www.nysc.lk
- * */
-class Database {
-
-    private $host = 'localhost';
-    private $name = 'solidrow_festi';
-    private $user = 'root';
-    private $password = '';
-    public $DB_CON = NULL;
-
-    public function __construct() {
-        // Establish database connection
+        // Connect
         $this->DB_CON = mysqli_connect($this->host, $this->user, $this->password, $this->name);
 
-        // Check for connection errors
-        if (mysqli_connect_errno()) {
-            throw new Exception('Failed to connect to MySQL: ' . mysqli_connect_error());
-        }
-
-        // Set the character set to UTF-8 to support Sinhala characters
-        if (!mysqli_set_charset($this->DB_CON, "utf8mb4")) {
-            throw new Exception('Error loading character set utf8mb4: ' . mysqli_error($this->DB_CON));
+        if (!$this->DB_CON) {
+            die("Database connection failed: " . mysqli_connect_error());
         }
     }
 
-    // Function to execute read queries (SELECT)
-    public function readQuery($query) {
-        $result = mysqli_query($this->DB_CON, $query);
-        if (!$result) {
-            throw new Exception('Query failed: ' . mysqli_error($this->DB_CON));
+    private function isLocalServer()
+    {
+        // Method 1: Check hostname
+        if (in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1'])) {
+            return true;
         }
+
+        return false;
+    }
+
+    public function readQuery($query)
+    {
+        $result = mysqli_query($this->DB_CON, $query) or die(mysqli_error($this->DB_CON));
         return $result;
     }
 
-    // Function to execute write queries (INSERT, UPDATE, DELETE)
-    public function readQuery1($query) {
-        $result = mysqli_query($this->DB_CON, $query);
-        if ($result === TRUE) {
-            // If query was successful, return the last inserted ID
-            return $this->DB_CON->insert_id;
-        } elseif (!$result) {
-            // If query fails, throw an exception with the error message
-            throw new Exception('Query failed: ' . mysqli_error($this->DB_CON));
-        }
-        return $result;
-    }
-
-    // Close the database connection
-    public function closeConnection() {
-        if ($this->DB_CON) {
-            mysqli_close($this->DB_CON);
-        }
+    public function escapeString($string)
+    {
+        return $this->DB_CON->real_escape_string($string);
     }
 }

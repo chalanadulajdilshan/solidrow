@@ -572,7 +572,7 @@ if ($incomingId) {
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <p class="text-danger">Final Test Details</p>
+                                            <p class="text-danger">1.2Final Test Details</p>
                                             <hr>
                                             <div class="col-md-4">
                                                 <label for="final_test_date" class="col-form-label">Final Test Date <span class="text-danger">*</span></label>

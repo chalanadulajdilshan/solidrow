@@ -553,7 +553,7 @@ if ($incomingId) {
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="pretest_result" class="col-form-label">Pre-test Result <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="pretest_result" name="pretest_result">
+                                                <select class="form-control" id="pretest_result" name="pretest_result" onchange="toggleFinalTestSection()">
                                                     <option value="">-- Select Result --</option>
                                                     <option value="pass" <?php echo $studentToEdit && isset($studentToEdit->pretest_result) && $studentToEdit->pretest_result == 'pass' ? 'selected' : ''; ?>>Pass</option>
                                                     <option value="fail" <?php echo $studentToEdit && isset($studentToEdit->pretest_result) && $studentToEdit->pretest_result == 'fail' ? 'selected' : ''; ?>>Fail</option>
@@ -567,7 +567,35 @@ if ($incomingId) {
                                 </div>
                             </div>
 
-<div id="section-2" class="section">
+                            <!-- Final Test Section (Initially Hidden) -->
+                            <div id="final-test-section" class="section" style="display: none;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <p class="text-danger">Final Test Details</p>
+                                            <hr>
+                                            <div class="col-md-4">
+                                                <label for="final_test_date" class="col-form-label">Final Test Date <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="final_test_date" name="final_test_date" 
+                                                       value="<?php echo isset($studentToEdit->final_test_date) && $studentToEdit->final_test_date ? date('Y-m-d', strtotime($studentToEdit->final_test_date)) : ''; ?>">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="final_test_result" class="col-form-label">Final Test Result <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="final_test_result" name="final_test_result">
+                                                    <option value="">-- Select Result --</option>
+                                                    <option value="pass" <?php echo isset($studentToEdit->final_test_result) && $studentToEdit->final_test_result == 'pass' ? 'selected' : ''; ?>>Pass</option>
+                                                    <option value="fail" <?php echo isset($studentToEdit->final_test_result) && $studentToEdit->final_test_result == 'fail' ? 'selected' : ''; ?>>Fail</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12" style="margin-top: 20px">
+                                                <button class="btn btn-primary" type="button" id="save_finaltest_details">Save Final Test Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!-- <div id="section-2" class="section">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -607,8 +635,9 @@ if ($incomingId) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </div> -->
+ <div class="card">
+                                    <div class="card-body">
                                         <p class="text-danger">02. Personal Details (Attachment) </p>
                                         <hr>
 
@@ -693,7 +722,7 @@ if ($incomingId) {
                                     </div>
                                 </div>
                             </div>
-
+ 
 
                             <div id="section-3" class="section"  >
 <!-- <div id="section-3" class="section" style="display: none;"> -->
@@ -1195,6 +1224,33 @@ if ($incomingId) {
     <!-- JavaScript to show/hide related qualification fields -->
 
     <script>
+        // Function to show/hide final test section based on pre-test result
+        function toggleFinalTestSection() {
+            const pretestResult = document.getElementById('pretest_result');
+            const finalTestSection = document.getElementById('final-test-section');
+            const countrySelect = document.getElementById('country');
+            
+            if (!pretestResult || !finalTestSection || !countrySelect) return;
+            
+            // Only show final test section if country is not Romania, pre-test is passed, and country is selected
+            const isRomania = countrySelect.options[countrySelect.selectedIndex].textContent.trim().toLowerCase() === 'romania';
+            const isPassed = pretestResult.value === 'pass';
+            
+            if (!isRomania && isPassed && countrySelect.value !== '') {
+                finalTestSection.style.display = 'block';
+                
+                // Set current date as default for final test date if empty
+                const finalTestDate = document.getElementById('final_test_date');
+                if (finalTestDate && !finalTestDate.value) {
+                    const today = new Date().toISOString().split('T')[0];
+                    finalTestDate.min = today;
+                    finalTestDate.value = today;
+                }
+            } else {
+                finalTestSection.style.display = 'none';
+            }
+        }
+        
         // Function to handle country selection change
         function handleCountryChange() {
             const countrySelect = document.getElementById('country');
@@ -1205,12 +1261,18 @@ if ($incomingId) {
             const selectedOption = countrySelect.options[countrySelect.selectedIndex];
             const countryName = selectedOption.textContent.trim().toLowerCase();
             
-            // Hide both sections first
+            // Hide all sections first
             const romaniaSection = document.getElementById('romania-section');
             const pretestSection = document.getElementById('pretest-section');
+            const finalTestSection = document.getElementById('final-test-section');
             
             if (romaniaSection) romaniaSection.style.display = 'none';
             if (pretestSection) pretestSection.style.display = 'none';
+            if (finalTestSection) finalTestSection.style.display = 'none';
+            
+            // Reset pre-test result if country changes
+            const pretestResult = document.getElementById('pretest_result');
+            if (pretestResult) pretestResult.value = '';
             
             // Show the appropriate section based on country
             if (countryName === 'romania') {
@@ -1240,6 +1302,9 @@ if ($incomingId) {
                             pretestDate.value = today;
                         }
                     }
+                    
+                    // Check if we need to show final test section based on existing pre-test result
+                    toggleFinalTestSection();
                 }
             }
         }
@@ -1248,13 +1313,31 @@ if ($incomingId) {
 
         // Initialize the form on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add event listener to the country select
             const countrySelect = document.getElementById('country');
+            const pretestResult = document.getElementById('pretest_result');
+            
             if (countrySelect) {
-                countrySelect.addEventListener('change', handleCountryChange);
+                // Remove any existing change event listeners to prevent duplicates
+                const newCountrySelect = countrySelect.cloneNode(true);
+                countrySelect.parentNode.replaceChild(newCountrySelect, countrySelect);
+                
+                // Add new event listener
+                newCountrySelect.addEventListener('change', handleCountryChange);
                 
                 // Trigger initial state
                 handleCountryChange();
+            }
+            
+            if (pretestResult) {
+                // Remove any existing change event listeners to prevent duplicates
+                const newPretestResult = pretestResult.cloneNode(true);
+                pretestResult.parentNode.replaceChild(newPretestResult, pretestResult);
+                
+                // Add new event listener
+                newPretestResult.addEventListener('change', toggleFinalTestSection);
+                
+                // Initialize final test section visibility
+                toggleFinalTestSection();
             }
         });
 
@@ -1468,29 +1551,11 @@ if ($incomingId) {
     </script>
 
 <script>
-function handleCountryChange() {
-    const countrySelect = document.getElementById("country");
-    if (!countrySelect) return;
+// Country change handling is now managed by the handleCountryChange function above
 
-    const selectedValue = countrySelect.value;
-    const selectedName = countrySelect.options[countrySelect.selectedIndex]
-        ? countrySelect.options[countrySelect.selectedIndex].text.trim().toLowerCase()
-        : '';
-
-    const romaniaSection = document.getElementById("romania-section");
-    const pretestSection = document.getElementById("pretest-section");
-
-    // Debug logs
-    try {
-        console.log('[handleCountryChange] value=', selectedValue, ' name=', selectedName);
-        console.log('[handleCountryChange] romaniaSection?', !!romaniaSection, ' pretestSection?', !!pretestSection);
-    } catch (e) {}
-
-    if (romaniaSection) romaniaSection.style.display = 'none';
-    if (pretestSection) pretestSection.style.display = 'none';
-
-    const today = new Date().toISOString().split('T')[0];
-    const studentIdInput = document.getElementById('student_id');
+// Initialize date pickers and other UI elements
+const today = new Date().toISOString().split('T')[0];
+const studentIdInput = document.getElementById('student_id');
     const historyIdInput = document.getElementById('history_student_id');
     const overrideId = historyIdInput && historyIdInput.value ? historyIdInput.value.trim() : '';
     const studentId = overrideId || (studentIdInput ? studentIdInput.value : '');
@@ -1522,7 +1587,7 @@ function handleCountryChange() {
 
 <script>
 // Ensure initial state on load and wire the change listener
-document.addEventListener('DOMContentLoaded', function () {
+// Final test save functionality has been removed
     var sel = document.getElementById('country');
     var historySel = document.getElementById('history_student_id');
     var studentDatalist = document.getElementById('existing-students');
@@ -1964,121 +2029,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const interviewResult = $('#interview_result').val();
                 const studentId = <?php echo $studentToEdit ? $studentToEdit->id : 'null'; ?>;
 
-                // Validate fields
-                if (!studentId) {
-                    swal("Error", "Please save the student information first before adding interview details", "error");
-                    return;
-                }
-
-                if (!interviewDate) {
-                    swal("Error", "Please select interview date", "error");
-                    return;
-                }
-
-                if (!interviewResult) {
-                    swal("Error", "Please select interview result", "error");
-                    return;
-                }
-
-                // Show loading
-                swal({
-                    title: "Saving...",
-                    text: "Please wait while we save the interview details",
-                    icon: "info",
-                    buttons: false,
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
-                });
-
-                // Send AJAX request
-                $.ajax({
-                    url: 'ajax/php/save-assessment.php',
-                    type: 'POST',
-                    data: {
-                        student_id: studentId,
-                        assessment_type: 'interview',
-                        assessment_date: interviewDate,
-                        assessment_result: interviewResult
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            swal("Success", response.message, "success");
-                            // Clear form fields for next entry
-                            $('#interview_date').val('');
-                            $('#interview_result').val('');
-                        } else {
-                            swal("Error", response.message, "error");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        swal("Error", "Failed to save interview details. Please try again.", "error");
-                        console.error('Error:', error);
-                    }
-                });
+                // Save Interview Details - Handled by agancy-student.js saveAssessmentDetails()
             });
 
-            // Save Pre-test Details
-            $('#save_pretest_details').on('click', function() {
-                const pretestDate = $('#pretest_date').val();
-                const pretestResult = $('#pretest_result').val();
-                const studentId = <?php echo $studentToEdit ? $studentToEdit->id : 'null'; ?>;
-
-                // Validate fields
-                if (!studentId) {
-                    swal("Error", "Please save the student information first before adding pretest details", "error");
-                    return;
-                }
-
-                if (!pretestDate) {
-                    swal("Error", "Please select pretest date", "error");
-                    return;
-                }
-
-                if (!pretestResult) {
-                    swal("Error", "Please select pretest result", "error");
-                    return;
-                }
-
-                // Show loading
-                swal({
-                    title: "Saving...",
-                    text: "Please wait while we save the pretest details",
-                    icon: "info",
-                    buttons: false,
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
-                });
-
-                // Send AJAX request
-                $.ajax({
-                    url: 'ajax/php/save-assessment.php',
-                    type: 'POST',
-                    data: {
-                        student_id: studentId,
-                        assessment_type: 'pretest',
-                        assessment_date: pretestDate,
-                        assessment_result: pretestResult
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            swal("Success", response.message, "success");
-                            // Clear form fields for next entry
-                            $('#pretest_date').val('');
-                            $('#pretest_result').val('');
-                        } else {
-                            swal("Error", response.message, "error");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        swal("Error", "Failed to save pretest details. Please try again.", "error");
-                        console.error('Error:', error);
-                    }
-                });
-            });
-
-        });
+            // Save Pre-Test Details - Handled by agancy-student.js saveAssessmentDetails()
+            // Save Final Test Details - Handled by agancy-student.js validateAndSubmitFinalSection()
     </script>
 
 </body>

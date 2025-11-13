@@ -9,7 +9,7 @@
 class Database {
 
     private $host = 'localhost';
-    private $name = 'solidrow';
+    private $name = 'solidrow_festi';
     private $user = 'root';
     private $password = '';
     public $DB_CON = NULL;

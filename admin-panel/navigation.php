@@ -34,7 +34,7 @@ $US = new User($_SESSION['id']);
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <?php if ($US->type == 1 || $US->type == 4) { ?>
-                    
+
                     <li class="menu-title">User Management</li>
                     <li>
                         <a href="create-users.php">
@@ -104,14 +104,14 @@ $US = new User($_SESSION['id']);
                             <span>Groups</span>
                         </a>
                     </li>
-                   
-                     <li>
+
+                    <li>
                         <a href="jobs.php">
                             <i class="bx bx-briefcase"></i>
                             <span>Jobs</span>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="jobs-categories.php">
                             <i class="bx bx-briefcase "></i>
@@ -136,6 +136,12 @@ $US = new User($_SESSION['id']);
                             <span>Manage Remarks</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="notification-manage.php">
+                            <i class="bx bx-bell"></i>
+                            <span>Notification</span>
+                        </a>
+                    </li>
                 <?php } ?>
 
                 <!-- Solidrow Engineering -->
@@ -156,11 +162,11 @@ $US = new User($_SESSION['id']);
                         <li><a href="staff-engineering-applications.php">My Applications</a></li>
                         <li><a href="commissions-engineering.php">Commissions</a></li>
                     </ul>
-                </li>  
+                </li>
 
-              
+
                 <li class="menu-title">Solidrow Foreign Engineering Skills Training Institute</li>
-                 <li>
+                <li>
                     <a href="skills-training-application.php">
                         <i class="bx bx-file"></i>
                         <span>Application Form</span>
@@ -179,49 +185,49 @@ $US = new User($_SESSION['id']);
                 </li>
 
 
-<!-- Later in the file, wrap the Foreign Employment section with the check -->
-<?php
-$USER_TYPE = new user($_SESSION['id']);
-if($USER_TYPE->type == 3 || $USER_TYPE->type == 1 || $USER_TYPE->type == 2 || $USER_TYPE->type == 4){
-    $show_foreign_employment = true;
-}else{
-    $show_foreign_employment = false;
-}
-?>
-<?php if ($show_foreign_employment): ?>
-    <!-- Solidrow Foreign Employment -->
-    <li class="menu-title">Solidrow Foreign Employment Agency</li>
-    <li>
-        <a href="foreign-employment-application.php">
-            <i class="bx bx-file"></i>
-            <span>Application Form</span>
-        </a>
-    </li>
-    <li>
-        <a href="create-agancy-student.php">
-            <i class="bx bx-user-plus"></i>
-            <span>Registration</span>
-        </a>
-    </li>
-    <li>
-        <a href="manage-agancy-student.php">
-            <i class="bx bx-list-ul"></i>
-            <span>Manage Registration</span>
-        </a>
-    </li>
+                <!-- Later in the file, wrap the Foreign Employment section with the check -->
+                <?php
+                $USER_TYPE = new user($_SESSION['id']);
+                if ($USER_TYPE->type == 3 || $USER_TYPE->type == 1 || $USER_TYPE->type == 2 || $USER_TYPE->type == 4) {
+                    $show_foreign_employment = true;
+                } else {
+                    $show_foreign_employment = false;
+                }
+                ?>
+                <?php if ($show_foreign_employment): ?>
+                    <!-- Solidrow Foreign Employment -->
+                    <li class="menu-title">Solidrow Foreign Employment Agency</li>
+                    <li>
+                        <a href="foreign-employment-application.php">
+                            <i class="bx bx-file"></i>
+                            <span>Application Form</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="create-agancy-student.php">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Registration</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="manage-agancy-student.php">
+                            <i class="bx bx-list-ul"></i>
+                            <span>Manage Registration</span>
+                        </a>
+                    </li>
 
-    <li>
-        <a href="javascript:void(0);" class="has-arrow waves-effect">
-            <i class="bx bx-phone"></i>
-            <span>Call Center</span>
-        </a>
-        <ul class="sub-menu" aria-expanded="false">
-            <li><a href="all-foreign-employment-application.php">Applications</a></li>
-            <li><a href="staff-foreign-employment-application.php">My Applications</a></li>
-            <li><a href="commissions-foreign-employment.php">Commissions</a></li>
-        </ul>
-    </li>
-<?php endif; ?>
+                    <li>
+                        <a href="javascript:void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-phone"></i>
+                            <span>Call Center</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="all-foreign-employment-application.php">Applications</a></li>
+                            <li><a href="staff-foreign-employment-application.php">My Applications</a></li>
+                            <li><a href="commissions-foreign-employment.php">Commissions</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
                 <!-- Solidrow Visa -->
                 <!-- <li class="menu-title">Solidrow Visa Consultancy Services</li>

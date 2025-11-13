@@ -12,7 +12,7 @@ class Database
         if ($this->isLocalServer()) {
             // Local DB settings
             $this->host = 'localhost';
-            $this->name = 'solidrow_festi';
+            $this->name = 'solidrow';
             $this->user = 'root';
             $this->password = '';
         } else {

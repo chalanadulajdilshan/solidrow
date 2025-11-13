@@ -82,6 +82,61 @@ if (isset($_POST['action'])) {
 // Handle assessment (interview/pretest) saving
 
 // Handle assessment (interview/pretest) saving
+// Handle final test details save
+if (isset($_POST['action']) && $_POST['action'] === 'SAVE_FINAL_TEST') {
+    try {
+        $agancy_student_id = $_POST['agancy_student_id'] ?? null;
+        $final_test_date = $_POST['final_test_date'] ?? null;
+        $final_test_result = $_POST['final_test_result'] ?? null;
+
+        if (empty($agancy_student_id) || empty($final_test_date) || empty($final_test_result)) {
+            echo json_encode(["status" => "error", "message" => "All fields are required"]);
+            exit();
+        }
+
+        // Check if record exists for this student
+        $db = new Database();
+        
+        // Check if record exists
+        $checkQuery = "SELECT id FROM student_final_assessment WHERE agancy_student_id = $agancy_student_id LIMIT 1";
+        $result = $db->readQuery($checkQuery);
+        
+        if (mysqli_num_rows($result) > 0) {
+            // Update existing record
+            $updateQuery = "UPDATE student_final_assessment SET 
+                          assessment_date = '$final_test_date', 
+                          assessment_result = '$final_test_result',
+                          updated_at = NOW()
+                          WHERE agancy_student_id = $agancy_student_id";
+            
+            $db->readQuery($updateQuery);
+        } else {
+            // Insert new record
+            $insertQuery = "INSERT INTO student_final_assessment 
+                         (agancy_student_id, assessment_type, assessment_date, assessment_result, created_at, updated_at)
+                         VALUES 
+                         ($agancy_student_id, 'final_test', '$final_test_date', '$final_test_result', NOW(), NOW())";
+            
+            $db->readQuery($insertQuery);
+        }
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "Final test details saved successfully"
+        ]);
+        exit();
+        
+    } catch (Exception $e) {
+        error_log("Final test save error: " . $e->getMessage());
+        echo json_encode([
+            "status" => "error",
+            "message" => "An error occurred while saving final test details",
+            "error" => $e->getMessage()
+        ]);
+        exit();
+    }
+}
+
 if (isset($_POST['action']) && $_POST['action'] === 'SAVE_ASSESSMENT') {
     try {
         $agancy_student_id = $_POST['agancy_student_id'] ?? null;

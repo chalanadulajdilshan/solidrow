@@ -1,51 +1,65 @@
+// Function to load assessment history
+function loadAssessmentHistory(selectElement) {
+    const assessmentType = $(selectElement).val();
+    const studentId = $('input[name="id"]').val() || $('input[name="student_id"]').val();
+    
+    if (!studentId || !assessmentType) return;
+    
+    // Show loading state
+    const historyContainer = $(selectElement).closest('.assessment-section').find('.assessment-history');
+    historyContainer.html('<p>Loading history...</p>');
+    
+    // Fetch assessment history
+    $.ajax({
+        url: 'ajax/php/agancy-student.php',
+        type: 'POST',
+        data: {
+            action: 'GET_ASSESSMENT_HISTORY',
+            student_id: studentId,
+            assessment_type: assessmentType
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success' && response.data && response.data.length > 0) {
+                let historyHtml = '<div class="table-responsive"><table class="table table-bordered table-striped">';
+                historyHtml += '<thead><tr><th>Date</th><th>Result</th><th>Status</th></tr></thead><tbody>';
+                
+                response.data.forEach(function(assessment) {
+                    const statusClass = assessment.assessment_result === 'pass' ? 'success' : 'danger';
+                    const statusText = assessment.assessment_result === 'pass' ? 'Passed' : 'Failed';
+                    
+                    historyHtml += `<tr>
+                        <td>${assessment.assessment_date || 'N/A'}</td>
+                        <td>${assessment.assessment_result || 'N/A'}</td>
+                        <td><span class="badge bg-${statusClass}">${statusText}</span></td>
+                    </tr>`;
+                });
+                
+                historyHtml += '</tbody></table></div>';
+                historyContainer.html(historyHtml);
+            } else {
+                // Show a more user-friendly message when no history is found
+                historyContainer.html('<div class="alert alert-info">No previous assessment records found for this student.</div>');
+            }
+        },
+        error: function() {
+            // Show a more user-friendly error message
+            historyContainer.html('<div class="alert alert-warning">Unable to load assessment history at this time. Please try again later.</div>');
+        }
+    });
+}
+
 jQuery(document).ready(function () {
     // Load assessment history when assessment type changes
     $(document).on('change', 'select[name^="assessment_type"]', function() {
-        const assessmentType = $(this).val();
-        const studentId = $('input[name="id"]').val() || $('input[name="student_id"]').val();
-        
-        if (!studentId) return;
-        
-        // Show loading state
-        const historyContainer = $(this).closest('.assessment-section').find('.assessment-history');
-        historyContainer.html('<p>Loading history...</p>');
-        
-        // Fetch assessment history
-        $.ajax({
-            url: 'ajax/php/agancy-student.php',
-            type: 'POST',
-            data: {
-                action: 'GET_ASSESSMENT_HISTORY',
-                student_id: studentId,
-                assessment_type: assessmentType
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success' && response.data.length > 0) {
-                    let historyHtml = '<div class="table-responsive"><table class="table table-bordered table-striped">';
-                    historyHtml += '<thead><tr><th>Date</th><th>Result</th><th>Status</th></tr></thead><tbody>';
-                    
-                    response.data.forEach(function(assessment) {
-                        const statusClass = assessment.assessment_result === 'pass' ? 'success' : 'danger';
-                        const statusText = assessment.assessment_result === 'pass' ? 'Passed' : 'Failed';
-                        
-                        historyHtml += `<tr>
-                            <td>${assessment.assessment_date || 'N/A'}</td>
-                            <td>${assessment.assessment_result || 'N/A'}</td>
-                            <td><span class="badge bg-${statusClass}">${statusText}</span></td>
-                        </tr>`;
-                    });
-                    
-                    historyHtml += '</tbody></table></div>';
-                    historyContainer.html(historyHtml);
-                } else {
-                    historyContainer.html('<p>No previous assessment history found.</p>');
-                }
-            },
-            error: function() {
-                historyContainer.html('<p>Error loading assessment history.</p>');
-            }
-        });
+        loadAssessmentHistory(this);
+    });
+    
+    // Load assessment history on page load if assessment type is already selected
+    $('select[name^="assessment_type"]').each(function() {
+        if ($(this).val()) {
+            loadAssessmentHistory(this);
+        }
     });
     
   $("#create").click(function (event) {
@@ -756,6 +770,75 @@ function unlockSection(sectionNumber) {
       saveAssessmentDetails('pretest');
   });
 
+  // Function to toggle final test section visibility based on pretest result
+  function toggleFinalTestSection() {
+      const pretestResult = $('#pretest_result').val();
+      const finalTestSection = $('#final-test-section');
+      
+      if (pretestResult === 'pass') {
+          finalTestSection.slideDown();
+      } else {
+          finalTestSection.slideUp();
+      }
+  }
+
+  // Initialize final test section visibility on page load
+  $(document).ready(function() {
+      toggleFinalTestSection();
+  });
+
+  // Handle final test details save
+  $(document).on('click', '#save_finaltest_details', function() {
+      const agancyStudentId = $('input[name="id"]').val();
+      const finalTestDate = $('#final_test_date').val();
+      const finalTestResult = $('#final_test_result').val();
+
+      if (!finalTestDate) {
+          swal('Error!', 'Please select a test date', 'error');
+          return;
+      }
+
+      if (!finalTestResult) {
+          swal('Error!', 'Please select a test result', 'error');
+          return;
+      }
+
+      const $btn = $(this);
+      const originalText = $btn.html();
+      $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
+
+      $.ajax({
+          url: 'ajax/php/agancy-student.php',
+          type: 'POST',
+          data: {
+              action: 'SAVE_FINAL_TEST',
+              agancy_student_id: agancyStudentId,
+              final_test_date: finalTestDate,
+              final_test_result: finalTestResult
+          },
+          dataType: 'json',
+          success: function(response) {
+              if (response.status === 'success') {
+                  swal('Success!', 'Final test details saved successfully!', 'success');
+                  // Optionally refresh the page or update the UI
+                  setTimeout(() => window.location.reload(), 1500);
+              } else {
+                  swal('Error!', response.message || 'Failed to save final test details', 'error');
+              }
+          },
+          error: function(xhr, status, error) {
+              console.error('Error saving final test details:', error);
+              swal('Error!', 'An error occurred while saving final test details', 'error');
+          },
+          complete: function() {
+              $btn.prop('disabled', false).html(originalText);
+          }
+      });
+  });
+
+  // Update final test section when pretest result changes
+  $('#pretest_result').on('change', toggleFinalTestSection);
+
   // Function to save assessment details (interview or pretest)
   function saveAssessmentDetails(type) {
       const studentDbId = $("#student_db_id").val();
@@ -771,14 +854,20 @@ function unlockSection(sectionNumber) {
           return;
       }
 
-      let dateField, resultField;
+      let dateField, resultField, buttonId;
       if (type === 'interview') {
           dateField = 'interview_date';
           resultField = 'interview_result';
-      } else {
+          buttonId = 'save_interview_details';
+      } else if (type === 'pretest') {
           dateField = 'pretest_date';
           resultField = 'pretest_result';
-      }
+          buttonId = 'save_pretest_details';
+      } else if (type === 'finaltest') {
+        // Final test functionality has been removed
+        console.log('Final test functionality has been disabled');
+        return false;
+    }  
 
       const assessmentDate = $("#" + dateField).val();
       const assessmentResult = $("#" + resultField).val();
@@ -808,7 +897,7 @@ function unlockSection(sectionNumber) {
       }
 
       // Show loading state
-      const $saveBtn = $("#save_" + type + "_details");
+      const $saveBtn = $("#" + buttonId);
       const originalText = $saveBtn.html();
       $saveBtn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
 
@@ -831,11 +920,13 @@ function unlockSection(sectionNumber) {
               if (response.status === "success") {
                   swal({
                       title: "Success!",
-                      text: type.charAt(0).toUpperCase() + type.slice(1) + " details saved successfully!",
+                      text: type.charAt(0).toUpperCase() + type.replace('_', ' ').slice(1) + " details saved successfully!",
                       type: "success",
                       timer: 2000,
                       showConfirmButton: false
                   });
+                  
+                  // Final test section visibility is now handled by the change event on pretest_result
               } else {
                   swal({
                       title: "Error!",

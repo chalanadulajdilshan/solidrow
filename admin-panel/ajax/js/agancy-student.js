@@ -846,7 +846,7 @@ function unlockSection(sectionNumber) {
       if (!studentDbId) {
           swal({
               title: "Error!",
-              text: "Please save Section 1 (Personal Details) first to get a student ID.",
+              text: "Please save Section 1 (Personal Details) first .",
               type: "error",
               timer: 3000,
               showConfirmButton: true

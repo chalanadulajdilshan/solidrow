@@ -15,13 +15,38 @@ if (isset($_POST['action'])) {
                 exit();
             }
 
-            $assessment = new StudentAssessment();
-            $all = $assessment->getAllByStudent($student_id);
+            $db = new Database();
+            
+            // Get all assessments for the student, ordered by date (newest first)
+            $query = "SELECT * FROM `student_assessment` 
+                     WHERE `agancy_student_id` = " . intval($student_id) . "
+                     ORDER BY 
+                         CASE 
+                             WHEN assessment_type = 'interview' THEN 1
+                             WHEN assessment_type = 'pretest' THEN 2
+                             WHEN assessment_type = 'finaltest' THEN 3
+                             ELSE 4
+                         END,
+                         assessment_date DESC";
+            
+            $result = $db->readQuery($query);
+            $assessments = [];
+            
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Ensure consistent data format
+                    $row['assessment_date'] = !empty($row['assessment_date']) ? $row['assessment_date'] : null;
+                    $row['assessment_result'] = !empty($row['assessment_result']) ? strtolower($row['assessment_result']) : null;
+                    $assessments[] = $row;
+                }
+            }
 
+            // If no assessments found, return empty array instead of error
             echo json_encode([
                 "status" => "success",
-                "data" => $all
+                "data" => $assessments
             ]);
+            
         } catch (Exception $e) {
             error_log("Assessment all history fetch error: " . $e->getMessage());
             echo json_encode([

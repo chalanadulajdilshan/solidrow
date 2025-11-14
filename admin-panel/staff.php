@@ -102,13 +102,19 @@ include './auth.php';
                                             <div class="col-md-6 mb-3">
                                                 <label>Group</label>
                                                 <select id="group_id" name="group_id" class="form-select">
-                                                    <option value="">Select Group</option>
+                                                    <option value="">Select Group (Optional)</option>
                                                     <?php
                                                     $GROUP = new Group(NULL);
                                                     $groups = $GROUP->all();
-                                                    foreach ($groups as $group) {
-                                                        echo "<option value='" . $group['id'] . "'>" . htmlspecialchars($group['group_name']) . "</option>";
-                                                    }
+                                                    if ($groups) {
+                                                        foreach ($groups as $group) {
+                                                    ?>
+                                                            <option value="<?php echo htmlspecialchars($group['id']); ?>">
+                                                                <?php echo htmlspecialchars($group['group_name']); ?>
+                                                            </option>
+                                                    <?php 
+                                                        }
+                                                    } 
                                                     ?>
                                                 </select>
                                             </div>

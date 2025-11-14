@@ -17,6 +17,7 @@ class Staff
     public $id_copy;
     public $epf_no;
     public $salary;
+    public $group_id;
 
     private $upload_dir = '../../upload/staff/id-copy/';
 
@@ -48,7 +49,7 @@ class Staff
         $query = "INSERT INTO `staff` (
             `name`, `position`, `contact_no`, `whatsapp_no`, `nic`,
             `education_qualification`, `position_qualification`, `service_experience`,
-            `id_copy`, `epf_no`, `salary`, `district`, `province`, `company`, `join_date`
+            `id_copy`, `epf_no`, `salary`, `district`, `province`, `company`, `join_date`, `group_id`
         ) VALUES (
             '" . $this->name . "', 
             '" . $this->position . "', 
@@ -61,10 +62,11 @@ class Staff
             '" . $this->id_copy . "', 
             '" . $this->epf_no . "', 
             '" . $this->salary . "', 
-            '" . $this->district . "', 
-            '" . $this->province . "', 
-            '" . $this->company . "', 
-            '" . $this->join_date . "'
+            " . ($this->district ? "'" . $this->district . "'" : "NULL") . ", 
+            " . ($this->province ? "'" . $this->province . "'" : "NULL") . ", 
+            " . ($this->company ? "'" . $this->company . "'" : "NULL") . ", 
+            " . ($this->join_date ? "'" . $this->join_date . "'" : "NULL") . ",
+            " . ($this->group_id ? "'" . $this->group_id . "'" : "NULL") . "
         )";
 
         $result = $db->readQuery($query);
@@ -93,10 +95,11 @@ class Staff
             `id_copy` = '" . $this->id_copy . "',
             `epf_no` = '" . $this->epf_no . "',
             `salary` = '" . $this->salary . "',
-            `district` = '" . $this->district . "',
-            `province` = '" . $this->province . "',
-            `company` = '" . $this->company . "',
-            `join_date` = '" . $this->join_date . "'
+            `district` = " . ($this->district ? "'" . $this->district . "'" : "NULL") . ",
+            `province` = " . ($this->province ? "'" . $this->province . "'" : "NULL") . ",
+            `company` = " . ($this->company ? "'" . $this->company . "'" : "NULL") . ",
+            `join_date` = " . ($this->join_date ? "'" . $this->join_date . "'" : "NULL") . ",
+            `group_id` = " . ($this->group_id ? "'" . $this->group_id . "'" : "NULL") . "
         WHERE `id` = " . (int)$this->id;
 
         return $db->readQuery($query);

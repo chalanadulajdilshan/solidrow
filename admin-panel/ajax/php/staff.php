@@ -62,6 +62,7 @@ if (isset($_POST['create'])) {
     $STAFF->province = filter_input(INPUT_POST, 'province', FILTER_SANITIZE_NUMBER_INT);
     $STAFF->company = filter_input(INPUT_POST, 'company', FILTER_SANITIZE_NUMBER_INT);
     $STAFF->join_date = filter_input(INPUT_POST, 'join_date', FILTER_SANITIZE_STRING);
+    $STAFF->group_id = filter_input(INPUT_POST, 'group_id', FILTER_SANITIZE_NUMBER_INT);
 
     if ($STAFF->create()) {
         echo json_encode(['status' => 'success', 'message' => 'Staff member created successfully.']);
@@ -113,6 +114,7 @@ if (isset($_POST['update'])) {
     $STAFF->province = filter_input(INPUT_POST, 'province', FILTER_SANITIZE_NUMBER_INT);
     $STAFF->company = filter_input(INPUT_POST, 'company', FILTER_SANITIZE_NUMBER_INT);
     $STAFF->join_date = filter_input(INPUT_POST, 'join_date', FILTER_SANITIZE_STRING);
+    $STAFF->group_id = filter_input(INPUT_POST, 'group_id', FILTER_SANITIZE_NUMBER_INT);
 
     if ($STAFF->update()) {
         echo json_encode(['status' => 'success', 'message' => 'Staff member updated successfully.']);

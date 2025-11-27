@@ -17,13 +17,16 @@ jQuery(document).ready(function ($) {
                 if (result.status === "success") {
                     swal({
                         title: "Success!",
-                        text: result.message || successMessage,
+                        text: successMessage || result.message,
                         type: "success",
                         timer: 2000,
                         showConfirmButton: false,
-                    }).then(function () {
-                        location.reload();
                     });
+
+                    // Reload after a short delay to allow the alert to be visible
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                 } else {
                     swal("Error!", result.message || errorMessage, "error");
                 }
@@ -201,9 +204,13 @@ jQuery(document).ready(function ($) {
             },
             function (isConfirm) {
                 if (isConfirm) {
+                    const formData = new FormData();
+                    formData.append("id", staffId);
+                    formData.append("delete", true);
+
                     handleAjaxRequest(
                         "delete",
-                        { id: staffId, delete: true },
+                        formData,
                         "Staff member deleted successfully.",
                         "Failed to delete staff member."
                     );

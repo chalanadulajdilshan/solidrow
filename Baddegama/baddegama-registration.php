@@ -108,15 +108,14 @@ include '../class/include.php';
             <div class="col-lg-10">
                 
                 <!-- Updated Banner matching screenshot -->
-                <div class="banner-container d-flex align-items-center p-0">
-                   <div style="background-color: #001f3f; width: 100%; padding: 20px; border-radius: 5px 5px 0 0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-                        <!-- Mocking the abstract lines/texture from image with overlay if possible, otherwise solid deep blue -->
-                        <div style="display: flex; align-items: center; gap: 20px; z-index: 2; width: 100%; max-width: 800px; justify-content: center;">
-                            <!-- <img src="../assets/images/logo.png" alt="SOLIDROW FESTI" style="max-height: 80px;"> -->
+                <div class="banner-container d-flex align-items-center p-0" style="background-color: #000000; border-radius: 15px 15px 0 0;">
+                   <div style="width: 100%; padding: 40px 20px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; z-index: 2; width: 100%; max-width: 800px; justify-content: center;">
+                            <img src="Agency Logo 2026 New.png" alt="SOLIDROW" style="max-height: 120px;">
                             <div class="text-center">
-                                <h1 style="color: white; font-weight: 700; margin: 0; font-size: 2.2rem; line-height: 1.1;">SOLIDROW FESTI (PVT) LTD</h1>
-                                <h4 style="color: #ffcc00; font-weight: 600; margin: 5px 0 0; font-size: 1.2rem;">FOREIGN EMPLOYMENT AGENCY</h4>
-                                <p style="color: white; margin: 5px 0 0; font-size: 1rem; font-weight: 500;">LICENCE NUMBER. - 3583</p>
+                                <h1 style="color: white; font-weight: 700; margin: 0; font-size: 2.8rem; letter-spacing: 1px;">SOLIDROW FESTI (PVT) LTD</h1>
+                                <h4 style="color: #ffcc00; font-weight: 700; margin: 10px 0 5px; font-size: 1.4rem; text-transform: uppercase;">FOREIGN EMPLOYMENT AGENCY</h4>
+                                <p style="color: white; margin: 0; font-size: 1.1rem; font-weight: 500;">LICENCE NUMBER. - 3583</p>
                             </div>
                         </div>
                    </div>
@@ -238,13 +237,50 @@ include '../class/include.php';
     <script src="../admin-panel/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../admin-panel/assets/libs/sweetalert2/sweetalert2.min.js"></script>
     
-    <!-- Preloader Mock if missing -->
+    <style>
+        .custom-preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    <!-- Preloader Implementation -->
     <script>
         $.fn.preloader = function(action) {
             if (action === 'remove') {
-                $(this).find('.custom-preloader').remove();
+                $('.custom-preloader').fadeOut(300, function() {
+                    $(this).remove();
+                });
             } else {
-                $(this).append('<div class="custom-preloader" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.7); z-index:9999; display:flex; align-items:center; justify-content:center;">Loading...</div>');
+                if ($('.custom-preloader').length === 0) {
+                    var loader = $('<div class="custom-preloader"><div class="spinner"></div><div style="font-weight: 600; font-size: 1.1rem; letter-spacing: 1px;">PROCESSING...</div></div>');
+                    $('body').append(loader.hide().fadeIn(300));
+                }
             }
         };
     </script>

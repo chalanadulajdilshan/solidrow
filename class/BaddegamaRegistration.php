@@ -4,6 +4,7 @@ class BaddegamaRegistration
 {
 
     public $id;
+    public $registration_code;
     public $full_name;
     public $nic;
     public $passport_number;
@@ -35,6 +36,7 @@ class BaddegamaRegistration
 
             if ($result) {
                 $this->id = $result['id'];
+                $this->registration_code = $result['registration_code'];
                 $this->full_name = $result['full_name'];
                 $this->nic = $result['nic'];
                 $this->passport_number = $result['passport_number'];
@@ -62,7 +64,11 @@ class BaddegamaRegistration
     public function create()
     {
         $db = new Database();
-        $query = "INSERT INTO baddegama_registration (full_name, nic, passport_number, birthday, age, gender, marital_status, mobile_number, whatsapp_number, province_id, current_job, job_abroad, type, created_at, experience, destination_country) VALUES ('"
+
+        $this->registration_code = $this->generateRegistrationCode($db);
+
+        $query = "INSERT INTO baddegama_registration (registration_code, full_name, nic, passport_number, birthday, age, gender, marital_status, mobile_number, whatsapp_number, province_id, current_job, job_abroad, type, created_at, experience, destination_country) VALUES ('"
+            . mysqli_real_escape_string($db->DB_CON, (string)$this->registration_code) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->full_name) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->nic) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->passport_number) . "', '"
@@ -90,10 +96,63 @@ class BaddegamaRegistration
         }
     }
 
+    public function generateRegistrationCode($db)
+    {
+        // SDWI/R26B001 ( Israel=I, Romania=R, 26=Year, Sequence )
+        $prefix = "SDWI/";
+        $country_char = "O"; // Default Other
+
+        if ($this->destination_country == 3) { // Romania
+            $country_char = "R";
+        } elseif ($this->destination_country == 4) { // Israel
+            $country_char = "I";
+        }
+
+        $year = date('y');
+        $code_prefix = $prefix . $country_char . $year . "B";
+
+        // Find last sequence number for this specific prefix
+        // We look for the maximum numeric suffix to ensure we always increment
+        $query = "SELECT registration_code FROM baddegama_registration WHERE registration_code LIKE '" . $code_prefix . "%' ORDER BY registration_code DESC LIMIT 1";
+        $result = mysqli_fetch_array($db->readQuery($query));
+
+        $last_number = 0;
+        if ($result && $result['registration_code']) {
+            // Extract the numeric part (everything after the code_prefix)
+            $last_number = (int)substr($result['registration_code'], strlen($code_prefix));
+        }
+
+        $next_number = str_pad($last_number + 1, 3, '0', STR_PAD_LEFT);
+
+        return $code_prefix . $next_number;
+    }
+
+    public function isDuplicate()
+    {
+        $db = new Database();
+        
+        // Check NIC
+        $query_nic = "SELECT id FROM baddegama_registration WHERE nic = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->nic) . "'";
+        $result_nic = mysqli_fetch_array($db->readQuery($query_nic));
+        if ($result_nic) {
+            return "NIC already exists in our system.";
+        }
+
+        // Check Mobile Number
+        $query_mobile = "SELECT id FROM baddegama_registration WHERE mobile_number = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->mobile_number) . "'";
+        $result_mobile = mysqli_fetch_array($db->readQuery($query_mobile));
+        if ($result_mobile) {
+            return "Mobile number already exists in our system.";
+        }
+
+        return false;
+    }
+
     public function update()
     {
         $db = new Database();
         $query = "UPDATE baddegama_registration SET "
+            . "registration_code = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->registration_code) . "', "
             . "full_name = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->full_name) . "', "
             . "nic = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->nic) . "', "
             . "passport_number = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->passport_number) . "', "
@@ -118,6 +177,7 @@ class BaddegamaRegistration
 
         return $db->readQuery($query);
     }
+
 
     public function delete()
     {

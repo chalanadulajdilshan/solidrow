@@ -28,13 +28,26 @@ $baddegama_registration->type = 'BADDEGAMA';
 $baddegama_registration->created_at = date('Y-m-d H:i:s');
 
 
+$duplicate_error = $baddegama_registration->isDuplicate();
+if ($duplicate_error) {
+    echo json_encode([
+        "status" => 'error',
+        "message" => $duplicate_error
+    ]);
+    exit();
+}
+
 $res = $baddegama_registration->create();
 
 if ($res) {
+    // Reload object to get the generated registration code
+    $reg_obj = new BaddegamaRegistration($res);
+    $reg_code = $reg_obj->registration_code;
+
     // Send SMS Notification
     $sms = new SMS();
     $recipient = $_POST['mobile_number'];
-    $message = "Registration Successful! Thank you for registering with Solidrow (Pvt) Ltd. Your registration ID is: " . $res;
+    $message = "Welcome!\nYou are now registered with Solidrow FESTI (Pvt) Ltd, Foreign Employment Agency. Your Reg No: " . $reg_code;
     $sms_res = $sms->sendSMS($recipient, $message);
 
     $sms_status_msg = "";
@@ -47,6 +60,7 @@ if ($res) {
     echo json_encode([
         "status" => 'success',
         "id" => $res,
+        "registration_code" => $reg_code,
         "sms_status" => $sms_status_msg,
         "sms_raw" => $sms_res
     ]);

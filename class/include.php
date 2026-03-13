@@ -17,6 +17,7 @@ include_once(dirname(__FILE__) . '/Career.php');
 include_once(dirname(__FILE__) . '/JobListing.php');
 include_once(dirname(__FILE__) . '/SkillsTrainingApplication.php');
 include_once(dirname(__FILE__) . '/ForeignEmploymentApplication.php');
+include_once(dirname(__FILE__) . '/BaddegamaRegistration.php');
 include_once(dirname(__FILE__) . '/StudentCountryVisa.php');
 include_once(dirname(__FILE__) . '/VisaConsultancyApplication.php');
 include_once(dirname(__FILE__) . '/VisaType.php');

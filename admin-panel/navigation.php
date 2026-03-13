@@ -216,6 +216,14 @@ $US = new User($_SESSION['id']);
                         </a>
                     </li>
 
+                    <li class="menu-title">Baddegama Registration</li>
+                    <li>
+                        <a href="manage-baddegama-registration.php">
+                            <i class="bx bx-file"></i>
+                            <span>Manage Registration</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="javascript:void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-phone"></i>

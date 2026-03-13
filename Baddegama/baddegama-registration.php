@@ -111,9 +111,9 @@ include '../class/include.php';
                 <div class="banner-container d-flex align-items-center p-0">
                    <div style="background-color: #001f3f; width: 100%; padding: 20px; border-radius: 5px 5px 0 0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
                         <!-- Mocking the abstract lines/texture from image with overlay if possible, otherwise solid deep blue -->
-                        <div style="display: flex; align-items: center; gap: 20px; z-index: 2; width: 100%; max-width: 800px;">
-                            <img src="../assets/images/logo.png" alt="SOLIDROW FESTI" style="max-height: 80px;">
-                            <div class="text-start">
+                        <div style="display: flex; align-items: center; gap: 20px; z-index: 2; width: 100%; max-width: 800px; justify-content: center;">
+                            <!-- <img src="../assets/images/logo.png" alt="SOLIDROW FESTI" style="max-height: 80px;"> -->
+                            <div class="text-center">
                                 <h1 style="color: white; font-weight: 700; margin: 0; font-size: 2.2rem; line-height: 1.1;">SOLIDROW FESTI (PVT) LTD</h1>
                                 <h4 style="color: #ffcc00; font-weight: 600; margin: 5px 0 0; font-size: 1.2rem;">FOREIGN EMPLOYMENT AGENCY</h4>
                                 <p style="color: white; margin: 5px 0 0; font-size: 1rem; font-weight: 500;">LICENCE NUMBER. - 3583</p>

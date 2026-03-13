@@ -31,7 +31,25 @@ $baddegama_registration->created_at = date('Y-m-d H:i:s');
 $res = $baddegama_registration->create();
 
 if ($res) {
-    echo json_encode(["status" => 'success', "id" => $res]);
+    // Send SMS Notification
+    $sms = new SMS();
+    $recipient = $_POST['mobile_number'];
+    $message = "Registration Successful! Thank you for registering with Solidrow (Pvt) Ltd. Your registration ID is: " . $res;
+    $sms_res = $sms->sendSMS($recipient, $message);
+
+    $sms_status_msg = "";
+    if (isset($sms_res['status_code']) && $sms_res['status_code'] == 204) {
+        $sms_status_msg = "SMS sent successfully.";
+    } else {
+        $sms_status_msg = "SMS sending failed. (Status: " . ($sms_res['status_code'] ?? 'Error') . ")";
+    }
+
+    echo json_encode([
+        "status" => 'success',
+        "id" => $res,
+        "sms_status" => $sms_status_msg,
+        "sms_raw" => $sms_res
+    ]);
     exit();
 } else {
     $db = new Database();

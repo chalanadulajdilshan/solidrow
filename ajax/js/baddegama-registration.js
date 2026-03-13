@@ -50,11 +50,21 @@ jQuery(document).ready(function () {
               icon: "success",
               timer: 2000,
               showConfirmButton: false,
+            }).then(() => {
+              // Show SMS Status Alert
+              var smsIcon = result.sms_status.includes("successfully") ? "success" : "error";
+              var smsTitle = result.sms_status.includes("successfully") ? "SMS Sent!" : "SMS Failed!";
+              
+              Swal.fire({
+                title: smsTitle,
+                text: result.sms_status,
+                icon: smsIcon,
+                timer: 3000,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.reload();
+              });
             });
-
-            setTimeout(function () {
-              window.location.reload();
-            }, 2000);
           } else {
             Swal.fire({
               title: "Error!",

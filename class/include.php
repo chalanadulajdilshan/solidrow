@@ -20,6 +20,7 @@ include_once(dirname(__FILE__) . '/ForeignEmploymentApplication.php');
 include_once(dirname(__FILE__) . '/BaddegamaRegistration.php');
 include_once(dirname(__FILE__) . '/StudentCountryVisa.php');
 include_once(dirname(__FILE__) . '/VisaConsultancyApplication.php');
+include_once(dirname(__FILE__) . '/SMS.php');
 include_once(dirname(__FILE__) . '/VisaType.php');
 include_once(dirname(__FILE__) . '/DefaultData.php');
 include_once(dirname(__FILE__) . '/AgancyStudent.php');

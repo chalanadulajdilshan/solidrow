@@ -99,7 +99,7 @@ class BaddegamaRegistration
     public function generateRegistrationCode($db)
     {
         // SDWI/R26B001 ( Israel=I, Romania=R, 26=Year, Sequence )
-        $prefix = "SDWI/";
+        $prefix = "SDW";
         $country_char = "O"; // Default Other
 
         if ($this->destination_country == 3) { // Romania

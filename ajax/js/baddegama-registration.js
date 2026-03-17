@@ -21,6 +21,14 @@ jQuery(document).ready(function () {
       showError("Please enter your mobile number");
     } else if (!$("#province_id").val()) {
       showError("Please select your province");
+    } else if (!$("#current_job").val()) {
+      showError("Please enter your current job");
+    } else if (!$("#experience").val()) {
+      showError("Please enter your experience");
+    } else if (!$("#job_abroad").val()) {
+      showError("Please enter job intended abroad");
+    } else if (!$("#destination_country").val()) {
+      showError("Please select your destination country");
     } else {
       // Start preloader
       if (typeof $.fn.preloader === 'function') {
@@ -54,7 +62,7 @@ jQuery(document).ready(function () {
               // Show SMS Status Alert
               var smsIcon = result.sms_status.includes("successfully") ? "success" : "error";
               var smsTitle = result.sms_status.includes("successfully") ? "SMS Sent!" : "SMS Failed!";
-              
+
               Swal.fire({
                 title: smsTitle,
                 text: result.sms_status,

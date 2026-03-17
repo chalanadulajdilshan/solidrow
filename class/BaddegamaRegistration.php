@@ -6,6 +6,7 @@ class BaddegamaRegistration
     public $id;
     public $registration_code;
     public $full_name;
+    public $result;
     public $nic;
     public $passport_number;
     public $birthday;
@@ -38,6 +39,7 @@ class BaddegamaRegistration
                 $this->id = $result['id'];
                 $this->registration_code = $result['registration_code'];
                 $this->full_name = $result['full_name'];
+                $this->result = $result['result'];
                 $this->nic = $result['nic'];
                 $this->passport_number = $result['passport_number'];
                 $this->birthday = $result['birthday'];
@@ -67,7 +69,7 @@ class BaddegamaRegistration
 
         $this->registration_code = $this->generateRegistrationCode($db);
 
-        $query = "INSERT INTO baddegama_registration (registration_code, full_name, nic, passport_number, birthday, age, gender, marital_status, mobile_number, whatsapp_number, province_id, current_job, job_abroad, type, created_at, experience, destination_country) VALUES ('"
+        $query = "INSERT INTO baddegama_registration (registration_code, full_name, nic, passport_number, birthday, age, gender, marital_status, mobile_number, whatsapp_number, province_id, current_job, job_abroad, type, created_at, result, experience, destination_country) VALUES ('"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->registration_code) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->full_name) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->nic) . "', '"
@@ -83,6 +85,7 @@ class BaddegamaRegistration
             . mysqli_real_escape_string($db->DB_CON, (string)$this->job_abroad) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->type) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->created_at) . "', '"
+            . mysqli_real_escape_string($db->DB_CON, (string)$this->result) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->experience) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->destination_country) . "')";
 
@@ -154,6 +157,8 @@ class BaddegamaRegistration
         $query = "UPDATE baddegama_registration SET "
             . "registration_code = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->registration_code) . "', "
             . "full_name = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->full_name) . "', "
+             . "result = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->result) . "', "
+            
             . "nic = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->nic) . "', "
             . "passport_number = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->passport_number) . "', "
             . "birthday = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->birthday) . "', "
@@ -182,6 +187,8 @@ class BaddegamaRegistration
     public function delete()
     {
         $query = "DELETE FROM baddegama_registration WHERE id='" . (int)$this->id . "'";
+     
+        
         $db = new Database();
         return $db->readQuery($query);
     }

@@ -108,10 +108,10 @@ include '../class/include.php';
             <div class="col-lg-10">
                 
                 <!-- Updated Banner matching screenshot -->
-                <div class="banner-container d-flex align-items-center p-0" style="background-color: #000000; border-radius: 15px 15px 0 0;">
-                   <div style="width: 100%; padding: 40px 20px; display: flex; align-items: center; justify-content: center; position: relative;">
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; z-index: 2; width: 100%; max-width: 800px; justify-content: center;">
-                            <img src="Agency Logo 2026 New.png" alt="SOLIDROW" style="max-height: 120px;">
+                <div class="banner-container d-flex align-items-center p-0" style="background-color: #0000007d; border-radius: 15px 15px 0 0;">
+                   <div style="width: 100%; padding: 0px 20px 20px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <div style="display: flex; flex-direction: column; align-items: center; z-index: 2; width: 100%; max-width: 800px; justify-content: center;">
+                            <img src="Agency Logo 2026 New.png" alt="SOLIDROW" style="max-height: 150px;">
                             <div class="text-center">
                                 <h1 style="color: white; font-weight: 700; margin: 0; font-size: 2.8rem; letter-spacing: 1px;">SOLIDROW FESTI (PVT) LTD</h1>
                                 <h4 style="color: #ffcc00; font-weight: 700; margin: 10px 0 5px; font-size: 1.4rem; text-transform: uppercase;">FOREIGN EMPLOYMENT AGENCY</h4>

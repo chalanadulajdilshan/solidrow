@@ -8,6 +8,8 @@ if (empty($id)) {
     exit();
 }
 $REGISTRATION = new BaddegamaRegistration($id);
+$is_edit = isset($_GET['edit']) && $_GET['edit'] == 'true';
+$readonly = $is_edit ? '' : 'readonly';
 
 // Handle status updates if needed (using the same logic as foreign employment)
 ?>
@@ -17,7 +19,7 @@ $REGISTRATION = new BaddegamaRegistration($id);
 <head>
 
     <meta charset="utf-8" />
-    <title>View Baddegama Registration | Solidrow </title>
+    <title><?php echo $is_edit ? 'Edit' : 'View'; ?> Baddegama Registration | Solidrow </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="#" name="description" />
     <meta content="Solidrow" name="author" />
@@ -49,12 +51,12 @@ $REGISTRATION = new BaddegamaRegistration($id);
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">View Registration</h4>
+                                <h4 class="mb-0"><?php echo $is_edit ? 'Edit' : 'View'; ?> Registration</h4>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                                         <li class="breadcrumb-item"><a href="manage-baddegama-registration.php">Manage Baddegama Registration</a></li>
-                                        <li class="breadcrumb-item active">View Details</li>
+                                        <li class="breadcrumb-item active"><?php echo $is_edit ? 'Edit' : 'View'; ?> Details</li>
                                     </ol>
                                 </div>
                             </div>
@@ -75,51 +77,80 @@ $REGISTRATION = new BaddegamaRegistration($id);
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Full Name</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->full_name); ?>" readonly>
+                                                    <label class="form-label" for="full_name">Full Name</label>
+                                                    <input type="text" class="form-control" name="full_name" value="<?php echo htmlspecialchars($REGISTRATION->full_name); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">NIC Number</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->nic); ?>" readonly>
+                                                    <label class="form-label" for="nic">NIC Number</label>
+                                                    <input type="text" class="form-control" name="nic" value="<?php echo htmlspecialchars($REGISTRATION->nic); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Passport Number</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->passport_number ?? 'N/A'); ?>" readonly>
+                                                    <label class="form-label" for="passport_number">Passport Number</label>
+                                                    <input type="text" class="form-control" name="passport_number" value="<?php echo htmlspecialchars($REGISTRATION->passport_number ?? 'N/A'); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Birthday</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->birthday); ?>" readonly>
+                                                    <label class="form-label" for="birthday">Birthday</label>
+                                                    <input type="date" class="form-control" name="birthday" value="<?php echo date('Y-m-d', strtotime($REGISTRATION->birthday)); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Age</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->age); ?>" readonly>
+                                                    <label class="form-label" for="age">Age</label>
+                                                    <input type="text" class="form-control" name="age" value="<?php echo htmlspecialchars($REGISTRATION->age); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Gender</label>
-                                                    <input type="text" class="form-control" value="<?php echo ucfirst(htmlspecialchars($REGISTRATION->gender)); ?>" readonly>
+                                                    <label class="form-label" for="gender">Gender</label>
+                                                    <?php if ($is_edit): ?>
+                                                        <select class="form-control" name="gender">
+                                                            <option value="male" <?php echo $REGISTRATION->gender == 'male' ? 'selected' : ''; ?>>Male</option>
+                                                            <option value="female" <?php echo $REGISTRATION->gender == 'female' ? 'selected' : ''; ?>>Female</option>
+                                                        </select>
+                                                    <?php else: ?>
+                                                        <input type="text" class="form-control" value="<?php echo ucfirst(htmlspecialchars($REGISTRATION->gender)); ?>" readonly>
+                                                        <input type="hidden" name="gender" value="<?php echo htmlspecialchars($REGISTRATION->gender); ?>">
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Marital Status</label>
-                                                    <input type="text" class="form-control" value="<?php echo ucfirst(htmlspecialchars($REGISTRATION->marital_status ?? 'N/A')); ?>" readonly>
+                                                    <label class="form-label" for="marital_status">Marital Status</label>
+                                                    <?php if ($is_edit): ?>
+                                                        <select class="form-control" name="marital_status">
+                                                            <option value="single" <?php echo $REGISTRATION->marital_status == 'single' ? 'selected' : ''; ?>>Single</option>
+                                                            <option value="married" <?php echo $REGISTRATION->marital_status == 'married' ? 'selected' : ''; ?>>Married</option>
+                                                        </select>
+                                                    <?php else: ?>
+                                                        <input type="text" class="form-control" value="<?php echo ucfirst(htmlspecialchars($REGISTRATION->marital_status ?? 'N/A')); ?>" readonly>
+                                                        <input type="hidden" name="marital_status" value="<?php echo htmlspecialchars($REGISTRATION->marital_status); ?>">
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Mobile Number</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->mobile_number); ?>" readonly>
+                                                    <label class="form-label" for="mobile_number">Mobile Number</label>
+                                                    <input type="text" class="form-control" name="mobile_number" value="<?php echo htmlspecialchars($REGISTRATION->mobile_number); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">WhatsApp Number</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->whatsapp_number ?? 'N/A'); ?>" readonly>
+                                                    <label class="form-label" for="whatsapp_number">WhatsApp Number</label>
+                                                    <input type="text" class="form-control" name="whatsapp_number" value="<?php echo htmlspecialchars($REGISTRATION->whatsapp_number ?? 'N/A'); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Province</label>
-                                                    <?php 
-                                                        $PROVINCE = new Province($REGISTRATION->province_id);
-                                                        $province_name = $PROVINCE->name ?? 'N/A';
-                                                    ?>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($province_name); ?>" readonly>
+                                                    <label class="form-label" for="province_id">Province</label>
+                                                    <?php if ($is_edit): ?>
+                                                        <select class="form-control" name="province_id">
+                                                            <?php 
+                                                            $PROV = new Province(NULL);
+                                                            foreach ($PROV->all() as $p) {
+                                                                $selected = $p['id'] == $REGISTRATION->province_id ? 'selected' : '';
+                                                                echo "<option value='{$p['id']}' {$selected}>{$p['name']}</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php else: ?>
+                                                        <?php 
+                                                            $PROVINCE = new Province($REGISTRATION->province_id);
+                                                            $province_name = $PROVINCE->name ?? 'N/A';
+                                                        ?>
+                                                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($province_name); ?>" readonly>
+                                                        <input type="hidden" name="province_id" value="<?php echo htmlspecialchars($REGISTRATION->province_id); ?>">
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
 
@@ -131,26 +162,39 @@ $REGISTRATION = new BaddegamaRegistration($id);
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Current Job</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->current_job ?? 'N/A'); ?>" readonly>
+                                                    <label class="form-label" for="current_job">Current Job</label>
+                                                    <input type="text" class="form-control" name="current_job" value="<?php echo htmlspecialchars($REGISTRATION->current_job ?? 'N/A'); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Experience (Years)</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->experience ?? '0'); ?>" readonly>
+                                                    <label class="form-label" for="experience">Experience (Years)</label>
+                                                    <input type="text" class="form-control" name="experience" value="<?php echo htmlspecialchars($REGISTRATION->experience ?? '0'); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Job Intended Abroad</label>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->job_abroad ?? 'N/A'); ?>" readonly>
+                                                    <label class="form-label" for="job_abroad">Job Intended Abroad</label>
+                                                    <input type="text" class="form-control" name="job_abroad" value="<?php echo htmlspecialchars($REGISTRATION->job_abroad ?? 'N/A'); ?>" <?php echo $readonly; ?>>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Destination Country</label>
-                                                    <?php 
-                                                        $COUNTRY = new Country($REGISTRATION->destination_country);
-                                                        $country_name = $COUNTRY->name ?? 'N/A';
-                                                    ?>
-                                                    <input type="text" class="form-control" value="<?php echo htmlspecialchars($country_name); ?>" readonly>
+                                                    <label class="form-label" for="destination_country">Destination Country</label>
+                                                    <?php if ($is_edit): ?>
+                                                        <select class="form-control" name="destination_country">
+                                                            <?php 
+                                                            $CTRY = new Country(NULL);
+                                                            foreach ($CTRY->all() as $c) {
+                                                                $selected = $c['id'] == $REGISTRATION->destination_country ? 'selected' : '';
+                                                                echo "<option value='{$c['id']}' {$selected}>{$c['name']}</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php else: ?>
+                                                        <?php 
+                                                            $COUNTRY = new Country($REGISTRATION->destination_country);
+                                                            $country_name = $COUNTRY->name ?? 'N/A';
+                                                        ?>
+                                                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($country_name); ?>" readonly>
+                                                        <input type="hidden" name="destination_country" value="<?php echo htmlspecialchars($REGISTRATION->destination_country); ?>">
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Application Type</label>
@@ -159,6 +203,19 @@ $REGISTRATION = new BaddegamaRegistration($id);
                                                 <div class="mb-3">
                                                     <label class="form-label">Registration Date</label>
                                                     <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->created_at); ?>" readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="result">Result</label>
+                                                    <?php if ($is_edit): ?>
+                                                        <select class="form-control" name="result" id="result">
+                                                            <option value="" <?php echo empty($REGISTRATION->result) ? 'selected' : ''; ?>>-- Select Result --</option>
+                                                            <option value="Pass" <?php echo ($REGISTRATION->result == 'Pass') ? 'selected' : ''; ?>>Pass</option>
+                                                            <option value="Fail" <?php echo ($REGISTRATION->result == 'Fail') ? 'selected' : ''; ?>>Fail</option>
+                                                        </select>
+                                                    <?php else: ?>
+                                                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->result ?? 'N/A'); ?>" readonly>
+                                                        <input type="hidden" name="result" value="<?php echo htmlspecialchars($REGISTRATION->result); ?>">
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
 
@@ -212,11 +269,10 @@ $REGISTRATION = new BaddegamaRegistration($id);
                                         </div>
 
                                         <input type="hidden" name="id" value="<?php echo $REGISTRATION->id; ?>">
-                                        <input type="hidden" name="update_baddegama">
 
                                         <div class="row mt-3">
                                             <div class="col-12 text-end">
-                                                <button type="submit" class="btn btn-primary px-4" id="update-btn">Update Status</button>
+                                                <button type="submit" class="btn btn-primary px-4" id="update-btn"><?php echo $is_edit ? 'Save Changes' : 'Update Status'; ?></button>
                                             </div>
                                         </div>
                                     </form>
@@ -241,8 +297,61 @@ $REGISTRATION = new BaddegamaRegistration($id);
                 
                 const formData = new FormData(this);
                 
+                // Validation (All except passport and whatsapp)
+                const is_edit = <?php echo json_encode($is_edit); ?>;
+                if (is_edit) {
+                    if (!$('input[name="full_name"]').val()) {
+                        swal("Error!", "Please enter full name", "error");
+                        return;
+                    }
+                    if (!$('input[name="nic"]').val()) {
+                        swal("Error!", "Please enter NIC", "error");
+                        return;
+                    }
+                    if (!$('input[name="birthday"]').val()) {
+                        swal("Error!", "Please select birthday", "error");
+                        return;
+                    }
+                    if (!$('input[name="age"]').val()) {
+                        swal("Error!", "Please enter age", "error");
+                        return;
+                    }
+                    if (!$('select[name="gender"]').val()) {
+                        swal("Error!", "Please select gender", "error");
+                        return;
+                    }
+                    if (!$('select[name="marital_status"]').val()) {
+                        swal("Error!", "Please select marital status", "error");
+                        return;
+                    }
+                    if (!$('input[name="mobile_number"]').val()) {
+                        swal("Error!", "Please enter mobile number", "error");
+                        return;
+                    }
+                    if (!$('select[name="province_id"]').val()) {
+                        swal("Error!", "Please select province", "error");
+                        return;
+                    }
+                    if (!$('input[name="current_job"]').val()) {
+                        swal("Error!", "Please enter current job", "error");
+                        return;
+                    }
+                    if (!$('input[name="experience"]').val()) {
+                        swal("Error!", "Please enter experience", "error");
+                        return;
+                    }
+                    if (!$('input[name="job_abroad"]').val()) {
+                        swal("Error!", "Please enter job intended abroad", "error");
+                        return;
+                    }
+                    if (!$('select[name="destination_country"]').val()) {
+                        swal("Error!", "Please select destination country", "error");
+                        return;
+                    }
+                }
+
                 $.ajax({
-                    url: 'ajax/php/baddegama-registration-update.php',
+                    url: '../ajax/php/baddegama-registration.php',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -256,7 +365,7 @@ $REGISTRATION = new BaddegamaRegistration($id);
                                 timer: 2000,
                                 showConfirmButton: false
                             }, function() {
-                                window.location.reload();
+                                window.location.href = 'manage-baddegama-registration.php';
                             });
                         } else {
                             swal({

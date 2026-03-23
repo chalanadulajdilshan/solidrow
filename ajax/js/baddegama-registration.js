@@ -25,8 +25,6 @@ jQuery(document).ready(function () {
       showError("Please enter your current job");
     } else if (!$("#experience").val()) {
       showError("Please enter your experience");
-    } else if (!$("#job_abroad").val()) {
-      showError("Please enter job intended abroad");
     } else if (!$("#destination_country").val()) {
       showError("Please select your destination country");
     } else {

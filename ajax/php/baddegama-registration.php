@@ -34,8 +34,7 @@ $required_fields = [
     'mobile_number' => 'Mobile Number',
     'province_id' => 'Province',
     'current_job' => 'Current Job',
-    'experience' => 'Experience',
-    'job_abroad' => 'Job Intended Abroad',
+    'experience' => 'Experience', 
     'destination_country' => 'Destination Country'
 ];
 
@@ -98,6 +97,38 @@ if (!$id) {
     $res = $baddegama_registration->create();
 } else {
     $res = $baddegama_registration->update();
+    
+    
+        $sms = new SMS();
+        $recipient = $_POST['mobile_number'];
+        $name = $_POST['full_name'];
+        
+        if ($_POST['gender'] == "male") {
+            $title = "Mr.";
+        } else {
+            $title = "Ms.";
+        }
+
+       $result = $_POST['result']; // PASS or FAIL
+
+if ($result == "Pass") {
+    $message = "Congratulations!\n" . $title . " " . $name . 
+               ", You have PASSED your exam successfully.\nResult: " . $result;
+} else {
+    $message = "Dear " . $title . " " . $name . ",\n" . 
+               "Unfortunately, you have FAILED the exam.\nResult: " . $result . 
+               ". Please try again.";
+}
+        
+        $sms_res = $sms->sendSMS($recipient, $message);
+
+        if (isset($sms_res['status_code']) && $sms_res['status_code'] == 204) {
+            $sms_status_msg = "SMS sent successfully.";
+        } else {
+            $sms_status_msg = "SMS sending failed. (Status: " . ($sms_res['status_code'] ?? 'Error') . ")";
+        }
+        
+        
 }
 
 if ($res) {

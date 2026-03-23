@@ -299,56 +299,56 @@ $readonly = $is_edit ? '' : 'readonly';
                 
                 // Validation (All except passport and whatsapp)
                 const is_edit = <?php echo json_encode($is_edit); ?>;
-                if (is_edit) {
-                    if (!$('input[name="full_name"]').val()) {
-                        swal("Error!", "Please enter full name", "error");
-                        return;
-                    }
-                    if (!$('input[name="nic"]').val()) {
-                        swal("Error!", "Please enter NIC", "error");
-                        return;
-                    }
-                    if (!$('input[name="birthday"]').val()) {
-                        swal("Error!", "Please select birthday", "error");
-                        return;
-                    }
-                    if (!$('input[name="age"]').val()) {
-                        swal("Error!", "Please enter age", "error");
-                        return;
-                    }
-                    if (!$('select[name="gender"]').val()) {
-                        swal("Error!", "Please select gender", "error");
-                        return;
-                    }
-                    if (!$('select[name="marital_status"]').val()) {
-                        swal("Error!", "Please select marital status", "error");
-                        return;
-                    }
-                    if (!$('input[name="mobile_number"]').val()) {
-                        swal("Error!", "Please enter mobile number", "error");
-                        return;
-                    }
-                    if (!$('select[name="province_id"]').val()) {
-                        swal("Error!", "Please select province", "error");
-                        return;
-                    }
-                    if (!$('input[name="current_job"]').val()) {
-                        swal("Error!", "Please enter current job", "error");
-                        return;
-                    }
-                    if (!$('input[name="experience"]').val()) {
-                        swal("Error!", "Please enter experience", "error");
-                        return;
-                    }
-                    if (!$('input[name="job_abroad"]').val()) {
-                        swal("Error!", "Please enter job intended abroad", "error");
-                        return;
-                    }
-                    if (!$('select[name="destination_country"]').val()) {
-                        swal("Error!", "Please select destination country", "error");
-                        return;
-                    }
-                }
+                // if (is_edit) {
+                //     if (!$('input[name="full_name"]').val()) {
+                //         swal("Error!", "Please enter full name", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="nic"]').val()) {
+                //         swal("Error!", "Please enter NIC", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="birthday"]').val()) {
+                //         swal("Error!", "Please select birthday", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="age"]').val()) {
+                //         swal("Error!", "Please enter age", "error");
+                //         return;
+                //     }
+                //     if (!$('select[name="gender"]').val()) {
+                //         swal("Error!", "Please select gender", "error");
+                //         return;
+                //     }
+                //     if (!$('select[name="marital_status"]').val()) {
+                //         swal("Error!", "Please select marital status", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="mobile_number"]').val()) {
+                //         swal("Error!", "Please enter mobile number", "error");
+                //         return;
+                //     }
+                //     if (!$('select[name="province_id"]').val()) {
+                //         swal("Error!", "Please select province", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="current_job"]').val()) {
+                //         swal("Error!", "Please enter current job", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="experience"]').val()) {
+                //         swal("Error!", "Please enter experience", "error");
+                //         return;
+                //     }
+                //     if (!$('input[name="job_abroad"]').val()) {
+                //         swal("Error!", "Please enter job intended abroad", "error");
+                //         return;
+                //     }
+                //     if (!$('select[name="destination_country"]').val()) {
+                //         swal("Error!", "Please select destination country", "error");
+                //         return;
+                //     }
+                // }
 
                 $.ajax({
                     url: '../ajax/php/baddegama-registration.php',

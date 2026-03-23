@@ -137,7 +137,7 @@ include '../class/include.php';
                                     <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number) <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIV Number) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your national id number">
                                 </div>
                                 <div class="col-md-6 mb-3">

@@ -137,8 +137,9 @@ include '../class/include.php';
                                     <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIV Number) <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your national id number">
+                                    <small id="nic-status" class="text-muted"></small>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="passport_number">පාස්පෝට් අංකය (Passport Number)</label>
@@ -175,7 +176,19 @@ include '../class/include.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="mobile_number">ජංගම දුරකතන අංකය (Mobile Number) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number">
+                                        <button class="btn btn-outline-primary" type="button" id="send-otp">Verify</button>
+                                    </div>
+                                    <small id="mobile-status" class="text-muted">Verification required</small>
+                                </div>
+                                <div class="col-md-6 mb-3" id="otp-section" style="display: none;">
+                                    <label class="form-label" for="otp_code">Enter OTP <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="otp_code" placeholder="Enter 6-digit OTP">
+                                        <button class="btn btn-primary" type="button" id="verify-otp">Confirm OTP</button>
+                                    </div>
+                                    <small class="text-muted">Check your SMS for the code</small>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="whatsapp_number">Whatsapp Number</label>
@@ -189,6 +202,18 @@ include '../class/include.php';
                                         $PROVINCE = new Province(NULL);
                                         foreach ($PROVINCE->all() as $province) {
                                             echo "<option value='{$province['id']}'>{$province['name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="type">Select Location <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="type" id="type">
+                                        <option value="">-- Select Location --</option>
+                                        <?php
+                                        $LOCATION = new Location(NULL);
+                                        foreach ($LOCATION->all() as $location) {
+                                            echo "<option value='{$location['id']}'>{$location['name']}</option>";
                                         }
                                         ?>
                                     </select>
@@ -222,7 +247,7 @@ include '../class/include.php';
 
                             <div class="row mt-4">
                                 <div class="col-12 text-end">
-                                    <button type="submit" id="create" class="btn btn-primary btn-register">Register</button>
+                                    <button type="submit" id="create" class="btn btn-primary btn-register" disabled>Register</button>
                                 </div>
                             </div>
                         </form>

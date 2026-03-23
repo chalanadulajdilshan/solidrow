@@ -8,8 +8,20 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $id = $_POST['id'] ?? NULL;
 $action = $_POST['action'] ?? NULL;
+
+// Verify mobile number from session for new registrations
+if (!$id && $action !== 'delete') {
+    if (!isset($_SESSION['mobile_verified']) || $_SESSION['mobile_verified'] !== ($_POST['mobile_number'] ?? '')) {
+        echo json_encode(["status" => 'error', "message" => "Mobile number verification failed. Please verify your number."]);
+        exit();
+    }
+}
 
 // Handle Delete Action
 if ($action == 'delete' && $id) {
@@ -45,13 +57,34 @@ foreach ($required_fields as $field => $label) {
     }
 }
 
+// NIC Validation
+$nic = $_POST['nic'];
+$old_nic_regx = '/^[0-9]{9}[vVxX]$/';
+$new_nic_regx = '/^[0-9]{12}$/';
+
+if (strlen($nic) === 10) {
+    if (!preg_match($old_nic_regx, $nic)) {
+        echo json_encode(["status" => 'error', "message" => "Invalid Old NIC format. (e.g., 123456789V)"]);
+        exit();
+    }
+} elseif (strlen($nic) === 12) {
+    if (!preg_match($new_nic_regx, $nic)) {
+        echo json_encode(["status" => 'error', "message" => "Invalid New NIC format. (e.g., 123456789012)"]);
+        exit();
+    }
+} else {
+    echo json_encode(["status" => 'error', "message" => "Invalid NIC number length. Must be 10 or 12 characters."]);
+    exit();
+}
+
 if ($id) {
     $baddegama_registration = new BaddegamaRegistration($id);
 } else {
     $baddegama_registration = new BaddegamaRegistration(NULL);
-    $baddegama_registration->type = 'BADDEGAMA';
     $baddegama_registration->created_at = date('Y-m-d H:i:s');
 }
+
+$baddegama_registration->type = $_POST['type'] ?? '1'; // Default to first location if not provided
 
 $baddegama_registration->full_name = $_POST['full_name'];
 $baddegama_registration->nic = $_POST['nic'];

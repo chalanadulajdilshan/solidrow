@@ -195,7 +195,10 @@ class BaddegamaRegistration
 
     public function all()
     {
-        $query = "SELECT * FROM baddegama_registration ORDER BY created_at DESC";
+        $query = "SELECT br.*, l.name as location_name 
+                  FROM baddegama_registration br 
+                  LEFT JOIN locations l ON br.type = l.id 
+                  ORDER BY br.created_at DESC";
         $db = new Database();
         $result = $db->readQuery($query);
 

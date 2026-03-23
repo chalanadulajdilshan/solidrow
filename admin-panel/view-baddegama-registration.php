@@ -152,6 +152,29 @@ $readonly = $is_edit ? '' : 'readonly';
                                                         <input type="hidden" name="province_id" value="<?php echo htmlspecialchars($REGISTRATION->province_id); ?>">
                                                     <?php endif; ?>
                                                 </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="type">Location</label>
+                                                    <?php if ($is_edit): ?>
+                                                        <select class="form-control" name="type">
+                                                            <option value="">-- Select Location --</option>
+                                                            <?php 
+                                                            $LOC = new Location(NULL);
+                                                            foreach ($LOC->all() as $l) {
+                                                                $selected = $l['id'] == $REGISTRATION->type ? 'selected' : '';
+                                                                echo "<option value='{$l['id']}' {$selected}>{$l['name']}</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php else: ?>
+                                                        <?php 
+                                                            $LOCATION = new Location($REGISTRATION->type);
+                                                            $location_name = $LOCATION->name ?? ($REGISTRATION->type == 'BADDEGAMA' ? 'Baddegama' : 'N/A');
+                                                        ?>
+                                                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($location_name); ?>" readonly>
+                                                        <input type="hidden" name="type" value="<?php echo htmlspecialchars($REGISTRATION->type); ?>">
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
 
                                             <hr class="my-4">

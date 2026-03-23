@@ -66,6 +66,7 @@ include './auth.php';
                                                 <th>Reg No</th>
                                                 <th>NIC</th>
                                                 <th>Mobile Number</th> 
+                                                <th>Location</th>
                                                 <th>Passport No</th>
                                                 <th>Created At</th>
                                                 <th>Action</th>
@@ -85,6 +86,7 @@ include './auth.php';
                                                     <td class="text-primary fw-bold"> <?php echo htmlspecialchars($registration['registration_code']) ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['nic']) ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['mobile_number']) ?></td> 
+                                                    <td> <?php echo htmlspecialchars($registration['location_name'] ?? 'N/A') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['passport_number'] ?? 'N/A') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['created_at']) ?></td>
                                                     <td>

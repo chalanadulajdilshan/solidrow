@@ -87,6 +87,12 @@ $US = new User($_SESSION['id']);
                         </a>
                     </li>
                     <li>
+                        <a href="locations.php">
+                            <i class="bx bx-map-pin"></i>
+                            <span>Locations</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="student-country-visa.php">
                             <i class="bx bx-globe"></i>
                             <span>Student Country Visa</span>

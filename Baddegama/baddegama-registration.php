@@ -207,16 +207,7 @@ include '../class/include.php';
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="type">Select Location <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="type" id="type">
-                                        <option value="">-- Select Location --</option>
-                                        <?php
-                                        $LOCATION = new Location(NULL);
-                                        foreach ($LOCATION->all() as $location) {
-                                            echo "<option value='{$location['id']}'>{$location['name']}</option>";
-                                        }
-                                        ?>
-                                    </select>
+                                    <input type="hidden" name="type" value="2">
                                 </div>
 
                                 <!-- Professional & Travel Details -->

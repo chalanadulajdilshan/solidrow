@@ -84,7 +84,7 @@ if ($id) {
     $baddegama_registration->created_at = date('Y-m-d H:i:s');
 }
 
-$baddegama_registration->type = $_POST['type'] ?? '1'; // Default to first location if not provided
+$baddegama_registration->type = $_POST['type'] ?? '2'; // Default to ID 2 as per user request
 
 $baddegama_registration->full_name = $_POST['full_name'];
 $baddegama_registration->nic = $_POST['nic'];

@@ -58,6 +58,7 @@ $count = 1;
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Location Name</th>
+                                                    <th>Active (Reg)</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -71,6 +72,13 @@ $count = 1;
                                                         echo "<tr>";
                                                         echo "<td>" . $count++ . "</td>";
                                                         echo "<td>" . htmlspecialchars($location['name']) . "</td>";
+                                                        echo "<td>";
+                                                        if ($location['is_active_registration']) {
+                                                            echo '<span class="badge bg-success">Active</span>';
+                                                        } else {
+                                                            echo '<button class="btn btn-sm btn-outline-info set-active-reg" data-id="' . htmlspecialchars($location['id']) . '">Set Active</button>';
+                                                        }
+                                                        echo "</td>";
                                                         echo "<td>";
                                                         echo "<button class='btn btn-sm btn-warning edit-location' data-id='" . htmlspecialchars($location['id']) . "' data-name='" . htmlspecialchars($location['name']) . "'><i class='mdi mdi-pencil'></i></button> ";
                                                         echo "<button class='btn btn-sm btn-danger delete-location' data-id='" . htmlspecialchars($location['id']) . "'><i class='mdi mdi-delete'></i></button>";
@@ -125,6 +133,29 @@ $count = 1;
                 $('html, body').animate({
                     scrollTop: $("#form-data").offset().top - 100
                 }, 500);
+            });
+
+            // Handle set active for registration
+            $(document).on('click', '.set-active-reg', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: 'ajax/php/location.php',
+                    type: 'POST',
+                    data: {
+                        set_active: true,
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            location.reload();
+                        } else {
+                            swal("Error!", "Failed to update status", "error");
+                        }
+                    }
+                });
             });
 
             // Handle delete button click

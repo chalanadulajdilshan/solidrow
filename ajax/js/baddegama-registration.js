@@ -185,9 +185,25 @@ jQuery(document).ready(function () {
 
   // Reset verification if mobile number is changed (if not readonly)
   $("#mobile_number").on("input", function () {
+    var mobile = $(this).val();
+    var status = $("#mobile-status");
+
     $("#create").prop("disabled", true);
-    $("#mobile-status").removeClass("text-success font-weight-bold").addClass("text-muted").text("Verification required");
     $("#otp-section").hide();
+
+    if (mobile.length === 0) {
+      status.text("Verification required").removeClass("text-success text-danger font-weight-bold").addClass("text-muted");
+    } else if (validateMobile(mobile)) {
+      status
+        .text("✓ Valid format - Verification required")
+        .removeClass("text-danger text-muted")
+        .addClass("text-success font-weight-bold");
+    } else {
+      status
+        .text("✗ Invalid mobile format (e.g., 0771234567)")
+        .removeClass("text-success text-muted")
+        .addClass("text-danger font-weight-bold");
+    }
   });
 
   // Real-time NIC Validation
@@ -220,6 +236,11 @@ jQuery(document).ready(function () {
       return true;
     }
     return false;
+  }
+
+  function validateMobile(mobile) {
+    var mobile_regx = /^07[01245678][0-9]{7}$/;
+    return mobile_regx.test(mobile);
   }
 
   function showError(message) {

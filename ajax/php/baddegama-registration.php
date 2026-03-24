@@ -57,6 +57,14 @@ foreach ($required_fields as $field => $label) {
     }
 }
 
+// Mobile Number Validation
+$mobile = $_POST['mobile_number'];
+$mobile_regx = '/^07[01245678][0-9]{7}$/';
+if (!preg_match($mobile_regx, $mobile)) {
+    echo json_encode(["status" => 'error', "message" => "Invalid mobile number format. Must be 10 digits starting with 07."]);
+    exit();
+}
+
 // NIC Validation
 $nic = $_POST['nic'];
 $old_nic_regx = '/^[0-9]{9}[vVxX]$/';

@@ -207,7 +207,8 @@ include '../class/include.php';
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="hidden" name="type" value="2">
+                                    <?php $default_loc = Location::getActiveRegistrationLocation(); ?>
+                                    <input type="hidden" name="type" value="<?php echo htmlspecialchars($default_loc); ?>">
                                 </div>
 
                                 <!-- Professional & Travel Details -->

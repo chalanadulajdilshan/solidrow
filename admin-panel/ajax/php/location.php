@@ -49,3 +49,15 @@ if (isset($_POST['delete']) && isset($_POST['id'])) {
     }
     exit();
 }
+
+// Set active for registration
+if (isset($_POST['set_active']) && isset($_POST['id'])) {
+    $res = Location::setActiveForRegistration($_POST['id']);
+
+    if ($res) {
+        echo json_encode(["status" => 'success']);
+    } else {
+        echo json_encode(["status" => 'error']);
+    }
+    exit();
+}

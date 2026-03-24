@@ -40,13 +40,8 @@ include './auth.php';
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Baddegama Registration</h4>
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Manage Baddegama Registration</li>
-                                    </ol>
-                                </div>
+                                <h4 class="mb-0">Manage All Registrations</h4>
+                                 
                             </div>
                         </div>
                     </div>
@@ -55,8 +50,22 @@ include './auth.php';
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Manage All Registrations</h4>
+                                <div class="card-body"> 
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Filter by Location</label>
+                                            <select id="location-filter" class="form-control">
+                                                <option value="">All Locations</option>
+                                                <?php
+                                                $LOCATION = new Location(NULL);
+                                                foreach ($LOCATION->all() as $loc) {
+                                                    echo "<option value='{$loc['name']}'>{$loc['name']}</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <table id="baddegama-datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
@@ -121,9 +130,15 @@ include './auth.php';
     
     <script>
         $(document).ready(function() {
-            $('#baddegama-datatable').DataTable({
+            var table = $('#baddegama-datatable').DataTable({
                 responsive: true,
-                order: [[6, 'desc']] // Sort by Created At (index 6) by default
+                order: [[7, 'desc']] // Sort by Created At (index 7) by default
+            });
+
+            // Location Filter logic
+            $('#location-filter').on('change', function() {
+                var val = $(this).val();
+                table.column(5).search(val ? '^' + val + '$' : '', true, false).draw();
             });
 
             $('.delete-registration').on('click', function() {

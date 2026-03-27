@@ -3,14 +3,25 @@ jQuery(document).ready(function ($) {
     function handleAjaxRequest(action, formData, successMessage, errorMessage) {
         $(".someBlock").preloader();
 
+        let ajaxData = formData;
+        let processData = false;
+        let contentType = false;
+
+        // If formData is not a FormData object (e.g., for delete), handle accordingly
+        if (!(formData instanceof FormData)) {
+            ajaxData = $.param(formData);
+            processData = true;
+            contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+        }
+
         $.ajax({
             url: "ajax/php/agent.php",
             type: "POST",
-            data: formData,
+            data: ajaxData,
             async: true,
             cache: false,
-            contentType: false,
-            processData: false,
+            contentType: contentType,
+            processData: processData,
             dataType: "json",
             success: function (result) {
                 $(".someBlock").preloader("remove");
@@ -41,7 +52,7 @@ jQuery(document).ready(function ($) {
     // Form validation
     function validateForm() {
         const requiredFields = [
-            { id: "name", message: "Please enter staff name" }, 
+            { id: "name", message: "Please enter agent name" }, 
             { id: "contact_no", message: "Please enter contact number" },
             { id: "nic", message: "Please enter NIC number" }, 
         ];
@@ -121,7 +132,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Populate form when selecting staff
-    $(document).on("click", ".select-staff", function () {
+    $(document).on("click", ".select-agent", function () {
         const agentData = $(this).data();
 
         $("#agent_id").val(agentData.id);

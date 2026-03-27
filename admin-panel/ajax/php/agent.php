@@ -44,4 +44,31 @@ if (isset($_POST['update'])) {
     }
     exit();
 }
- 
+// Delete agent
+if (isset($_POST['delete'])) {
+    if (!isset($_POST['id']) || empty($_POST['id'])) {
+        echo json_encode(['status' => 'error', 'message' => 'Agent ID is required.']);
+        exit();
+    }
+
+    $AGENT = new Agent($_POST['id']);
+
+    if ($AGENT->delete()) {
+        echo json_encode(['status' => 'success', 'message' => 'Agent deleted successfully.']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Failed to delete agent.']);
+    }
+    exit();
+}
+
+// Set active for registration
+if (isset($_POST['set_active']) && isset($_POST['id'])) {
+    $res = Agent::setActiveForRegistration($_POST['id']);
+
+    if ($res) {
+        echo json_encode(["status" => 'success']);
+    } else {
+        echo json_encode(["status" => 'error']);
+    }
+    exit();
+}

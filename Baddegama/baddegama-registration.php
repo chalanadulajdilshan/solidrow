@@ -209,6 +209,8 @@ include '../class/include.php';
                                 <div class="col-md-6 mb-3">
                                     <?php $default_loc = Location::getActiveRegistrationLocation(); ?>
                                     <input type="hidden" name="type" value="<?php echo htmlspecialchars($default_loc); ?>">
+                                    <?php $active_agent = Agent::getActiveRegistrationAgent(); ?>
+                                    <input type="hidden" name="agent_id" value="<?php echo htmlspecialchars($active_agent); ?>">
                                 </div>
 
                                 <!-- Professional & Travel Details -->

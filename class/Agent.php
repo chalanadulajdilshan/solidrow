@@ -79,7 +79,7 @@ class Agent
     public function all($orderBy = 'id', $order = 'DESC')
     {
         $db = new Database();
-        $allowedColumns = ['id', 'name', 'contact_no', 'whatsapp_no', 'nic'];
+        $allowedColumns = ['id', 'name', 'contact_no', 'whatsapp_no', 'nic', 'is_active_registration'];
         $orderBy = in_array(strtolower($orderBy), $allowedColumns) ? $orderBy : 'id';
         $order = strtoupper($order) === 'ASC' ? 'ASC' : 'DESC';
 
@@ -92,5 +92,29 @@ class Agent
         }
 
         return $staff;
+    }
+
+    public static function setActiveForRegistration($id)
+    {
+        $db = new Database();
+        // Deactivate all first
+        $query1 = "UPDATE `agent` SET `is_active_registration` = 0";
+        $db->readQuery($query1);
+
+        // Activate selected one
+        $query2 = "UPDATE `agent` SET `is_active_registration` = 1 WHERE `id` = " . (int)$id;
+        return $db->readQuery($query2);
+    }
+
+    public static function getActiveRegistrationAgent()
+    {
+        $query = "SELECT `id` FROM `agent` WHERE `is_active_registration` = 1 LIMIT 1";
+        $db = new Database();
+        $result = mysqli_fetch_array($db->readQuery($query));
+
+        if ($result) {
+            return $result['id'];
+        }
+        return null;
     }
 }

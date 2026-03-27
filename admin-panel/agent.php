@@ -7,7 +7,7 @@ include './auth.php';
 
 <head>
     <meta charset="utf-8" />
-    <title>Staff Management | Youth Service LTD</title>
+    <title>Agent Management | Youth Service LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include './assets/main-css.php'; ?>
 </head>
@@ -58,7 +58,7 @@ include './auth.php';
                                                 <button type="button" class="btn btn-secondary" id="new">
                                                     <i class="uil uil-plus me-1"></i> New
                                                 </button>
-                                                <button type="button" class="btn btn-danger delete-staff">
+                                                <button type="button" class="btn btn-danger delete-agent">
                                                     <i class="uil uil-trash me-1"></i> Delete
                                                 </button>
                                             </div>
@@ -72,7 +72,7 @@ include './auth.php';
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Manage Staff</h4>
+                                    <h4 class="card-title">Manage Agents</h4>
                                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="width:100%">
                                         <thead>
                                             <tr>
@@ -81,6 +81,7 @@ include './auth.php';
                                                 <th>Contact No</th>
                                                 <th>WhatsApp No</th>
                                                 <th>NIC</th>
+                                                <th>Active (Reg)</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -97,7 +98,16 @@ include './auth.php';
                                                     <td><?php echo htmlspecialchars($agent['whatsapp_no']) ?></td>
                                                     <td><?php echo htmlspecialchars($agent['nic']) ?></td>
                                                     <td>
-                                                        <div class="badge bg-pill bg-soft-success font-size-14 select-staff"
+                                                        <?php
+                                                        if ($agent['is_active_registration']) {
+                                                            echo '<span class="badge bg-success">Active</span>';
+                                                        } else {
+                                                            echo '<button class="btn btn-sm btn-outline-info set-active-reg" data-id="' . htmlspecialchars($agent['id']) . '">Set Active</button>';
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge bg-pill bg-soft-success font-size-14 select-agent"
                                                             data-id="<?php echo htmlspecialchars($agent['id']) ?>"
                                                             data-name="<?php echo htmlspecialchars($agent['name']) ?>"
                                                              data-contact_no="<?php echo htmlspecialchars($agent['contact_no']) ?>"
@@ -143,6 +153,30 @@ include './auth.php';
             input.value = '';
             preview.style.display = 'none';
         }
+
+        $(document).ready(function() {
+            $(document).on('click', '.set-active-reg', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: 'ajax/php/agent.php',
+                    type: 'POST',
+                    data: {
+                        set_active: true,
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            location.reload();
+                        } else {
+                            swal("Error!", "Failed to update status", "error");
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

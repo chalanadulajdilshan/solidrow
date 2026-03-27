@@ -76,6 +76,7 @@ include './auth.php';
                                                 <th>NIC</th>
                                                 <th>Mobile Number</th> 
                                                 <th>Location</th>
+                                                <th>Agent</th>
                                                 <th>Passport No</th>
                                                 <th>Created At</th>
                                                 <th>Action</th>
@@ -96,6 +97,7 @@ include './auth.php';
                                                     <td> <?php echo htmlspecialchars($registration['nic']) ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['mobile_number']) ?></td> 
                                                     <td> <?php echo htmlspecialchars($registration['location_name'] ?? 'N/A') ?></td>
+                                                    <td> <?php echo htmlspecialchars($registration['agent_name'] ?? 'Direct') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['passport_number'] ?? 'N/A') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['created_at']) ?></td>
                                                     <td>
@@ -139,6 +141,11 @@ include './auth.php';
             $('#location-filter').on('change', function() {
                 var val = $(this).val();
                 table.column(5).search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+
+            // Agent Filter (optional but good)
+            table.on('draw', function() {
+                // Logic if needed
             });
 
             $('.delete-registration').on('click', function() {

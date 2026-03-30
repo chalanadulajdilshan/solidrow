@@ -35,7 +35,7 @@ $count = 1;
                                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter location name" required>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label>Agent</label>
+                                                <label>Foreign Agent</label>
                                                 <input type="text" id="agent" name="agent" class="form-control" placeholder="Enter agent name">
                                             </div>
                                             <div class="col-12 mt-2">
@@ -62,7 +62,7 @@ $count = 1;
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Location Name</th>
-                                                    <th>Agent</th>
+                                                    <th>Foreign Agent</th>
                                                     <th>Active (Reg)</th>
                                                     <th>Actions</th>
                                                 </tr>

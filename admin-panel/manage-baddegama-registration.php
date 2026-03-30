@@ -76,7 +76,7 @@ include './auth.php';
                                                 <th>NIC</th>
                                                 <th>Mobile Number</th> 
                                                 <th>Location</th>
-                                                <th>Agent</th>
+                                                <th>Foreign Agent</th>
                                                 <th>Passport No</th>
                                                 <th>Created At</th>
                                                 <th>Action</th>

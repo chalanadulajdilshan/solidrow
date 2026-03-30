@@ -108,7 +108,7 @@ $baddegama_registration->current_job = $_POST['current_job'] ?? '';
 $baddegama_registration->experience = $_POST['experience'] ?? 0;
 $baddegama_registration->job_abroad = $_POST['job_abroad'] ?? '';
 $baddegama_registration->destination_country = $_POST['destination_country'] ?? 0;
-$baddegama_registration->agent_id = $_POST['agent_id'] ?? NULL;
+$baddegama_registration->marks = $_POST['marks'] ?? NULL;
 
 // Admin only fields
 if (isset($_POST['call_status'])) {

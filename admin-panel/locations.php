@@ -34,6 +34,10 @@ $count = 1;
                                                 <label>Location Name</label>
                                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter location name" required>
                                             </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Agent</label>
+                                                <input type="text" id="agent" name="agent" class="form-control" placeholder="Enter agent name">
+                                            </div>
                                             <div class="col-12 mt-2">
                                                 <button type="submit" id="create" class="btn btn-primary">Save Location</button>
                                                 <button type="submit" id="update" class="btn btn-success" style="display: none;">Update Location</button>
@@ -58,6 +62,7 @@ $count = 1;
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Location Name</th>
+                                                    <th>Agent</th>
                                                     <th>Active (Reg)</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -72,6 +77,7 @@ $count = 1;
                                                         echo "<tr>";
                                                         echo "<td>" . $count++ . "</td>";
                                                         echo "<td>" . htmlspecialchars($location['name']) . "</td>";
+                                                        echo "<td>" . htmlspecialchars($location['agent'] ?? '') . "</td>";
                                                         echo "<td>";
                                                         if ($location['is_active_registration']) {
                                                             echo '<span class="badge bg-success">Active</span>';
@@ -80,7 +86,7 @@ $count = 1;
                                                         }
                                                         echo "</td>";
                                                         echo "<td>";
-                                                        echo "<button class='btn btn-sm btn-warning edit-location' data-id='" . htmlspecialchars($location['id']) . "' data-name='" . htmlspecialchars($location['name']) . "'><i class='mdi mdi-pencil'></i></button> ";
+                                                        echo "<button class='btn btn-sm btn-warning edit-location' data-id='" . htmlspecialchars($location['id']) . "' data-name='" . htmlspecialchars($location['name']) . "' data-agent='" . htmlspecialchars($location['agent'] ?? '') . "'><i class='mdi mdi-pencil'></i></button> ";
                                                         echo "<button class='btn btn-sm btn-danger delete-location' data-id='" . htmlspecialchars($location['id']) . "'><i class='mdi mdi-delete'></i></button>";
                                                         echo "</td>";
                                                         echo "</tr>";
@@ -122,9 +128,11 @@ $count = 1;
 
                 var id = $(this).data('id');
                 var name = $(this).data('name');
+                var agent = $(this).data('agent');
 
                 $('#location_id').val(id);
                 $('#name').val(name);
+                $('#agent').val(agent);
 
                 $('#create').hide();
                 $('#update').show();

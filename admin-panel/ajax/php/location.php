@@ -9,6 +9,7 @@ if (isset($_POST['create'])) {
     $LOCATION = new Location(NULL);
 
     $LOCATION->name = $_POST['name'];
+    $LOCATION->agent = $_POST['agent'];
 
     $res = $LOCATION->create();
 
@@ -26,6 +27,7 @@ if (isset($_POST['update'])) {
     $LOCATION = new Location($_POST['location_id']);
 
     $LOCATION->name = $_POST['name'];
+    $LOCATION->agent = $_POST['agent'];
 
     $res = $LOCATION->update();
 

@@ -7,10 +7,14 @@ jQuery(document).ready(function () {
     // Validation
     if (!$("#full_name").val()) {
       showError("Please enter your full name");
+    } else if (!validateName($("#full_name").val())) {
+      showError("Full name must contain only English letters and spaces (automatic caps)");
     } else if (!$("#nic").val()) {
       showError("Please enter your NIC number");
     } else if (!validateNIC($("#nic").val())) {
       showError("Please enter a valid Sri Lankan NIC number (e.g., 123456789V or 123456789012)");
+    } else if ($("#passport_number").val() && !validatePassport($("#passport_number").val())) {
+      showError("Please enter a valid passport number (Starts with N or P followed by numbers)");
     } else if (!$("#birthday").val()) {
       showError("Please select your birthday");
     } else if (!$("#age").val()) {
@@ -208,7 +212,8 @@ jQuery(document).ready(function () {
 
   // Real-time NIC Validation
   $("#nic").on("input", function () {
-    var nic = $(this).val();
+    var nic = $(this).val().toUpperCase();
+    $(this).val(nic); // Auto-capitalize
     var status = $("#nic-status");
 
     if (nic.length === 0) {
@@ -225,9 +230,61 @@ jQuery(document).ready(function () {
         .addClass("text-danger font-weight-bold");
     }
   });
+ 
+  // Real-time Name Validation
+  $("#full_name").on("input", function () {
+    var name = $(this).val().toUpperCase();
+    $(this).val(name); // Auto-capitalize
+
+    var status = $("#name-status");
+
+    if (name.length === 0) {
+      status.text("").removeClass("text-success text-danger font-weight-bold");
+    } else if (validateName(name)) {
+      status
+        .text("✓ Valid Name format")
+        .removeClass("text-danger text-muted")
+        .addClass("text-success font-weight-bold");
+    } else {
+      status
+        .text("✗ Only English letters and spaces allowed")
+        .removeClass("text-success text-muted")
+        .addClass("text-danger font-weight-bold");
+    }
+  });
+
+  // Real-time Passport Validation
+  $("#passport_number").on("input", function () {
+    var passport = $(this).val();
+
+    if (passport.length > 0) {
+      // Auto-capitalize first character if it's n or p
+      var firstChar = passport.charAt(0).toUpperCase();
+      if (firstChar === 'N' || firstChar === 'P') {
+        passport = firstChar + passport.substring(1);
+        $(this).val(passport);
+      }
+    }
+
+    var status = $("#passport-status");
+
+    if (passport.length === 0) {
+      status.text("").removeClass("text-success text-danger font-weight-bold");
+    } else if (validatePassport(passport)) {
+      status
+        .text("✓ Valid Passport format")
+        .removeClass("text-danger text-muted")
+        .addClass("text-success font-weight-bold");
+    } else {
+      status
+        .text("✗ Must start with N or P followed by numbers (no spaces/special characters)")
+        .removeClass("text-success text-muted")
+        .addClass("text-danger font-weight-bold");
+    }
+  });
 
   function validateNIC(nic) {
-    var old_nic_regx = /^(?:19|20)?\d{9}[vVxX]$/;
+    var old_nic_regx = /^(?:19|20)?\d{9}[VX]$/;
     var new_nic_regx = /^[0-9]{12}$/;
 
     if (nic.length === 10 && old_nic_regx.test(nic)) {
@@ -241,6 +298,16 @@ jQuery(document).ready(function () {
   function validateMobile(mobile) {
     var mobile_regx = /^07[01245678][0-9]{7}$/;
     return mobile_regx.test(mobile);
+  }
+
+  function validatePassport(passport) {
+    var passport_regx = /^[NP][0-9]+$/;
+    return passport_regx.test(passport);
+  }
+
+  function validateName(name) {
+    var name_regx = /^[A-Z ]+$/;
+    return name_regx.test(name);
   }
 
   function showError(message) {

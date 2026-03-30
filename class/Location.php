@@ -4,6 +4,7 @@ class Location
 {
     public $id;
     public $name;
+    public $agent;
 
     public function __construct($id = null)
     {
@@ -15,6 +16,7 @@ class Location
             if ($result) {
                 $this->id = $result['id'];
                 $this->name = $result['name'];
+                $this->agent = $result['agent'];
             }
         }
     }
@@ -22,7 +24,7 @@ class Location
     // Get all locations
     public function all()
     {
-        $query = "SELECT `id`, `name`, `is_active_registration` FROM `locations` ORDER BY `name` ASC";
+        $query = "SELECT `id`, `name`, `agent`, `is_active_registration` FROM `locations` ORDER BY `name` ASC";
         $db = new Database();
         $result = $db->readQuery($query);
 
@@ -37,7 +39,7 @@ class Location
     public function create()
     {
         $db = new Database();
-        $query = "INSERT INTO `locations` (`name`) VALUES ('" . mysqli_real_escape_string($db->DB_CON, $this->name) . "')";
+        $query = "INSERT INTO `locations` (`name`, `agent`) VALUES ('" . mysqli_real_escape_string($db->DB_CON, $this->name) . "', '" . mysqli_real_escape_string($db->DB_CON, $this->agent) . "')";
         $result = $db->readQuery($query);
 
         if ($result) {
@@ -50,7 +52,7 @@ class Location
     public function update()
     {
         $db = new Database();
-        $query = "UPDATE `locations` SET `name` = '" . mysqli_real_escape_string($db->DB_CON, $this->name) . "' WHERE `id` = " . (int)$this->id;
+        $query = "UPDATE `locations` SET `name` = '" . mysqli_real_escape_string($db->DB_CON, $this->name) . "', `agent` = '" . mysqli_real_escape_string($db->DB_CON, $this->agent) . "' WHERE `id` = " . (int)$this->id;
         return $db->readQuery($query);
     }
 

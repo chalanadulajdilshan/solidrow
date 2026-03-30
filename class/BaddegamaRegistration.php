@@ -26,7 +26,7 @@ class BaddegamaRegistration
     public $call_notes;
     public $experience;
     public $destination_country;
-    public $agent_id;
+    public $marks;
 
 
     public function __construct($id)
@@ -60,7 +60,7 @@ class BaddegamaRegistration
                 $this->call_notes = $result['call_notes'];
                 $this->experience = $result['experience'];
                 $this->destination_country = $result['destination_country'];
-                $this->agent_id = $result['agent_id'];
+                $this->marks = $result['marks'];
             }
         }
     }
@@ -71,7 +71,7 @@ class BaddegamaRegistration
 
         $this->registration_code = $this->generateRegistrationCode($db);
 
-        $query = "INSERT INTO baddegama_registration (registration_code, full_name, nic, passport_number, birthday, age, gender, marital_status, mobile_number, whatsapp_number, province_id, current_job, job_abroad, type, created_at, result, experience, destination_country, agent_id) VALUES ('"
+        $query = "INSERT INTO baddegama_registration (registration_code, full_name, nic, passport_number, birthday, age, gender, marital_status, mobile_number, whatsapp_number, province_id, current_job, job_abroad, type, created_at, result, experience, destination_country, marks) VALUES ('"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->registration_code) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->full_name) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->nic) . "', '"
@@ -90,7 +90,7 @@ class BaddegamaRegistration
             . mysqli_real_escape_string($db->DB_CON, (string)$this->result) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->experience) . "', '"
             . mysqli_real_escape_string($db->DB_CON, (string)$this->destination_country) . "', '"
-            . mysqli_real_escape_string($db->DB_CON, (string)$this->agent_id) . "')";
+            . mysqli_real_escape_string($db->DB_CON, (string)$this->marks) . "')";
 
 
         $result = $db->readQuery($query);
@@ -181,7 +181,7 @@ class BaddegamaRegistration
             . "call_notes = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->call_notes) . "', "
             . "experience = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->experience) . "', "
             . "destination_country = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->destination_country) . "', "
-            . "agent_id = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->agent_id) . "' "
+            . "marks = '" . mysqli_real_escape_string($db->DB_CON, (string)$this->marks) . "' "
             . "WHERE id = '" . (int)$this->id . "'";
 
         return $db->readQuery($query);
@@ -199,10 +199,9 @@ class BaddegamaRegistration
 
     public function all()
     {
-        $query = "SELECT br.*, l.name as location_name, a.name as agent_name 
+        $query = "SELECT br.*, l.name as location_name, l.agent as agent_name 
                   FROM baddegama_registration br 
                   LEFT JOIN locations l ON br.type = l.id 
-                  LEFT JOIN agent a ON br.agent_id = a.id
                   ORDER BY br.created_at DESC";
         $db = new Database();
         $result = $db->readQuery($query);

@@ -227,18 +227,27 @@ $readonly = $is_edit ? '' : 'readonly';
                                                     <label class="form-label">Registration Date</label>
                                                     <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->created_at); ?>" readonly>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="result">Result</label>
-                                                    <?php if ($is_edit): ?>
-                                                        <select class="form-control" name="result" id="result">
-                                                            <option value="" <?php echo empty($REGISTRATION->result) ? 'selected' : ''; ?>>-- Select Result --</option>
-                                                            <option value="Pass" <?php echo ($REGISTRATION->result == 'Pass') ? 'selected' : ''; ?>>Pass</option>
-                                                            <option value="Fail" <?php echo ($REGISTRATION->result == 'Fail') ? 'selected' : ''; ?>>Fail</option>
-                                                        </select>
-                                                    <?php else: ?>
-                                                        <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->result ?? 'N/A'); ?>" readonly>
-                                                        <input type="hidden" name="result" value="<?php echo htmlspecialchars($REGISTRATION->result); ?>">
-                                                    <?php endif; ?>
+                                                </div>
+
+                                                <div class="col-12 mt-3">
+                                                    <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label" for="marks">Marks</label>
+                                                        <input type="number" class="form-control" name="marks" value="<?php echo htmlspecialchars($REGISTRATION->marks ?? ''); ?>" <?php echo $readonly; ?>>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label" for="result">Result</label>
+                                                        <?php if ($is_edit): ?>
+                                                            <select class="form-control" name="result" id="result">
+                                                                <option value="" <?php echo empty($REGISTRATION->result) ? 'selected' : ''; ?>>-- Select Result --</option>
+                                                                <option value="Pass" <?php echo ($REGISTRATION->result == 'Pass') ? 'selected' : ''; ?>>Pass</option>
+                                                                <option value="Fail" <?php echo ($REGISTRATION->result == 'Fail') ? 'selected' : ''; ?>>Fail</option>
+                                                            </select>
+                                                        <?php else: ?>
+                                                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($REGISTRATION->result ?? 'N/A'); ?>" readonly>
+                                                            <input type="hidden" name="result" value="<?php echo htmlspecialchars($REGISTRATION->result); ?>">
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </div>
                                             </div>
 

@@ -135,16 +135,20 @@ include '../class/include.php';
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="full_name">සම්පූර්ණ නම (Full Name) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name">
+                                    <small id="name-status" class="text-muted"></small>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your national id number">
                                     <small id="nic-status" class="text-muted"></small>
                                 </div>
+                                
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="passport_number">පාස්පෝට් අංකය (Passport Number)</label>
                                     <input type="text" class="form-control" id="passport_number" name="passport_number" placeholder="Enter your passport number">
+                                    <small id="passport-status" class="text-muted"></small>
                                 </div>
+
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="birthday">උපන් දිනය (Birthday) <span class="text-danger">*</span></label>
                                     <input type="date" class="form-control" id="birthday" name="birthday">
@@ -209,8 +213,6 @@ include '../class/include.php';
                                 <div class="col-md-6 mb-3">
                                     <?php $default_loc = Location::getActiveRegistrationLocation(); ?>
                                     <input type="hidden" name="type" value="<?php echo htmlspecialchars($default_loc); ?>">
-                                    <?php $active_agent = Agent::getActiveRegistrationAgent(); ?>
-                                    <input type="hidden" name="agent_id" value="<?php echo htmlspecialchars($active_agent); ?>">
                                 </div>
 
                                 <!-- Professional & Travel Details -->

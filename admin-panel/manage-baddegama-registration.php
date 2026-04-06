@@ -41,7 +41,7 @@ include './auth.php';
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <h4 class="mb-0">Manage All Registrations</h4>
-                                 
+                                <div id="export-buttons-container"></div>
                             </div>
                         </div>
                     </div>
@@ -134,8 +134,23 @@ include './auth.php';
         $(document).ready(function() {
             var table = $('#baddegama-datatable').DataTable({
                 responsive: true,
-                order: [[7, 'desc']] // Sort by Created At (index 7) by default
+                order: [[7, 'desc']], // Sort by Created At (index 7) by default
+                dom: 'lfrtip', // Removed B from dom as we append it manually
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="far fa-file-excel mr-1"></i> Export to Excel',
+                        title: 'All Registrations - Solidrow',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] // Exclude Action column
+                        },
+                        className: 'btn btn-success btn-sm'
+                    }
+                ]
             });
+
+            // Move the buttons to the header container
+            table.buttons().container().appendTo('#export-buttons-container');
 
             // Location Filter logic
             $('#location-filter').on('change', function() {

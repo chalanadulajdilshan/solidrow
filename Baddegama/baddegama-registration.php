@@ -98,6 +98,58 @@ include '../class/include.php';
             max-height: 100px;
             margin-bottom: 15px;
         }
+
+        /* Step Indicator Styling */
+        .registration-tabs {
+            border: none;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .registration-tabs .nav-link {
+            border: none;
+            background: #e9ecef;
+            color: #6c757d;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            pointer-events: none; /* Disable manual clicking initially */
+        }
+
+        .registration-tabs .nav-link.active {
+            background: #5b73e8;
+            color: white;
+            box-shadow: 0 4px 15px rgba(91, 115, 232, 0.3);
+        }
+
+        .registration-tabs .nav-link.completed {
+            background: #34c38f;
+            color: white;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .tab-pane {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 
@@ -124,126 +176,168 @@ include '../class/include.php';
                 <div class="card registration-card">
                     <div class="card-body p-4">
                         <h3 class="card-title-main">Registration Form</h3>
-                        <p class="card-subtitle-main">Fill your Personal Details and submit now.</p>
+                        <p class="card-subtitle-main">Follow the steps to complete your registration.</p>
+
+                        <!-- Step Navigation -->
+                        <ul class="nav nav-tabs registration-tabs" id="registrationTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="verify-tab" data-bs-toggle="tab" data-bs-target="#verify-pane" type="button" role="tab">
+                                    <span class="step-number">1</span> Phone Verification
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="form-tab" data-bs-toggle="tab" data-bs-target="#form-pane" type="button" role="tab" disabled>
+                                    <span class="step-number">2</span> Registration Details
+                                </button>
+                            </li>
+                        </ul>
 
                         <form id="form-data">
-                            <div class="row">
-                                <!-- Personal Details Section -->
-                                <div class="col-12">
-                                    <h5 class="mb-3 text-primary border-bottom pb-2">Personal Details</h5>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="full_name">සම්පූර්ණ නම (Full Name) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name">
-                                    <small id="name-status" class="text-muted"></small>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your national id number">
-                                    <small id="nic-status" class="text-muted"></small>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="passport_number">පාස්පෝට් අංකය (Passport Number)</label>
-                                    <input type="text" class="form-control" id="passport_number" name="passport_number" placeholder="Enter your passport number">
-                                    <small id="passport-status" class="text-muted"></small>
-                                </div>
+                            <div class="tab-content" id="registrationTabContent">
+                                <!-- Step 1: Verification Pane -->
+                                <div class="tab-pane fade show active" id="verify-pane" role="tabpanel">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <div class="text-center mb-4">
+                                                <i class="bx bx-mobile-alt text-primary display-4 mb-3"></i>
+                                                <h5>Verify Your Mobile Number</h5>
+                                                <p class="text-muted">We will send a 6-digit OTP to your phone for security.</p>
+                                            </div>
+                                            
+                                            <div class="mb-4">
+                                                <label class="form-label" for="mobile_number">ජංගම දුරකතන අංකය (Mobile Number) <span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-lg">
+                                                    <span class="input-group-text bg-light border-end-0"><i class="bx bx-phone"></i></span>
+                                                    <input type="text" class="form-control border-start-0" id="mobile_number" name="mobile_number" placeholder="07XXXXXXXX">
+                                                    <button class="btn btn-primary px-4" type="button" id="send-otp">Send OTP</button>
+                                                </div>
+                                                <small id="mobile-status" class="text-muted mt-2 d-block">Please enter a valid Sri Lankan mobile number.</small>
+                                            </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="birthday">උපන් දිනය (Birthday) <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="birthday" name="birthday">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="age">වයස (Age) <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="gender">ස්ත්‍රී පුරුෂභාවය (Gender) <span class="text-danger">*</span></label>
-                                    <select class="form-control" id="gender" name="gender">
-                                        <option value="">-- Select Gender --</option>
-                                        <option value="male">පුරුෂ (Male)</option>
-                                        <option value="female">ස්ත්‍රී (Female)</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="marital_status">විවාහක අවිවාහක බව (Marital Status) <span class="text-danger">*</span></label>
-                                    <select class="form-control" id="marital_status" name="marital_status">
-                                        <option value="">-- Select Marital Status --</option>
-                                        <option value="single">අවිවාහක (Single)</option>
-                                        <option value="married">විවාහක (Married)</option>
-                                    </select>
-                                </div>
-
-                                <!-- Contact Details -->
-                                <div class="col-12 mt-3">
-                                    <h5 class="mb-3 text-primary border-bottom pb-2">Contact Details</h5>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="mobile_number">ජංගම දුරකතන අංකය (Mobile Number) <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number">
-                                        <button class="btn btn-outline-primary" type="button" id="send-otp">Verify</button>
+                                            <div id="otp-section" style="display: none;" class="mb-4">
+                                                <div class="p-3 bg-light rounded border border-dashed text-center">
+                                                    <label class="form-label d-block mb-3" for="otp_code">Enter the 6-digit OTP sent to your phone</label>
+                                                    <div class="d-flex justify-content-center gap-2 mb-3">
+                                                        <input type="text" class="form-control text-center font-size-24 fw-bold" id="otp_code" style="max-width: 200px; letter-spacing: 5px;" maxlength="6" placeholder="------">
+                                                    </div>
+                                                    <button class="btn btn-success w-100 py-2 fw-bold" type="button" id="verify-otp">Verify & Continue</button>
+                                                    <p class="mt-3 mb-0 font-size-13 text-muted">Didn't receive the code? Wait for 60s to resend.</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <small id="mobile-status" class="text-muted">Verification required</small>
                                 </div>
-                                <div class="col-md-6 mb-3" id="otp-section" style="display: none;">
-                                    <label class="form-label" for="otp_code">Enter OTP <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="otp_code" placeholder="Enter 6-digit OTP">
-                                        <button class="btn btn-primary" type="button" id="verify-otp">Confirm OTP</button>
+
+                                <!-- Step 2: Full Form Pane -->
+                                <div class="tab-pane fade" id="form-pane" role="tabpanel">
+                                    <div class="row">
+                                        <!-- Personal Details Section -->
+                                        <div class="col-12">
+                                            <h5 class="mb-3 text-primary border-bottom pb-2">Personal Details</h5>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="full_name">සම්පූර්ණ නම (Full Name) <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name">
+                                            <small id="name-status" class="text-muted"></small>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="nic">ජාතික හැඳුනුම්පත් අංකය (NIC Number) <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter your national id number">
+                                            <small id="nic-status" class="text-muted"></small>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="passport_number">පාස්පෝට් අංකය (Passport Number)</label>
+                                            <input type="text" class="form-control" id="passport_number" name="passport_number" placeholder="Enter your passport number">
+                                            <small id="passport-status" class="text-muted"></small>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="birthday">උපන් දිනය (Birthday) <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" id="birthday" name="birthday">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="age">වයස (Age) <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="gender">ස්ත්‍රී පුරුෂභාවය (Gender) <span class="text-danger">*</span></label>
+                                            <select class="form-control" id="gender" name="gender">
+                                                <option value="">-- Select Gender --</option>
+                                                <option value="male">පුරුෂ (Male)</option>
+                                                <option value="female">ස්ත්‍රී (Female)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="marital_status">විවාහක අවිවාහක බව (Marital Status) <span class="text-danger">*</span></label>
+                                            <select class="form-control" id="marital_status" name="marital_status">
+                                                <option value="">-- Select Marital Status --</option>
+                                                <option value="single">අවිවාහක (Single)</option>
+                                                <option value="married">විවාහක (Married)</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Contact Details (Locked version of Mobile) -->
+                                        <div class="col-12 mt-3">
+                                            <h5 class="mb-3 text-primary border-bottom pb-2">Location & Contact</h5>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Verified Mobile Number</label>
+                                            <input type="text" class="form-control bg-light" id="verified_mobile_display" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="whatsapp_number">Whatsapp Number</label>
+                                            <input type="text" class="form-control" id="whatsapp_number" name="whatsapp_number" placeholder="Enter your WhatsApp number">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="province_id">Select your Province <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="province_id" id="province_id">
+                                                <option value="">-- Select your Province --</option>
+                                                <?php
+                                                $PROVINCE = new Province(NULL);
+                                                foreach ($PROVINCE->all() as $province) {
+                                                    echo "<option value='{$province['id']}'>{$province['name']}</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3 d-none">
+                                            <?php $default_loc = Location::getActiveRegistrationLocation(); ?>
+                                            <input type="hidden" name="type" value="<?php echo htmlspecialchars($default_loc); ?>">
+                                        </div>
+
+                                        <!-- Professional & Travel Details -->
+                                        <div class="col-12 mt-3">
+                                            <h5 class="mb-3 text-primary border-bottom pb-2">Professional & Travel Details</h5>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="current_job">ඔබගේ වෘත්තීය (Your current job)</label>
+                                            <input type="text" class="form-control" id="current_job" name="current_job" placeholder="Enter your current job">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="experience">සේවා පළපුරුද්ද (Working exp. years)</label>
+                                            <input type="number" class="form-control" id="experience" name="experience" placeholder="Enter your years of experience">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="destination_country">බලාපොරොත්තු වන රට (Destination country)</label>
+                                            <select class="form-control" id="destination_country" name="destination_country">
+                                                <option value="">-- Select Destination Country --</option>
+                                                <?php
+                                                $Country = new Country(NULL);
+                                                foreach ($Country->all() as $country) {
+                                                    echo "<option value='{$country['id']}'>{$country['name']}</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <small class="text-muted">Check your SMS for the code</small>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="whatsapp_number">Whatsapp Number</label>
-                                    <input type="text" class="form-control" id="whatsapp_number" name="whatsapp_number" placeholder="Enter your WhatsApp number">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="province_id">Select your Province <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="province_id" id="province_id">
-                                        <option value="">-- Select your Province --</option>
-                                        <?php
-                                        $PROVINCE = new Province(NULL);
-                                        foreach ($PROVINCE->all() as $province) {
-                                            echo "<option value='{$province['id']}'>{$province['name']}</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <?php $default_loc = Location::getActiveRegistrationLocation(); ?>
-                                    <input type="hidden" name="type" value="<?php echo htmlspecialchars($default_loc); ?>">
-                                </div>
 
-                                <!-- Professional & Travel Details -->
-                                <div class="col-12 mt-3">
-                                    <h5 class="mb-3 text-primary border-bottom pb-2">Professional & Travel Details</h5>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="current_job">ඔබගේ වෘත්තීය (Your current job)</label>
-                                    <input type="text" class="form-control" id="current_job" name="current_job" placeholder="Enter your current job">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="experience">සේවා පළපුරුද්ද (Working exp. years)</label>
-                                    <input type="number" class="form-control" id="experience" name="experience" placeholder="Enter your years of experience">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label" for="destination_country">බලාපොරොත්තු වන රට (Destination country)</label>
-                                    <select class="form-control" id="destination_country" name="destination_country">
-                                        <option value="">-- Select Destination Country --</option>
-                                        <?php
-                                        $Country = new Country(NULL);
-                                        foreach ($Country->all() as $country) {
-                                            echo "<option value='{$country['id']}'>{$country['name']}</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col-12 text-end">
-                                    <button type="submit" id="create" class="btn btn-primary btn-register" disabled>Register</button>
+                                    <div class="row mt-4">
+                                        <div class="col-12 text-end">
+                                            <button type="submit" id="create" class="btn btn-primary btn-register">Complete Registration</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

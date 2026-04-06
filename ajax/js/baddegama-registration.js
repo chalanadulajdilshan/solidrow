@@ -162,19 +162,32 @@ jQuery(document).ready(function () {
         if (result.status === "success") {
           Swal.fire({
             title: "Verified!",
-            text: "Mobile number verified successfully.",
+            text: "Mobile number verified successfully. Proceeding to registration form...",
             icon: "success",
             timer: 2000,
             showConfirmButton: false,
           });
-          $("#otp-section").fadeOut();
-          $("#send-otp").hide();
-          $("#mobile_number").prop("readonly", true);
-          $("#mobile-status")
-            .removeClass("text-muted")
-            .addClass("text-success font-weight-bold")
-            .text("✓ Verified");
+
+          // Sync mobile number to display in Step 2
+          $("#verified_mobile_display").val(mobile);
+
+          // UI Transitions
+          $("#verify-tab").addClass("completed");
+          $("#verify-tab").html('<span class="step-number"><i class="bx bx-check"></i></span> Phone Verified');
+
+          // Enable and Switch to Step 2
+          $("#form-tab").prop("disabled", false);
+          $("#form-tab").css("pointer-events", "auto");
           $("#create").prop("disabled", false);
+
+          var nextTab = new bootstrap.Tab(document.querySelector('#form-tab'));
+          nextTab.show();
+
+          // Scroll to top of card
+          $('html, body').animate({
+            scrollTop: $(".registration-card").offset().top - 20
+          }, 500);
+
         } else {
           showError(result.message);
           $("#verify-otp").prop("disabled", false).text("Confirm OTP");
@@ -193,6 +206,8 @@ jQuery(document).ready(function () {
     var status = $("#mobile-status");
 
     $("#create").prop("disabled", true);
+    $("#form-tab").prop("disabled", true);
+    $("#verify-tab").removeClass("completed").html('<span class="step-number">1</span> Phone Verification');
     $("#otp-section").hide();
 
     if (mobile.length === 0) {

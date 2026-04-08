@@ -94,6 +94,9 @@ include '../class/include.php';
             border-radius: 5px 5px 0 0;
         }
         
+
+
+        
         .banner-logo {
             max-height: 100px;
             margin-bottom: 15px;

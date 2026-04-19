@@ -241,6 +241,7 @@ $readonly = $is_edit ? '' : 'readonly';
                                                             <select class="form-control" name="result" id="result">
                                                                 <option value="" <?php echo empty($REGISTRATION->result) ? 'selected' : ''; ?>>-- Select Result --</option>
                                                                 <option value="Pass" <?php echo ($REGISTRATION->result == 'Pass') ? 'selected' : ''; ?>>Pass</option>
+                                                                <option value="Pass + Training" <?php echo ($REGISTRATION->result == 'Pass + Training') ? 'selected' : ''; ?>>Pass + Training</option>
                                                                 <option value="Fail" <?php echo ($REGISTRATION->result == 'Fail') ? 'selected' : ''; ?>>Fail</option>
                                                             </select>
                                                         <?php else: ?>

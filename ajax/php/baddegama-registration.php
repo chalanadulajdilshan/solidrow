@@ -151,15 +151,14 @@ if (!$id) {
             $title = "Ms.";
         }
 
-       $result = $_POST['result']; // PASS or FAIL
+       $result = $_POST['result']; // Pass or Fail
 
-if ($result == "Pass") {
-    $message = "Congratulations!\n" . $title . " " . $name . 
-               ", You have PASSED your exam successfully.\nResult: " . $result;
+if (strcasecmp($result, "Pass + Training") == 0) {
+    $message = "Congratulations.\nYou have passed the test, but the training provided by our training institute is mandatory to appear for the final test. An officer from our training institute will contact you.";
+} elseif (strcasecmp($result, "Pass") == 0) {
+    $message = "Congratulations! " . $title . " " . $name . ", you have successfully passed your exam. The training provided by our training institute is mandatory to appear for the final test. An officer from our training institute will contact you.";
 } else {
-    $message = "Dear " . $title . " " . $name . ",\n" . 
-               "Unfortunately, you have FAILED the exam.\nResult: " . $result . 
-               ". Please try again.";
+    $message = "Dear " . $title . " " . $name . ", unfortunately, you did not pass the exam this time. The training provided by our training institute is mandatory to appear for the final test. An officer from our training institute will contact you.";
 }
         
         $sms_res = $sms->sendSMS($recipient, $message);

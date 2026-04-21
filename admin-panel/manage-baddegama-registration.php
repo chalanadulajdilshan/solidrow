@@ -78,6 +78,7 @@ include './auth.php';
                                                 <th>Location</th>
                                                 <th>Foreign Agent</th>
                                                 <th>Passport No</th>
+                                                <th>Result</th>
                                                 <th>Created At</th>
                                                 <th>Action</th>
                                             </tr>
@@ -99,6 +100,7 @@ include './auth.php';
                                                     <td> <?php echo htmlspecialchars($registration['location_name'] ?? 'N/A') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['agent_name'] ?? 'Direct') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['passport_number'] ?? 'N/A') ?></td>
+                                                    <td> <?php echo htmlspecialchars($registration['result'] ?? 'N/A') ?></td>
                                                     <td> <?php echo htmlspecialchars($registration['created_at']) ?></td>
                                                     <td>
                                                         <a href="view-baddegama-registration.php?id=<?php echo $registration['id'] ?>">
@@ -134,7 +136,7 @@ include './auth.php';
         $(document).ready(function() {
             var table = $('#baddegama-datatable').DataTable({
                 responsive: true,
-                order: [[7, 'desc']], // Sort by Created At (index 7) by default
+                order: [[9, 'desc']], // Sort by Created At (index 9) by default
                 dom: 'lfrtip', // Removed B from dom as we append it manually
                 buttons: [
                     {
@@ -142,7 +144,7 @@ include './auth.php';
                         text: '<i class="far fa-file-excel mr-1"></i> Export to Excel',
                         title: 'All Registrations - Solidrow',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] // Exclude Action column
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] // Exclude Action column
                         },
                         className: 'btn btn-success btn-sm'
                     }

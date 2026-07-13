@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\app\\\\Http\\\\Controllers\\\\CandidateController.php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\routes\\\\api.php\")",
+      "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"c:\\\\xampp\\\\htdocs\\\\solidrow\\\\includes\\\\navbar.php\"; php -l \"c:\\\\xampp\\\\htdocs\\\\solidrow\\\\ajax\\\\php\\\\registration-progress.php\")"
+    ],
+    "additionalDirectories": [
+      "D:\\My Projects\\Solidrow-admin\\backend\\app\\Http\\Controllers",
+      "D:\\My Projects\\Solidrow-admin\\backend\\routes",
+      "D:\\My Projects\\Solidrow-admin\\frontend\\src\\pages",
+      "D:\\My Projects\\Solidrow-admin\\frontend\\src"
+    ]
+  }
+}

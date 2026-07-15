@@ -141,6 +141,56 @@ $companies = $company->all();
         </div>
     </section>
 
+    <!-- Meet Our Founder Section -->
+    <section id="founder" class="founder-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <span class="founder-badge" data-aos="fade-up"><i class="fas fa-user-tie me-2"></i>Our Leadership</span>
+                    <h2 class="section-title mt-3" data-aos="fade-up">Meet Our <span class="text-accent">Founder</span></h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+                        A visionary leader driving excellence across engineering, training, and global opportunities.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="founder-image-card">
+                        <div class="founder-image-inner">
+                            <img src="assets/images/founder-nuwan-kalhara.jpg" alt="Nuwan Kalhara - Founder" class="img-fluid">
+                            <div class="founder-image-overlay">
+                                <span class="founder-role-label">Founder</span>
+                                <h3 class="founder-name">Nuwan Kalhara</h3>
+                                <p class="founder-quals">BSc(Hons)QS, MBA(PM)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="founder-content">
+                        <span class="founder-badge mb-3 d-inline-block"><i class="fas fa-graduation-cap me-2"></i>Founder</span>
+                        <h3 class="founder-heading">Dedicated to Excellence &amp; Innovation</h3>
+                        <p class="founder-description">
+                            With a strong commitment to building a group of companies that empowers individuals and industries,
+                            our founder established Solidrow Group with a vision to deliver world-class engineering solutions,
+                            professional training, and ethical global opportunities.
+                        </p>
+                        <p class="founder-description">
+                            Combining academic expertise in Quantity Surveying and Project Management with hands-on industry
+                            experience, he brings a unique blend of technical knowledge and practical leadership to every
+                            aspect of the group's operations.
+                        </p>
+                        <div class="founder-tags">
+                            <span class="founder-tag"><i class="fas fa-award me-2"></i>BSc(Hons) QS</span>
+                            <span class="founder-tag"><i class="fas fa-briefcase me-2"></i>MBA (PM)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Our Websites Section -->
     <section id="our-websites" class="py-5 bg-light">
         <div class="container">

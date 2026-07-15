@@ -4,7 +4,8 @@
       "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\app\\\\Http\\\\Controllers\\\\CandidateController.php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\routes\\\\api.php\")",
       "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"c:\\\\xampp\\\\htdocs\\\\solidrow\\\\includes\\\\navbar.php\"; php -l \"c:\\\\xampp\\\\htdocs\\\\solidrow\\\\ajax\\\\php\\\\registration-progress.php\")",
       "PowerShell(nslookup ftp.solidrow.lk)",
-      "PowerShell(nslookup solidrow.lk)"
+      "PowerShell(nslookup solidrow.lk)",
+      "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\app\\\\Http\\\\Controllers\\\\CandidateController.php\")"
     ],
     "additionalDirectories": [
       "D:\\My Projects\\Solidrow-admin\\backend\\app\\Http\\Controllers",

@@ -1504,3 +1504,225 @@ html {
         font-size: 1.3rem;
     }
 }
+
+/* ===== Meet Our Founder Section ===== */
+.founder-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative blurred blobs */
+.founder-section::before,
+.founder-section::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.founder-section::before {
+    width: 380px;
+    height: 380px;
+    background: rgba(245, 124, 2, 0.18);
+    top: -120px;
+    right: -100px;
+}
+
+.founder-section::after {
+    width: 420px;
+    height: 420px;
+    background: rgba(1, 26, 66, 0.12);
+    bottom: -150px;
+    left: -120px;
+}
+
+.founder-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.founder-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(245, 124, 2, 0.12);
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 20px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(245, 124, 2, 0.25);
+}
+
+/* Image with animated gradient glow frame */
+.founder-image-card {
+    position: relative;
+    border-radius: 22px;
+    padding: 6px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color), var(--secondary-color));
+    background-size: 300% 300%;
+    box-shadow: var(--shadow-heavy);
+    animation: founderGlow 8s ease infinite, founderFloat 5s ease-in-out infinite;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+@keyframes founderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes founderFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.founder-image-inner {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.founder-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    vertical-align: bottom;
+    transition: transform 0.6s ease;
+}
+
+.founder-image-card:hover .founder-image-inner img {
+    transform: scale(1.06);
+}
+
+.founder-image-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 40px 25px 22px;
+    line-height: normal;
+    background: linear-gradient(to top, rgba(1, 26, 66, 0.95) 0%, rgba(1, 26, 66, 0.6) 55%, transparent 100%);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.founder-image-card:hover .founder-image-overlay {
+    padding-bottom: 30px;
+}
+
+.founder-role-label {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 6px;
+}
+
+.founder-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--white);
+}
+
+.founder-quals {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.founder-content {
+    padding-left: 15px;
+}
+
+.founder-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    position: relative;
+    padding-bottom: 14px;
+}
+
+.founder-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 70px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--gradient-2);
+    transition: width 0.4s ease;
+}
+
+.founder-content:hover .founder-heading::after {
+    width: 110px;
+}
+
+.founder-description {
+    color: var(--text-light);
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 16px;
+}
+
+.founder-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.founder-tag {
+    display: inline-flex;
+    align-items: center;
+    background: var(--white);
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid rgba(1, 26, 66, 0.08);
+    transition: var(--transition);
+}
+
+.founder-tag:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.founder-tag i {
+    color: var(--secondary-color);
+}
+
+.founder-tag:hover i {
+    color: var(--secondary-color);
+}
+
+@media (max-width: 991px) {
+    .founder-content {
+        padding-left: 0;
+        margin-top: 20px;
+    }
+
+    .founder-heading {
+        font-size: 1.6rem;
+    }
+
+    .founder-image-card {
+        animation: founderGlow 8s ease infinite;
+    }
+}

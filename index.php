@@ -161,7 +161,7 @@ $companies = $company->all();
                             <img src="assets/images/founder-nuwan-kalhara.jpg" alt="Nuwan Kalhara - Founder" class="img-fluid">
                             <div class="founder-image-overlay">
                                 <span class="founder-role-label">Founder</span>
-                                <h3 class="founder-name">Nuwan Kalhara</h3>
+                                <h3 class="founder-name">Dr. Nuwan Kalhara</h3>
                                 <p class="founder-quals">BSc(Hons)QS, MBA(PM)</p>
                             </div>
                         </div>

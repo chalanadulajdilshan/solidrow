@@ -43,7 +43,7 @@ $current_year = date('Y');
 
                 <!-- Quick Links -->
                 <div class="col-lg-2 col-md-4">
-                    <div class="fo    oter-section">
+                    <div class="footer-section">
                         <h4 class="footer-title">Quick Links</h4>
                         <ul class="footer-links">
                             <li><a href="#hero-slider">Home</a></li>

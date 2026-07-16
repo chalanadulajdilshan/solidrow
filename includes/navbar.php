@@ -20,23 +20,21 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <!-- Contact Info -->
-                <div class="d-flex ms-auto align-items-center">
-                    <a href="tel:+94112223344" class="nav-link text-white d-flex align-items-center me-3">
-                        <i class="bi bi-telephone-fill me-1"></i> +94 77 930 1318
-                    </a>
-                    <a href="mailto:info@solidrow.lk" class="nav-link text-white d-flex align-items-center me-3">
-                        <i class="bi bi-envelope-fill me-1"></i> info@solidrow.lk
-                    </a>
-                    <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#progressModal">
-                        <i class="bi bi-search me-1"></i> Check Progress
-                    </button>
-                    <a href="jobs.php" class="btn btn-outline-light">
-                        <i class="bi bi-briefcase me-1"></i> Careers
-                    </a>
-                </div>
-            </ul>
+            <!-- Contact Info -->
+            <div class="navbar-contact d-flex flex-column flex-lg-row ms-lg-auto align-items-stretch align-items-lg-center">
+                <a href="tel:+94779301318" class="nav-link text-white d-flex align-items-center justify-content-center justify-content-lg-start me-lg-3">
+                    <i class="bi bi-telephone-fill me-1"></i> +94 77 930 1318
+                </a>
+                <a href="mailto:info@solidrow.lk" class="nav-link text-white d-flex align-items-center justify-content-center justify-content-lg-start me-lg-3">
+                    <i class="bi bi-envelope-fill me-1"></i> info@solidrow.lk
+                </a>
+                <button type="button" class="btn btn-outline-light me-lg-2 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#progressModal">
+                    <i class="bi bi-search me-1"></i> Check Progress
+                </button>
+                <a href="jobs.php" class="btn btn-outline-light">
+                    <i class="bi bi-briefcase me-1"></i> Careers
+                </a>
+            </div>
         </div>
     </div>
 </nav>

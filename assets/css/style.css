@@ -1726,3 +1726,146 @@ html {
         animation: founderGlow 8s ease infinite;
     }
 }
+
+/* ===== Global Mobile Responsiveness ===== */
+
+/* Navbar contact block */
+.navbar-contact .nav-link {
+    white-space: nowrap;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-brand {
+        font-size: 1.05rem;
+        max-width: 78%;
+        line-height: 1.2;
+    }
+
+    .brand-text {
+        white-space: normal;
+    }
+
+    .navbar-contact {
+        width: 100%;
+        gap: 0.35rem;
+    }
+
+    .navbar-contact .nav-link {
+        margin: 0;
+        padding: 0.6rem 1rem !important;
+        border-radius: 10px;
+    }
+
+    .navbar-contact .btn {
+        width: 100%;
+        padding: 0.65rem 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar-brand {
+        font-size: 0.9rem;
+    }
+}
+
+/* Prevent horizontal overflow site-wide */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tablet tweaks */
+@media (max-width: 991.98px) {
+    section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    .section-title {
+        font-size: 1.9rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .about-heading {
+        font-size: 1.5rem;
+    }
+
+    .founder-image-card {
+        max-width: 360px;
+    }
+}
+
+/* Phone tweaks */
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .founder-heading {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .founder-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .founder-content:hover .founder-heading::after {
+        transform: translateX(-50%);
+        width: 110px;
+    }
+
+    .founder-description {
+        text-align: left;
+    }
+
+    .founder-tags {
+        justify-content: center;
+    }
+
+    .founder-content .founder-badge {
+        display: flex !important;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .founder-image-card {
+        max-width: 100%;
+    }
+
+    .founder-name {
+        font-size: 1.35rem;
+    }
+
+    /* Company / website cards */
+    .website-card {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Mission list readability */
+    .mission-list li {
+        font-size: 0.95rem;
+    }
+
+    /* Vision / mission cards spacing */
+    .about-card {
+        padding: 1.5rem !important;
+    }
+
+    /* Feature items */
+    .feature-item {
+        text-align: center;
+        margin-bottom: 1.2rem;
+    }
+}

@@ -5,7 +5,9 @@
       "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"c:\\\\xampp\\\\htdocs\\\\solidrow\\\\includes\\\\navbar.php\"; php -l \"c:\\\\xampp\\\\htdocs\\\\solidrow\\\\ajax\\\\php\\\\registration-progress.php\")",
       "PowerShell(nslookup ftp.solidrow.lk)",
       "PowerShell(nslookup solidrow.lk)",
-      "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\app\\\\Http\\\\Controllers\\\\CandidateController.php\")"
+      "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\app\\\\Http\\\\Controllers\\\\CandidateController.php\")",
+      "Bash(grep -nE \"width:\\\\s*[0-9]{3,}px\" solidrow-engineering/assets/css/style.css)",
+      "Bash(grep -rnE 'width:\\\\s*100vw|min-width:\\\\s*[0-9]{3,}px|white-space:\\\\s*nowrap' solidrow-engineering/assets/css/style.css solidrow-foreign-employment/assets/css/Style.css solidrow-foreign-employment/assets/css/sfe_Style.css solidrow-foreign-engineering-skills-training-institute/assets/css/Main.css visa-consultancy/assets/css/Style.css)"
     ],
     "additionalDirectories": [
       "D:\\My Projects\\Solidrow-admin\\backend\\app\\Http\\Controllers",

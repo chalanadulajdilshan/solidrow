@@ -1510,3 +1510,77 @@ html {
         padding: 25px;
     }
 }
+/* =====================================================
+   Responsive Safety Net (added for full mobile support)
+   ===================================================== */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+video,
+iframe,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+table {
+    max-width: 100%;
+}
+
+pre,
+code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Keep any absolutely-positioned decorative blobs from causing scroll */
+section {
+    overflow-x: hidden;
+}
+
+@media (max-width: 991.98px) {
+    .container,
+    .container-fluid {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* Long headings should never overflow small screens */
+    .hero-title,
+    .display-1,
+    .display-2,
+    .display-3,
+    .display-4 {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        word-break: break-word;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+    }
+
+    /* Full-width stacked buttons for hero CTAs */
+    .hero-buttons .btn {
+        width: 100%;
+        margin: 0 0 0.75rem 0 !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    h1 { font-size: 1.7rem; }
+    h2 { font-size: 1.45rem; }
+    h3 { font-size: 1.25rem; }
+
+    .btn {
+        white-space: normal;
+    }
+
+    /* Stack any row that used fixed inline flex */
+    .row > [class*="col-"] {
+        margin-bottom: 0.5rem;
+    }
+}

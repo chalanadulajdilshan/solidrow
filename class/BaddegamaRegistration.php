@@ -28,7 +28,7 @@ class BaddegamaRegistration
     public $destination_country;
     public $marks;
 
-
+ 
     public function __construct($id)
     {
         if ($id) {

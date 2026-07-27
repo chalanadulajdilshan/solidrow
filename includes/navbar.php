@@ -61,9 +61,12 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
 
                 <div id="progressResult" class="d-none">
                     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                        <div>
-                            <div class="sr-cand-name" id="progressName"></div>
-                            <div class="sr-cand-reg" id="progressRegNo"></div>
+                        <div class="d-flex align-items-center gap-3">
+                            <img id="progressPhoto" class="sr-cand-photo d-none" alt="Candidate photo">
+                            <div>
+                                <div class="sr-cand-name" id="progressName"></div>
+                                <div class="sr-cand-reg" id="progressRegNo"></div>
+                            </div>
                         </div>
                         <span class="sr-badge" id="progressBadge"></span>
                     </div>
@@ -90,6 +93,7 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
     .sr-progress-modal .modal-header { background: #011a42; color: #fff; border: none; }
     .sr-progress-modal .modal-title { font-weight: 700; }
     .sr-progress-modal .btn-close { filter: invert(1) grayscale(1) brightness(2); }
+    .sr-cand-photo { width: 64px; height: 64px; border-radius: 8px; object-fit: cover; border: 2px solid #eee; }
     .sr-btn-search { background: #f57c02; border: none; color: #fff; }
     .sr-btn-search:hover { background: #e06f00; color: #fff; }
     .sr-cand-name { font-size: 1.15rem; font-weight: 700; color: #011a42; }
@@ -136,6 +140,15 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
 
             document.getElementById('progressName').textContent = data.full_name || '';
             document.getElementById('progressRegNo').textContent = data.candidate_reg_no || data.registration_no || '';
+
+            var photo = document.getElementById('progressPhoto');
+            if (data.candidate_photo) {
+                photo.src = data.candidate_photo;
+                photo.classList.remove('d-none');
+            } else {
+                photo.removeAttribute('src');
+                photo.classList.add('d-none');
+            }
 
             var badge = document.getElementById('progressBadge');
             if (data.is_completed) {

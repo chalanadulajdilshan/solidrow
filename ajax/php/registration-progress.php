@@ -46,10 +46,15 @@ if (is_array($data) && !empty($data['registration_no'])) {
         $db = new Database();
         $regNo = $db->escapeString($data['registration_no']);
         $result = $db->readQuery(
-            "SELECT `student_id` FROM `agencystudent` WHERE `registration_no` = '" . $regNo . "' LIMIT 1"
+            "SELECT `student_id`, `passport_image` FROM `agencystudent` WHERE `registration_no` = '" . $regNo . "' LIMIT 1"
         );
-        if ($result && ($row = mysqli_fetch_assoc($result)) && !empty($row['student_id'])) {
-            $data['candidate_reg_no'] = $row['student_id'];
+        if ($result && ($row = mysqli_fetch_assoc($result))) {
+            if (!empty($row['student_id'])) {
+                $data['candidate_reg_no'] = $row['student_id'];
+            }
+            if (!empty($row['passport_image'])) {
+                $data['candidate_photo'] = '/upload/agancy/passport/' . rawurlencode($row['passport_image']);
+            }
         }
     } catch (\Throwable $e) {
         // Leave the response as-is; the frontend falls back to registration_no.

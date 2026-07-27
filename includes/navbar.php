@@ -135,7 +135,7 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
             var percent = total ? Math.round((done / total) * 100) : 0;
 
             document.getElementById('progressName').textContent = data.full_name || '';
-            document.getElementById('progressRegNo').textContent = data.registration_no || '';
+            document.getElementById('progressRegNo').textContent = data.candidate_reg_no || data.registration_no || '';
 
             var badge = document.getElementById('progressBadge');
             if (data.is_completed) {

@@ -37,30 +37,5 @@ if ($body === false || $status === 0) {
     exit();
 }
 
-// Enrich the Laravel JSON with the admin-panel Candidate Reg. No (agencystudent.student_id),
-// matched on the shared registration_no. Falls back silently if unavailable.
-$data = json_decode($body, true);
-if (is_array($data) && !empty($data['registration_no'])) {
-    try {
-        require_once __DIR__ . '/../../class/Database.php';
-        $db = new Database();
-        $regNo = $db->escapeString($data['registration_no']);
-        $result = $db->readQuery(
-            "SELECT `student_id`, `passport_image` FROM `agencystudent` WHERE `registration_no` = '" . $regNo . "' LIMIT 1"
-        );
-        if ($result && ($row = mysqli_fetch_assoc($result))) {
-            if (!empty($row['student_id'])) {
-                $data['candidate_reg_no'] = $row['student_id'];
-            }
-            if (!empty($row['passport_image'])) {
-                $data['candidate_photo'] = '/upload/agancy/passport/' . rawurlencode($row['passport_image']);
-            }
-        }
-    } catch (\Throwable $e) {
-        // Leave the response as-is; the frontend falls back to registration_no.
-    }
-    $body = json_encode($data);
-}
-
 http_response_code($status ?: 200);
-echo $body; // Laravel JSON, enriched with candidate_reg_no when available
+echo $body; // pass the Laravel JSON straight through (now includes candidate_reg_no & candidate_photo)

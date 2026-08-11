@@ -133,8 +133,10 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
 
         function render(data) {
             errBox.classList.add('d-none');
-            var sections = data.sections || [];
-            var total = data.total_sections || sections.length || 6;
+            var sections = (data.sections || []).filter(function (s) {
+                return s.section_no != 6 && s.title !== 'Employee Details';
+            });
+            var total = sections.length || 5;
             var done = sections.filter(function (s) { return s.submitted; }).length;
             var percent = total ? Math.round((done / total) * 100) : 0;
 

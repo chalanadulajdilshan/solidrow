@@ -93,7 +93,8 @@ $progressEndpoint = $__basePath . '/ajax/php/registration-progress.php';
     .sr-progress-modal .modal-header { background: #011a42; color: #fff; border: none; }
     .sr-progress-modal .modal-title { font-weight: 700; }
     .sr-progress-modal .btn-close { filter: invert(1) grayscale(1) brightness(2); }
-    .sr-cand-photo { width: 64px; height: 64px; border-radius: 8px; object-fit: cover; border: 2px solid #eee; }
+    .sr-cand-photo { width: 110px; height: 110px; border-radius: 10px; object-fit: cover; border: 2px solid #eee; }
+    @media (min-width: 768px) { .sr-cand-photo { width: 140px; height: 140px; } }
     .sr-btn-search { background: #f57c02; border: none; color: #fff; }
     .sr-btn-search:hover { background: #e06f00; color: #fff; }
     .sr-cand-name { font-size: 1.15rem; font-weight: 700; color: #011a42; }

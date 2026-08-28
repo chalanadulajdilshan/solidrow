@@ -7,7 +7,12 @@
       "PowerShell(nslookup solidrow.lk)",
       "PowerShell($env:Path += \";C:\\\\xampp\\\\php\"; php -l \"D:\\\\My Projects\\\\Solidrow-admin\\\\backend\\\\app\\\\Http\\\\Controllers\\\\CandidateController.php\")",
       "Bash(grep -nE \"width:\\\\s*[0-9]{3,}px\" solidrow-engineering/assets/css/style.css)",
-      "Bash(grep -rnE 'width:\\\\s*100vw|min-width:\\\\s*[0-9]{3,}px|white-space:\\\\s*nowrap' solidrow-engineering/assets/css/style.css solidrow-foreign-employment/assets/css/Style.css solidrow-foreign-employment/assets/css/sfe_Style.css solidrow-foreign-engineering-skills-training-institute/assets/css/Main.css visa-consultancy/assets/css/Style.css)"
+      "Bash(grep -rnE 'width:\\\\s*100vw|min-width:\\\\s*[0-9]{3,}px|white-space:\\\\s*nowrap' solidrow-engineering/assets/css/style.css solidrow-foreign-employment/assets/css/Style.css solidrow-foreign-employment/assets/css/sfe_Style.css solidrow-foreign-engineering-skills-training-institute/assets/css/Main.css visa-consultancy/assets/css/Style.css)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Bash(php -S 127.0.0.1:8899)",
+      "Bash(taskkill //F //IM php.exe)"
     ],
     "additionalDirectories": [
       "D:\\My Projects\\Solidrow-admin\\backend\\app\\Http\\Controllers",

@@ -99,6 +99,11 @@ html {
     transition: var(--transition-smooth);
 }
 
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
 .navbar-brand:hover {
     color: var(--secondary-color) !important;
     transform: scale(1.05);

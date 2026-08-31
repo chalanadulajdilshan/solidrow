@@ -12,7 +12,19 @@
       "Read(//c/Program Files \\(x86\\)/Google/Chrome/Application/**)",
       "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
       "Bash(php -S 127.0.0.1:8899)",
-      "Bash(taskkill //F //IM php.exe)"
+      "Bash(taskkill //F //IM php.exe)",
+      "Bash(php -l index.php)",
+      "Bash(php -l class/include.php)",
+      "Bash(php index.php)",
+      "Read(//c/xampp/**)",
+      "Bash(./mysql/bin/mysqladmin -u root status)",
+      "Bash(./mysql_start.bat)",
+      "Bash(Start-Sleep -Seconds 3)",
+      "Bash(./apache/bin/httpd -t)",
+      "Bash(./apache_start.bat)",
+      "Bash(mysql -u root solidrow_festi -e \"SHOW CREATE TABLE gallery_media\\\\G\")",
+      "Bash(./mysql/bin/mysql.exe -u root solidrow_festi)",
+      "Bash(./mysql/bin/mysql.exe -u root solidrow_festi -e \"DESCRIBE gallery_media;\")"
     ],
     "additionalDirectories": [
       "D:\\My Projects\\Solidrow-admin\\backend\\app\\Http\\Controllers",

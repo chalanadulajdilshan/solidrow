@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
             once: true,
             offset: 100
         });
+        
+        // Refresh AOS on window load to recalculate offsets after stylesheets/fonts load
+        window.addEventListener('load', function() {
+            AOS.refresh();
+        });
+    } else {
+        // Fallback: If AOS JS fails to load (e.g. CDN blocked/offline), ensure content remains visible
+        console.warn('AOS library not loaded. Falling back to static display.');
+        document.querySelectorAll('[data-aos]').forEach(function(el) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.transition = 'none';
+        });
     }
 
     // Initialize all functions

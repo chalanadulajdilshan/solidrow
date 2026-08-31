@@ -34,6 +34,7 @@ include_once(dirname(__FILE__) . '/Application.php');
 include_once(dirname(__FILE__) . '/Group.php'); 
 include_once(dirname(__FILE__) . '/Notification.php');
 include_once(dirname(__FILE__) . '/Location.php');
+include_once(dirname(__FILE__) . '/Gallery.php');
 
 
 

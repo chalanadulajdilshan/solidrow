@@ -255,6 +255,99 @@ $companies = $company->all();
         </div>
     </section>
 
+    <!-- Latest Highlights Section -->
+    <?php
+    $gallery = new Gallery();
+    $highlightItems = $gallery->getHighlightsAndLatest(8);
+    ?>
+    <?php if (!empty($highlightItems)): ?>
+    <section id="highlights" class="highlights-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Latest <span class="text-accent">Highlights</span></h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+                        Photos, videos, and updates from across our companies
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <?php 
+                $delay = 100;
+                foreach ($highlightItems as $item): 
+                    // Determine thumbnail
+                    $thumbSrc = '';
+                    if ($item['media_type'] === 'photo' && !empty($item['file_name'])) {
+                        $thumbSrc = 'upload/gallery/' . $item['file_name'];
+                    } elseif (!empty($item['thumbnail'])) {
+                        $thumbSrc = 'upload/gallery/' . $item['thumbnail'];
+                    } elseif (!empty($item['video_url'])) {
+                        $ytId = Gallery::getYoutubeId($item['video_url']);
+                        if ($ytId) {
+                            $thumbSrc = 'https://img.youtube.com/vi/' . $ytId . '/hqdefault.jpg';
+                        }
+                    }
+                    if (empty($thumbSrc)) $thumbSrc = 'assets/images/about-main.jpg';
+
+                    // Determine lightbox data
+                    $lightboxSrc = '';
+                    $lightboxType = $item['media_type'];
+                    $lightboxVideo = '';
+                    if ($item['media_type'] === 'photo' && !empty($item['file_name'])) {
+                        $lightboxSrc = 'upload/gallery/' . $item['file_name'];
+                    } elseif ($item['media_type'] === 'video') {
+                        if (!empty($item['video_url'])) {
+                            $lightboxSrc = $thumbSrc;
+                            $lightboxVideo = $item['video_url'];
+                        } elseif (!empty($item['file_name'])) {
+                            $lightboxSrc = 'upload/gallery/' . $item['file_name'];
+                        }
+                    }
+
+                    $dateFormatted = !empty($item['created_at']) ? date('M d, Y', strtotime($item['created_at'])) : '';
+                ?>
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="<?= $delay ?>">
+                    <div class="highlight-card" 
+                         data-lightbox="<?= htmlspecialchars($lightboxSrc) ?>"
+                         data-lightbox-group="highlights"
+                         data-lightbox-type="<?= $lightboxType ?>"
+                         data-lightbox-title="<?= htmlspecialchars($item['title'] ?? '') ?>"
+                         data-lightbox-video="<?= htmlspecialchars($lightboxVideo) ?>">
+                        <div class="card-img-wrapper">
+                            <img src="<?= htmlspecialchars($thumbSrc) ?>" alt="<?= htmlspecialchars($item['title'] ?? 'Gallery Item') ?>" loading="lazy">
+                            <span class="media-type-badge <?= $item['media_type'] === 'photo' ? 'photo-badge' : 'video-badge' ?>">
+                                <?= $item['media_type'] === 'photo' ? '📷 Photo' : '🎬 Video' ?>
+                            </span>
+                            <?php if (!empty($item['company_name'])): ?>
+                            <span class="company-tag"><?= htmlspecialchars($item['company_name']) ?></span>
+                            <?php endif; ?>
+                            <?php if ($item['media_type'] === 'video'): ?>
+                            <div class="video-play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="card-info">
+                            <h5><?= htmlspecialchars($item['title'] ?: 'Gallery Update') ?></h5>
+                            <?php if ($dateFormatted): ?>
+                            <div class="card-date">
+                                <i class="fas fa-calendar-alt"></i> <?= $dateFormatted ?>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <?php 
+                    $delay += 100;
+                    if ($delay > 400) $delay = 100;
+                endforeach; 
+                ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
 
     <!-- About Us Section -->
     <section id="about-us" class="py-5">
@@ -382,6 +475,9 @@ $companies = $company->all();
         </div>
     </section>
 
+    <!-- Gallery Lightbox -->
+    <?php include 'includes/gallery-lightbox.php'; ?>
+
     <!-- Footer -->
     <?php include 'includes/footer.php'; ?>
 
@@ -389,6 +485,7 @@ $companies = $company->all();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/gallery.js"></script>
 </body>
 
 </html>

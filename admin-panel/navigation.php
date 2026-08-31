@@ -148,6 +148,12 @@ $US = new User($_SESSION['id']);
                             <span>Notification</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="gallery.php">
+                            <i class="bx bx-images"></i>
+                            <span>Gallery Management</span>
+                        </a>
+                    </li>
                 <?php } ?>
 
                 <!-- Solidrow Engineering -->

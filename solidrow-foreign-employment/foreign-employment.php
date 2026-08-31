@@ -1,3 +1,6 @@
+<?php
+include_once(dirname(__FILE__) . '/../class/include.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/sfe_Style.css" rel="stylesheet">
     <link href="assets/css/Style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -215,64 +219,11 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">Our <span class="text-accent">Gallery</span></h2>
-                <p class="section-subtitle">Explore our state-of-the-art facilities and training programs</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="gallery-item">
-                        <img src="../assets/images/gallery/1.jpg" alt="Training Facility" class="img-fluid rounded-3">
-                        <div class="gallery-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="gallery-item">
-                        <img src="../assets/images/gallery/2.jpg" alt="Welding Training" class="img-fluid rounded-3">
-                        <div class="gallery-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="gallery-item">
-                        <img src="../assets/images/gallery/3.jpg" alt="Students" class="img-fluid rounded-3">
-                        <div class="gallery-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="gallery-item">
-                        <img src="../assets/images/gallery/4.jpg" alt="Students" class="img-fluid rounded-3">
-                        <div class="gallery-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="gallery-item">
-                        <img src="../assets/images/gallery/5.jpg" alt="Students" class="img-fluid rounded-3">
-                        <div class="gallery-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="gallery-item">
-                        <img src="../assets/images/gallery/6.jpg" alt="Students" class="img-fluid rounded-3">
-                        <div class="gallery-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php
+    $galleryCompanyId = 16;
+    $galleryBasePath = '../';
+    include(dirname(__FILE__) . '/../includes/gallery-section.php');
+    ?>
 
     <!-- Contact Section -->
     <section id="contact" class="py-5">
@@ -398,6 +349,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="assets/js/sfe_js.js"></script>
+    <script src="../assets/js/gallery.js"></script>
+
+    <?php include(dirname(__FILE__) . '/../includes/gallery-lightbox.php'); ?>
 </body>
 
 </html>

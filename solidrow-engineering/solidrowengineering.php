@@ -1,3 +1,6 @@
+<?php
+include_once(dirname(__FILE__) . '/../class/include.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +19,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,6 +43,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact-us.php">Contact</a>
@@ -457,6 +464,12 @@
             </div>
     </section>
 
+    <?php
+    $galleryCompanyId = 14;
+    $galleryBasePath = '../';
+    include(dirname(__FILE__) . '/../includes/gallery-section.php');
+    ?>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -535,6 +548,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+    <script src="../assets/js/gallery.js"></script>
+
+    <?php include(dirname(__FILE__) . '/../includes/gallery-lightbox.php'); ?>
 </body>
 
 </html>
